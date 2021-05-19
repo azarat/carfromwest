@@ -1,15 +1,10 @@
 // import App from "next/app";
-import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import 'normalize.css'
 import '../styles/main.scss'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
-      <Head>
-        {/* <link rel="preload" href="./../styles/fonts/gilroy.css" /> */}
-      </Head>
       <Component {...pageProps} />
     </>
   )

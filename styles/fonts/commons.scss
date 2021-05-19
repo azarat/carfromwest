@@ -1,0 +1,107 @@
+@font-face {
+  font-weight: $fw-100;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-Thin.eot');
+  src: url('/fonts/TTCommons/TTCommons-Thin.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-Thin.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-200;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-ExtraLight.eot');
+  src: url('/fonts/TTCommons/TTCommons-ExtraLight.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-ExtraLight.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-300;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-Light.eot');
+  src: url('/fonts/TTCommons/TTCommons-Light.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-Light.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-400;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-Regular.eot');
+  src: url('/fonts/TTCommons/TTCommons-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-Regular.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-500;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-Medium.eot');
+  src: url('/fonts/TTCommons/TTCommons-Medium.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-Medium.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-600;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-DemiBold.eot');
+  src: url('/fonts/TTCommons/TTCommons-DemiBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-DemiBold.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-DemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-700;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-Bold.eot');
+  src: url('/fonts/TTCommons/TTCommons-Bold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-Bold.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-800;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTCommons-ExtraBold.eot');
+  src: url('/fonts/TTCommons/TTCommons-ExtraBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTCommons-ExtraBold.woff') format('woff'),
+    url('/fonts/TTCommons/TTCommons-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: $fw-900;
+  font-family: $ff-commons;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/TTCommons/TTBlack-Black.eot');
+  src: url('/fonts/TTCommons/TTBlack-Black.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/TTCommons/TTBlack-Black.woff') format('woff'),
+    url('/fonts/TTCommons/TTBlack-Black.ttf') format('truetype');
+}

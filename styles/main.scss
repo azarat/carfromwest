@@ -1,7 +1,12 @@
 @import './variables/variables';
-@import './fonts/gilroy.scss';
-@import './fonts/montserrat.scss';
+@import './fonts/commons.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  font-family: $font-family-gilroy;
+  font-family: $ff-commons;
 }
