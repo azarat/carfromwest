@@ -1,5 +1,11 @@
 @import './variables/variables';
-@import './fonts/commons.scss';
+@import './fonts/commons';
+
+// Components
+@import './components/Header';
+@import './components/HeaderMenu';
+@import './components/SocialLink';
+@import './components/SearchInput';
 
 * {
   box-sizing: border-box;
@@ -8,5 +14,11 @@
 }
 
 body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   font-family: $ff-commons;
+}
+
+html {
+  height: -webkit-fill-available;
 }

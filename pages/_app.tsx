@@ -1,11 +1,15 @@
 // import App from "next/app";
 import type { AppProps } from 'next/app'
 import '../styles/main.scss'
+import Header from '../src/components/Header/Header'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
-      <Component {...pageProps} />
+      <Header />
+      <main>
+        <Component {...pageProps} />
+      </main>
     </>
   )
 }
