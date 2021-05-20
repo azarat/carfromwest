@@ -1,0 +1,88 @@
+.accordion {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  & + * {
+    margin-top: 0.5em;
+  }
+  &__item {
+    height: auto;
+    max-height: 9999px;
+    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    -webkit-animation-name: overflowTransition;
+    animation-name: overflowTransition;
+    -webkit-animation-duration: 0s;
+    animation-duration: 0s;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+    &--collapsed {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+      -webkit-animation-name: overflowTransition;
+      animation-name: overflowTransition;
+      -webkit-animation-duration: 0s;
+      animation-duration: 0s;
+      -webkit-animation-delay: 1s;
+      animation-delay: 1s;
+    }
+  }
+  &__title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em 1.5em;
+    color: $black-color;
+    font-size: $fs-18;
+    line-height: 22px;
+    text-transform: uppercase;
+    cursor: pointer;
+    &::after {
+      position: absolute;
+      right: 25px;
+      width: 2px;
+      height: 16px;
+      background-color: $light-gray-color;
+      transition: transform 0.4s ease-in-out;
+      content: '';
+    }
+    &::before {
+      position: absolute;
+      right: 18px;
+      width: 16px;
+      height: 2px;
+      background-color: $light-gray-color;
+      content: '';
+    }
+    &:hover,
+    &--open {
+      color: $black-color;
+    }
+    &--open {
+      &::after {
+        transform: rotate(90deg);
+        content: '';
+      }
+    }
+  }
+  &__content {
+    padding: 1em 1.5em;
+  }
+}
+
+@-webkit-keyframes overflowTransition {
+  from {
+    overflow: hidden;
+  }
+  to {
+    overflow: visible;
+  }
+}
+
+@keyframes overflowTransition {
+  from {
+    overflow: hidden;
+  }
+  to {
+    overflow: visible;
+  }
+}

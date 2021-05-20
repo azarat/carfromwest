@@ -1,0 +1,27 @@
+.filter-full--table {
+  display: none;
+  grid-row: 3/4;
+  grid-column: 1;
+}
+@media screen and (min-width: 1024px) {
+  .filter-full--table {
+    display: block;
+    margin-top: 55px;
+    padding: 10px;
+    background: $white-color;
+    border-radius: 5px;
+    box-shadow: 0px 6px 15px rgba(34, 86, 21, 0.05);
+    & .filter-full__vehicle,
+    & .filter-full__year,
+    & .filter-full__price,
+    & .filter-full__transmission,
+    & .filter-full__gas,
+    & .filter-full__engine {
+      border: none;
+    }
+    & .filter-full__button {
+      margin: 0 auto;
+      margin-top: 60px;
+    }
+  }
+}

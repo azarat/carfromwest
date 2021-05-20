@@ -1,0 +1,161 @@
+.catalog-grid {
+  min-height: calc(100vh - 400px);
+  margin-top: 50px;
+  &__title {
+    margin: 0;
+    font-weight: $fw-700;
+    font-size: $fs-24;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__subtitle {
+    margin: 0;
+    margin-top: 30px;
+    font-weight: $fw-500;
+    font-size: $fs-23;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
+    gap: 20px;
+    justify-content: space-around;
+    &-link {
+      display: flex;
+      justify-content: center;
+      color: $inherit;
+    }
+  }
+  &__item {
+    width: 100%;
+    min-width: 250px;
+    max-width: 300px;
+    height: auto;
+    margin: 20px 0;
+    background-color: $white-color;
+    border-radius: 5px;
+    box-shadow: 0px 6px 15px rgba(28, 78, 16, 0.05);
+    cursor: pointer;
+    &-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 5px;
+      & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px 5px 0 0;
+      }
+    }
+    &-header {
+      height: 105px;
+      padding: 25px 30px 10px;
+      border-bottom: 1px solid $light-gray-color;
+    }
+    &-title {
+      font-weight: $fw-700;
+      font-size: $fs-18;
+      text-transform: uppercase;
+    }
+    &-lot {
+      margin-top: 5px;
+      font-weight: $fw-400;
+      font-size: $fs-18;
+      text-transform: uppercase;
+    }
+    &-descr {
+      padding: 15px 30px;
+    }
+    &-mileage,
+    &-engine,
+    &-gas {
+      margin-top: 15px;
+      font-size: $fs-16;
+      text-transform: uppercase;
+      & span {
+        font-weight: $fw-600;
+      }
+    }
+    &-price {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      margin-top: 20px;
+      font-weight: $fw-700;
+      font-size: $fs-24;
+      text-transform: uppercase;
+      & span {
+        flex: 0 0 auto;
+        max-width: 100px;
+        font-size: $fs-14;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .catalog-grid {
+    grid-row: 3/5;
+    grid-column: 2 / span 2;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 40px;
+    &__container {
+      grid-template-columns: repeat(auto-fit, minmax(auto, 260px));
+      gap: 20px;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media screen and (min-width: 1215px) {
+  .catalog-grid {
+    &__container {
+      justify-content: start;
+    }
+    &__item {
+      position: relative;
+      z-index: 44;
+      transition: all 0.4s ease-in;
+      &::after {
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+        height: 40px;
+        color: $white-color;
+        font-weight: $fw-700;
+        font-size: $fs-12;
+        background-color: $red-color;
+        border-radius: 0 0 5px 5px;
+        transition: bottom 0.3s ease-in-out, opacity 0.3s 0.2s;
+        content: 'УЗНАТЬ ПОДРОБНЕЕ';
+        &:hover {
+          bottom: -40px;
+          opacity: 1;
+        }
+      }
+      &:hover {
+        overflow: visible;
+        &::after {
+          bottom: -40px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .catalog-grid {
+    &__container {
+      grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
+      justify-content: end;
+    }
+  }
+}

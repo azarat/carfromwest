@@ -1,12 +1,23 @@
 @import './variables/variables';
 @import './fonts/commons';
+//Pages
+@import './pages/catalog.scss';
 
 // Components
 @import './components/Header';
 @import './components/HeaderMenu';
 @import './components/SocialLink';
 @import './components/SearchInput';
-
+@import './components/catalog.scss';
+@import './components/catalogGrid.scss';
+@import './components//catalogSearch.scss';
+@import './components/catalogSort.scss';
+@import './components//filterField.scss';
+@import './components//spinner.scss';
+@import './components/tableFilterFull.scss';
+@import './components/mobileFilterFull.scss';
+@import './components/pagination.scss';
+@import './components/accordion.scss';
 * {
   box-sizing: border-box;
   margin: 0;
