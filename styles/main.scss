@@ -1,7 +1,5 @@
 @import './variables/variables';
-@import './fonts/commons';
-//Pages
-@import './pages/catalog.scss';
+@import './fonts/openSans.scss';
 
 // Components
 @import './components/Header';
@@ -27,7 +25,7 @@
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  font-family: $ff-commons;
+  font-family: $ff-opensans;
 }
 
 html {

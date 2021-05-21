@@ -26,7 +26,11 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       placeholder={placeholder}
       options={options}
       name={field.name}
-      value={options ? options.find((option: any) => option.value === field.value) : ''}
+      value={
+        options
+          ? options.find((option: any) => option.value === field.value)
+          : ''
+      }
       onChange={(e) => handleYear(e)}
     />
   )

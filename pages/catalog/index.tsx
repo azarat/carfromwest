@@ -13,6 +13,7 @@ import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 import { capacityArray } from '../../src/helpers/calculator'
+import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
 
 const Index: NextPage<Partial<ICatalog>> = ({
   makes,
@@ -43,6 +44,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
   const fetchCars = async (page = 1) => {
     setLoading(true)
+
     const cfwURL = '/api/lots'
     const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
 
@@ -92,14 +94,80 @@ const Index: NextPage<Partial<ICatalog>> = ({
           loading={loading}
         />
         <FilterTable filter={filter} setFilter={setFilter} loading={loading} />
-        <FilterField
-          loading={loading}
-          setOpen={setOpenFilter}
-          filter={filter}
-          setFilter={setFilter}
-        />
-        <CatalogSearch loading={loading} handleSearch={handleSearch} />
-        <CatalogSort handleSort={handleSort} loading={loading} />
+        <div className="catalog__filters-wrapper">
+          <CatalogSearch loading={loading} handleSearch={handleSearch} />
+          <FilterField
+            loading={loading}
+            setOpen={setOpenFilter}
+            filter={filter}
+            setFilter={setFilter}
+          />
+          <CatalogSort handleSort={handleSort} loading={loading} />
+          <div className="filter-field__grid">
+            <div className="filter-field__grid-list">
+              {Object.keys(filter)
+                .filter((key) => {
+                  if (['sortField', 'sortDirection'].includes(key)) return false
+                  return !!filter[key]
+                })
+                .map((key) => {
+                  let title = filter[key]
+                  if (key === 'type')
+                    title = vehicleTypes.filter(
+                      (val) => val.value === filter[key]
+                    )[0].title
+                  if (key === 'fuelTypes')
+                    title = gas.filter((val) => val.value === filter[key])[0]
+                      .label
+                  if (key === 'transmissionTypes')
+                    title = transmissions.filter(
+                      (val) => val.value === filter[key]
+                    )[0].label
+                  if (/^year_min$/.test(key)) title = `c ${title}`
+                  else if (/_min$/.test(key) || key === 'Price')
+                    title = `от ${title}`
+                  if (/_max$/.test(key)) title = `до ${title}`
+                  if (/^Price/.test(key)) title = `${title}$`
+                  if (/^year/.test(key)) title = `${title}г.`
+                  if (/^engine/.test(key)) title = `${title}л.`
+
+                  return (
+                    <div key={title} className="filter-field__grid-item">
+                      <div className="filter-field__grid-item-text">
+                        {title}
+                      </div>
+                      <button
+                        disabled={loading}
+                        className="filter-field__grid-item-delete"
+                        onClick={() => {
+                          setFilter(
+                            Object.keys(filter)
+                              .filter((k) => !!filter[k] && k !== key)
+                              .reduce(
+                                (obj, key) =>
+                                  Object.assign(obj, { [key]: filter[key] }),
+                                {}
+                              ) as IFilter
+                          )
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+            </div>
+            {Object.keys(filter).length > 0 && (
+              <button
+                className="filter-field__grid-item filter-field__grid-item--reset"
+                onClick={() => {
+                  setFilter({})
+                }}
+              >
+                Сбросить фильтры
+              </button>
+            )}
+          </div>
+        </div>
+
         <CatalogGrid loading={loading} cars={cars}>
           <Pagination page={page} cars={cars} setPage={setPage} />
         </CatalogGrid>

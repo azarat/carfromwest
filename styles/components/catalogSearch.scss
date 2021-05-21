@@ -4,11 +4,9 @@
     width: 100%;
     max-width: 375px;
     height: 38px;
-    border: 2px solid $light-gray-color;
-    border-radius: 5px;
+    border-bottom: 1px solid $black-color;
     &-input {
       width: 100%;
-      padding-left: 10px;
       border: none;
       outline: none;
     }
@@ -17,7 +15,6 @@
       height: 100%;
       background-color: $white-color;
       border: none;
-      border-left: 2px solid $light-gray-color;
       cursor: pointer;
       & svg {
         width: 20px;
@@ -26,9 +23,17 @@
       }
       &:disabled {
         & svg {
-          fill: $light-gray-color;
+          fill: $light-gray-color-01;
         }
       }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .catalog {
+    &__search {
+      grid-column: 2;
     }
   }
 }
@@ -38,6 +43,7 @@
     &__search {
       grid-row: 1;
       grid-column: 2;
+      margin-left: 190px;
     }
   }
 }

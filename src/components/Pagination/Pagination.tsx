@@ -79,11 +79,12 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   const handleClickItem = (item: any) => {
+    if (typeof window !== 'undefined')
+      window.scrollTo({ behavior: 'smooth', top: 0 })
     setPage(item)
-    document.body.scrollIntoView({ behavior: 'smooth' })
   }
 
-  let pages: any[] = fetchPageNumbers()
+  const pages: any[] = fetchPageNumbers()
 
   return (
     <nav>
