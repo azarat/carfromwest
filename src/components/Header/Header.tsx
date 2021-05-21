@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           />
         </div>
         <div className="header__search">
-          <SearchInput />
+          <SearchInput id="header-search" />
         </div>
         <div className="header__contact">
           <div className="header__contact-item">
@@ -44,7 +44,11 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        <div onClick={handleOpenMenu} className="header__menu">
+        <div
+          role="presentation"
+          onClick={handleOpenMenu}
+          className="header__menu"
+        >
           <div
             className={
               open
@@ -61,7 +65,7 @@ const Header: React.FC = () => {
           <a href="tel:0800215804">0 800 215 804</a>
         </div>
       </header>
-      <HeaderMenu open={open} setOpen={setOpen} />
+      <HeaderMenu open={open} setOpen={handleOpenMenu} />
     </>
   )
 }

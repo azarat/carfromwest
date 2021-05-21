@@ -82,3 +82,28 @@
     }
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .header-menu {
+    right: 70%;
+    & .social-link {
+      margin-top: 30px;
+    }
+    &__phone {
+      &-number {
+        & a {
+          font-size: $fs-23;
+        }
+      }
+      &-cost {
+        font-size: $fs-23;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .header-menu {
+    right: 80%;
+  }
+}

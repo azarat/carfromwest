@@ -8,7 +8,7 @@ const IndexPage: NextPage = () => {
       <HelloWord />
       <HelloWord />
       <HelloWord />
-      <SearchInput />
+      <SearchInput id="not-header-search" />
     </>
   )
 }
