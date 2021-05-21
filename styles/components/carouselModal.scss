@@ -1,0 +1,37 @@
+.carousel__modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white-transparent-color;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  &-img {
+    min-width: 100px;
+    max-width: 80%;
+    min-height: 100px;
+    max-height: 80%;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  &-close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: $fs-45;
+    line-height: 30px;
+    cursor: pointer;
+  }
+}
