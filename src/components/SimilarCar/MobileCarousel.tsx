@@ -1,6 +1,6 @@
 import Link from 'next/link'
 // SVG
-import ArrowSVG from '../../assets/svg/arrow.svg'
+import ArrowSVG from '../../assets/svg/carouselArrow.svg'
 import { gas } from '../../constants/filter'
 import { ISimilarCarousel } from '../../Types/Types'
 // Components

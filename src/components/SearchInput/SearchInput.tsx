@@ -1,15 +1,27 @@
+import { useRouter } from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
 import SearchSVG from '../../assets/svg/search.svg'
 
 const SearchInput: React.FC = () => {
   const [value, setValue] = useState<string>('')
+  const { push } = useRouter()
 
   const handleChange = ({ currentTarget }: ChangeEvent<HTMLInputElement>) => {
     setValue(currentTarget.value)
   }
 
+  const handleSearch = (): void => {
+    setValue('')
+    push({
+      pathname: '/catalog',
+      query: {
+        searchTerm: value,
+      },
+    })
+  }
+
   return (
-    <div className="search">
+    <form className="search" onSubmit={handleSearch}>
       <input
         value={value}
         onChange={handleChange}
@@ -21,8 +33,8 @@ const SearchInput: React.FC = () => {
           Введите номер лота, VIN или название авто
         </label>
       )}
-      <SearchSVG />
-    </div>
+      <SearchSVG onClick={handleSearch} />
+    </form>
   )
 }
 

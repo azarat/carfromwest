@@ -4,7 +4,7 @@
   justify-content: space-around;
   width: 100%;
   max-width: 350px;
-  font-size: $fs-25;
+  font-size: $fs-12;
   line-height: 40px;
   &__box {
     display: flex;
@@ -38,11 +38,10 @@
   .countdown {
     max-width: 600px;
     min-height: 90px;
-    font-size: $fs-35;
+    font-size: $fs-16;
     &__box {
       &-left {
-        min-width: 48px;
-        min-height: 59px;
+        font-size: $fs-22;
       }
     }
   }

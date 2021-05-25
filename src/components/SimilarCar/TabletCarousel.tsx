@@ -12,10 +12,10 @@ const chunk = <T extends unknown>(arr: T[], size: number): T[][] =>
     arr.slice(i * size, i * size + size)
   )
 
-const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
-  const chunkData = chunk(data, 3)
+const TabletCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
+  const chunkData = chunk(data, 2)
   return (
-    <div className="similar__desktop-carousel">
+    <div className="similar__tablet-carousel">
       <Carousel buttonNext={<ArrowSVG />} buttonPrev={<ArrowSVG />}>
         {data &&
           chunkData.map((data) =>
@@ -47,4 +47,4 @@ const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
   )
 }
 
-export default DesktopCarousel
+export default TabletCarousel

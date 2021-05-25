@@ -2,6 +2,7 @@ import Spinner from '../Spinner/Spinner'
 import DesktopCarousel from './DesktopCarousel'
 import MobileCarousel from './MobileCarousel'
 import { ISimilarCar } from '../../Types/Types'
+import TabletCarousel from './TabletCarousel'
 
 const SimilarCar: React.FC<ISimilarCar> = ({ data, loading }): JSX.Element => {
   if (loading) {
@@ -17,6 +18,7 @@ const SimilarCar: React.FC<ISimilarCar> = ({ data, loading }): JSX.Element => {
         </h2>
         {data && <DesktopCarousel data={data} />}
         {data && <MobileCarousel data={data} />}
+        {data && <TabletCarousel data={data} />}
       </div>
     </div>
   )

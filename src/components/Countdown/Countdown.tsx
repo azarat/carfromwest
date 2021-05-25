@@ -75,8 +75,11 @@ const Countdown: React.FC<CountdownProps> = ({ date }) => {
   return (
     <div className="countdown">
       <CountdownBox left={timeLeft.days} label="дней" />
+      :
       <CountdownBox left={timeLeft.hours} label="часов" />
+      :
       <CountdownBox left={timeLeft.minutes} label="минут" />
+      :
       <CountdownBox left={timeLeft.seconds} label="секунд" />
     </div>
   )
