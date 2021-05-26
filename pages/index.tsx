@@ -1,14 +1,14 @@
 import { NextPage } from 'next'
-import HelloWord from '../src/components/HelloWorld/HelloWord'
-import SearchInput from '../src/components/SearchInput/SearchInput'
+import Promo from '../src/components/HomePage/Promo/Promo'
+import AboutUs from '../src/components/HomePage/AboutUs/AboutUs'
+import Request from '../src/components/HomePage/Request/Request'
 
 const IndexPage: NextPage = () => {
   return (
     <>
-      <HelloWord />
-      <HelloWord />
-      <HelloWord />
-      <SearchInput id="not-header-search" />
+      <Promo />
+      <AboutUs />
+      <Request />
     </>
   )
 }

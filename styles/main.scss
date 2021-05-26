@@ -1,11 +1,18 @@
 @import './variables/variables';
 @import './fonts/commons';
+@import './fonts/opensans';
 
 // Components
 @import './components/Header';
 @import './components/HeaderMenu';
 @import './components/SocialLink';
 @import './components/SearchInput';
+@import './components/HomePage/Promo';
+@import './components/HomePage/AutoSearch';
+@import './components/SubTitle';
+@import './components/Title';
+@import './components/HomePage/AboutUs';
+@import './components/HomePage/Request';
 
 * {
   box-sizing: border-box;
@@ -16,7 +23,7 @@
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  font-family: $ff-commons;
+  font-family: $ff-opensans;
 }
 
 html {

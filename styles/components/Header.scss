@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  z-index: 2;
+  z-index: 15;
   display: flex;
   align-items: center;
   width: 100%;
@@ -149,6 +149,7 @@
 
 @media screen and (min-width: 1200px) {
   .header {
+    height: 60px;
     padding: 0 65px;
     &__logo {
       margin-left: 55px;

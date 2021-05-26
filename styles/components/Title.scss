@@ -1,0 +1,13 @@
+.title {
+  font-weight: $fw-800;
+  font-size: $fs-30;
+  font-family: $ff-commons;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 1800px) {
+  .title {
+    font-size: $fs-60;
+  }
+}
