@@ -7,10 +7,10 @@ const PopularAuto: React.FC = () => {
     <div className="popular">
       <div className="popular__wrapper">
         <h2 className="popular__title">Популярные авто из США</h2>
-        <div className="popular__mobile-slider">
+        <div className="popular__mobile-slider-wrapper">
           <PopularSlider />
         </div>
-        <div className="popular__desktop-slider">
+        <div className="popular__desktop-slider-wrapper">
           <PopularDesktopSlider />
         </div>
       </div>
