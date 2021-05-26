@@ -1,0 +1,132 @@
+.thanks {
+  height: 100vh;
+  min-height: 550px;
+  background: #494949;
+  &__wrapper {
+    padding: 110px 15px 75px;
+  }
+  &__title {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+  &__subtitle {
+    margin-top: 15px;
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 150%;
+  }
+
+  &__img {
+    display: none;
+    background-image: url('../../public/assets/images/thanksBg-tablet.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  &__btn {
+    width: 100%;
+    max-width: 215px;
+    height: 45px;
+    margin-top: 50px;
+    color: $red-color;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+    background-color: $transparent;
+    border: 1px solid $red-color;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  &__contacts {
+    margin-top: 110px;
+    &-title {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 150%;
+    }
+    &-phone {
+      display: block;
+      margin-top: 15px;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 24px;
+      text-decoration: none;
+    }
+    & .social-link {
+      margin-top: 20px;
+      &__list {
+        justify-content: flex-start;
+      }
+      &__item {
+        margin-right: 35px;
+      }
+      & svg {
+        & * {
+          fill: $white-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .thanks {
+    height: unset;
+    min-height: unset;
+    &__wrapper {
+      padding: 200px 360px 150px 90px;
+    }
+    &__img {
+      display: block;
+      min-height: 322px;
+    }
+    &__title {
+      font-size: $fs-24;
+      text-align: left;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .thanks {
+    display: flex;
+    height: 100vh;
+    padding-top: 70px;
+    &__wrapper {
+      flex: 0 0 50%;
+      padding: 210px 115px 60px 70px;
+    }
+
+    &__img {
+      flex: 0 0 50%;
+      background-image: url('../../public/assets/images/thanksBg-mac.png');
+      background-position: top;
+    }
+    &__contacts {
+      margin-top: 95px;
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .thanks {
+    &__title {
+      font-size: $fs-34;
+    }
+    &__wrapper {
+      padding: 345px 180px 345px 215px;
+    }
+    &__contacts {
+      margin-top: 200px;
+    }
+    &__img {
+      background-image: url('../../public/assets/images/thanksBg-desktop.png');
+      background-position: unset;
+    }
+  }
+}

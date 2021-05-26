@@ -1,0 +1,129 @@
+.order {
+  height: 100vh;
+  min-height: 550px;
+  background: #494949;
+  &__wrapper {
+    padding: 110px 15px 75px;
+  }
+  &__title {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__form {
+    display: grid;
+    gap: 40px;
+    margin-top: 40px;
+    &-input {
+      padding: 5px 0;
+      color: $white-color;
+      background-color: $transparent;
+      border: 1px solid $transparent;
+      border-bottom: 1px solid #a6a6a6;
+      outline: none;
+      transition: all 0.3s ease;
+      &::placeholder {
+        font-size: 15px;
+        line-height: 24px;
+      }
+
+      &--error {
+        border: 1px solid $red-color;
+      }
+    }
+
+    &-label {
+      position: relative;
+      margin-left: 10px;
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 24px;
+      &::before {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 0.5em;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: 1px solid #adb5bd;
+        content: '';
+      }
+    }
+    &-checkbox {
+      display: none;
+      &:checked + .order__form-label::before {
+        background-color: $white-color;
+        background-image: url('../../public/assets/svg/check.svg');
+      }
+    }
+    &-btn {
+      width: 100%;
+      max-width: 245px;
+      height: 45px;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 24px;
+      text-transform: uppercase;
+      background-color: $red-color;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  &__img {
+    display: none;
+    background-image: url('../../public/assets/images/orderBg-tablet.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .order {
+    height: unset;
+    min-height: unset;
+    &__wrapper {
+      padding: 200px 360px 150px 90px;
+    }
+    &__img {
+      display: block;
+      min-height: 322px;
+    }
+    &__title {
+      font-size: $fs-24;
+      text-align: left;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .order {
+    display: flex;
+    height: 100vh;
+    padding-top: 70px;
+    &__wrapper {
+      flex: 0 0 50%;
+      padding: 130px 170px 140px 160px;
+    }
+
+    &__img {
+      flex: 0 0 50%;
+      background-image: url('../../public/assets/images/orderBg-dekstop.png');
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .order {
+    &__title {
+      font-size: $fs-34;
+    }
+    &__wrapper {
+      padding: 345px 305px 345px 215px;
+    }
+  }
+}
