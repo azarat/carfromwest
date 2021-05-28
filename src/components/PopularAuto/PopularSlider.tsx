@@ -16,7 +16,7 @@ import { popularAuto } from '../../constants/popularAuto'
 SwiperCore.use([Navigation, Thumbs])
 
 export const PopularSlider: React.FC = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null)
 
   return (
     <>
@@ -39,7 +39,7 @@ export const PopularSlider: React.FC = () => {
         ))}
       </Swiper>
       <Swiper
-        onSwiper={setThumbsSwiper}
+        onSwiper={(swiper) => setThumbsSwiper(swiper)}
         spaceBetween={10}
         slidesPerView={4}
         freeMode={true}

@@ -15,7 +15,10 @@
 @import './components/HomePage/Request';
 @import './components/HomePage/PopularAuto.scss';
 @import './components/HomePage/PopularDesktopSlider.scss';
-
+@import './components/HomePage/ReviewItem.scss';
+@import './components//HomePage/ClientReviews.scss';
+@import './components/HomePage/FullReview.scss';
+@import './components/HomePage/FullSizeImg.scss';
 * {
   box-sizing: border-box;
   margin: 0;
@@ -26,6 +29,9 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   font-family: $ff-opensans;
+  &.fixed {
+    overflow: hidden;
+  }
 }
 
 html {
