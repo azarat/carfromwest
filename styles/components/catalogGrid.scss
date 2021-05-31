@@ -125,6 +125,11 @@
       position: relative;
       z-index: 44;
       transition: all 0.4s ease-in;
+      &-image {
+        & img {
+          object-fit: cover;
+        }
+      }
       &::after {
         position: absolute;
         bottom: 0;
