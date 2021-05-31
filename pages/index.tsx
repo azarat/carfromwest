@@ -8,6 +8,8 @@ import FormBlock from '../src/components/HomePage/FormBlock/FormBlock'
 import Video from '../src/components/HomePage/Video/Video'
 import MainPageTimeLine from '../src/components/HomePage/MainPageTimeLine/MainPageTimeLine'
 import WorkSum from '../src/components/HomePage/WorkSum/WorkSum'
+import ClientReviews from '../src/components/HomePage/ClientsReview/ClientReviews'
+import Faq from '../src/components/HomePage/Faq/Faq'
 
 const IndexPage: NextPage = () => {
   return (
@@ -16,6 +18,8 @@ const IndexPage: NextPage = () => {
       <AboutUs />
       <Request />
       <PopularAuto />
+      <ClientReviews />
+      <Faq />
       <Advantages />
       <FormBlock />
       <MainPageTimeLine />

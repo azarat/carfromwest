@@ -1,0 +1,233 @@
+.client-reviews {
+  position: relative;
+  padding: 20px 15px;
+  overflow: hidden;
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -3;
+    width: 100%;
+    height: 800px;
+    background: linear-gradient(
+      130.17deg,
+      rgba(233, 205, 205, 0.6) 22.13%,
+      rgba(250, 250, 250, 0.6) 100%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    content: '';
+  }
+  &__title {
+    margin: 0 auto;
+    font-size: $fs-18;
+    font-family: $ff-commons;
+    line-height: 120%;
+    text-align: center;
+  }
+  &__tablet-slider {
+    display: none;
+  }
+  &__slider,
+  &__tablet-slider {
+    margin-top: 25px;
+    .swiper {
+      &-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      &-wrapper {
+        min-height: 460px;
+      }
+      &-slide {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        font-size: $fs-18;
+        text-align: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+      }
+      &-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      &-button {
+        &-prev,
+        &-next {
+          top: unset !important;
+          -webkit-tap-highlight-color: $transparent;
+          &::after {
+            position: absolute;
+            right: 0px;
+            bottom: 5px;
+            width: 15px;
+            height: 15px;
+            border-right: 2px solid black;
+            border-bottom: 2px solid black;
+            transform: rotate(135deg);
+            content: '';
+          }
+        }
+        &-prev {
+          bottom: 45px;
+          left: 120px;
+        }
+        &-next {
+          right: 120px;
+          bottom: 45px;
+          &::after {
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .client-reviews {
+    &__slider {
+      .swiper {
+        &-button {
+          &-prev {
+            left: 150px;
+          }
+          &-next {
+            right: 150px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .client-reviews {
+    padding: 25px 0px;
+    &__title {
+      max-width: 450px;
+      margin: unset;
+      margin-left: 45px;
+      font-size: $fs-22;
+      line-height: 22px;
+      text-align: left;
+    }
+    &__slider {
+      display: none;
+    }
+    &__tablet-slider {
+      display: block;
+      .swiper {
+        &-wrapper {
+          align-items: center;
+          min-height: 300px;
+        }
+        &-slide {
+          width: 70% !important;
+          & .reviews-item {
+            position: relative;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+
+            &__photos {
+              position: absolute;
+              top: -55%;
+              grid-template-columns: 1fr;
+            }
+          }
+          &-active {
+            & .reviews-item {
+              transform: scale(1);
+              transition: transform 0.3s ease;
+
+              &__photos {
+                position: unset;
+                grid-template-columns: 1fr 1fr;
+              }
+            }
+          }
+        }
+        &-button {
+          &-prev {
+            bottom: 0px;
+            left: 45%;
+          }
+          &-next {
+            right: 45%;
+            bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .client-reviews {
+    &__title {
+      max-width: 730px;
+      margin-left: 100px;
+      font-size: $fs-36;
+      line-height: 36px;
+    }
+    & .swiper {
+      &-wrapper {
+        min-height: 390px;
+      }
+      &-slide {
+        & .reviews-item {
+          &__photos {
+            top: -50%;
+          }
+        }
+        &-active {
+          & .reviews-item {
+            &__wrapper {
+              grid-template-columns: auto auto;
+            }
+          }
+        }
+      }
+      &-button {
+        &-prev {
+          left: 48%;
+        }
+        &-next {
+          right: 48%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .client-reviews {
+    &__title {
+      max-width: 990px;
+      margin-left: 160px;
+      font-size: $fs-48;
+      line-height: 60px;
+    }
+    & .swiper {
+      &-wrapper {
+        min-height: 445px;
+      }
+      &-slide {
+        width: 60% !important;
+      }
+    }
+  }
+}

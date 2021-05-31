@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -16,6 +16,8 @@ import { popularAuto } from '../../constants/popularAuto'
 SwiperCore.use([Navigation, Thumbs])
 
 export const PopularSlider: React.FC = () => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null)
+
   return (
     <>
       <Swiper
@@ -23,6 +25,7 @@ export const PopularSlider: React.FC = () => {
         spaceBetween={10}
         navigation={true}
         className="popular__mobile-main-slider"
+        thumbs={{ swiper: thumbsSwiper }}
       >
         {popularAuto.map(({ name, uaPrice, usaPrice, img }) => (
           <SwiperSlide key={name}>
@@ -36,9 +39,10 @@ export const PopularSlider: React.FC = () => {
         ))}
       </Swiper>
       <Swiper
-        loop={true}
+        onSwiper={(swiper) => setThumbsSwiper(swiper)}
         spaceBetween={10}
         slidesPerView={4}
+        freeMode={true}
         watchSlidesVisibility={true}
         watchSlidesProgress={true}
         className="sub-slider"
