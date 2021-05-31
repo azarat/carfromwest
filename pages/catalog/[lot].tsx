@@ -2,6 +2,7 @@ import CarPageCarousel from '../../src/components/CarPageCarousel/CarPageCarouse
 // SVG
 import InfoSVG from '../../src/assets/svg/info.svg'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 // Types
 import { CarPageProps } from '../../src/Types/Types'
@@ -14,8 +15,8 @@ import Consultation from '../../src/components/Consultation/Consultation'
 import SearchInput from '../../src/components/SearchInput/SearchInput'
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
+  const router = useRouter()
   const [car, setCar] = useState(carResponse)
-
   const [similarCar, setSimilarCar] = useState<ICar[]>([])
   const [loading, setLoading] = useState(false)
   const images = useMemo(
@@ -62,6 +63,13 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     car.data.attributes.lotData.sale.saleDocument?.state || ''
   }-${car.data.attributes.lotData.sale.saleDocument?.type || ''}`
 
+  const handleCost = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('url', window.location.href)
+      router.push({ pathname: '/order' })
+    }
+  }
+
   return (
     <div className="car-page__wrapper">
       <section className="car-page">
@@ -100,17 +108,12 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                 <span>${car.data.attributes.lotData.sale.currentBid}</span>
               </div>
               <div className="car-page__header-btn">
-                <button className="car-page__header-button car-page__header-button-order">
+                <button
+                  className="car-page__header-button car-page__header-button-order"
+                  onClick={handleCost}
+                >
                   посчитать стоимость
                 </button>
-                {/* <a
-                rel="noreferrer"
-                target="_blank"
-                href={`https://vin.doctor/ru/report/check/${car.data.attributes.lotData.vin}`}
-                className="car-page__header-button car-page__header-button-vin"
-              >
-                проверить VIN
-              </a> */}
               </div>
             </div>
             <div className="car-page__about">

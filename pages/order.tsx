@@ -7,14 +7,16 @@ const Order: NextPage = () => {
   const [name, setName] = useState<string>('')
   const [phone, setPhone] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
-  const rouster = useRouter()
+  const router = useRouter()
 
   const handleSend: MouseEventHandler = async (e) => {
+    const url = localStorage.getItem('url')
     e.preventDefault()
     if (validate().length == 0) {
-      console.log(name, phone, connectType)
+      console.log(name, phone, connectType, url)
       setName('')
       setPhone('')
+      localStorage.removeItem('url')
     }
   }
 
@@ -23,7 +25,7 @@ const Order: NextPage = () => {
     if (name.length < 2) initErrors.push('name')
     if (phone.length < 10) initErrors.push('phone')
     setErrors([...initErrors])
-    rouster.push({ pathname: '/thanks/' })
+    router.push({ pathname: '/thanks/' })
     return initErrors
   }
 
