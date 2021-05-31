@@ -26,8 +26,8 @@ const Request: React.FC = () => {
         <SubTitle>Оставьте заявку</SubTitle>
         <Title>АВТО “ПОД КЛЮЧ” С АУКЦИОНОВ ИЗ США</Title>
         <div className="request__info-description">
-          Заполните форму, чтобы мы связались с вами и сказали какой автомобиль
-          вы можете себе пригнать из США, сэкономив до 40% его стоимости.
+          Заполните форму, чтобы мы связались с Вами и сказали какой автомобиль
+          Вы можете себе пригнать из США, сэкономив до 40% его стоимости.
         </div>
         <form className="request__info-form">
           <div className="request__info-form-input--wrapper">
@@ -41,7 +41,11 @@ const Request: React.FC = () => {
             {inputValue.length === 0 && (
               <label htmlFor="request-name">Введите ваше имя</label>
             )}
-            <p className="request__info-form-input-error">Обязательное поле</p>
+            {inputValue.length === 0 && (
+              <p className="request__info-form-input-error">
+                Обязательное поле
+              </p>
+            )}
           </div>
           <div className="request__info-form-input--wrapper">
             <InputMask
@@ -49,10 +53,13 @@ const Request: React.FC = () => {
               onChange={handlePhoneChange}
               className="request__info-form-input"
               mask="+380\(99) 999-99-99"
-              maskPlaceholder="_"
               alwaysShowMask
             />
-            <p className="request__info-form-input-error">Обязательное поле</p>
+            {phoneValue.length === 0 && (
+              <p className="request__info-form-input-error">
+                Обязательное поле
+              </p>
+            )}
           </div>
           <div className="request__info-form-input--wrapper request__info-form-textarea--wrapper">
             <textarea
