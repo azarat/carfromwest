@@ -1,4 +1,5 @@
 import { EventHandler, FormEvent, useState } from 'react'
+import { useRouter } from 'next/router'
 // Types
 import { CatalogSearchProps } from './Types'
 // SVG
@@ -9,6 +10,7 @@ const CatalogSearch: React.FC<CatalogSearchProps> = ({
   loading,
 }): JSX.Element => {
   const [searchValue, setSearchValue] = useState('')
+  const router = useRouter()
 
   const handleChange = ({
     target: { value },
@@ -19,6 +21,8 @@ const CatalogSearch: React.FC<CatalogSearchProps> = ({
   const handleSubmit: EventHandler<FormEvent> = (e) => {
     e.preventDefault()
     handleSearch(searchValue)
+    setSearchValue('')
+    router.push({ pathname: '/catalog/', query: { searchTerm: searchValue } })
   }
 
   return (

@@ -70,3 +70,13 @@
     }
   }
 }
+
+@media screen and(min-width:1200px) {
+  .sort-field {
+    &__react-select {
+      &__menu {
+        z-index: 5;
+      }
+    }
+  }
+}

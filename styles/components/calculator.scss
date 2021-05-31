@@ -1,0 +1,138 @@
+.calculator {
+  min-height: 590px;
+  padding: 85px 15px;
+  background-color: $dark-gray-color;
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &__header {
+    display: flex;
+    & svg {
+      width: 35px;
+      margin-right: 10px;
+    }
+  }
+  &__title {
+    width: 270px;
+    color: $white-color;
+    font-size: $fs-23;
+    line-height: 25px;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  &__label {
+    margin-bottom: 10px;
+    color: $white-transparent-04-color;
+    font-size: $fs-12;
+  }
+  &__select {
+    &-container {
+      width: 100%;
+      max-width: 375px;
+      background-color: $transparent;
+    }
+    &__control {
+      background-color: $transparent !important;
+    }
+    &__single-value {
+      color: $white-color !important;
+    }
+  }
+  &__input {
+    width: 100%;
+    max-width: 375px;
+    height: 40px;
+    padding: 5px 10px;
+    color: $white-color;
+    background-color: $transparent;
+    border: 1px solid $gray-color;
+    border-radius: 5px;
+  }
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 375px;
+    height: 50px;
+    margin-top: 20px;
+    color: $green-color;
+    font-weight: $fw-700;
+    font-size: $fs-16;
+    text-transform: uppercase;
+    background-color: $transparent;
+    border: 3px solid $green-color;
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    &:hover {
+      color: $white-color;
+      background-color: $green-color;
+    }
+  }
+  &__results {
+    width: 100%;
+    max-width: 375px;
+    margin-top: 40px;
+    &-title {
+      color: $white-color;
+      font-size: $fs-23;
+      text-transform: uppercase;
+    }
+    &-list {
+      margin-top: 15px;
+      list-style: none;
+    }
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      color: $white-color;
+      font-size: $fs-18;
+      border-bottom: 1px solid $white-transparent-color;
+      & span {
+        display: inline-block;
+      }
+      & + & {
+        margin-top: 15px;
+      }
+    }
+    &-together {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      color: $white-color;
+      font-weight: $fw-700;
+      font-size: $fs-20;
+      & span {
+        font-size: $fs-28;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .calculator {
+    &-wrapper {
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .calculator {
+    &-wrapper {
+      gap: 100px;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+}

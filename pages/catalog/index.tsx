@@ -1,5 +1,7 @@
 import { NextPage, GetServerSideProps } from 'next'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+
 // Components
 import CatalogGrid from '../../src/components/CatalogGrid/CatalogGrid'
 import CatalogSort from '../../src/components/CatalogSort/CatalogSort'
@@ -23,6 +25,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
   models,
   searchTerm,
 }): JSX.Element => {
+  const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [cars, setCars] = useState<ICarsFetchTypes | undefined>(undefined)
   const [page, setPage] = useState<number>(1)
@@ -34,17 +37,17 @@ const Index: NextPage<Partial<ICatalog>> = ({
           yearMin,
           yearMax,
           models,
-          searchTerm,
+          searchTerm: router.query.searchTerm,
         }
       : typeof localStorage !== 'undefined'
       ? JSON.parse(localStorage.getItem('filter') ?? '{}')
       : {}
   )
   const [loading, setLoading] = useState<boolean>(false)
+  console.log('filter: ', filter)
 
   const fetchCars = async (page = 1) => {
     setLoading(true)
-
     const cfwURL = '/api/lots'
     const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
 
@@ -72,13 +75,14 @@ const Index: NextPage<Partial<ICatalog>> = ({
       localStorage.setItem('filter', JSON.stringify(filter))
 
     fetchCars(page)
-  }, [filter, page])
+  }, [filter, page, router.query])
 
   const handleSearch = (searchTerm: string) => {
     setFilter({ ...filter, searchTerm })
   }
 
   const handleSort = ({ value }: { value: string }): void => {
+    setPage(1)
     const [sortField, sortDirection] = value.split('-')
     setFilter({ ...filter, sortField, sortDirection })
   }
@@ -160,6 +164,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
                 className="filter-field__grid-item filter-field__grid-item--reset"
                 onClick={() => {
                   setFilter({})
+                  router.push({ query: { searchTerm: '' } })
                 }}
               >
                 Сбросить фильтры

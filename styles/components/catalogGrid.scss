@@ -118,6 +118,7 @@
 
 @media screen and (min-width: 1215px) {
   .catalog-grid {
+    z-index: 1;
     &__container {
       justify-content: start;
     }
