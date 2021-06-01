@@ -13,6 +13,18 @@ const Order: NextPage = () => {
     const url = localStorage.getItem('url')
     e.preventDefault()
     if (validate().length == 0) {
+      fetch('https://admin.webrains.studio/sendCFWLandingMessage', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          link: url,
+          type: connectType,
+        }),
+      })
       console.log(name, phone, connectType, url)
       setName('')
       setPhone('')
