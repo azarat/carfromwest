@@ -3,7 +3,6 @@
   margin-top: 70px;
   overflow: hidden;
   &__wrapper {
-    min-height: 735px;
     padding: 0 15px;
   }
   &__title {
@@ -53,22 +52,66 @@
     cursor: pointer;
   }
   &__img {
-    position: absolute;
-    right: -15px;
-    bottom: -20px;
     width: 100%;
-    &-inner {
-      position: relative;
-      height: 335px;
-      & img {
-        object-fit: contain;
-      }
-    }
+    height: 335px;
+    margin-top: 30px;
+    background-image: url(/assets/images/consultCar-mob.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
 }
 
 @media screen and(min-width:768px) {
   .consult {
+    display: flex;
     margin-top: 90px;
+    &__title {
+      font-size: $fs-25;
+    }
+
+    &__wrapper {
+      max-width: 350px;
+      padding: 0 30px;
+    }
+    &__img {
+      height: 450px;
+      margin-top: unset;
+      background-image: url(/assets/images/consultCar-tablet.png);
+    }
+  }
+}
+
+@media screen and(min-width:1200px) {
+  .consult {
+    margin-top: 230px;
+    overflow: unset;
+    &__title {
+      font-size: $fs-27;
+    }
+    &__text {
+      font-size: $fs-18;
+    }
+    &__wrapper {
+      max-width: 570px;
+      padding: 0 65px;
+    }
+    &__img {
+      height: 670px;
+      background-image: url(/assets/images/consultCar-mac.png);
+      transform: translate(0, -120px);
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .consult {
+    &__wrapper {
+      max-width: 890px;
+    }
+    &__img {
+      height: 725px;
+      background-image: url(/assets/images/consultCar-desktop.png);
+    }
   }
 }

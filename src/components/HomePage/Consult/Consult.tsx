@@ -1,6 +1,5 @@
 import React from 'react'
 import ClickSVG from '../../../assets/svg/click.svg'
-import Image from 'next/image'
 
 const Consult: React.FC = () => {
   return (
@@ -21,11 +20,7 @@ const Consult: React.FC = () => {
         </div>
         <button className="consult__btn">хочу консультацию</button>
       </div>
-      <div className="consult__img">
-        <div className="consult__img-inner">
-          <Image src="/assets/images/consultCar.png" layout="fill" />
-        </div>
-      </div>
+      <div className="consult__img"></div>
     </div>
   )
 }
