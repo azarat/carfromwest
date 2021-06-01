@@ -7,8 +7,8 @@
   }
   &__title {
     color: #1f181a;
-    font-weight: 800;
-    font-size: 23px;
+    font-weight: $fw-800;
+    font-size: $fs-23;
     line-height: 150%;
     & span {
       color: #a1231b;
@@ -17,7 +17,7 @@
   &__text {
     margin-top: 20px;
     color: #1f181a;
-    font-size: 17px;
+    font-size: $fs-17;
     line-height: 150%;
   }
   &__click {
@@ -27,8 +27,8 @@
     &-text {
       margin-right: 15px;
       color: #1f181a;
-      font-weight: 600;
-      font-size: 22px;
+      font-weight: $fw-600;
+      font-size: $fs-22;
       line-height: 150%;
     }
   }
