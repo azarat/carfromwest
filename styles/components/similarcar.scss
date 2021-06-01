@@ -32,6 +32,9 @@
       display: none;
       .carousel {
         &-list-item {
+          &-current {
+            justify-content: center;
+          }
           & a {
             color: $black-color;
             text-decoration: none;
