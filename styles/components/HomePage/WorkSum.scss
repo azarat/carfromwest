@@ -1,0 +1,199 @@
+.work-sum {
+  & span {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    &::after {
+      position: absolute;
+      bottom: 0;
+      z-index: 11;
+      width: 100%;
+      height: 6%;
+      background: linear-gradient(to right bottom, transparent 49.5%, #fff 50%)
+        right/100% 100% no-repeat;
+      content: '';
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    &::before {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: #1c2030;
+      background: linear-gradient(90deg, #1c2030 0, #0f0f0f 100%);
+      content: '';
+    }
+    &::after {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+          105.74deg,
+          #011830 19.93%,
+          rgba(0, 0, 0, 0) 77.77%
+        ),
+        #000;
+      opacity: 0.7;
+      content: '';
+    }
+  }
+  &__num {
+    position: relative;
+    margin: 0 auto;
+    padding: 0 15px 24px;
+    &-title {
+      margin: 30px 0 0;
+      color: $white-color;
+      font-weight: $fw-700;
+      font-size: $fs-18;
+      font-family: $ff-commons;
+      line-height: 120%;
+      text-align: center;
+    }
+  }
+  &__stats {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    color: $white-color;
+    &-auto,
+    &-year,
+    &-money {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    &-number {
+      font-weight: $fw-700;
+      font-size: $fs-24;
+    }
+    &-text {
+      color: rgba(255, 255, 255, 0.6);
+      font-family: $ff-commons;
+      font-weight: $fw-500;
+      font-size: $fs-14;
+      text-align: center;
+    }
+    &-auto,
+    &-year {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+    &-money {
+      flex: 0 0 100%;
+      margin-top: 30px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .work-sum {
+    & span {
+      &::after {
+        height: 15%;
+      }
+    }
+    &__wrapper {
+      height: 430px;
+      &::before {
+        background: url('/assets/images/work-sum-bg.jpg') 0 0 / cover;
+      }
+    }
+    &__num {
+      z-index: 9;
+      padding-bottom: 50px;
+      &-title {
+        margin-top: 80px;
+        font-size: $fs-22;
+      }
+    }
+    &__stats {
+      position: relative;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      &-auto,
+      &-year,
+      &-money {
+        flex: unset;
+      }
+      &-money {
+        margin-top: 0;
+        order: 1;
+      }
+      &-year {
+        order: 2;
+      }
+      &-auto {
+        order: 0;
+      }
+      &-text {
+        font-size: $fs-15;
+      }
+      &-number {
+        font-size: $fs-32;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .work-sum {
+    & span {
+      &::after {
+        height: 20%;
+      }
+    }
+    &__wrapper {
+      height: 700px;
+    }
+    &__num {
+      max-width: 1140px;
+      padding-bottom: 180px;
+      &-title {
+        margin-top: 90px;
+        font-size: $fs-36;
+      }
+    }
+    &__stats {
+      &-number {
+        font-size: $fs-54;
+      }
+      &-text {
+        margin-top: 10px;
+        font-size: $fs-22;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .work-sum {
+    &__wrapper {
+      height: 960px;
+    }
+    &__num {
+      &-title {
+        margin-top: 115px;
+        font-size: $fs-48;
+      }
+    }
+    &__stats {
+      margin-top: 120px;
+      &-number {
+        font-size: $fs-72;
+      }
+      &-text {
+        font-size: $fs-24;
+      }
+    }
+  }
+}

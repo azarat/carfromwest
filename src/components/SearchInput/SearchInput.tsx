@@ -2,7 +2,11 @@ import { useRouter } from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
 import SearchSVG from '../../assets/svg/search.svg'
 
-const SearchInput: React.FC = () => {
+interface ISearchInput {
+  id: string
+}
+
+const SearchInput: React.FC<ISearchInput> = ({ id }) => {
   const [value, setValue] = useState<string>('')
   const { push } = useRouter()
 
@@ -25,11 +29,11 @@ const SearchInput: React.FC = () => {
       <input
         value={value}
         onChange={handleChange}
-        id="search"
+        id={id}
         className="search__input"
       />
       {value.length === 0 && (
-        <label className="search__label" htmlFor="search">
+        <label className="search__label" htmlFor={id}>
           Введите номер лота, VIN или название авто
         </label>
       )}

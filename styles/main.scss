@@ -1,29 +1,32 @@
 @import './variables/variables';
-@import './fonts/openSans.scss';
+@import './fonts/commons';
+@import './fonts/opensans';
 
 // Components
 @import './components/Header';
 @import './components/HeaderMenu';
 @import './components/SocialLink';
 @import './components/SearchInput';
-@import './components/catalog.scss';
-@import './components/catalogGrid.scss';
-@import './components//catalogSearch.scss';
-@import './components/catalogSort.scss';
-@import './components//filterField.scss';
-@import './components//spinner.scss';
-@import './components/tableFilterFull.scss';
-@import './components/mobileFilterFull.scss';
-@import './components/pagination.scss';
-@import './components/accordion.scss';
-@import './components/calculator.scss';
-@import './components/carsPage.scss';
-@import './components//carouselModal.scss';
-@import './components/similarcar.scss';
-@import './components/countdown.scss';
-@import './components/consultation.scss';
-@import './components/order.scss';
-@import './components/thanks.scss';
+@import './components/HomePage/Promo';
+@import './components/HomePage/AutoSearch';
+@import './components/SubTitle';
+@import './components/Title';
+@import './components/HomePage/AboutUs';
+@import './components/HomePage/Request';
+@import './components/HomePage/PopularAuto.scss';
+@import './components/HomePage/PopularDesktopSlider.scss';
+@import './components/HomePage/Advantages';
+@import './components/HomePage/FormBlock';
+@import './components/HomePage/VideoBlock';
+@import './components/HomePage/MainPageTimeLine';
+@import './components/HomePage/WorkSum';
+@import './components/HomePage/ReviewItem.scss';
+@import './components//HomePage/ClientReviews.scss';
+@import './components/HomePage/FullReview.scss';
+@import './components/HomePage/FullSizeImg.scss';
+@import './components/HomePage/Faq.scss';
+@import './components/HomePage/CheckAuto.scss';
+@import './components/HomePage/Consult.scss';
 * {
   box-sizing: border-box;
   margin: 0;
@@ -34,6 +37,10 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   font-family: $ff-opensans;
+  background-color: #f2f2f2;
+  &.fixed {
+    overflow: hidden;
+  }
 }
 
 html {

@@ -1,0 +1,151 @@
+.about-us {
+  &__text {
+    padding: 70px 15px 0;
+  }
+  & .title {
+    margin-top: 8px;
+  }
+  &__description {
+    margin-top: 8px;
+    & p {
+      font-weight: $fw-300;
+      font-size: $fs-16;
+      & + p {
+        margin-top: 1rem;
+      }
+    }
+  }
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    &-auto,
+    &-year,
+    &-money {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    &-year,
+    &-money {
+      margin-top: 15px;
+    }
+    &-number {
+      font-weight: $fw-700;
+      font-size: $fs-40;
+      font-family: $ff-commons;
+      text-align: center;
+    }
+    &-text {
+      font-weight: $fw-300;
+      font-size: $fs-16;
+    }
+  }
+  &__image {
+    position: relative;
+    height: 213px;
+    margin-top: 100px;
+    &-title {
+      position: absolute;
+      top: -40px;
+      right: 15px;
+      z-index: 1;
+      color: $red-color;
+      font-weight: $fw-800;
+      font-size: $fs-75;
+      font-family: $ff-commons;
+    }
+    &-sub-title {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .about-us {
+    &__stats {
+      flex-direction: row;
+      &-year,
+      &-money {
+        margin-top: 0;
+      }
+    }
+    &__image {
+      height: 512px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .about-us {
+    display: flex;
+    height: 100vh;
+    padding: 100px 0;
+    overflow: hidden;
+    &__text {
+      flex: 0 0 50%;
+      padding: 50px 70px;
+      background: #f4f4f4;
+    }
+    &__stats {
+      flex-wrap: wrap;
+      &-money {
+        margin-top: 15px;
+      }
+    }
+    &__image {
+      left: -30px;
+      width: 512px;
+      height: 340px;
+      margin-top: 150px;
+      &-title {
+        right: 20%;
+        font-size: $fs-100;
+      }
+      &-sub-title {
+        position: absolute;
+        top: -100px;
+        left: calc(100% - 230px);
+        display: unset;
+        color: rgba(244, 244, 244, 0.7);
+        font-weight: $fw-800;
+        font-size: $fs-100;
+        font-family: $ff-commons;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .about-us {
+    &__text {
+      flex: 0 0 55%;
+      height: max-content;
+      padding-left: calc(100vw * 0.55 - 1530px * 0.55);
+      padding-top: 100px;
+      padding-right: 100px;
+    }
+    &__description {
+      margin-top: 60px;
+    }
+    &__stats {
+      margin-top: 60px;
+      &-money {
+        margin-top: 0;
+      }
+      &-number {
+        font-size: $fs-60;
+      }
+    }
+    &__image {
+      left: -60px;
+      margin-top: 100px;
+      width: 895px;
+      height: 595px;
+    }
+  }
+}

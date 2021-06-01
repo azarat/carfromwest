@@ -74,7 +74,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     <div className="car-page__wrapper">
       <section className="car-page">
         <div className="container">
-          <SearchInput />
+          <SearchInput id="lot-search" />
         </div>
         <div className="container">
           <div className="car-page__name-wrapper">
