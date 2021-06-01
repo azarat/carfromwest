@@ -10,7 +10,18 @@
     & svg {
       width: 25px;
       height: 25px;
+      animation: icon-animation 1.5s ease-in-out infinite;
       fill: $gray-color;
     }
+  }
+}
+
+@keyframes icon-animation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
   }
 }
