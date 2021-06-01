@@ -4,6 +4,7 @@ import TelegramSVG from '../../assets/svg/telegram.svg'
 import PhoneSVG from '../../assets/svg/phone.svg'
 import HeaderMenu from './HeaderMenu'
 import SearchInput from '../SearchInput/SearchInput'
+import Link from 'next/link'
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false)
@@ -16,11 +17,15 @@ const Header: React.FC = () => {
     <>
       <header className="header">
         <div className="header__logo">
-          <img
-            className="header__logo-img"
-            src="/assets/images/logo.png"
-            alt="Логотип"
-          />
+          <Link href="/">
+            <a>
+              <img
+                className="header__logo-img"
+                src="/assets/images/logo.png"
+                alt="Логотип"
+              />
+            </a>
+          </Link>
         </div>
         <div className="header__search">
           <SearchInput id="header-search" />
