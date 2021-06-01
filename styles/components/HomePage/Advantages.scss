@@ -1,0 +1,114 @@
+.advantages {
+  display: flex;
+  flex-direction: column;
+  padding: 75px 15px;
+  background: #211d1d;
+  & .title {
+    margin-top: 8px;
+    color: $white-color;
+  }
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    &-item {
+      &-svg {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        & svg {
+          z-index: 1;
+        }
+        &::after {
+          position: absolute;
+          left: 20px;
+          z-index: 0;
+          width: 35px;
+          height: 35px;
+          background: rgba(255, 255, 255, 0.1);
+          content: '';
+        }
+      }
+      &-title {
+        margin-top: 30px;
+        color: $white-color;
+        font-weight: $fw-700;
+        font-size: $fs-16;
+        text-transform: uppercase;
+      }
+      &-description {
+        margin-top: 8px;
+        color: $white-color;
+        font-weight: $fw-400;
+        font-size: $fs-16;
+      }
+      & + & {
+        margin-top: 16px;
+      }
+    }
+  }
+  &__link {
+    width: 100%;
+    margin-top: 16px;
+    padding: 20px 0;
+    color: $white-color;
+    font-weight: $fw-700;
+    font-size: $fs-16;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: linear-gradient(135deg, #e02c22 0, #a20103 100%);
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .advantages {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .advantages {
+    & .title {
+      font-size: $fs-50;
+    }
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      margin-top: 60px;
+      column-gap: min(100px, 5%);
+      row-gap: min(100px, 10vh);
+      &-item {
+        max-width: 500px;
+        &-svg {
+          width: 100%;
+          &:after {
+            display: none;
+          }
+        }
+        &-title {
+          text-align: center;
+        }
+        &-description {
+          margin-top: 20px;
+          text-align: center;
+        }
+        & + & {
+          margin-top: 0;
+        }
+      }
+    }
+    &__link {
+      display: block;
+      max-width: 260px;
+      margin: 50px auto 0;
+    }
+  }
+}

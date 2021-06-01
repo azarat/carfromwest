@@ -1,0 +1,80 @@
+.form-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  padding: 20px 15px;
+  background-image: url('/assets/images/form-1.jpeg');
+  background-repeat: no-repeat;
+  background-position: 90% 0;
+  background-size: cover;
+  &__title {
+    max-width: 250px;
+    margin-right: auto;
+    margin-left: auto;
+    color: $white-color;
+    font-weight: $fw-700;
+    font-size: $fs-18;
+    line-height: 120%;
+    text-align: center;
+  }
+  &__button {
+    width: 100%;
+    height: unset;
+    margin-top: 30px;
+    padding: 25px;
+    color: $white-color;
+    font-size: $fs-16;
+    line-height: unset;
+    text-align: center;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #e02c22 0, #a20103 100%);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .form-block {
+    padding: 15px 40px;
+    background-position: unset;
+    &__title {
+      margin-left: 0;
+      line-height: 140%;
+      text-align: left;
+    }
+    &__button {
+      width: 240px;
+      margin-right: auto;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .form-block {
+    height: 340px;
+    padding: 50px;
+    &__title {
+      max-width: 60%;
+      font-size: $fs-36;
+      line-height: 120%;
+    }
+    &__button {
+      width: 260px;
+      margin-top: 40px;
+    }
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .form-block {
+    height: 455px;
+    padding: 120px calc(50vw - 765px);
+    &__title {
+      max-width: 50%;
+    }
+  }
+}
