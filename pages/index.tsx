@@ -10,6 +10,8 @@ import MainPageTimeLine from '../src/components/HomePage/MainPageTimeLine/MainPa
 import WorkSum from '../src/components/HomePage/WorkSum/WorkSum'
 import ClientReviews from '../src/components/HomePage/ClientsReview/ClientReviews'
 import Faq from '../src/components/HomePage/Faq/Faq'
+import CheckAuto from '../src/components/HomePage/CheckAuto/CheckAuto'
+import Consult from '../src/components/HomePage/Consult/Consult'
 
 const IndexPage: NextPage = () => {
   return (
@@ -20,6 +22,8 @@ const IndexPage: NextPage = () => {
       <PopularAuto />
       <ClientReviews />
       <Faq />
+      <CheckAuto />
+      <Consult />
       <Advantages />
       <FormBlock />
       <MainPageTimeLine />
