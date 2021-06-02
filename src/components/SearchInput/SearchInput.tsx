@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import SearchSVG from '../../assets/svg/search.svg'
 
 interface ISearchInput {
@@ -14,7 +14,8 @@ const SearchInput: React.FC<ISearchInput> = ({ id }) => {
     setValue(currentTarget.value)
   }
 
-  const handleSearch = (): void => {
+  const handleSearch: FormEventHandler = (e): void => {
+    e.preventDefault()
     setValue('')
     push({
       pathname: '/catalog',
