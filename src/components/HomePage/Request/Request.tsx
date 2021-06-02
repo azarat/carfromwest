@@ -8,7 +8,7 @@ import Title from '../../Title/Title'
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const Request: React.FC = () => {
-  const sendRequest = async (values: any) => {
+  const sendRequest = async (values: any): Promise<void> => {
     const res = await fetch(
       'https://admin.webrains.studio/sendCFWLandingMessage',
       {
@@ -20,7 +20,9 @@ const Request: React.FC = () => {
         body: JSON.stringify(values),
       }
     )
-    console.log(res)
+    if (res) {
+      return
+    }
   }
 
   return (

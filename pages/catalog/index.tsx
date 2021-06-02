@@ -1,5 +1,5 @@
 import { NextPage, GetServerSideProps } from 'next'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 // Components
@@ -25,6 +25,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
   models,
   searchTerm,
 }): JSX.Element => {
+  console.log('term', searchTerm)
+
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [cars, setCars] = useState<ICarsFetchTypes | undefined>(undefined)
@@ -46,36 +48,44 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const [loading, setLoading] = useState<boolean>(false)
   console.log('filter: ', filter)
 
-  const fetchCars = async (page = 1) => {
-    setLoading(true)
-    const cfwURL = '/api/lots'
-    const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
+  const fetchCars = useCallback(
+    (page = 1) =>
+      (async (page) => {
+        setLoading(true)
+        const cfwURL = '/api/lots'
+        const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
 
-    const filterString = Object.keys(filter)
-      .filter((key) => filter[key])
-      .map((key) => `${key}=${filter[key]}`)
-      .join('&')
-    const engineCapacitiesString = `engineCapacities=
+        const filterString = Object.keys(filter)
+          .filter((key) => filter[key])
+          .map((key) => `${key}=${filter[key]}`)
+          .join('&')
+        const engineCapacitiesString = `engineCapacities=
       ${capacityArray(
         filter.engine_min ? filter.engine_min : 0.7,
         filter.engine_max ? filter.engine_max : 17
       ).join(',')}`
 
-    const response = await fetch(
-      `${cfwURL}?${queryParams}&${filterString}&${engineCapacitiesString}`
-    )
-    const cfwData = await response.json()
+        const response = await fetch(
+          `${cfwURL}?${queryParams}&${filterString}&${engineCapacitiesString}`
+        )
+        const cfwData = await response.json()
 
-    setCars(cfwData)
-    setLoading(false)
-  }
+        setCars(cfwData)
+        setLoading(false)
+      })(page),
+    [filter]
+  )
+
+  useEffect(() => {
+    setFilter((prev) => ({ ...prev, searchTerm: router.query.searchTerm }))
+  }, [router.query.searchTerm])
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined')
       localStorage.setItem('filter', JSON.stringify(filter))
 
     fetchCars(page)
-  }, [filter, page, router.query])
+  }, [filter, page, fetchCars])
 
   const handleSearch = (searchTerm: string) => {
     setFilter({ ...filter, searchTerm })

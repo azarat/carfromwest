@@ -35,7 +35,11 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
             key={item}
             className="car-page__carousel-img"
             loading="lazy"
-            src={item}
+            src={
+              item
+                ? item
+                : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
+            }
             alt="car"
           />
         ))}

@@ -1,4 +1,4 @@
-.order {
+.check-auto {
   height: 100vh;
   min-height: 550px;
   overflow: hidden;
@@ -10,13 +10,13 @@
     color: #ffffff;
     font-weight: 800;
     font-size: 22px;
-    line-height: 100%;
+    line-height: 24px;
     text-align: center;
     text-transform: uppercase;
   }
   &__form {
     display: grid;
-    gap: 40px;
+    gap: 35px;
     margin-top: 40px;
     &-input {
       padding: 5px 0;
@@ -26,7 +26,9 @@
       border-bottom: 1px solid #a6a6a6;
       outline: none;
       transition: all 0.3s ease;
+
       &::placeholder {
+        color: $text-gray-color;
         font-size: 15px;
         line-height: 24px;
       }
@@ -34,6 +36,29 @@
       &--error {
         border: 1px solid $red-color;
       }
+    }
+
+    &-textarea-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    &-textarea-label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: $text-gray-color;
+      font-size: $fs-15;
+      line-height: 24px;
+    }
+
+    &-textarea {
+      width: 100%;
+      color: $white-color;
+      background-color: $transparent;
+      border: none;
+      border-bottom: 1px solid #a6a6a6;
+      outline: none;
+      resize: none;
     }
 
     &-label {
@@ -55,7 +80,7 @@
     }
     &-checkbox {
       display: none;
-      &:checked + .order__form-label::before {
+      &:checked + .check-auto__form-label::before {
         background-color: $white-color;
         background-image: url('../../public/assets/svg/check.svg');
       }
@@ -77,14 +102,14 @@
   }
   &__img {
     display: none;
-    background-image: url('../../public/assets/images/orderBg-tablet.png');
+    background-image: url('/assets/images/checkAuto-tablet.png');
     background-repeat: no-repeat;
     background-size: cover;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .order {
+  .check-auto {
     height: unset;
     min-height: unset;
     &__wrapper {
@@ -102,10 +127,15 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .order {
+  .check-auto {
     display: flex;
     height: 100vh;
     padding-top: 70px;
+    &__form {
+      &-textarea {
+        min-height: 50px;
+      }
+    }
     &__wrapper {
       flex: 0 0 50%;
       padding: 130px 170px 140px 160px;
@@ -113,18 +143,21 @@
 
     &__img {
       flex: 0 0 50%;
-      background-image: url('../../public/assets/images/orderBg-dekstop.png');
+      background-image: url(/assets/images/checkAuto-mac.png);
     }
   }
 }
 
 @media screen and (min-width: 1800px) {
-  .order {
+  .check-auto {
     &__title {
       font-size: $fs-34;
     }
     &__wrapper {
       padding: 345px 305px 345px 215px;
+    }
+    &__img {
+      background-image: url(/assets/images/checkAuto-desktop.png);
     }
   }
 }
