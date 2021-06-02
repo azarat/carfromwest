@@ -13,8 +13,6 @@ const chunk = <T extends unknown>(arr: T[], size: number): T[][] =>
   )
 
 const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
-  console.log(data)
-
   const chunkData = chunk(data, 3)
   return (
     <div className="similar__desktop-carousel">

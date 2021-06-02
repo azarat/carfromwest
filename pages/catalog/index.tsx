@@ -25,8 +25,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
   models,
   searchTerm,
 }): JSX.Element => {
-  console.log('term', searchTerm)
-
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [cars, setCars] = useState<ICarsFetchTypes | undefined>(undefined)
@@ -39,14 +37,13 @@ const Index: NextPage<Partial<ICatalog>> = ({
           yearMin,
           yearMax,
           models,
-          searchTerm: router.query.searchTerm,
+          searchTerm: router.query.searchTerm ? router.query.searchTerm : null,
         }
       : typeof localStorage !== 'undefined'
       ? JSON.parse(localStorage.getItem('filter') ?? '{}')
       : {}
   )
   const [loading, setLoading] = useState<boolean>(false)
-  console.log('filter: ', filter)
 
   const fetchCars = useCallback(
     (page = 1) =>
@@ -107,7 +104,12 @@ const Index: NextPage<Partial<ICatalog>> = ({
           setOpen={setOpenFilter}
           loading={loading}
         />
-        <FilterTable filter={filter} setFilter={setFilter} loading={loading} />
+        <FilterTable
+          filter={filter}
+          setFilter={setFilter}
+          loading={loading}
+          setPage={setPage}
+        />
         <div className="catalog__filters-wrapper">
           <CatalogSearch loading={loading} handleSearch={handleSearch} />
           <FilterField
@@ -169,12 +171,13 @@ const Index: NextPage<Partial<ICatalog>> = ({
                   )
                 })}
             </div>
-            {Object.keys(filter).length > 0 && (
+            {Object.keys(filter).filter((key) => !!filter[key]).length > 0 && (
               <button
                 className="filter-field__grid-item filter-field__grid-item--reset"
                 onClick={() => {
                   setFilter({})
-                  router.push({ query: { searchTerm: '' } })
+                  router.push({ query: {} })
+                  setPage(1)
                 }}
               >
                 Сбросить фильтры

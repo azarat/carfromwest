@@ -12,6 +12,7 @@ export type FilterTableProps = {
   setFilter: Dispatch<SetStateAction<any>>
   filter: any
   loading: boolean
+  setPage: Dispatch<SetStateAction<number>>
 }
 
 export interface IFilter {

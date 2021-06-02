@@ -44,8 +44,6 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     Promise.all(simillarFetches)
       .then((response) => Promise.all(response.map((resp) => resp.json())))
       .then((data: ICarsFetchTypes[]) => {
-        console.log(data)
-
         const [byDefault, byMark, byModel] = data.map((d) => {
           const filtred = d.data.filter((c) => c.id !== car.data.id)
           return {

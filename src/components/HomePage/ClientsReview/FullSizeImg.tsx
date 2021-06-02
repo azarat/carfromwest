@@ -18,7 +18,6 @@ const FullSizeImg: React.FC<FullSizeImgProps> = ({
           className="full-img__close-wrapper"
           role="presentation"
           onClick={() => {
-            console.log('hu')
             setFullImgOpen(false)
           }}
         >
