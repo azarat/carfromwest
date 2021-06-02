@@ -23,6 +23,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   setFilter,
   loading,
   filter,
+  setPage,
 }): JSX.Element => {
   const [vehicle, setVehicle] = useState<string>('AM')
   const [fromYear, setFromYear] = useState<number>(0)
@@ -33,7 +34,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [currentModel, setCurrentModel] = useState<string>()
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
-  console.log(currentModel)
 
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
@@ -94,6 +94,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
       odometerMax: +values.odometerMax,
       bodyStyles: bodyStyle,
     })
+    setPage(1)
     document.body.scrollIntoView({ behavior: 'smooth' })
   }
 

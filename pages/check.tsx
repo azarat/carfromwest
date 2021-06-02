@@ -14,7 +14,6 @@ const Check: NextPage = () => {
   const router = useRouter()
 
   const handleSend: MouseEventHandler = async (e) => {
-    const url = localStorage.getItem('url')
     e.preventDefault()
     if (validate().length == 0) {
       const res = await fetch(
@@ -34,7 +33,6 @@ const Check: NextPage = () => {
       )
 
       if (res.status === 200) {
-        console.log(name, phone, connectType, url, wishes)
         setName('')
         setPhone('')
         localStorage.removeItem('url')

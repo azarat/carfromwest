@@ -144,6 +144,9 @@
       order: 1;
       height: 300px;
       margin-top: 130px;
+      & img {
+        object-fit: contain;
+      }
     }
   }
 }

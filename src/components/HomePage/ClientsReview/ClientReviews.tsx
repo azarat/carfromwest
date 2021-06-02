@@ -12,7 +12,6 @@ const ClientReviews: React.FC = () => {
     body?.classList.toggle('fixed')
     setFullReviewOpen((prev) => !prev)
   }
-  console.log(activeReview, isFullReviewOpen)
 
   return (
     <FullReviewContext.Provider

@@ -35,7 +35,6 @@ const FilterFull: React.FC<FilterFullProps> = ({
   const [currentModel, setCurrentModel] = useState<string>()
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
-  console.log(currentModel)
 
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
