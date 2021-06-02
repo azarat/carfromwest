@@ -18,17 +18,17 @@ const IndexPage: NextPage = () => {
     <>
       <Promo />
       <AboutUs />
+      <CheckAuto />
       <Request />
       <PopularAuto />
       <ClientReviews />
-      <Faq />
-      <CheckAuto />
-      <Consult />
       <Advantages />
       <FormBlock />
       <MainPageTimeLine />
       <Video />
+      <Consult />
       <WorkSum />
+      <Faq />
     </>
   )
 }

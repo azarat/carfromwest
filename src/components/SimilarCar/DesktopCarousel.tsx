@@ -13,6 +13,8 @@ const chunk = <T extends unknown>(arr: T[], size: number): T[][] =>
   )
 
 const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
+  console.log(data)
+
   const chunkData = chunk(data, 3)
   return (
     <div className="similar__desktop-carousel">
@@ -29,7 +31,11 @@ const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
                           .label
                       }
                       hightBid={+lotData.sale.currentBid}
-                      imageUrl={lotData.images[0].i}
+                      imageUrl={
+                        lotData.images
+                          ? lotData.images[0]?.i
+                          : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
+                      }
                       lotNumber={`${auctionLotId}`}
                       make={lotData.make}
                       modelGroup={lotData.model}

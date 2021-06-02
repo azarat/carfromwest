@@ -20,13 +20,22 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const [similarCar, setSimilarCar] = useState<ICar[]>([])
   const [loading, setLoading] = useState(false)
   const images = useMemo(
-    () => car.data.attributes.lotData.images.map(({ i }) => i),
+    () =>
+      car.data.attributes.lotData.images
+        ? car.data.attributes.lotData.images.map(({ i }) => i)
+        : [
+            'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg',
+          ],
     [car]
   )
 
   const auctionDateEnd = new Date(carResponse.data.attributes.auctionDate)
 
-  const fetchSimilar = async () => {
+  useEffect(() => {
+    setCar(carResponse)
+  }, [carResponse])
+
+  useEffect(() => {
     setLoading(true)
     const defaultUrl = '/api/lots?includeFilters=false&itemsPerPage=9'
     const markUrl = `${defaultUrl}&makes=${car.data.attributes.lotData.make}`
@@ -35,6 +44,8 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     Promise.all(simillarFetches)
       .then((response) => Promise.all(response.map((resp) => resp.json())))
       .then((data: ICarsFetchTypes[]) => {
+        console.log(data)
+
         const [byDefault, byMark, byModel] = data.map((d) => {
           const filtred = d.data.filter((c) => c.id !== car.data.id)
           return {
@@ -49,15 +60,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
       .finally(() => {
         setLoading(false)
       })
-  }
-
-  useEffect(() => {
-    fetchSimilar()
   }, [car])
-
-  useEffect(() => {
-    setCar(carResponse)
-  }, [carResponse])
 
   const certString = `${
     car.data.attributes.lotData.sale.saleDocument?.state || ''

@@ -5,9 +5,10 @@ import InputMask from 'react-input-mask'
 
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
-const Order: NextPage = () => {
+const Check: NextPage = () => {
   const [connectType, setConnectType] = useState<string>('tel')
   const [name, setName] = useState<string>('')
+  const [wishes, setWishes] = useState<string>('')
   const [phone, setPhone] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
   const router = useRouter()
@@ -26,18 +27,19 @@ const Order: NextPage = () => {
           body: JSON.stringify({
             name,
             phone,
-            link: url,
+            wishes,
             type: connectType,
           }),
         }
       )
+
       if (res.status === 200) {
+        console.log(name, phone, connectType, url, wishes)
         setName('')
         setPhone('')
         localStorage.removeItem('url')
         router.push({ pathname: '/' })
       }
-      console.log(name, phone, connectType, url)
     }
   }
 
@@ -50,14 +52,14 @@ const Order: NextPage = () => {
   }
 
   return (
-    <div className="order">
-      <div className="order__wrapper">
-        <h1 className="order__title">посчитать стоимость</h1>
-        <form className="order__form">
+    <div className="check-auto">
+      <div className="check-auto__wrapper">
+        <h1 className="check-auto__title">проверить авто</h1>
+        <form className="check-auto__form">
           <input
             type="text"
-            className={`order__form-input ${
-              errors.includes('name') ? 'order__form-input--error' : ''
+            className={`check-auto__form-input ${
+              errors.includes('name') ? 'check-auto__form-input--error' : ''
             }`}
             placeholder="Ваше имя"
             value={name}
@@ -67,47 +69,63 @@ const Order: NextPage = () => {
             mask="+380\(99) 999-99-99"
             alwaysShowMask
             type="text"
-            className={`order__form-input ${
-              errors.includes('phone') ? 'order__form-input--error' : ''
+            className={`check-auto__form-input ${
+              errors.includes('phone') ? 'check-auto__form-input--error' : ''
             }`}
             placeholder="Ваш телефон"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
-          <div className="order__form-checkbox-wrapper">
+          <div className="check-auto__form-textarea-wrapper">
+            <textarea
+              name="wishes"
+              className="check-auto__form-textarea"
+              value={wishes as string}
+              onChange={(e) => setWishes(e.target.value)}
+            />
+            {wishes?.length === 0 && (
+              <label
+                className="check-auto__form-textarea-label"
+                htmlFor="wishes"
+              >
+                Комментарий
+              </label>
+            )}
+          </div>
+          <div className="check-auto__form-checkbox-wrapper">
             <input
               id="tel"
               name="tel"
               type="checkbox"
-              className="order__form-checkbox"
+              className="check-auto__form-checkbox"
               onChange={() => setConnectType('tel')}
               checked={connectType === 'tel'}
             />
-            <label className="order__form-label" htmlFor="tel">
+            <label className="check-auto__form-label" htmlFor="tel">
               Консультация по телефону
             </label>
           </div>
-          <div className="order__form-checkbox-wrapper">
+          <div className="check-auto__form-checkbox-wrapper">
             <input
               type="checkbox"
               id="messanger"
               name="messanger"
-              className="order__form-checkbox"
+              className="check-auto__form-checkbox"
               onChange={() => setConnectType('messanger')}
               checked={connectType === 'messanger'}
             />
-            <label className="order__form-label" htmlFor="messanger">
+            <label className="check-auto__form-label" htmlFor="messanger">
               Отправить информацию в Вайбер/Телеграм
             </label>
           </div>
-          <button className="order__form-btn" onClick={handleSend}>
+          <button className="check-auto__form-btn" onClick={handleSend}>
             отправить
           </button>
         </form>
       </div>
-      <div className="order__img"></div>
+      <div className="check-auto__img" />
     </div>
   )
 }
 
-export default Order
+export default Check

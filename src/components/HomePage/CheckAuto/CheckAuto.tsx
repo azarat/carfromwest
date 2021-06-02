@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const CheckAuto: React.FC = () => {
@@ -12,7 +13,11 @@ const CheckAuto: React.FC = () => {
           экспертов. Так вы на 100% защитите себя от обмана и покупки
           некачественного автомобиля
         </p>
-        <button className="check__btn">проверить авто</button>
+        <Link href="/check">
+          <a>
+            <button className="check__btn">проверить авто</button>
+          </a>
+        </Link>
       </div>
       <div className="check__img" />
     </div>

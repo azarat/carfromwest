@@ -10,6 +10,9 @@
   background-repeat: no-repeat;
   background-position: 90% 0;
   background-size: cover;
+  & a {
+    text-decoration: none;
+  }
   &__title {
     max-width: 250px;
     margin-right: auto;

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import ClickSVG from '../../../assets/svg/click.svg'
 
@@ -18,7 +19,11 @@ const Consult: React.FC = () => {
           <p className="consult__click-text">Нажимайте</p>
           <ClickSVG />
         </div>
-        <button className="consult__btn">хочу консультацию</button>
+        <Link href="check">
+          <a>
+            <button className="consult__btn">хочу консультацию</button>
+          </a>
+        </Link>
       </div>
       <div className="consult__img"></div>
     </div>

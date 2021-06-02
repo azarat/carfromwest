@@ -16,9 +16,13 @@ const SimilarCar: React.FC<ISimilarCar> = ({ data, loading }): JSX.Element => {
           <span className="title-bg"></span>
           <span className="title-text">ПОХОЖИЕ АВТОМОБИЛИ</span>
         </h2>
-        {data && <DesktopCarousel data={data} />}
-        {data && <MobileCarousel data={data} />}
-        {data && <TabletCarousel data={data} />}
+        {data && (
+          <>
+            <DesktopCarousel data={data} />
+            <MobileCarousel data={data} />
+            <TabletCarousel data={data} />
+          </>
+        )}
       </div>
     </div>
   )

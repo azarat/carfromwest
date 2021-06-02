@@ -29,7 +29,11 @@ const TabletCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
                           .label
                       }
                       hightBid={+lotData.sale.currentBid}
-                      imageUrl={lotData.images[0].i}
+                      imageUrl={
+                        lotData.images
+                          ? lotData.images[0]?.i
+                          : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
+                      }
                       lotNumber={`${auctionLotId}`}
                       make={lotData.make}
                       modelGroup={lotData.model}
