@@ -9,7 +9,7 @@
   &__name {
     color: #192a3e;
     font-weight: $fw-700;
-    font-size: 18px;
+    font-size: $fs-18;
     line-height: 21px;
   }
   &__text {
@@ -19,21 +19,23 @@
     overflow: hidden;
     color: #323c47;
     font-weight: $fw-300;
-    font-size: 16px;
+    font-size: $fs-16;
     line-height: 18px;
   }
   &__btn-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 200px;
     margin-top: 10px;
+    margin-left: auto;
     padding: 10px;
     cursor: pointer;
   }
   &__btn {
     position: relative;
     color: #9f2000;
-    font-size: 16px;
+    font-size: $fs-16;
     font-family: $ff-commons;
     line-height: 13px;
     background: $transparent;
@@ -115,26 +117,44 @@
       margin-right: auto;
     }
     &__name {
-      font-size: 24px;
+      font-size: $fs-24;
       line-height: 28px;
     }
     &__text {
       max-width: unset;
       height: 120px;
-      font-size: 22px;
+      font-size: $fs-22;
       line-height: 25px;
     }
-    &__btn-wrapper {
-      grid-row: 3;
+    &__btns-wrapper {
+      display: flex;
+      flex-direction: row-reverse;
+      grid-row: 2/4;
       grid-column: 2;
-      justify-content: flex-end;
-      transform: translateX(-30px);
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    &__btn {
+      padding: 5px 10px;
+      font-size: $fs-18;
+      line-height: 100%;
+      &::after {
+        right: -13px;
+        bottom: 15px;
+      }
+    }
+    &__btn-wrapper {
+      margin: unset;
+      padding: unset;
+      transform: translate(-30px, 0);
+      cursor: pointer;
     }
     &__more-reviews {
       display: flex;
-      grid-row: 3;
-      grid-column: 2;
       justify-content: flex-start;
+      margin: unset;
+      padding: unset;
+      padding: 5px 10px;
     }
   }
 }
@@ -146,12 +166,12 @@
       height: 145px;
     }
     &__name {
-      font-size: 28px;
+      font-size: $fs-28;
       line-height: 28px;
     }
     &__text {
       height: 225px;
-      font-size: 28px;
+      font-size: $fs-28;
       line-height: 28px;
     }
   }

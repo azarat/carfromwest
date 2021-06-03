@@ -20,7 +20,10 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
     <div className="car-page__carousel">
       <div
         role="presentation"
-        onClick={() => setOpenModal(true)}
+        onClick={() => {
+          document.querySelector('body')?.classList.add('fixed')
+          setOpenModal(true)
+        }}
         className="car-page__carousel-full-size"
       >
         <FullSizeSVG />
@@ -48,7 +51,16 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
         <PhotoSVG />
         {images.length} фото
       </div>
-      <CarouselModal open={openModal} onClose={() => setOpenModal(false)}>
+      <CarouselModal
+        open={openModal}
+        onClose={() => {
+          document.querySelector('body')?.classList.remove('fixed')
+          setOpenModal(false)
+        }}
+        images={images}
+        setCurrentSlide={setCurrentSlide}
+        initialSlide={currentSlide}
+      >
         <img
           className="carousel__modal-img"
           src={images[currentSlide]}

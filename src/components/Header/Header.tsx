@@ -47,7 +47,11 @@ const Header: React.FC = () => {
             <div className="header__contact-item-icon">
               <PhoneSVG />
             </div>
-            <div className="header__contact-item-text">ЗАКАЗАТЬ ЗВОНОК</div>
+            <Link href="/check">
+              <a>
+                <div className="header__contact-item-text">ЗАКАЗАТЬ ЗВОНОК</div>
+              </a>
+            </Link>
           </div>
         </div>
 

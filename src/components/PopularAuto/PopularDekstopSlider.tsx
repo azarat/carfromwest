@@ -13,7 +13,7 @@ import SliderItem from './SliderItem'
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation])
 
-export const PopularDesktopSlider = () => {
+const PopularDesktopSlider: React.FC = () => {
   return (
     <>
       <Swiper
@@ -26,6 +26,8 @@ export const PopularDesktopSlider = () => {
           clickable: true,
         }}
         className="mySwiper"
+        grabCursor={true}
+        slideToClickedSlide={true}
       >
         {popularAuto.map(({ img, name, uaPrice, usaPrice }) => (
           <SwiperSlide key={img}>
