@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import TelegramSVG from '../../assets/svg/telegram.svg'
 import PhoneSVG from '../../assets/svg/phone.svg'
 import HeaderMenu from './HeaderMenu'
@@ -10,6 +9,7 @@ const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleOpenMenu = () => {
+    document.body.classList.toggle('fixed')
     setOpen((prev) => !prev)
   }
 
@@ -31,19 +31,21 @@ const Header: React.FC = () => {
           <SearchInput id="header-search" />
         </div>
         <div className="header__contact">
-          <div className="header__contact-item">
-            <div className="header__contact-item-icon">
-              <a href="#">
+          <a
+            href="https://t.me/joinchat/AAAAAD9TKVdDMSjyAzajbA"
+            target="_blank"
+          >
+            <div className="header__contact-item">
+              <div className="header__contact-item-icon">
                 <TelegramSVG />
-              </a>
+              </div>
+              <div className="header__contact-item-text">ПИШИТЕ В ТЕЛЕГРАМ</div>
             </div>
-            <div className="header__contact-item-text">ПИШИТЕ В ТЕЛЕГРАМ</div>
-          </div>
+          </a>
+
           <div className="header__contact-item">
             <div className="header__contact-item-icon">
-              <a href="#">
-                <PhoneSVG />
-              </a>
+              <PhoneSVG />
             </div>
             <div className="header__contact-item-text">ЗАКАЗАТЬ ЗВОНОК</div>
           </div>

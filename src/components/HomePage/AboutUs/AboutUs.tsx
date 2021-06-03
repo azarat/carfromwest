@@ -5,7 +5,7 @@ import Title from '../../Title/Title'
 
 const AboutUs: React.FC = () => {
   return (
-    <section className="about-us">
+    <section id="section-about" className="about-us">
       <div className="about-us__text">
         <SubTitle>Наши достижения</SubTitle>
         <Title>О НАШЕЙ КОМПАНИИ</Title>

@@ -22,7 +22,7 @@ const ClientReviews: React.FC = () => {
         handleFullReview,
       }}
     >
-      <div className="client-reviews">
+      <div id="client-reviews-section" className="client-reviews">
         <div className="client-reviews__wrapper">
           <h2 className="client-reviews__title">
             Наши клиенты которые которые уже получили свои машины из США
