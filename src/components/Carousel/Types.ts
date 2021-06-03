@@ -5,4 +5,5 @@ export interface ICarousel {
   buttonNext?: React.ReactNode
   withDots?: boolean
   callback?: any
+  initialSlide?: number
 }

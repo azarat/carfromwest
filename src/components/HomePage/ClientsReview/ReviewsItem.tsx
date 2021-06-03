@@ -20,20 +20,27 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
           <p className="reviews-item__name">{name}</p>
           <p className="reviews-item__text">{text}</p>
         </div>
-        <div className="reviews-item__btn-wrapper">
-          <button
-            className="reviews-item__btn"
-            onClick={() => {
-              setActiveReview(index)
-              handleFullReview()
-            }}
+        <div className="reviews-item__btns-wrapper">
+          <div className="reviews-item__btn-wrapper">
+            <button
+              className="reviews-item__btn"
+              onClick={() => {
+                setActiveReview(index)
+                handleFullReview()
+              }}
+            >
+              Развернуть отзыв
+            </button>
+          </div>
+          <a
+            target="_blank"
+            href="https://www.google.com/maps/place/%D0%9A%D0%90%D0%A0%D0%A1%D0%A4%D0%A0%D0%9E%D0%9C%D0%92%D0%95%D0%A1%D0%A2+%D0%9A%D0%B8%D0%B5%D0%B2/@50.3931402,30.4899978,17z/data=!3m1!4b1!4m5!3m4!1s0x40d4c8ce74c9cea1:0x3dcbf27b84312b1f!8m2!3d50.3931346!4d30.49215"
+            className="reviews-item__more-reviews"
+            rel="noreferrer"
           >
-            Развернуть отзыв
-          </button>
+            Смотреть больше отзывов
+          </a>
         </div>
-        <a href="" className="reviews-item__more-reviews">
-          Смотреть больше отзывов
-        </a>
 
         <div className="reviews-item__photos">
           {images.slice(0, 4).map((el) => (

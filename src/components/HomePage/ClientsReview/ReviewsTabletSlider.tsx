@@ -24,6 +24,8 @@ export const ReviewsTabletSlider: React.FC = () => {
         slidesPerView={'auto'}
         spaceBetween={10}
         initialSlide={1}
+        grabCursor={true}
+        slideToClickedSlide={true}
       >
         {reviews.map(({ name, images, text }, index) => (
           <SwiperSlide key={name}>

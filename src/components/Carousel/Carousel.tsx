@@ -10,10 +10,11 @@ const Carousel: React.FC<ICarousel> = ({
   buttonPrev,
   buttonNext,
   withDots,
+  initialSlide,
   callback = () => {},
 }): JSX.Element => {
   const carousel = useRef<any>()
-  const [slide, setSlide] = useState(0)
+  const [slide, setSlide] = useState(initialSlide ? initialSlide : 0)
 
   const handleNextSlide = () => {
     if (slide + 1 < children.length) setSlide(slide + 1)

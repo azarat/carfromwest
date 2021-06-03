@@ -61,7 +61,7 @@ body {
   font-family: $ff-opensans;
   background-color: #f2f2f2;
   &.fixed {
-    overflow: hidden;
+    overflow: hidden !important;
   }
 }
 
