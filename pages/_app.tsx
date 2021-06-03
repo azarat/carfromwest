@@ -23,3 +23,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 }
 
 export default MyApp
+
+
+// TODO: COOMMENT FOR DEPLOY
