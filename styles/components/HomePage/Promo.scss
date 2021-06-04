@@ -39,32 +39,33 @@
   }
   &__video {
     margin-top: 30px;
+    cursor: pointer;
     &-image {
       position: relative;
-      height: 86px;
       width: 153px;
+      height: 86px;
       background: url('/assets/images/promo-video-bg.jpeg');
     }
     &-play-button {
-      display: block;
-      height: 45px;
-      width: 45px;
       position: absolute;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.45);
       top: 50%;
       left: 50%;
+      display: block;
+      width: 45px;
+      height: 45px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 50%;
       transform: translate(-50%, -50%);
       &::after {
-        height: 15px;
-        width: 15px;
-        content: '';
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        width: 15px;
+        height: 15px;
         background: url('/assets/images/play-button.png');
         background-size: cover;
+        transform: translate(-50%, -50%);
+        content: '';
       }
     }
     &-link {

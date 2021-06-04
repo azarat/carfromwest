@@ -19,6 +19,7 @@ const Promo: React.FC = (): JSX.Element => {
   }, [])
 
   const handleModalOpen = () => {
+    document.body.scrollIntoView()
     document.body.classList.toggle('fixed')
     setShowModal((prev) => !prev)
   }
