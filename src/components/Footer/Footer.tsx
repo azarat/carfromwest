@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 import SocialLink from '../SocialLink/SocialLink'
 
@@ -42,6 +43,14 @@ const Footer: React.FC = () => {
           <p className="footer__work-time-date">24/7/365</p>
         </div>
         <SocialLink />
+        <div className="footer__development">
+          <div className="footer__development-image">
+            <Image src="/assets/images/gp-logo.png" layout="fill" />
+          </div>
+          <p className="footer__development-text">
+            Сайт разработан GoodPage.studio
+          </p>
+        </div>
       </div>
       <div className="footer__copyright">
         <p className="footer__copyright-text">
