@@ -164,6 +164,10 @@
         background: $transparent;
         border: 1px solid rgba(226, 40, 29, 0.92);
         border-radius: 0px;
+        transition: background-color 0.3s linear;
+        &:hover {
+          background: rgba(226, 40, 29, 0.92);
+        }
       }
     }
     & .react-select {

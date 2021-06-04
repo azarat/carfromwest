@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="footer__copyright">
         <p className="footer__copyright-text">
-          © Copyright - Все права защищены 2019.
+          © Copyright - Все права защищены 2021.
           <br /> CARSFROMWEST
         </p>
       </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { SocialLinkItems } from '../../constants/SocialLinkItems'
 
 const SocialLink: React.FC = () => {
@@ -8,11 +7,9 @@ const SocialLink: React.FC = () => {
       <ul className="social-link__list">
         {SocialLinkItems.map(({ id, icon: Icon, href }) => (
           <li key={id} className="social-link__item">
-            <Link href={href}>
-              <a>
-                <Icon />
-              </a>
-            </Link>
+            <a target="_blank" href={href}>
+              <Icon />
+            </a>
           </li>
         ))}
       </ul>

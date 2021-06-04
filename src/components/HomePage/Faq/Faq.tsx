@@ -3,7 +3,7 @@ import FaqAccordion from './FaqAccordion'
 
 const Faq: React.FC = () => {
   return (
-    <div className="faq">
+    <div id="section-faq" className="faq">
       <div className="faq__wrapper">
         <h2 className="faq__title">Ответы на вопросы</h2>
         <FaqAccordion />

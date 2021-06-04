@@ -4,7 +4,7 @@ import PopularDesktopSlider from './PopularDekstopSlider'
 
 const PopularAuto: React.FC = () => {
   return (
-    <div className="popular">
+    <div id="section-popular" className="popular">
       <div className="popular__wrapper">
         <h2 className="popular__title">Популярные авто из США</h2>
         <div className="popular__mobile-slider-wrapper">

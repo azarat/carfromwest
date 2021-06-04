@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const Advantages: React.FC = () => {
   return (
-    <section className="advantages">
+    <section id="advantages-section" className="advantages">
       <SubTitle>Работая с CarsFromWest Вы получаете преимущества</SubTitle>
       <Title>Наши преимущества</Title>
       <div className="advantages__grid">

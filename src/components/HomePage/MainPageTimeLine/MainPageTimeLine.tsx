@@ -37,7 +37,7 @@ const MainPageTimeLine: React.FC = () => {
   }, [stepPoint])
 
   return (
-    <section className="delivery-process">
+    <section id="delivery-section" className="delivery-process">
       <div className="delivery-process__container">
         <h4 className="delivery-process__title">
           Процесс доставки авто из США
