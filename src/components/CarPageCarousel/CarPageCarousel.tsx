@@ -5,6 +5,7 @@ import FullSizeSVG from '../../assets/svg/fullsize.svg'
 import PhotoSVG from '../../assets/svg/photo.svg'
 import { useState } from 'react'
 import CarouselModal from '../CarouselModal/CarouselModal'
+import CarouselImage from './CarouselImage'
 
 type CarPageCarouselProps = {
   images: string[]
@@ -34,17 +35,7 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
         callback={setCurrentSlide}
       >
         {images.map((item) => (
-          <img
-            key={item}
-            className="car-page__carousel-img"
-            loading="lazy"
-            src={
-              item
-                ? item
-                : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
-            }
-            alt="car"
-          />
+          <CarouselImage url={item} key={item} />
         ))}
       </Carousel>
       <div className="car-page__carousel-total">

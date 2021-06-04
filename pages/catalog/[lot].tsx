@@ -40,18 +40,34 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     const defaultUrl = '/api/lots?includeFilters=false&itemsPerPage=9'
     const markUrl = `${defaultUrl}&makes=${car.data.attributes.lotData.make}`
     const modelUrl = `${markUrl}&models=${car.data.attributes.lotData.model}`
-    const simillarFetches = [fetch(defaultUrl), fetch(markUrl), fetch(modelUrl)]
+    const yearUrl = `${modelUrl}&yearMin=${car.data.attributes.lotData.year}&yearMax=${car.data.attributes.lotData.year}`
+    const yearUrlAnother = `${modelUrl}&yearMin=${
+      car.data.attributes.lotData.year - 2
+    }&yearMax=${car.data.attributes.lotData.year + 2}`
+
+    const simillarFetches = [
+      fetch(defaultUrl),
+      fetch(markUrl),
+      fetch(modelUrl),
+      fetch(yearUrl),
+      fetch(yearUrlAnother),
+    ]
     Promise.all(simillarFetches)
       .then((response) => Promise.all(response.map((resp) => resp.json())))
       .then((data: ICarsFetchTypes[]) => {
-        const [byDefault, byMark, byModel] = data.map((d) => {
-          const filtred = d.data.filter((c) => c.id !== car.data.id)
-          return {
-            totalItems: filtred.length,
-            data: filtred,
+        const [byDefault, byMark, byModel, byYear, byYearAnother] = data.map(
+          (d) => {
+            const filtred = d.data.filter((c) => c.id !== car.data.id)
+            return {
+              totalItems: filtred.length,
+              data: filtred,
+            }
           }
-        })
-        if (byModel.totalItems !== 0) setSimilarCar(byModel.data)
+        )
+        if (byYear.totalItems !== 0) setSimilarCar(byYear.data)
+        else if (byYearAnother.totalItems !== 0)
+          setSimilarCar(byYearAnother.data)
+        else if (byModel.totalItems !== 0) setSimilarCar(byModel.data)
         else if (byMark.totalItems !== 0) setSimilarCar(byMark.data)
         else if (byDefault.totalItems !== 0) setSimilarCar(byDefault.data)
       })

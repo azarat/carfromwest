@@ -63,7 +63,14 @@
     max-width: 100%;
     &-img {
       width: 100%;
-      max-height: 260px;
+      height: 260px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      cursor: zoom-in;
+      &--zoomed {
+        cursor: zoom-out;
+      }
     }
     &-full-size {
       position: absolute;
@@ -287,8 +294,7 @@
   .car-page {
     &__carousel {
       &-img {
-        max-height: 510px;
-        object-fit: cover;
+        height: 510px;
       }
     }
     &__name-wrapper {
@@ -361,10 +367,7 @@
       max-width: 100%;
       &-img {
         width: 100%;
-        max-width: 100%;
-        max-height: 325px;
-        -o-object-fit: cover;
-        object-fit: cover;
+        height: 325px;
       }
     }
 
@@ -429,7 +432,7 @@
     }
     &__carousel {
       &-img {
-        max-height: 510px;
+        height: 470px;
       }
     }
     &__info {

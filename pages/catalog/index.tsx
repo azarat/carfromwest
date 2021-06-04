@@ -50,7 +50,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
       (async (page) => {
         setLoading(true)
         const cfwURL = '/api/lots'
-        const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
+        const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}&yearMin=2010`
 
         const filterString = Object.keys(filter)
           .filter((key) => filter[key])

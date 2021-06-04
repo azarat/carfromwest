@@ -20,7 +20,10 @@ const CarouselImage: React.FC<ICarouselImage> = ({ url }) => {
     const handleMove = (e: MouseEvent): void => {
       if (isZoomed) {
         const { offsetX, offsetY } = e
-        if (img) img.style.backgroundPosition = `-${offsetX}px -${offsetY}px`
+        if (img)
+          img.style.backgroundPosition = `-${offsetX / 1.5}px -${
+            offsetY / 1.5
+          }px`
       }
     }
 
@@ -41,15 +44,15 @@ const CarouselImage: React.FC<ICarouselImage> = ({ url }) => {
       imgRef.current.style.backgroundSize = isZoomed ? '' : '170%'
       imgRef.current.style.backgroundPosition = isZoomed
         ? ''
-        : `-${offsetX}px -${offsetY}px`
+        : `-${offsetX / 1.5}px -${offsetY / 1.5}px`
       zoom((prev) => !prev)
     }
   }
 
   return (
     <div
-      className={`car-page__carousel-img car-page__carousel-img--full ${
-        isZoomed ? 'car-page__carousel-img--full--zoomed' : ''
+      className={`car-page__carousel-img car-page__carousel-img ${
+        isZoomed ? 'car-page__carousel-img--zoomed' : ''
       }`}
       ref={imgRef as RefObject<HTMLDivElement>}
       style={{

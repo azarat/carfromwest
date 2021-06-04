@@ -52,7 +52,7 @@
     .car-page {
       &__carousel {
         &-img {
-          &--full {
+          &--fullsize {
             position: relative;
             z-index: 20;
             width: 80%;
@@ -60,13 +60,8 @@
             max-height: 600px;
             margin: 0 auto;
             object-fit: contain;
-            background-repeat: no-repeat;
-            background-size: contain;
-            cursor: zoom-in;
+            cursor: unset;
             pointer-events: all;
-            &--zoomed {
-              cursor: zoom-out;
-            }
           }
         }
       }
@@ -106,9 +101,8 @@
       .car-page {
         &__carousel {
           &-img {
-            &--full {
+            &--fullsize {
               height: 600px;
-              background-position: center;
             }
           }
         }
