@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { createPortal } from 'react-dom'
 import ArrowSVG from '../../assets/svg/carouselArrow.svg'
 import Carousel from '../Carousel/Carousel'
+import CarouselImage from './CarouselImage'
 
 type CarouselModalProps = {
   onClose: () => void
@@ -41,17 +42,16 @@ const CarouselModal: React.FC<CarouselModalProps> = ({
             initialSlide={initialSlide}
           >
             {images.map((item) => (
-              <img
-                key={item}
-                className="car-page__carousel-img car-page__carousel-img--full"
-                loading="lazy"
-                src={
-                  item
-                    ? item
-                    : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
-                }
-                alt="car"
-              />
+              <>
+                <CarouselImage
+                  key={item}
+                  url={
+                    item
+                      ? item
+                      : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
+                  }
+                ></CarouselImage>
+              </>
             ))}
           </Carousel>
         </div>,

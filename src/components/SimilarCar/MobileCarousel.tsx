@@ -18,7 +18,7 @@ const MobileCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
                 <CatalogItem
                   fuelType={
                     gas.find(({ value }) => value === lotData.info.fuelType)
-                      .label
+                      ?.label || null
                   }
                   hightBid={+lotData.sale.currentBid}
                   imageUrl={
