@@ -6,7 +6,7 @@ const filter: NextApiHandler = async (req, res) => {
       req.query.searchTerm &&
       !req.query?.searchTerm.toString().match(/[0-9A-Za-z]/gi)
     ) {
-      res.status(200).send({ data: [] })
+      return res.status(200).send({ data: [] })
     }
 
     const queryParams = Object.keys(req.query)
@@ -17,9 +17,9 @@ const filter: NextApiHandler = async (req, res) => {
     const response = await fetch(url)
     const data = await response.json()
 
-    res.status(200).send(data)
+    return res.status(200).send(data)
   } catch (e) {
-    res.status(500).send({ message: 'Server Error' })
+    return res.status(500).send({ message: 'Server Error' })
   }
 }
 
