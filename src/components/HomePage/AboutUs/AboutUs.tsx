@@ -1,20 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
-import SubTitle from '../../SubTitle/SubTitle'
 import Title from '../../Title/Title'
 
 const AboutUs: React.FC = () => {
   return (
     <section id="section-about" className="about-us">
       <div className="about-us__text">
-        <SubTitle>Наши достижения</SubTitle>
         <Title>О НАШЕЙ КОМПАНИИ</Title>
         <div className="about-us__description">
           <p>Уже 5 лет наша компания является дилером автомобилей из США.</p>
           <p>
             Мы организовываем весь процесс привоза автомобиля из США, от
             профессионального выбора, до ремонта и постановки на номера! Найдем
-            любой автомобиль , под любой вкус наших клиентов!
+            любой автомобиль, под любой вкус наших клиентов!
           </p>
         </div>
         <div className="about-us__stats">

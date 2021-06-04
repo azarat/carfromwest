@@ -1,5 +1,4 @@
 import React from 'react'
-import SubTitle from '../../SubTitle/SubTitle'
 import Title from '../../Title/Title'
 import { AdvantagesItems } from '../../../constants/AdvantagesItems'
 import Link from 'next/link'
@@ -7,7 +6,6 @@ import Link from 'next/link'
 const Advantages: React.FC = () => {
   return (
     <section id="advantages-section" className="advantages">
-      <SubTitle>Работая с CarsFromWest Вы получаете преимущества</SubTitle>
       <Title>Наши преимущества</Title>
       <div className="advantages__grid">
         {AdvantagesItems.map(({ id, icon: Icon, title, description }) => (

@@ -127,6 +127,9 @@
       &-money {
         margin-top: 0;
       }
+      &-text {
+        font-size: $fs-15;
+      }
     }
   }
 }
@@ -150,6 +153,10 @@
       }
       &-number {
         font-size: $fs-60;
+      }
+      &-text {
+        font-size: $fs-16;
+        text-align: center;
       }
     }
     &__image {

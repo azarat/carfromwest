@@ -4,10 +4,13 @@ import { Formik } from 'formik'
 import InputMask from 'react-input-mask'
 import SubTitle from '../../SubTitle/SubTitle'
 import Title from '../../Title/Title'
+import { useRouter } from 'next/router'
 
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const Request: React.FC = () => {
+  const router = useRouter()
+
   const sendRequest = async (values: any): Promise<void> => {
     const res = await fetch(
       'https://admin.webrains.studio/sendCFWLandingMessage',
@@ -21,7 +24,7 @@ const Request: React.FC = () => {
       }
     )
     if (res) {
-      return
+      await router.push('/thanks')
     }
   }
 
