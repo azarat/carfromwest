@@ -102,7 +102,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
               № Лота {car.data.attributes.auctionLotId}
             </h2>
           </div>
-          <div className="car-page__info">
+          <div className="car-page__info-wrapper">
             <div className="car-page__header">
               <div className="car-page__header-slider">
                 <CarPageCarousel images={images} />
