@@ -9,7 +9,7 @@ const Consultation: React.FC = () => {
         <h3 className="consultation__title">
           Есть вопросы или что-то не поняли? Звоните и мы ответим на них!
         </h3>
-        <Link href="/check">
+        <Link href="/consult">
           <a>
             <button className="consultation__btn">получить консультацию</button>
           </a>
