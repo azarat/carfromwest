@@ -50,27 +50,27 @@ const Index: NextPage<Partial<ICatalog>> = ({
       (async (page) => {
         setLoading(true)
         const cfwURL = '/api/lots'
-        const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}&yearMin=2010`
-
+        const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
         const filterString = Object.keys(filter)
           .filter((key) => filter[key])
           .map((key) => `${key}=${filter[key]}`)
           .join('&')
+
         const engineCapacitiesString = `engineCapacities=
       ${capacityArray(
         filter.engine_min ? filter.engine_min : 0.7,
         filter.engine_max ? filter.engine_max : 17
       ).join(',')}`
-
+        const url = `${cfwURL}?${queryParams}&${filterString}&${engineCapacitiesString}`
         const response = await fetch(
-          `${cfwURL}?${queryParams}&${filterString}&${engineCapacitiesString}`
+          url.includes('yearMin') ? url : `${url}&yearMin=2010`
         )
         const cfwData = await response.json()
 
         setCars(cfwData)
         setLoading(false)
       })(page),
-    [filter]
+    [filter, yearMin]
   )
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
     fetchCars(page)
   }, [filter, page, fetchCars])
 
-  const handleSearch = (searchTerm: string) => {
+  const handleSearch = (searchTerm: string): void => {
     setFilter({ ...filter, searchTerm })
   }
 

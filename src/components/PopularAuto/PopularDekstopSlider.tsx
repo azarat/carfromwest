@@ -29,13 +29,14 @@ const PopularDesktopSlider: React.FC = () => {
         grabCursor={true}
         slideToClickedSlide={true}
       >
-        {popularAuto.map(({ img, name, uaPrice, usaPrice }) => (
+        {popularAuto.map(({ img, name, uaPrice, usaPrice, filterParams }) => (
           <SwiperSlide key={img}>
             <SliderItem
               name={name}
               uaPrice={uaPrice}
               usaPrice={usaPrice}
               img={img}
+              filterParams={filterParams}
             />
           </SwiperSlide>
         ))}

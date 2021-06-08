@@ -1,0 +1,134 @@
+.consult {
+  &__gallery {
+    position: relative;
+    display: grid;
+    grid-template-rows: 200px 155px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    width: 100%;
+    margin: 50px 0px;
+    &-last {
+      position: absolute;
+      top: 206px;
+      right: 0px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(50% - 3px);
+      height: 155px;
+      color: $white-color;
+      font-weight: $fw-700;
+      font-size: $fs-29;
+      line-height: 150%;
+      background-color: $light-gray-color-05;
+      pointer-events: none;
+      &-tablet,
+      &-desktop {
+        display: none;
+      }
+    }
+    &-img {
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+
+      &:nth-of-type(n + 5) {
+        display: none;
+      }
+
+      &:nth-of-type(2) {
+        grid-row: 1;
+        grid-column: span 2;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .consult {
+    &__gallery {
+      margin: unset;
+      margin-left: 15px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .consult {
+    &__gallery {
+      grid-template-rows: 230px 170px;
+      grid-template-columns: repeat(4, 1fr);
+      &-last {
+        top: 236px;
+        right: 0px;
+        width: calc(25% - 3px);
+        height: 170px;
+        &-mobile {
+          display: none;
+        }
+        &-tablet {
+          display: inline;
+        }
+      }
+      &-img {
+        &:nth-of-type(3) {
+          grid-row: 1;
+          grid-column: span 2;
+          height: 100%;
+        }
+        &:nth-of-type(n + 5) {
+          display: block;
+        }
+        &:nth-of-type(n + 8) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          filter: unset;
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .consult {
+    &__gallery {
+      grid-template-columns: repeat(6, 1fr);
+      &-last {
+        top: 236px;
+        right: 0px;
+        width: calc(100% / 6 - 3px);
+        &-tablet {
+          display: none;
+        }
+        &-desktop {
+          display: inline;
+        }
+      }
+      &-img {
+        &:nth-of-type(4) {
+          grid-row: 1;
+          grid-column: span 2;
+          height: 100%;
+        }
+        &:nth-of-type(n + 8) {
+          display: block;
+        }
+        &:nth-of-type(n + 11) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          filter: unset;
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

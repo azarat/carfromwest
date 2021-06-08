@@ -89,7 +89,7 @@ export interface ICatalog {
   type: string
   yearMin: number
   yearMax: number
-  models: number
+  models: number | string
   searchTerm: string
 }
 

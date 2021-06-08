@@ -112,7 +112,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                 <>
                   <div className="car-page__header-timer-wrapper">
                     <div className="car-page__header-time">
-                      До окончания торгов осталось
+                      до старта торгов осталось
                     </div>
                     <div className="car-page__header-timer">
                       <Countdown date={auctionDateEnd.toISOString()} />

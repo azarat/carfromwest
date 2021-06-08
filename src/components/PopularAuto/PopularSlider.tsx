@@ -11,40 +11,55 @@ import 'swiper/components/thumbs/thumbs.min.css'
 import SwiperCore, { Navigation, Thumbs } from 'swiper/core'
 import SliderItem from './SliderItem'
 import { popularAuto } from '../../constants/popularAuto'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs])
 
 export const PopularSlider: React.FC = () => {
+  const { push } = useRouter()
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null)
 
   return (
     <>
       <Swiper
-        loop={true}
         spaceBetween={10}
-        navigation={true}
+        loop
+        navigation
         className="popular__mobile-main-slider"
         thumbs={{ swiper: thumbsSwiper }}
       >
-        {popularAuto.map(({ name, uaPrice, usaPrice, img }) => (
-          <SwiperSlide key={name}>
-            <SliderItem
-              name={name}
-              uaPrice={uaPrice}
-              usaPrice={usaPrice}
-              img={img}
-            />
-          </SwiperSlide>
-        ))}
+        {popularAuto.map(({ name, uaPrice, usaPrice, img, filterParams }) => {
+          return (
+            <Link key={name} href={{}}>
+              <SwiperSlide className="auto-slide">
+                <div
+                  role="presentation"
+                  onClick={() => {
+                    push('/catalog', { query: filterParams })
+                  }}
+                >
+                  <SliderItem
+                    name={name}
+                    uaPrice={uaPrice}
+                    usaPrice={usaPrice}
+                    img={img}
+                    filterParams={filterParams}
+                  />
+                </div>
+              </SwiperSlide>
+            </Link>
+          )
+        })}
       </Swiper>
       <Swiper
         onSwiper={(swiper) => setThumbsSwiper(swiper)}
         spaceBetween={10}
         slidesPerView={4}
-        freeMode={true}
-        watchSlidesVisibility={true}
-        watchSlidesProgress={true}
+        freeMode
+        watchSlidesVisibility
+        watchSlidesProgress
         className="sub-slider"
       >
         {popularAuto.map(({ img }) => (

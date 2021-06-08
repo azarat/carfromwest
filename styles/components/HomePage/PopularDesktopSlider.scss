@@ -27,11 +27,16 @@
         -ms-flex-pack: center;
         -webkit-box-align: center;
         -ms-flex-align: center;
+        & .slider-item {
+          pointer-events: none;
+        }
         &-active {
           transform: scale(1.2);
           filter: opacity(1);
           transition: transform 0.3s ease, opacity 0.5s ease;
           & .slider-item {
+            pointer-events: all;
+
             & img {
               display: block;
               width: 100%;

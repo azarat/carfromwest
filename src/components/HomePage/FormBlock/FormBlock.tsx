@@ -7,7 +7,7 @@ const FormBlock: React.FC = () => {
       <h2 className="form-block__title">
         Есть вопросы или что-то не поняли? Звоните и мы ответим на них!
       </h2>
-      <Link href="/check">
+      <Link href="/consult">
         <a>
           <button className="form-block__button">Связаться с нами</button>
         </a>
