@@ -48,7 +48,7 @@ export const popularAuto = [
     name: '2015 SUBARU FORESTER',
     usaPrice: '13000',
     uaPrice: '17000',
-    img: '/assets/images/2013_Subare_Forester.png',
+    img: '/assets/images/Subaru.png',
     filterParams: {
       makes: 'Subaru',
       models: 'Forester',
