@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 import SocialLink from '../SocialLink/SocialLink'
+import LogoSVG from '../../assets/svg/logo.svg'
 
 const Footer: React.FC = () => {
   return (
@@ -10,11 +11,7 @@ const Footer: React.FC = () => {
         <div className="footer__logo">
           <Link href="/">
             <a>
-              <img
-                className="header__logo-img"
-                src="/assets/images/logo.png"
-                alt="Логотип"
-              />
+              <LogoSVG />
             </a>
           </Link>
         </div>

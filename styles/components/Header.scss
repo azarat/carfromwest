@@ -16,9 +16,8 @@
     display: flex;
     align-items: center;
     margin-right: 20px;
-    &-img {
-      max-width: 130px;
-      max-height: 10px;
+    &-svg {
+      display: none;
     }
   }
   &__search {
@@ -169,8 +168,11 @@
     padding: 0 65px;
     &__logo {
       margin-left: 55px;
-      &-img {
-        height: 15px;
+      &-svg {
+        display: block;
+        &--mobile {
+          display: none;
+        }
       }
     }
     &__search {
