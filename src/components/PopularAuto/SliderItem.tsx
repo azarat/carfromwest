@@ -23,8 +23,9 @@ const SliderItem: React.FC<SliderItemProps> = ({
         <strong>$ {usaPrice}</strong> из США с ремонтом
       </p>
       <p className="slider-item__price">
-        <strong>$ {uaPrice}</strong> аналогом из Украины
+        <strong>$ {uaPrice}</strong> аналог в Украине
       </p>
+      <button className="slider-item__btn">Посмотреть в каталоге</button>
     </div>
   )
 }

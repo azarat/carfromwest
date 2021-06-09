@@ -6,11 +6,11 @@ import React, {
   useState,
 } from 'react'
 
-interface ICarouselImage {
+type CarouselModalImageProps = {
   url: string
 }
 
-const CarouselImage: React.FC<ICarouselImage> = ({ url }) => {
+const CarouselModalImage: React.FC<CarouselModalImageProps> = ({ url }) => {
   const [isZoomed, zoom] = useState(false)
   const imgRef = useRef<HTMLDivElement>()
 
@@ -61,4 +61,4 @@ const CarouselImage: React.FC<ICarouselImage> = ({ url }) => {
   )
 }
 
-export default CarouselImage
+export default CarouselModalImage

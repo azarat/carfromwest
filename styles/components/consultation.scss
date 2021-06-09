@@ -1,17 +1,47 @@
 .consultation {
-  padding: 220px 15px 45px;
-  background-image: url('/assets/images/conslutationBg-mob.png');
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  background-color: $white-color;
   & a {
     text-decoration: none;
     cursor: pointer;
+  }
+  &__inner {
+    padding: 50px 15px;
+  }
+  &__text {
+    margin-top: 15px;
+    color: #1f181a;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 150%;
+    & span {
+      color: $red-color;
+    }
+  }
+  &__svg {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 200px;
+    height: 62px;
+    &--first {
+      left: -15px;
+    }
+    &--second {
+      right: -15px;
+      transform: scaleX(-1);
+    }
   }
 
   &__image-inner {
     position: relative;
     width: 100%;
-    height: 205px;
+    min-height: 200px;
+    overflow: hidden;
+    & img {
+      object-fit: cover !important;
+    }
   }
   &__title {
     max-width: 285px;
@@ -39,23 +69,28 @@
   }
 }
 
+@media screen and(min-width:375px) {
+  .consultation {
+    &__image-inner {
+      min-height: 270px;
+    }
+  }
+}
+
 @media screen and(min-width:768px) {
   .consultation {
     position: relative;
-    padding: 140px 30px 80px;
+    display: flex;
     overflow: hidden;
-    background-image: url('/assets/images/conslutationBg-desktop.png');
+    &__inner {
+      padding: 40px 25px;
+    }
+
     &__title {
       font-size: $fs-25;
       line-height: 34px;
     }
-    &__image-inner {
-      height: 320px;
-    }
     &__image-wrapper {
-      position: absolute;
-      top: 60px;
-      right: -135px;
       width: 100%;
     }
   }
@@ -63,18 +98,44 @@
 
 @media screen and(min-width:1200px) {
   .consultation {
-    padding: 140px 65px 160px;
+    &__inner {
+      padding: 95px 65px;
+    }
+    &__svg {
+      width: 500px;
+      height: 165px;
+    }
     &__title {
       max-width: 470px;
-      font-size: $fs-30;
-      line-height: 41px;
+      font-size: $fs-35;
+      line-height: 48px;
+    }
+    &__text {
+      max-width: 403px;
+      font-size: $fs-25;
+      line-height: 34px;
     }
     &__image-inner {
-      height: 490px;
+      min-height: 630px;
+      & img {
+        object-position: top left;
+      }
     }
-    &__image-wrapper {
-      top: -10px;
-      right: -215px;
+  }
+}
+
+@media screen and(min-width:1800px) {
+  .consultation {
+    &__title {
+      font-size: $fs-40;
+      line-height: 54px;
+    }
+    &__text {
+      max-width: unset;
+    }
+    &__inner {
+      width: 905px;
+      padding: 160px 100px 225px 65px;
     }
   }
 }
