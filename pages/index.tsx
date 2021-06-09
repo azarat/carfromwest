@@ -17,7 +17,7 @@ const IndexPage: NextPage = () => {
     <>
       <Promo />
       <AboutUs />
-      <CheckAuto />
+      <Consult />
       <Request />
       <PopularAuto />
       <ClientReviews />
@@ -25,7 +25,7 @@ const IndexPage: NextPage = () => {
       {/* <FormBlock /> */}
       <MainPageTimeLine />
       <Video />
-      <Consult />
+      <CheckAuto />
       <WorkSum />
       <Faq />
     </>

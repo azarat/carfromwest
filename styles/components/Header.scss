@@ -146,11 +146,18 @@
       display: block;
       order: 5;
       & a {
+        display: block;
         color: $white-color;
         font-weight: $fw-700;
         font-size: $fs-16;
         line-height: 150%;
+        text-align: center;
         text-decoration: none;
+      }
+
+      & p {
+        color: $white-transparent-04-color;
+        font-size: $fs-12;
       }
     }
   }

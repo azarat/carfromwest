@@ -34,6 +34,7 @@ const Header: React.FC = () => {
           <a
             href="https://t.me/joinchat/AAAAAD9TKVdDMSjyAzajbA"
             target="_blank"
+            rel="noreferrer"
           >
             <div className="header__contact-item">
               <div className="header__contact-item-icon">
@@ -74,6 +75,7 @@ const Header: React.FC = () => {
         </div>
         <div className="header__phone">
           <a href="tel:0800215804">0 800 215 804</a>
+          <p>(бесплатно по Украине)</p>
         </div>
       </header>
       <HeaderMenu open={open} setOpen={handleOpenMenu} />
