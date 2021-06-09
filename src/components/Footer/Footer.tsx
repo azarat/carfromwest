@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 import SocialLink from '../SocialLink/SocialLink'
+import LogoSVG from '../../assets/svg/logo.svg'
 
 const Footer: React.FC = () => {
   return (
@@ -10,11 +11,7 @@ const Footer: React.FC = () => {
         <div className="footer__logo">
           <Link href="/">
             <a>
-              <img
-                className="header__logo-img"
-                src="/assets/images/logo.png"
-                alt="Логотип"
-              />
+              <LogoSVG />
             </a>
           </Link>
         </div>
@@ -34,7 +31,13 @@ const Footer: React.FC = () => {
 
           <div className="footer__contacts-address">
             <p>
-              г. Киев, пер. <br /> Коломиевский, 20
+              <a
+                href="https://goo.gl/maps/Ahc6Nndy4vtpVXcB6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                г. Киев, пер. <br /> Коломиевский, 20
+              </a>
             </p>
           </div>
         </div>
@@ -44,12 +47,18 @@ const Footer: React.FC = () => {
         </div>
         <SocialLink />
         <div className="footer__development">
-          <div className="footer__development-image">
-            <Image src="/assets/images/gp-logo.png" layout="fill" />
-          </div>
-          <p className="footer__development-text">
-            Сайт разработан GoodPage.studio
-          </p>
+          <a
+            href="https://goodpage.studio/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="footer__development-image">
+              <Image src="/assets/images/gp-logo.png" layout="fill" />
+            </div>
+            <p className="footer__development-text">
+              Сайт разработан GoodPage.studio
+            </p>
+          </a>
         </div>
       </div>
       <div className="footer__copyright">

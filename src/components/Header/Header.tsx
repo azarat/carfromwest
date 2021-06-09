@@ -4,11 +4,13 @@ import PhoneSVG from '../../assets/svg/phone.svg'
 import HeaderMenu from './HeaderMenu'
 import SearchInput from '../SearchInput/SearchInput'
 import Link from 'next/link'
+import LogoSVG from '../../assets/svg/logo.svg'
+import LogoMobileSVG from '../../assets/svg/logo-mobile.svg'
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
-  const handleOpenMenu = () => {
+  const handleOpenMenu = (): void => {
     document.body.classList.toggle('fixed')
     setOpen((prev) => !prev)
   }
@@ -19,11 +21,12 @@ const Header: React.FC = () => {
         <div className="header__logo">
           <Link href="/">
             <a>
-              <img
-                className="header__logo-img"
-                src="/assets/images/logo.png"
-                alt="Логотип"
-              />
+              <div className="header__logo-svg">
+                <LogoSVG />
+              </div>
+              <div className="header__logo-svg--mobile">
+                <LogoMobileSVG />
+              </div>
             </a>
           </Link>
         </div>
@@ -34,6 +37,7 @@ const Header: React.FC = () => {
           <a
             href="https://t.me/joinchat/AAAAAD9TKVdDMSjyAzajbA"
             target="_blank"
+            rel="noreferrer"
           >
             <div className="header__contact-item">
               <div className="header__contact-item-icon">
@@ -74,6 +78,7 @@ const Header: React.FC = () => {
         </div>
         <div className="header__phone">
           <a href="tel:0800215804">0 800 215 804</a>
+          <p>(бесплатно по Украине)</p>
         </div>
       </header>
       <HeaderMenu open={open} setOpen={handleOpenMenu} />
