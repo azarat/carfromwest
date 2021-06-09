@@ -12,6 +12,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <title>
           Авто из США с Аукционов Копарт, IAAI, Манхейм | CarsFromWest
         </title>
+        {/* Jivosite Code */}
+        <script src="//code.jivosite.com/widget/UvLnO8ySQi" async></script>
         {/* Binotel Code */}
         <script
           dangerouslySetInnerHTML={{
