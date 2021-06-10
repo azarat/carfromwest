@@ -5,8 +5,6 @@ const CarouselGrid: React.FC<CarouselGridProps> = ({
   setOpenModal,
   setCurrentSlide,
 }) => {
-  console.log(images)
-
   return (
     <div className="carousel-grid">
       <div className="carousel-grid__list">
