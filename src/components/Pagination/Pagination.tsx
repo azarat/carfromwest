@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     if (totalPages > totalBlocks) {
       const startPage = Math.max(2, page - pageNeighbours)
-      const endPage = Math.min(totalPages - 2, page + pageNeighbours)
+      const endPage = Math.min(totalPages - 1, page + pageNeighbours)
       let pages: any = range(startPage, endPage)
 
       const hasLeftSpill = startPage > 2

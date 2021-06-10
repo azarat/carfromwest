@@ -51,7 +51,7 @@ const Header: React.FC = () => {
             <div className="header__contact-item-icon">
               <PhoneSVG />
             </div>
-            <Link href="/check">
+            <Link href="/consult">
               <a>
                 <div className="header__contact-item-text">ЗАКАЗАТЬ ЗВОНОК</div>
               </a>
