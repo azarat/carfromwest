@@ -39,8 +39,4 @@ export const consultGallery = [
     id: 10,
     url: '/assets/images/consult/consult10.jpg',
   },
-  {
-    id: 11,
-    url: '/assets/images/consult/consult11.jpg',
-  },
 ]

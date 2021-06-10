@@ -72,7 +72,7 @@ export const popularAuto = [
     uaPrice: '18000',
     img: '/assets/images/tiguan.png',
     filterParams: {
-      makes: 'Volkswages',
+      makes: 'Volkswagen',
       models: 'Tiguan',
       yearMin: 2015,
     },

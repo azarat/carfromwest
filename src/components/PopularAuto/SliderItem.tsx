@@ -12,7 +12,10 @@ const SliderItem: React.FC<SliderItemProps> = ({
   const { push } = useRouter()
 
   const handleCatalog = (): void => {
-    push({ pathname: '/catalog', query: filterParams })
+    if (typeof document !== 'undefined') {
+      document.body.scrollTo(0, 0)
+      push({ pathname: '/catalog', query: filterParams })
+    }
   }
 
   return (
