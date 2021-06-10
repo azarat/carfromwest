@@ -1,4 +1,6 @@
+import { MouseEventHandler } from 'react'
+
 export interface IAutoSearchProps {
   isFormOpen?: boolean
-  handleFormOpen?: () => void
+  handleFormOpen: MouseEventHandler<HTMLButtonElement>
 }

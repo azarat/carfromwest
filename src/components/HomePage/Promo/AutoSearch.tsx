@@ -68,10 +68,6 @@ const AutoSearch: FC<IAutoSearchProps> = ({
       <form className="auto-search__form">
         <Select
           onChange={(value) => setCarType(value?.value as string)}
-          defaultValue={{
-            label: vehicleTypes[0].title,
-            value: vehicleTypes[0].value,
-          }}
           isSearchable={false}
           placeholder="Автомобиль"
           className="auto-search__form-select"
