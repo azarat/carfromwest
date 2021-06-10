@@ -44,7 +44,9 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
               <Link key={vin} href={`/catalog/${auction}-${auctionLotId}`}>
                 <a className="catalog-grid__container-link">
                   <CatalogItem
-                    fuelType={gas.find(({ value }) => value === fuelType).label}
+                    fuelType={
+                      gas.find(({ value }) => value === fuelType)?.label || ''
+                    }
                     hightBid={+currentBid}
                     imageUrl={
                       images ? images[0].i : '/assets/images/no-image.jpg'

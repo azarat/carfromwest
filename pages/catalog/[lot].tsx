@@ -190,12 +190,10 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Топливо:</span>
                     <span className="car-page__table-item-description">
-                      {
-                        gas.find(
-                          ({ value }) =>
-                            value === car.data.attributes.lotData.info.fuelType
-                        ).label
-                      }
+                      {gas.find(
+                        ({ value }) =>
+                          value === car.data.attributes.lotData.info.fuelType
+                      )?.label || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -213,7 +211,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Объём двигателя:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.engine.capacity}
+                      {car.data.attributes.lotData.info.engine?.capacity || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -231,7 +229,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Количество цилиндров:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.engine.cylinders}
+                      {car.data.attributes.lotData.info.engine?.cylinders || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
