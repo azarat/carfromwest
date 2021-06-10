@@ -18,7 +18,10 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
       <div className="reviews-item__wrapper">
         <div className="reviews-item__review">
           <p className="reviews-item__name">{name}</p>
-          <p className="reviews-item__text">{text}</p>
+          <div
+            className="reviews-item__text"
+            dangerouslySetInnerHTML={{ __html: text }}
+          ></div>
         </div>
         <div className="reviews-item__btns-wrapper">
           <div className="reviews-item__btn-wrapper">
