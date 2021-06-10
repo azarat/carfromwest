@@ -4,12 +4,19 @@
   overflow: hidden;
   background: #494949;
   &__wrapper {
+    position: relative;
     padding: 110px 15px 75px;
   }
+  &__back {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    cursor: pointer;
+  }
   &__title {
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 22px;
+    color: $white-color;
+    font-weight: $fw-800;
+    font-size: $fs-22;
     line-height: 100%;
     text-align: center;
     text-transform: uppercase;
@@ -39,8 +46,8 @@
     &-label {
       position: relative;
       margin-left: 10px;
-      color: #ffffff;
-      font-size: 15px;
+      color: $white-color;
+      font-size: $fs-15;
       line-height: 24px;
       &::before {
         display: inline-block;
@@ -64,9 +71,9 @@
       width: 100%;
       max-width: 245px;
       height: 45px;
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 12px;
+      color: $white-color;
+      font-weight: $fw-800;
+      font-size: $fs-12;
       line-height: 24px;
       text-transform: uppercase;
       background-color: $red-color;
@@ -87,6 +94,10 @@
   .order {
     height: unset;
     min-height: unset;
+    &__back {
+      top: 90px;
+      left: 30px;
+    }
     &__wrapper {
       padding: 200px 360px 150px 90px;
     }
@@ -105,7 +116,11 @@
   .order {
     display: flex;
     height: 100vh;
-    padding-top: 70px;
+    padding-top: 60px;
+    &__back {
+      top: 20px;
+      left: 20px;
+    }
     &__wrapper {
       flex: 0 0 50%;
       padding: 130px 170px 140px 160px;

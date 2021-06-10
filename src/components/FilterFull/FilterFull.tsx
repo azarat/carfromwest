@@ -234,7 +234,6 @@ const FilterFull: React.FC<FilterFullProps> = ({
           </div>
           <div className="filter-full__engine">
             <h3 className="filter-full__title">Пробег (миль)</h3>
-
             <div className="filter-full__engine-input">
               <Field placeholder="Пр. 10000" type="number" name="odometerMin" />
               <SpeedSVG />

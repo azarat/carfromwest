@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import React, { MouseEventHandler, useState } from 'react'
 import { useRouter } from 'next/router'
 import InputMask from 'react-input-mask'
+import ArrowBackSVG from '../src/assets/svg/arrowBack.svg'
 
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
@@ -51,6 +52,7 @@ const Order: NextPage = () => {
   return (
     <div className="order">
       <div className="order__wrapper">
+        <ArrowBackSVG className="order__back" onClick={() => router.back()} />
         <h1 className="order__title">посчитать стоимость</h1>
         <form className="order__form">
           <input

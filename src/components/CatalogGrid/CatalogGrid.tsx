@@ -47,7 +47,7 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
                     fuelType={gas.find(({ value }) => value === fuelType).label}
                     hightBid={+currentBid}
                     imageUrl={
-                      images ? images[0].i : '/assets/images/other/no-image.png'
+                      images ? images[0].i : '/assets/images/no-image.jpg'
                     }
                     lotNumber={`${auctionLotId}`}
                     make={make}

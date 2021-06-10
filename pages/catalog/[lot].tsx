@@ -16,8 +16,6 @@ import { ICarsFetchTypes, ICar } from '../../src/components/CatalogGrid/Types'
 import Consultation from '../../src/components/Consultation/Consultation'
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
-  console.log(carResponse)
-
   const router = useRouter()
   const [car, setCar] = useState(carResponse)
   const [similarCar, setSimilarCar] = useState<ICar[]>([])
@@ -26,9 +24,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     () =>
       car.data.attributes.lotData.images
         ? car.data.attributes.lotData.images.map(({ i }) => i)
-        : [
-            'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg',
-          ],
+        : ['/assets/images/no-image.jpg'],
     [car]
   )
 
@@ -180,7 +176,8 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       тип документа:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.sale.saleDocument.type}
+                      {car.data.attributes.lotData.sale.saleDocument?.type ||
+                        ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">

@@ -21,14 +21,16 @@ const SliderItem: React.FC<SliderItemProps> = ({
   return (
     <div role="presentation" className="slider-item" onClick={handleCatalog}>
       <img src={img} alt="car-full" className="slider-item__img" />
-      <p className="slider-item__name">{name}</p>
-      <p className="slider-item__price">
-        <strong>$ {usaPrice}</strong> из США с ремонтом
-      </p>
-      <p className="slider-item__price">
-        <strong>$ {uaPrice}</strong> аналог в Украине
-      </p>
-      <button className="slider-item__btn">Посмотреть в каталоге</button>
+      <div className="slider-item__inner">
+        <p className="slider-item__name">{name}</p>
+        <p className="slider-item__price">
+          <strong>$ {usaPrice}</strong> из США с ремонтом
+        </p>
+        <p className="slider-item__price">
+          <strong>$ {uaPrice}</strong> аналог в Украине
+        </p>
+        <button className="slider-item__btn">Посмотреть в каталоге</button>
+      </div>
     </div>
   )
 }

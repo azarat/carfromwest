@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import React, { MouseEventHandler, useState } from 'react'
 import { useRouter } from 'next/router'
 import InputMask from 'react-input-mask'
+import ArrowBackSVG from '../src/assets/svg/arrowBack.svg'
 
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
@@ -52,6 +53,11 @@ const Check: NextPage = () => {
   return (
     <div className="check-auto">
       <div className="check-auto__wrapper">
+        <ArrowBackSVG
+          className="check-auto__back"
+          onClick={() => router.back()}
+        />
+
         <h1 className="check-auto__title">Получить консультацию</h1>
         <form className="check-auto__form">
           <input

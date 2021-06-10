@@ -32,7 +32,7 @@ const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
                       imageUrl={
                         lotData.images
                           ? lotData.images[0]?.i
-                          : 'https://manxmotortrader.com/wp-content/themes/kensington/img/placeholder.jpg'
+                          : '/assets/images/no-image.jpg'
                       }
                       lotNumber={`${auctionLotId}`}
                       make={lotData.make}

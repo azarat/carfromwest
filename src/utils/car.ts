@@ -18,6 +18,7 @@ export const getCarPageProps = async (
   try {
     const res = await fetch(url)
     const carResponse = await res.json()
+
     if (res.status !== 200) {
       return {
         redirect: {

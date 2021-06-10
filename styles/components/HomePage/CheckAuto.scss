@@ -6,7 +6,14 @@
     text-decoration: none;
   }
   &__wrapper {
+    position: relative;
     padding: 60px 15px;
+  }
+  &__back {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    cursor: pointer;
   }
   &__title {
     color: #1f181a;
@@ -58,6 +65,10 @@
       padding: 60px 75px 60px 30px;
       background-color: $white-color;
     }
+    &__back {
+      top: 90px;
+      left: 30px;
+    }
     &__title {
       font-size: $fs-25;
     }
@@ -77,6 +88,10 @@
     &__wrapper {
       max-width: 730px;
       padding: 100px 100px 100px 65px;
+    }
+    &__back {
+      top: 20px;
+      left: 20px;
     }
     &__title {
       font-size: $fs-35;

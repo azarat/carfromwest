@@ -14,7 +14,6 @@ import {
   vehicleTypes,
   bodyTypeArray,
 } from '../../constants/filter'
-
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'

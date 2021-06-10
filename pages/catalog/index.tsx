@@ -56,11 +56,14 @@ const Index: NextPage<Partial<ICatalog>> = ({
           .map((key) => `${key}=${filter[key]}`)
           .join('&')
 
-        const engineCapacitiesString = `engineCapacities=
+        const engineCapacitiesString =
+          filter.Fuel_Type === '8'
+            ? `engineCapacities=
       ${capacityArray(
         filter.engine_min ? filter.engine_min : 0.7,
         filter.engine_max ? filter.engine_max : 17
       ).join(',')}`
+            : ''
         const url = `${cfwURL}?${queryParams}&${filterString}&${engineCapacitiesString}`
         const response = await fetch(
           url.includes('yearMin') ? url : `${url}&yearMin=2010`
