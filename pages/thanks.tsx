@@ -2,9 +2,16 @@ import { NextPage } from 'next'
 import React from 'react'
 import SocialLink from '../src/components/SocialLink/SocialLink'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const Thanks: NextPage = () => {
   const router = useRouter()
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.scrollTo(0, 0)
+    }
+  }, [])
 
   return (
     <div className="thanks">
@@ -21,7 +28,9 @@ const Thanks: NextPage = () => {
         </button>
         <div className="thanks__contacts">
           <p className="thanks__contacts-title">Cвяжитесь с нами</p>
-          <a className="thanks__contacts-phone">321312312</a>
+          <a className="thanks__contacts-phone" href="tel:0800215804">
+            0 800 215 804
+          </a>
           <SocialLink />
         </div>
       </div>

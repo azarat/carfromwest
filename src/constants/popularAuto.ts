@@ -3,7 +3,7 @@ export const popularAuto = [
     name: '2015 MAZDA 6',
     usaPrice: '12000',
     uaPrice: '15000',
-    img: '/assets/images/2015_Mazda_6.png',
+    img: '/assets/images/mazda6.png',
     filterParams: {
       makes: 'Mazda',
       models: '6',
@@ -48,7 +48,7 @@ export const popularAuto = [
     name: '2015 SUBARU FORESTER',
     usaPrice: '13000',
     uaPrice: '17000',
-    img: '/assets/images/2013_Subare_Forester.png',
+    img: '/assets/images/Subaru.png',
     filterParams: {
       makes: 'Subaru',
       models: 'Forester',
@@ -70,11 +70,22 @@ export const popularAuto = [
     name: '2015 VOLKSWAGEN TIGUAN',
     usaPrice: '14000',
     uaPrice: '18000',
-    img: '/assets/images/2015_Volkswagen_Tiguan.png',
+    img: '/assets/images/tiguan.png',
     filterParams: {
-      makes: 'Volkswages',
+      makes: 'Volkswagen',
       models: 'Tiguan',
       yearMin: 2015,
+    },
+  },
+  {
+    name: '2017 CHEVROLET MALIBU',
+    usaPrice: '11000',
+    uaPrice: '15000',
+    img: '/assets/images/malibu.png',
+    filterParams: {
+      makes: 'Chevrolet',
+      models: 'Malibu',
+      yearMin: 2017,
     },
   },
 ]

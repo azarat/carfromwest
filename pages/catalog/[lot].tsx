@@ -1,9 +1,11 @@
+import Link from 'next/link'
 import CarPageCarousel from '../../src/components/CarPageCarousel/CarPageCarousel'
 // SVG
 import InfoSVG from '../../src/assets/svg/info.svg'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import RightPolygonSVG from '../../src/assets/svg/right-polygon.svg'
 // Types
 import { CarPageProps } from '../../src/Types/Types'
 import Countdown from '../../src/components/Countdown/Countdown'
@@ -12,13 +14,14 @@ import SimilarCar from '../../src/components/SimilarCar/SimilarCar'
 import { driveLineTypes, gas, transmissions } from '../../src/constants/filter'
 import { ICarsFetchTypes, ICar } from '../../src/components/CatalogGrid/Types'
 import Consultation from '../../src/components/Consultation/Consultation'
-import SearchInput from '../../src/components/SearchInput/SearchInput'
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
+  console.log(carResponse)
+
   const router = useRouter()
   const [car, setCar] = useState(carResponse)
   const [similarCar, setSimilarCar] = useState<ICar[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const images = useMemo(
     () =>
       car.data.attributes.lotData.images
@@ -91,16 +94,41 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     <div className="car-page__wrapper">
       <section className="car-page">
         <div className="container">
-          <SearchInput id="lot-search" />
+          <nav className="car-page__breadcrumbs">
+            <ul>
+              <li className="car-page__breadcrumbs-link">
+                <Link href="/">
+                  <a>
+                    главная <RightPolygonSVG />
+                  </a>
+                </Link>
+              </li>
+              <li className="car-page__breadcrumbs-link">
+                <Link href="/catalog">
+                  <a>
+                    каталог авто <RightPolygonSVG />
+                  </a>
+                </Link>
+              </li>
+              <li className="car-page__breadcrumbs-link">
+                {car.data.attributes.lotData.vin}
+              </li>
+            </ul>
+          </nav>
         </div>
         <div className="container">
           <div className="car-page__name-wrapper">
             <h2 className="car-page__header-title">
               {`${car.data.attributes.lotData.year} ${car.data.attributes.lotData.make} ${car.data.attributes.lotData.model}`}
             </h2>
-            <h2 className="car-page__title">
-              № Лота {car.data.attributes.auctionLotId}
-            </h2>
+            <div className="car-page__name-inner">
+              <h2 className="car-page__title">
+                № Лота {car.data.attributes.auctionLotId}
+              </h2>
+              <h2 className="car-page__auction">
+                Аукцион: {car.data.attributes.auction}
+              </h2>
+            </div>
           </div>
           <div className="car-page__info-wrapper">
             <div className="car-page__header">
@@ -120,13 +148,15 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   </div>
                 </>
               )}
-              <div className="car-page__header-price">
+            </div>
+            <div className="car-page__price-wrapper">
+              <div className="car-page__price">
                 <p>текущая ставка</p>
                 <span>${car.data.attributes.lotData.sale.currentBid}</span>
               </div>
-              <div className="car-page__header-btn">
+              <div className="car-page__btn">
                 <button
-                  className="car-page__header-button car-page__header-button-order"
+                  className="car-page__button car-page__button-order"
                   onClick={handleCost}
                 >
                   посчитать стоимость
@@ -143,6 +173,14 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                     <span className="car-page__table-item-title">VIN:</span>
                     <span className="car-page__table-item-description">
                       {car.data.attributes.lotData.vin}
+                    </span>
+                  </div>
+                  <div className="car-page__table-item">
+                    <span className="car-page__table-item-title">
+                      тип документа:
+                    </span>
+                    <span className="car-page__table-item-description">
+                      {car.data.attributes.lotData.sale.saleDocument.type}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -221,6 +259,14 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                     <span className="car-page__table-item-title">Год:</span>
                     <span className="car-page__table-item-description">
                       {car.data.attributes.lotData.year}
+                    </span>
+                  </div>
+                  <div className="car-page__table-item">
+                    <span className="car-page__table-item-title">
+                      продавец:
+                    </span>
+                    <span className="car-page__table-item-description">
+                      {car.data.attributes.lotData.sale.seller.displayName}
                     </span>
                   </div>
                 </div>

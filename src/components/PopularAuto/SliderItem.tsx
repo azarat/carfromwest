@@ -12,7 +12,10 @@ const SliderItem: React.FC<SliderItemProps> = ({
   const { push } = useRouter()
 
   const handleCatalog = (): void => {
-    push({ pathname: '/catalog', query: filterParams })
+    if (typeof document !== 'undefined') {
+      document.body.scrollTo(0, 0)
+      push({ pathname: '/catalog', query: filterParams })
+    }
   }
 
   return (
@@ -23,8 +26,9 @@ const SliderItem: React.FC<SliderItemProps> = ({
         <strong>$ {usaPrice}</strong> из США с ремонтом
       </p>
       <p className="slider-item__price">
-        <strong>$ {uaPrice}</strong> аналогом из Украины
+        <strong>$ {uaPrice}</strong> аналог в Украине
       </p>
+      <button className="slider-item__btn">Посмотреть в каталоге</button>
     </div>
   )
 }
