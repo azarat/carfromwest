@@ -1,0 +1,35 @@
+.carousel-grid {
+  grid-row: 2;
+  margin-top: 10px;
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__item {
+    width: 122px;
+    height: 100px;
+    cursor: pointer;
+    &:not(:nth-child(4n)) {
+      margin-right: 10px;
+    }
+
+    &-img {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and(min-width:1800px) {
+  .carousel-grid {
+    &__item {
+      width: 205px;
+      height: 166px;
+      &:not(:nth-child(4n)) {
+        margin-right: unset;
+      }
+      &:not(:nth-child(5n)) {
+        margin-right: 10px;
+      }
+    }
+  }
+}

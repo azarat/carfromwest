@@ -51,9 +51,12 @@ const FullReview: React.FC<FullReviewProps> = ({
           >
             Профиль в facebook
           </a>
-          <p className="full-review__text">
-            {reviews[activeReview as number].text}
-          </p>
+          <div
+            className="full-review__text"
+            dangerouslySetInnerHTML={{
+              __html: reviews[activeReview as number].text,
+            }}
+          ></div>
           <div className="full-review__photos">
             <Swiper
               navigation={true}
@@ -73,7 +76,7 @@ const FullReview: React.FC<FullReviewProps> = ({
                   }}
                 >
                   <div className="full-review__photo-wrapper">
-                    <Image src={el} layout="fill" />
+                    <Image src={el} layout="fill" objectFit="cover" />
                   </div>
                 </SwiperSlide>
               ))}

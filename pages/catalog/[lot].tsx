@@ -131,20 +131,19 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
               <div className="car-page__header-slider">
                 <CarPageCarousel images={images} />
               </div>
-
-              {car.data.attributes.auctionDate && (
-                <>
-                  <div className="car-page__header-timer-wrapper">
-                    <div className="car-page__header-time">
-                      до старта торгов осталось
-                    </div>
-                    <div className="car-page__header-timer">
-                      <Countdown date={auctionDateEnd.toISOString()} />
-                    </div>
-                  </div>
-                </>
-              )}
             </div>
+            {car.data.attributes.auctionDate && (
+              <>
+                <div className="car-page__timer-wrapper">
+                  <div className="car-page__time">
+                    до старта торгов осталось:
+                  </div>
+                  <div className="car-page__timer">
+                    <Countdown date={auctionDateEnd.toISOString()} />
+                  </div>
+                </div>
+              </>
+            )}
             <div className="car-page__price-wrapper">
               <div className="car-page__price">
                 <p>текущая ставка</p>

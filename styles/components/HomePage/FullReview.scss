@@ -9,6 +9,9 @@
   padding: 0 15px;
   font-family: $ff-commons;
   background-color: $white-color;
+  & ul {
+    list-style: none;
+  }
   &--open {
     display: block;
   }

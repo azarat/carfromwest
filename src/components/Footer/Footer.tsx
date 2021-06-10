@@ -22,10 +22,9 @@ const Footer: React.FC = () => {
               <a href="tel:0443343869">(044) 334-38-69</a>
             </li>
             <li className="footer__contacts-item">
-              <a href="tel:+380634688818">+380 (63) 468-88-18</a>
-            </li>
-            <li className="footer__contacts-item">
-              <a href="tel:+380979838888">+380 (97) 983-88-88</a>
+              <a href="tel:0800215804">
+                0800 215 804<span>(бесплатно по Украине)</span>
+              </a>
             </li>
           </ul>
 
