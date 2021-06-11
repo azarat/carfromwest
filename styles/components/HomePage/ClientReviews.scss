@@ -141,21 +141,13 @@
             position: relative;
             transform: scale(0.7);
             transition: transform 0.3s ease;
-
-            &__photos {
-              position: absolute;
-              top: -55%;
-              grid-template-columns: 1fr;
-            }
           }
           &-active {
             & .reviews-item {
               transform: scale(1);
               transition: transform 0.3s ease;
-
-              &__photos {
-                position: unset;
-                grid-template-columns: 1fr 1fr;
+              &__wrapper {
+                min-height: 308px;
               }
             }
           }
@@ -192,11 +184,19 @@
           &__photos {
             top: -50%;
           }
+          &__photo-wrapper {
+            width: 100px;
+            height: 83px;
+          }
         }
         &-active {
           & .reviews-item {
             &__wrapper {
               grid-template-columns: auto auto;
+            }
+            &__photo-wrapper {
+              width: 165px;
+              height: 125px;
             }
           }
         }

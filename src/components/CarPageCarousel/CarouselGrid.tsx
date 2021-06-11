@@ -2,7 +2,6 @@ import React from 'react'
 import { CarouselGridProps } from './Types'
 const CarouselGrid: React.FC<CarouselGridProps> = ({
   images,
-  setOpenModal,
   setCurrentSlide,
 }) => {
   return (
@@ -14,7 +13,6 @@ const CarouselGrid: React.FC<CarouselGridProps> = ({
             className="carousel-grid__item"
             onClick={() => {
               setCurrentSlide(i)
-              setOpenModal(true)
             }}
             role="presentation"
           >

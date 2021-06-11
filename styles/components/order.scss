@@ -45,10 +45,15 @@
 
     &-label {
       position: relative;
+      display: flex;
+      align-items: center;
       margin-left: 10px;
       color: $white-color;
       font-size: $fs-15;
       line-height: 24px;
+      & span {
+        display: block;
+      }
       &::before {
         display: inline-block;
         width: 10px;

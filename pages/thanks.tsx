@@ -9,7 +9,7 @@ const Thanks: NextPage = () => {
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      document.body.scrollTo(0, 0)
+      document.body.scrollIntoView()
     }
   }, [])
 

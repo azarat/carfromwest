@@ -114,7 +114,11 @@ const Request: React.FC = () => {
       </div>
       <div className="request__image">
         <h4 className="request__image-title">CARSFROMWEST</h4>
-        <Image src={'/assets/images/request-nissan.png'} layout="fill" />
+        <Image
+          src={'/assets/images/request-vag.png'}
+          layout="fill"
+          objectFit="contain"
+        />
       </div>
     </section>
   )

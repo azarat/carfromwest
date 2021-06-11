@@ -1,24 +1,21 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import AutoSearch from './AutoSearch'
 import ArrowLinkSVG from '../../../assets/svg/right-arrow-link.svg'
 import PromoModal from './PromoModal'
+import { useRouter } from 'next/router'
 
 const Promo: React.FC = (): JSX.Element => {
-  const [open, setOpen] = useState(false)
+  const [open] = useState(false)
+  const router = useRouter()
 
   const [showModal, setShowModal] = useState(false)
 
-  const handleFormOpen = useCallback(() => {
-    setOpen((prev) => {
-      const { body } = document
-      if (!prev) body.classList.add('fixed')
-      else body.classList.remove('fixed')
-      return !prev
-    })
-  }, [])
+  const handleFormOpen = (): void => {
+    router.push('/order')
+  }
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (): void => {
     document.body.scrollIntoView()
     document.body.classList.toggle('fixed')
     setShowModal((prev) => !prev)

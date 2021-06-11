@@ -1,6 +1,6 @@
 .check-auto {
   height: 100vh;
-  min-height: 550px;
+  min-height: 580px;
   overflow: hidden;
   background: #494949;
   &__wrapper {
@@ -70,10 +70,15 @@
 
     &-label {
       position: relative;
+      display: flex;
+      align-items: center;
       margin-left: 10px;
       color: $white-color;
       font-size: $fs-15;
       line-height: 100%;
+      & span {
+        display: block;
+      }
       &::before {
         display: inline-block;
         width: 10px;
@@ -120,7 +125,7 @@
     height: unset;
     min-height: unset;
     &__wrapper {
-      padding: 200px 360px 150px 90px;
+      padding: 200px 270px 150px 90px;
     }
     &__back {
       top: 90px;

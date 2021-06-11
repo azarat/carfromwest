@@ -119,7 +119,7 @@ const Check: NextPage = () => {
               checked={connectType === 'messanger'}
             />
             <label className="check-auto__form-label" htmlFor="messanger">
-              Отправить информацию в Вайбер/Телеграм
+              <span>Отправить информацию в Вайбер/Телеграм</span>
             </label>
           </div>
           <button className="check-auto__form-btn" onClick={handleSend}>

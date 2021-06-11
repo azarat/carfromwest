@@ -30,6 +30,10 @@ const Carousel: React.FC<ICarousel> = ({
     }
   }
 
+  useEffect(() => {
+    setSlide(initialSlide ? initialSlide : 0)
+  }, [initialSlide])
+
   const handlePrevSlide = () => {
     if (slide - 1 >= 0) {
       setSlide(slide - 1)

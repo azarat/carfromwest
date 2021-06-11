@@ -26,6 +26,10 @@ export const ReviewsTabletSlider: React.FC = () => {
         initialSlide={1}
         grabCursor={true}
         slideToClickedSlide={true}
+        breakpoints={{
+          1800: { spaceBetween: 250 },
+          2300: { spaceBetween: 500 },
+        }}
       >
         {reviews.map(({ name, images, text }, index) => (
           <SwiperSlide key={name}>

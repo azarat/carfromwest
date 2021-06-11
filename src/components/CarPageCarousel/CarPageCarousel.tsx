@@ -35,6 +35,7 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
           buttonNext={<ArrowSVG />}
           buttonPrev={<ArrowSVG />}
           callback={setCurrentSlide}
+          initialSlide={currentSlide}
         >
           {images.map((item) => (
             <CarouselImage url={item} key={item} />

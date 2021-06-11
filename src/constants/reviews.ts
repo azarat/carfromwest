@@ -57,7 +57,6 @@ export const reviews = [
     images: [
       '/assets/images/reviews/comment_img_5.1.jpg',
       '/assets/images/reviews/comment_img_5.2.jpg',
-      '/assets/images/reviews/comment_img_5.3.png',
     ],
   },
 ]

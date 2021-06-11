@@ -48,7 +48,7 @@
       }
     }
     &-header {
-      height: 105px;
+      height: min-content;
       padding: 15px 10px;
       border-bottom: 1px solid $light-gray-color-01;
     }
@@ -98,6 +98,11 @@
     &__container {
       grid-template-columns: repeat(auto-fit, minmax(auto, 226px));
     }
+    &__item {
+      &-price {
+        font-size: $fs-18;
+      }
+    }
   }
 }
 
@@ -126,6 +131,9 @@
       position: relative;
       z-index: 44;
       transition: all 0.4s ease-in;
+      &-price {
+        font-size: $fs-24;
+      }
       &-image {
         & img {
           object-fit: cover;

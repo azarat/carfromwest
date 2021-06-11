@@ -13,7 +13,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
 
   const handleCatalog = (): void => {
     if (typeof document !== 'undefined') {
-      document.body.scrollTo(0, 0)
+      document.body.scrollIntoView()
       push({ pathname: '/catalog', query: filterParams })
     }
   }

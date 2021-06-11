@@ -15,7 +15,7 @@ const AutoSearch: FC<IAutoSearchProps> = ({
   isFormOpen,
   handleFormOpen,
 }): JSX.Element => {
-  const [carType, setCarType] = useState<string>(vehicleTypes[0].value)
+  const [carType, setCarType] = useState<string>('')
   const [isLoading, setLoading] = useState<boolean>(false)
   const [marks, setMarks] = useState()
   const [currentMark, setCurrentMark] = useState<string>()
@@ -23,6 +23,8 @@ const AutoSearch: FC<IAutoSearchProps> = ({
   const [currentModel, setCurrentModel] = useState<string>()
   const [yearFrom, setYearFrom] = useState<number>()
   const [yearTo, setYearTo] = useState<number>()
+
+  console.log(carType)
 
   useEffect(() => {
     setLoading(true)

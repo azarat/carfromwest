@@ -35,6 +35,7 @@
   .catalog {
     &__search {
       grid-column: 2;
+      height: 45px;
     }
   }
 }
@@ -44,6 +45,7 @@
     &__search {
       grid-row: 1;
       grid-column: 2;
+      height: 38px;
       margin-left: 190px;
     }
   }
