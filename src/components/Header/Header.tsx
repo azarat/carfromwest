@@ -48,11 +48,12 @@ const Header: React.FC = () => {
           </a>
 
           <div className="header__contact-item">
-            <div className="header__contact-item-icon">
-              <PhoneSVG />
-            </div>
             <Link href="/consult">
               <a>
+                <div className="header__contact-item-icon">
+                  <PhoneSVG />
+                </div>
+
                 <div className="header__contact-item-text">ЗАКАЗАТЬ ЗВОНОК</div>
               </a>
             </Link>

@@ -42,8 +42,7 @@
     flex-direction: column;
     margin-top: 30px;
     &-number {
-      & a {
-        display: block;
+      &-link {
         width: 100%;
         color: $white-color;
         font-size: $fs-14;
@@ -51,6 +50,12 @@
         letter-spacing: 0.19em;
         text-align: center;
         text-decoration: none;
+        &--desktop {
+          display: none;
+        }
+        &--mobile {
+          display: block;
+        }
       }
     }
     &-cost {
@@ -82,6 +87,22 @@
         }
       }
     }
+    &__phone {
+      &-number {
+        &-link {
+          &--desktop {
+            display: block;
+          }
+          &--mobile {
+            margin-top: 15px;
+            // display: none;
+          }
+        }
+      }
+      &-cost {
+        // display: none;
+      }
+    }
   }
 }
 
@@ -93,11 +114,13 @@
     }
     &__phone {
       &-number {
-        & a {
+        &-link {
+          display: none;
           font-size: $fs-22;
         }
       }
       &-cost {
+        display: none;
         font-size: $fs-22;
       }
     }

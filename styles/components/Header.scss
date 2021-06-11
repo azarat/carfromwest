@@ -27,6 +27,9 @@
     display: flex;
     margin-right: 25px;
     margin-left: auto;
+    & a {
+      display: flex;
+    }
     &-item {
       cursor: pointer;
 

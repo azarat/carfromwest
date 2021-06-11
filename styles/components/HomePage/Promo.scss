@@ -38,6 +38,7 @@
     outline: none;
   }
   &__video {
+    display: none;
     margin-top: 30px;
     margin-left: 100px;
     cursor: pointer;
@@ -122,6 +123,7 @@
       display: none;
     }
     &__video {
+      display: block;
       margin-left: 0;
     }
   }
