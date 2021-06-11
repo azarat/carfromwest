@@ -36,7 +36,7 @@ const Order: NextPage = () => {
         setName('')
         setPhone('')
         localStorage.removeItem('url')
-        router.push({ pathname: '/' })
+        router.push({ pathname: '/thanks' })
       }
     }
   }
