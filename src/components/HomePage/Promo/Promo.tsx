@@ -12,7 +12,7 @@ const Promo: React.FC = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false)
 
   const handleFormOpen = (): void => {
-    router.push('/order')
+    router.push('/consult')
   }
 
   const handleModalOpen = (): void => {
