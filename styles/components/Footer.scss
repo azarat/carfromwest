@@ -146,8 +146,9 @@
 @media screen and (min-width: 768px) {
   .footer {
     position: relative;
+    padding-top: 60px;
     &__container {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
     &__copyright {
       & br {
@@ -167,6 +168,9 @@
 
 @media screen and (min-width: 1200px) {
   .footer {
+    &__container {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
     &__development {
       right: calc(50vw - 560px);
     }
