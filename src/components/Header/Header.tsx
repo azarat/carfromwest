@@ -46,18 +46,17 @@ const Header: React.FC = () => {
               <div className="header__contact-item-text">ПИШИТЕ В ТЕЛЕГРАМ</div>
             </div>
           </a>
-
-          <div className="header__contact-item">
-            <Link href="/consult">
-              <a>
+          <Link href="/consult">
+            <a>
+              <div className="header__contact-item">
                 <div className="header__contact-item-icon">
                   <PhoneSVG />
                 </div>
 
                 <div className="header__contact-item-text">ЗАКАЗАТЬ ЗВОНОК</div>
-              </a>
-            </Link>
-          </div>
+              </div>
+            </a>
+          </Link>
         </div>
 
         <div

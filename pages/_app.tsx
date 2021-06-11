@@ -17,6 +17,21 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           href="/assets/images/favicon.ico"
           type="image/x-icon"
         />
+
+        {/*  Global site tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-26Q9M74LEJ"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-26Q9M74LEJ');`,
+          }}
+        />
         {/* Jivosite Code */}
         <script src="//code.jivosite.com/widget/UvLnO8ySQi" async></script>
         {/* Binotel Code */}
