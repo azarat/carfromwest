@@ -178,6 +178,19 @@
       &__single-value {
         color: $white-color;
       }
+      &__placeholder {
+        font-size: $fs-12;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .auto-search {
+    & .react-select {
+      &__placeholder {
+        font-size: $fs-16;
+      }
     }
   }
 }
