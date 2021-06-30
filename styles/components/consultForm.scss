@@ -12,8 +12,15 @@
     background-color: $white-color;
   }
   &-title {
-    margin-bottom: 35px;
     font-size: $fs-17;
+    line-height: 27px;
+    text-align: center;
+  }
+  &-subtitle {
+    margin-top: 15px;
+    margin-bottom: 35px;
+    font-weight: $fw-400;
+    font-size: $fs-15;
     line-height: 27px;
     text-align: center;
   }
@@ -57,9 +64,13 @@
   .consult-form {
     max-width: 380px;
     &-title {
-      margin-bottom: 45px;
       font-size: $fs-25;
       line-height: 33px;
+    }
+    &-subtitle {
+      margin-bottom: 45px;
+      font-size: $fs-20;
+      line-height: 100%;
     }
     &-input {
       margin-bottom: 45px;
@@ -77,9 +88,12 @@
   .consult-form {
     max-width: 690px;
     &-title {
-      margin-bottom: 60px;
       font-size: $fs-45;
       line-height: 55px;
+    }
+    &-subtitle {
+      margin-bottom: 60px;
+      font-size: $fs-35;
     }
     &-input {
       margin-bottom: 60px;

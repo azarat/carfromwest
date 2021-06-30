@@ -32,9 +32,11 @@ const ConsultForm: React.FC = () => {
   return (
     <div className="consult-form-wrapper">
       <div className="consult-form">
-        <h1 className="consult-form-title">
-          Заполните форму, чтобы записаться на аудит
-        </h1>
+        <h1 className="consult-form-title">Заполните форму</h1>
+        <h3 className="consult-form-subtitle">
+          С вами свяжется менеджер, уточнит все детали и начнет поиск авто для
+          вас
+        </h3>
         <input
           className="consult-form-input"
           type="text"
@@ -56,7 +58,7 @@ const ConsultForm: React.FC = () => {
           onChange={formik.handleChange}
         ></InputMask>
         <button className="consult-form-button" onClick={formik.submitForm}>
-          ХОЧУ АУДИТ
+          начать поиск
         </button>
       </div>
     </div>
