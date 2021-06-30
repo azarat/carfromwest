@@ -9,6 +9,9 @@
   padding: 0 15px;
   background: #0f2442;
   box-shadow: 0px 3px 8px 0px rgba(255, 255, 255, 0.2);
+  &--none {
+    display: none;
+  }
   & a {
     text-decoration: none;
   }

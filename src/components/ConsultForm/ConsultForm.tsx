@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import React from 'react'
+import { useEffect } from 'react'
 import InputMask from 'react-input-mask'
 import * as Yup from 'yup'
 
@@ -29,6 +30,14 @@ const ConsultForm: React.FC = () => {
       )
     },
   })
+
+  useEffect(() => {
+    document.querySelector('.header')?.classList.add('header--none')
+    return () => {
+      document.querySelector('.header')?.classList.remove('header--none')
+    }
+  }, [])
+
   return (
     <div className="consult-form-wrapper">
       <div className="consult-form">
