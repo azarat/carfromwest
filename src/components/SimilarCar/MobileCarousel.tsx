@@ -1,7 +1,6 @@
 import Link from 'next/link'
 // SVG
 import ArrowSVG from '../../assets/svg/carouselArrow.svg'
-import { gas } from '../../constants/filter'
 import { ISimilarCarousel } from '../../Types/Types'
 // Components
 import Carousel from '../Carousel/Carousel'
@@ -12,30 +11,38 @@ const MobileCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
     <div className="similar__mobile-carousel">
       <Carousel buttonNext={<ArrowSVG />} buttonPrev={<ArrowSVG />}>
         {data &&
-          data.map(({ id, attributes: { auction, auctionLotId, lotData } }) => (
-            <Link key={id} href={`/catalog/${auction}-${auctionLotId}`}>
-              <a>
-                <CatalogItem
-                  fuelType={
-                    gas.find(({ value }) => value === lotData.info.fuelType)
-                      ?.label || null
-                  }
-                  hightBid={+lotData.sale.currentBid}
-                  imageUrl={
-                    lotData.images
-                      ? lotData.images[0]?.i
-                      : '/assets/images/no-image.jpg'
-                  }
-                  lotNumber={`${auctionLotId}`}
-                  make={lotData.make}
-                  modelGroup={lotData.model}
-                  odometer={lotData.info.odometer?.value || 0}
-                  year={lotData.year}
-                  vin={lotData.vin}
-                />
-              </a>
-            </Link>
-          ))}
+          data.map(
+            ({
+              auction,
+              lotNumber,
+              lotInfo,
+              saleInfo,
+              images,
+              specifications: { fuelType },
+              conditionInfo: { odometer },
+            }) => (
+              <Link
+                key={`${auction}-${lotNumber}`}
+                href={`/catalog/${auction}-${lotNumber}`}
+              >
+                <a>
+                  <CatalogItem
+                    fuelType={fuelType}
+                    hightBid={+saleInfo.currentBid}
+                    imageUrl={
+                      images ? images[0]?.thumb : '/assets/images/no-image.jpg'
+                    }
+                    lotNumber={`${lotNumber}`}
+                    make={lotInfo.make}
+                    modelGroup={lotInfo.model}
+                    odometer={odometer?.value || 0}
+                    year={lotInfo.year}
+                    vin={lotInfo.vin}
+                  />
+                </a>
+              </Link>
+            )
+          )}
       </Carousel>
     </div>
   )

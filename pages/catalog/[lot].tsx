@@ -7,28 +7,28 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import RightPolygonSVG from '../../src/assets/svg/right-polygon.svg'
 // Types
-import { CarPageProps } from '../../src/Types/Types'
+import { CarPageProps, ILot } from '../../src/Types/Types'
 import Countdown from '../../src/components/Countdown/Countdown'
 import { dateToText } from '../../src/helpers/dateToText'
 import SimilarCar from '../../src/components/SimilarCar/SimilarCar'
-import { driveLineTypes, gas, transmissions } from '../../src/constants/filter'
-import { ICarsFetchTypes, ICar } from '../../src/components/CatalogGrid/Types'
+import { gas } from '../../src/constants/filter'
+import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 import Consultation from '../../src/components/Consultation/Consultation'
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const router = useRouter()
   const [car, setCar] = useState(carResponse)
-  const [similarCar, setSimilarCar] = useState<ICar[]>([])
+  const [similarCar, setSimilarCar] = useState<ILot[]>([])
   const [loading, setLoading] = useState(true)
   const images = useMemo(
     () =>
-      car.data.attributes.lotData.images
-        ? car.data.attributes.lotData.images.map(({ i }) => i)
+      car.images
+        ? car.images.map(({ full }) => full)
         : ['/assets/images/no-image.jpg'],
     [car]
   )
 
-  const auctionDateEnd = new Date(carResponse.data.attributes.auctionDate)
+  const auctionDateEnd = new Date(carResponse.auction)
 
   useEffect(() => {
     setCar(carResponse)
@@ -37,12 +37,12 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   useEffect(() => {
     setLoading(true)
     const defaultUrl = '/api/lots?includeFilters=false&itemsPerPage=9'
-    const markUrl = `${defaultUrl}&makes=${car.data.attributes.lotData.make}`
-    const modelUrl = `${markUrl}&models=${car.data.attributes.lotData.model}`
-    const yearUrl = `${modelUrl}&yearMin=${car.data.attributes.lotData.year}&yearMax=${car.data.attributes.lotData.year}`
+    const markUrl = `${defaultUrl}&makes=${car.lotInfo.make}`
+    const modelUrl = `${markUrl}&models=${car.lotInfo.model}`
+    const yearUrl = `${modelUrl}&yearMin=${car.lotInfo.year}&yearMax=${car.lotInfo.year}`
     const yearUrlAnother = `${modelUrl}&yearMin=${
-      car.data.attributes.lotData.year - 2
-    }&yearMax=${car.data.attributes.lotData.year + 2}`
+      car.lotInfo.year - 2
+    }&yearMax=${car.lotInfo.year + 2}`
 
     const simillarFetches = [
       fetch(defaultUrl),
@@ -56,7 +56,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
       .then((data: ICarsFetchTypes[]) => {
         const [byDefault, byMark, byModel, byYear, byYearAnother] = data.map(
           (d) => {
-            const filtred = d.data.filter((c) => c.id !== car.data.id)
+            const filtred = d.items.filter((c) => c.lotNumber !== car.lotNumber)
             return {
               totalItems: filtred.length,
               data: filtred,
@@ -75,9 +75,9 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
       })
   }, [car])
 
-  const certString = `${
-    car.data.attributes.lotData.sale.saleDocument?.state || ''
-  }-${car.data.attributes.lotData.sale.saleDocument?.type || ''}`
+  const certString = `${car.saleInfo.saleDocument?.state || ''}-${
+    car.saleInfo.saleDocument?.type || ''
+  }`
 
   const handleCost = () => {
     if (typeof window !== 'undefined') {
@@ -106,24 +106,18 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   </a>
                 </Link>
               </li>
-              <li className="car-page__breadcrumbs-link">
-                {car.data.attributes.lotData.vin}
-              </li>
+              <li className="car-page__breadcrumbs-link">{car.lotInfo.vin}</li>
             </ul>
           </nav>
         </div>
         <div className="container">
           <div className="car-page__name-wrapper">
             <h2 className="car-page__header-title">
-              {`${car.data.attributes.lotData.year} ${car.data.attributes.lotData.make} ${car.data.attributes.lotData.model}`}
+              {`${car.lotInfo.year} ${car.lotInfo.make} ${car.lotInfo.model}`}
             </h2>
             <div className="car-page__name-inner">
-              <h2 className="car-page__title">
-                № Лота {car.data.attributes.auctionLotId}
-              </h2>
-              <h2 className="car-page__auction">
-                Аукцион: {car.data.attributes.auction}
-              </h2>
+              <h2 className="car-page__title">№ Лота {car.lotNumber}</h2>
+              <h2 className="car-page__auction">Аукцион: {car.auction}</h2>
             </div>
           </div>
           <div className="car-page__info-wrapper">
@@ -132,7 +126,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                 <CarPageCarousel images={images} />
               </div>
             </div>
-            {car.data.attributes.auctionDate && (
+            {car.auctionDate && (
               <>
                 <div className="car-page__timer-wrapper">
                   <div className="car-page__time">
@@ -147,7 +141,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
             <div className="car-page__price-wrapper">
               <div className="car-page__price">
                 <p>текущая ставка</p>
-                <span>${car.data.attributes.lotData.sale.currentBid}</span>
+                <span>${car.saleInfo.currentBid}</span>
               </div>
               <div className="car-page__btn">
                 <button
@@ -167,7 +161,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">VIN:</span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.vin}
+                      {car.lotInfo.vin}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -175,34 +169,27 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       тип документа:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.sale.saleDocument?.type ||
-                        ''}
+                      {car.saleInfo.saleDocument?.type || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Пробег:</span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.odometer?.value || 0}{' '}
-                      миль
+                      {car.conditionInfo.odometer?.value || 0} миль
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Топливо:</span>
                     <span className="car-page__table-item-description">
                       {gas.find(
-                        ({ value }) =>
-                          value === car.data.attributes.lotData.info.fuelType
+                        ({ value }) => value === car.specifications.fuelType
                       )?.label || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Привод:</span>
                     <span className="car-page__table-item-description">
-                      {
-                        driveLineTypes[
-                          car.data.attributes.lotData.info.drivelineType - 1
-                        ]
-                      }
+                      {car.specifications.drivelineType}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -210,25 +197,24 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Объём двигателя:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.engine?.capacity || ''}
+                      {car.specifications.engine?.capacity || ''}
                     </span>
                   </div>
-                  <div className="car-page__table-item">
+                  {/* <div className="car-page__table-item">
                     <span className="car-page__table-item-title">
                       Трансмиссия:
                     </span>
                     <span className="car-page__table-item-description">
-                      {transmissions[
-                        car.data.attributes.lotData.info.transmissionType
-                      ]?.label || 'N/A'}
+                      {car.specifications.
+}
                     </span>
-                  </div>
+                  </div> */}
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">
                       Количество цилиндров:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.engine?.cylinders || ''}
+                      {car.specifications.engine.cylinders || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -236,9 +222,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Наличие ключей:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.keys
-                        ? 'В наличии'
-                        : 'Нету в наличии'}
+                      {car.conditionInfo.keys ? 'В наличии' : 'Нету в наличии'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -252,7 +236,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Год:</span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.year}
+                      {car.lotInfo.year}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -260,7 +244,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       продавец:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.sale.seller.displayName}
+                      {car.saleInfo.seller.displayName}
                     </span>
                   </div>
                 </div>
@@ -273,7 +257,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Статус:</span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.runnable
+                      {car.conditionInfo.condition === 'wont-start'
                         ? 'Заводится'
                         : 'Не заводится'}
                     </span>
@@ -283,7 +267,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Основные повреждения:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info.primaryDamage}
+                      {car.conditionInfo?.primaryDamage || 'Отсутствуют'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -291,8 +275,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       второстепенные повреждения:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.data.attributes.lotData.info?.secondaryDamage ||
-                        'Отсутствуют'}
+                      {car.conditionInfo?.secondaryDamage || 'Отсутствуют'}
                     </span>
                   </div>
                 </div>
@@ -307,7 +290,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Дата продажи:
                     </span>
                     <span className="car-page__table-item-description">
-                      {carResponse.data.attributes.auctionDate
+                      {carResponse.auctionDate
                         ? dateToText(auctionDateEnd)
                         : 'Не назначена'}
                     </span>
@@ -317,7 +300,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Время начала аукциона:
                     </span>
                     <span className="car-page__table-item-description">
-                      {carResponse.data.attributes.auctionDate
+                      {carResponse.auctionDate
                         ? `${auctionDateEnd.getHours()}:${auctionDateEnd.getMinutes()}`
                         : 'Не назначена'}
                     </span>

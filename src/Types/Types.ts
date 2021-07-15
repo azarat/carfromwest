@@ -1,86 +1,93 @@
-import { ICar, ICarImage } from '../components/CatalogGrid/Types'
 export type CarPageProps = {
   carResponse: ILot
 }
 
 export interface ILot {
-  data: {
-    id: string
-    type: string
-    attributes: {
-      auction: string
-      auctionLotId: number
-      projectedWinBid: {
-        min: string
-        max: string
-      }
-      userData: null
-      auctionDate: string
-      lotData: {
-        vin: string
-        type: string
-        make: string
-        model: string
-        trim: string
-        year: number
-        images: ICarImage[]
-        sale: {
-          branch: {
-            id: number
-            country: string
-            state: string
-            city: string
-            zip: string
-            locationName: string
-          }
-          repairCost: string
-          retailPrice: string
-          sellerReserveMet: boolean
-          currentBid: string
-          saleDocument: {
-            group: number
-            state: string
-            type: string
-          }
-          sold: boolean
-          seller: {
-            displayName: string
-            insurance: boolean
-          }
-        }
-        info: {
-          primaryDamage: string
-          secondaryDamage: string
-          lossType: string
-          odometer: {
-            value: number
-            unit: string
-            actual: boolean
-          }
-          fuelType: number
-          drivelineType: number
-          transmissionType: number
-          engine: {
-            capacity: string
-            cylinders: number
-          }
-          bodyStyle: string
-          color: string
-          keys: boolean
-          runnable: boolean
-          startState: number
-        }
-      }
+  auction: string
+  lotNumber: string
+  auctionDate: string
+  lotInfo: {
+    vehicleType: string
+    vin: string
+    make: string
+    model: string
+    trim: string
+    year: number
+  }
+  specifications: {
+    bodyStyle: {
+      name: string
+      type: string
+    }
+    engine: {
+      capacity: string
+      cylinders: number
+    }
+    fuelType: string
+    drivelineType: string
+    color: string
+  }
+  conditionInfo: {
+    condition: string
+    odometer: {
+      value: number
+      unit: string
+      status: string
+    }
+    primaryDamage: string
+    secondaryDamage: string
+    lossType: string
+    keys: false
+  }
+  saleInfo: {
+    sold: false
+    currentBid: {
+      value: number
+      unit: string
+    }
+    finalBid: {
+      value: number
+      unit: string
+    }
+    branch: {
+      id: number
+      country: string
+      state: string
+      city: string
+      zip: string
+      locationName: string
+      name: string
+    }
+    retailPrice: {
+      value: number
+      unit: string
+    }
+    sellerReserve: {
+      value: number
+      unit: string
+    }
+    sellerReserveMet: false
+    saleDocument: {
+      group: string
+      state: string
+      type: string
+    }
+    seller: {
+      displayName: string
     }
   }
+  images: {
+    full: string
+    thumb: string
+  }[]
 }
 
 export interface ISimilarCarousel {
-  data: ICar[]
+  data: ILot[]
 }
 
 export interface ISimilarCar {
-  data: ICar[]
+  data: ILot[]
   loading: boolean
 }
 

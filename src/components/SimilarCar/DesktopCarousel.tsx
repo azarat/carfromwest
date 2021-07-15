@@ -5,7 +5,6 @@ import ArrowSVG from '../../assets/svg/carouselArrow.svg'
 import Carousel from '../Carousel/Carousel'
 import CatalogItem from '../CatalogGrid/CatalogItem'
 import { ISimilarCarousel } from '../../Types/Types'
-import { gas } from '../../constants/filter'
 
 const chunk = <T extends unknown>(arr: T[], size: number): T[][] =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_v, i) =>
@@ -20,26 +19,34 @@ const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
         {data &&
           chunkData.map((data) =>
             data.map(
-              ({ id, attributes: { auction, auctionLotId, lotData } }) => (
-                <Link key={id} href={`/catalog/${auction}-${auctionLotId}`}>
+              ({
+                auction,
+                lotNumber,
+                lotInfo,
+                saleInfo,
+                images,
+                specifications: { fuelType },
+                conditionInfo: { odometer },
+              }) => (
+                <Link
+                  key={`${auction}-${lotNumber}`}
+                  href={`/catalog/${auction}-${lotNumber}`}
+                >
                   <a>
                     <CatalogItem
-                      fuelType={
-                        gas.find(({ value }) => value === lotData.info.fuelType)
-                          ?.label || null
-                      }
-                      hightBid={+lotData.sale.currentBid}
+                      fuelType={fuelType}
+                      hightBid={+saleInfo.currentBid}
                       imageUrl={
-                        lotData.images
-                          ? lotData.images[0]?.i
+                        images
+                          ? images[0]?.thumb
                           : '/assets/images/no-image.jpg'
                       }
-                      lotNumber={`${auctionLotId}`}
-                      make={lotData.make}
-                      modelGroup={lotData.model}
-                      odometer={lotData.info.odometer?.value || 0}
-                      year={lotData.year}
-                      vin={lotData.vin}
+                      lotNumber={`${lotNumber}`}
+                      make={lotInfo.make}
+                      modelGroup={lotInfo.model}
+                      odometer={odometer?.value || 0}
+                      year={lotInfo.year}
+                      vin={lotInfo.vin}
                     />
                   </a>
                 </Link>

@@ -5,14 +5,13 @@ import CatalogGridEmpty from './CatalogGridEmpty'
 // Types
 import { CatalogGridProps } from './Types'
 import Spinner from '../Spinner/Spinner'
-import { gas } from '../../constants/filter'
 
 const CatalogGrid: React.FC<CatalogGridProps> = ({
   children,
   cars,
   loading,
 }): JSX.Element => {
-  if (!loading && !cars?.data.length) {
+  if (!loading && !cars?.items.length) {
     return (
       <div className="catalog-grid">
         <CatalogGridEmpty />
@@ -25,33 +24,25 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
       <div className="catalog-grid__container">
         {!loading &&
           cars &&
-          cars.data.map(
+          cars.items.map(
             ({
-              attributes: {
-                auction,
-                auctionLotId,
-                lotData: {
-                  vin,
-                  make,
-                  year,
-                  model,
-                  images,
-                  sale: { currentBid },
-                  info: { fuelType, odometer },
-                },
-              },
+              auction,
+              lotNumber,
+              lotInfo: { vin, make, model, year },
+              specifications: { fuelType },
+              conditionInfo: { odometer },
+              saleInfo: { currentBid },
+              images,
             }) => (
-              <Link key={vin} href={`/catalog/${auction}-${auctionLotId}`}>
+              <Link key={vin} href={`/catalog/${auction}-${lotNumber}`}>
                 <a className="catalog-grid__container-link">
                   <CatalogItem
-                    fuelType={
-                      gas.find(({ value }) => value === fuelType)?.label || ''
-                    }
+                    fuelType={fuelType}
                     hightBid={+currentBid}
                     imageUrl={
-                      images ? images[0].i : '/assets/images/no-image.jpg'
+                      images ? images[0].thumb : '/assets/images/no-image.jpg'
                     }
-                    lotNumber={`${auctionLotId}`}
+                    lotNumber={`${lotNumber}`}
                     make={make}
                     modelGroup={model}
                     odometer={odometer?.value || 0}

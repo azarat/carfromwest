@@ -13,8 +13,13 @@ const filter: NextApiHandler = async (req, res) => {
       .map((key) => `${key}=${req.query[key]}`)
       .join('&')
 
-    const url = `https://carsfromwest.com/api/auction/lots?${queryParams}`
-    const response = await fetch(url)
+    const url = `https://api-stage.carsfromwest.com/search/v1/lots?${queryParams}`
+    const response = await fetch(url, {
+      headers: {
+        Authorization: 'Basic cfw8/PZl0eg,B92',
+        'X-AUTH-TOKEN': '1d21e20bd0b8d46297b102d28d5d070eb9b626c3',
+      },
+    })
     const data = await response.json()
 
     return res.status(200).send(data)
