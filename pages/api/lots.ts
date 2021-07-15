@@ -21,7 +21,7 @@ const filter: NextApiHandler = async (req, res) => {
       },
     })
     console.log(response.status)
-    console.log(response.body)
+    console.log(await response.text())
 
     const data = await response.json()
 
