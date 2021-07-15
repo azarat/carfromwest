@@ -20,6 +20,9 @@ const filter: NextApiHandler = async (req, res) => {
         'X-AUTH-TOKEN': '1d21e20bd0b8d46297b102d28d5d070eb9b626c3',
       },
     })
+    console.log(response.status)
+    console.log(response.body)
+
     const data = await response.json()
 
     return res.status(200).send(data)
