@@ -24,6 +24,7 @@ const filter: NextApiHandler = async (req, res) => {
 
     return res.status(200).send(data)
   } catch (e) {
+    console.log(e)
     return res.status(500).send({ message: 'Server Error' })
   }
 }
