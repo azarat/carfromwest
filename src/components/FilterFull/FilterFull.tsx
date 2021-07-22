@@ -153,7 +153,6 @@ const FilterFull: React.FC<FilterFullProps> = ({
     if (values.transmission) newFilter.transmissionTypes = [values.transmission]
     setFilter(newFilter)
     setOpen(false)
-
     document.body.scrollIntoView({ behavior: 'smooth' })
   }
 
