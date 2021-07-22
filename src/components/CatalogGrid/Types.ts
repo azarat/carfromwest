@@ -73,18 +73,7 @@ export interface ICar {
 
 export interface ICarsFetchTypes {
   items: ILot[]
-  links: {
-    first: string
-    self: string
-    last: string
-    next: string
-  }
   total: number
-  meta: {
-    currentPage: number
-    itemsPerPage: number
-    totalItems: number
-  }
 }
 
 export type CatalogItemProps = {

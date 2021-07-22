@@ -35,11 +35,9 @@ const DesktopCarousel: React.FC<ISimilarCarousel> = ({ data }): JSX.Element => {
                   <a>
                     <CatalogItem
                       fuelType={fuelType}
-                      hightBid={+saleInfo.currentBid}
+                      hightBid={+saleInfo.currentBid.value}
                       imageUrl={
-                        images
-                          ? images[0]?.thumb
-                          : '/assets/images/no-image.jpg'
+                        images ? images[0]?.full : '/assets/images/no-image.jpg'
                       }
                       lotNumber={`${lotNumber}`}
                       make={lotInfo.make}

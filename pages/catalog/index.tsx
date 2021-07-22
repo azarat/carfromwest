@@ -14,7 +14,6 @@ import { IFilter } from '../../src/components/FilterFull/Types'
 import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
-import { capacityArray } from '../../src/helpers/calculator'
 import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
 
 const Index: NextPage<Partial<ICatalog>> = ({
@@ -25,6 +24,16 @@ const Index: NextPage<Partial<ICatalog>> = ({
   models,
   searchTerm,
 }): JSX.Element => {
+  const defaultFilter = {
+    auctions: ['copart', 'iaai'],
+    vehicleType: 'automobile',
+    countries: ['US'],
+    page: 1,
+    itemsPerPage: 12,
+    sortField: 'added-date',
+    sortDirection: 'asc',
+    includeFilters: ['auctions'],
+  }
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [cars, setCars] = useState<ICarsFetchTypes | undefined>(undefined)
@@ -32,16 +41,18 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
-          makes,
-          type,
-          yearMin,
-          yearMax,
-          models,
-          searchTerm: router.query.searchTerm ? router.query.searchTerm : null,
+          includeFilters: ['makes', 'vehicleTypes', 'models'],
+          makes: [makes],
+          vehicleType: type,
+          models: [models],
+          yearMin: yearMin ? +yearMin : null,
+          yearMax: yearMax ? +yearMax : null,
         }
       : typeof localStorage !== 'undefined'
-      ? JSON.parse(localStorage.getItem('filter') ?? '{}')
-      : {}
+      ? JSON.parse(
+          localStorage.getItem('filter') ?? JSON.stringify({ ...defaultFilter })
+        )
+      : { ...defaultFilter }
   )
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -50,30 +61,18 @@ const Index: NextPage<Partial<ICatalog>> = ({
       (async (page) => {
         setLoading(true)
         const cfwURL = '/api/lots'
-        const queryParams = `includeFilters=false&itemsPerPage=12&onlyActive=true&auctions=iaai,copart&page=${page}`
-        const filterString = Object.keys(filter)
-          .filter((key) => filter[key])
-          .map((key) => `${key}=${filter[key]}`)
-          .join('&')
 
-        const engineCapacitiesString =
-          filter.Fuel_Type === '8'
-            ? `engineCapacities=
-      ${capacityArray(
-        filter.engine_min ? filter.engine_min : 0.7,
-        filter.engine_max ? filter.engine_max : 17
-      ).join(',')}`
-            : ''
-        const url = `${cfwURL}?${queryParams}&${filterString}&${engineCapacitiesString}`
-        const response = await fetch(
-          url.includes('yearMin') ? url : `${url}&yearMin=2010`
-        )
+        const response = await fetch(cfwURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...filter, page }),
+        })
         const cfwData = await response.json()
 
         setCars(cfwData)
         setLoading(false)
       })(page),
-    [filter, yearMin]
+    [filter]
   )
 
   useEffect(() => {
@@ -93,7 +92,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
   const handleSort = ({ value }: { value: string }): void => {
     setPage(1)
-    const [sortField, sortDirection] = value.split('-')
+    const [sortField, sortDirection] = value.split('--')
     setFilter({ ...filter, sortField, sortDirection })
   }
 
@@ -121,12 +120,29 @@ const Index: NextPage<Partial<ICatalog>> = ({
             filter={filter}
             setFilter={setFilter}
           />
-          <CatalogSort handleSort={handleSort} loading={loading} />
+          <CatalogSort
+            handleSort={handleSort}
+            filter={filter}
+            loading={loading}
+          />
           <div className="filter-field__grid">
             <div className="filter-field__grid-list">
               {Object.keys(filter)
                 .filter((key) => {
-                  if (['sortField', 'sortDirection'].includes(key)) return false
+                  if (
+                    [
+                      'sortField',
+                      'sortDirection',
+                      'auctions',
+                      'vehicleType',
+                      'bodyStyles',
+                      'countries',
+                      'page',
+                      'itemsPerPage',
+                      'includeFilters',
+                    ].includes(key)
+                  )
+                    return false
                   return !!filter[key]
                 })
                 .map((key) => {
@@ -136,12 +152,27 @@ const Index: NextPage<Partial<ICatalog>> = ({
                       (val) => val.value === filter[key]
                     )[0].title
                   if (key === 'fuelTypes')
-                    title = gas.filter((val) => val.value === filter[key])[0]
-                      .label
+                    title = gas.filter(
+                      (val) =>
+                        filter.fuelTypes?.length &&
+                        val.value === filter.fuelTypes[0]
+                    )[0].label
+                  if (
+                    key === 'engineCapacities' &&
+                    filter.engineCapacities?.length
+                  )
+                    title = `${filter.engineCapacities[0]} - ${
+                      filter.engineCapacities[
+                        filter.engineCapacities.length - 1
+                      ]
+                    }`
+
                   if (key === 'transmissionTypes')
                     title = transmissions.filter(
-                      (val) => val.value === filter[key]
-                    )[0].label
+                      (val) =>
+                        filter.transmissionTypes?.length &&
+                        val.value === filter.transmissionTypes[0]
+                    )[0]?.label
                   if (/^year_min$/.test(key)) title = `c ${title}`
                   else if (/_min$/.test(key) || key === 'Price')
                     title = `от ${title}`
@@ -190,7 +221,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
         </div>
 
         <CatalogGrid loading={loading} cars={cars}>
-          <Pagination page={page} cars={cars} setPage={setPage} />
+          {cars && <Pagination page={page} cars={cars} setPage={setPage} />}
         </CatalogGrid>
       </section>
     </div>

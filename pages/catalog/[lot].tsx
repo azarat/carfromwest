@@ -11,9 +11,9 @@ import { CarPageProps, ILot } from '../../src/Types/Types'
 import Countdown from '../../src/components/Countdown/Countdown'
 import { dateToText } from '../../src/helpers/dateToText'
 import SimilarCar from '../../src/components/SimilarCar/SimilarCar'
-import { gas } from '../../src/constants/filter'
 import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 import Consultation from '../../src/components/Consultation/Consultation'
+import { IFilter } from '../../src/components/FilterFull/Types'
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const router = useRouter()
@@ -28,7 +28,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
     [car]
   )
 
-  const auctionDateEnd = new Date(carResponse.auction)
+  const auctionDateEnd = new Date(carResponse.auctionDate)
 
   useEffect(() => {
     setCar(carResponse)
@@ -36,33 +36,94 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
 
   useEffect(() => {
     setLoading(true)
-    const defaultUrl = '/api/lots?includeFilters=false&itemsPerPage=9'
-    const markUrl = `${defaultUrl}&makes=${car.lotInfo.make}`
-    const modelUrl = `${markUrl}&models=${car.lotInfo.model}`
-    const yearUrl = `${modelUrl}&yearMin=${car.lotInfo.year}&yearMax=${car.lotInfo.year}`
-    const yearUrlAnother = `${modelUrl}&yearMin=${
-      car.lotInfo.year - 2
-    }&yearMax=${car.lotInfo.year + 2}`
+    const defaultUrl = '/api/lots'
+
+    const defaultFilter: Partial<IFilter> = {
+      page: 1,
+      itemsPerPage: 12,
+      vehicleType: 'automobile',
+      includeFilters: ['vehicleTypes'],
+    }
 
     const simillarFetches = [
-      fetch(defaultUrl),
-      fetch(markUrl),
-      fetch(modelUrl),
-      fetch(yearUrl),
-      fetch(yearUrlAnother),
+      fetch(defaultUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(defaultFilter),
+      }),
+      fetch(defaultUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...defaultFilter,
+          includeFilters: [
+            ...(defaultFilter.includeFilters as string[]),
+            'makes',
+          ],
+          makes: [car.lotInfo.make],
+        }),
+      }),
+      fetch(defaultUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...defaultFilter,
+          includeFilters: [
+            ...(defaultFilter.includeFilters as string[]),
+            'makes',
+            'models',
+          ],
+          makes: [car.lotInfo.make],
+          models: [car.lotInfo.model],
+        }),
+      }),
+      fetch(defaultUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...defaultFilter,
+          includeFilters: [
+            ...(defaultFilter.includeFilters as string[]),
+            'makes',
+            'models',
+          ],
+          makes: [car.lotInfo.make],
+          models: [car.lotInfo.model],
+          yearMin: car.lotInfo.year,
+          yearMax: car.lotInfo.year,
+        }),
+      }),
+      fetch(defaultUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...defaultFilter,
+          includeFilters: [
+            ...(defaultFilter.includeFilters as string[]),
+            'makes',
+            'models',
+          ],
+          makes: [car.lotInfo.make],
+          models: [car.lotInfo.model],
+          yearMin: car.lotInfo.year - 2,
+          yearMax: car.lotInfo.year + 2,
+        }),
+      }),
     ]
     Promise.all(simillarFetches)
       .then((response) => Promise.all(response.map((resp) => resp.json())))
       .then((data: ICarsFetchTypes[]) => {
         const [byDefault, byMark, byModel, byYear, byYearAnother] = data.map(
           (d) => {
-            const filtred = d.items.filter((c) => c.lotNumber !== car.lotNumber)
+            const filtred =
+              d.items?.filter((c) => c.lotNumber !== car.lotNumber) || []
             return {
               totalItems: filtred.length,
               data: filtred,
             }
           }
         )
+
         if (byYear.totalItems !== 0) setSimilarCar(byYear.data)
         else if (byYearAnother.totalItems !== 0)
           setSimilarCar(byYearAnother.data)
@@ -75,9 +136,11 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
       })
   }, [car])
 
-  const certString = `${car.saleInfo.saleDocument?.state || ''}-${
-    car.saleInfo.saleDocument?.type || ''
-  }`
+  const certString = car.saleInfo
+    ? `${car.saleInfo.saleDocument?.state || ''}-${
+        car.saleInfo.saleDocument?.type || ''
+      }`
+    : ''
 
   const handleCost = () => {
     if (typeof window !== 'undefined') {
@@ -141,7 +204,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
             <div className="car-page__price-wrapper">
               <div className="car-page__price">
                 <p>текущая ставка</p>
-                <span>${car.saleInfo.currentBid}</span>
+                <span>${car.saleInfo.currentBid.value}</span>
               </div>
               <div className="car-page__btn">
                 <button
@@ -181,9 +244,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title">Топливо:</span>
                     <span className="car-page__table-item-description">
-                      {gas.find(
-                        ({ value }) => value === car.specifications.fuelType
-                      )?.label || ''}
+                      {car.specifications.fuelType}
                     </span>
                   </div>
                   <div className="car-page__table-item">

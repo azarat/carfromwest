@@ -3,6 +3,6 @@ import { ICarsFetchTypes } from '../CatalogGrid/Types'
 
 export type PaginationProps = {
   setPage: Dispatch<SetStateAction<number>>
-cars: ICarsFetchTypes | undefined
+  cars: ICarsFetchTypes
   page: number
 }

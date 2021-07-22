@@ -8,16 +8,11 @@ import EngineSVG from '../../assets/svg/engine.svg'
 import SpeedSVG from '../../assets/svg/speed.svg'
 
 // Constants
-import {
-  years,
-  gas,
-  transmissions,
-  vehicleTypes,
-  bodyTypeArray,
-} from '../../constants/filter'
+import { years, gas, transmissions, vehicleTypes } from '../../constants/filter'
 
-import { FilterFullProps } from './Types'
+import { FilterFullProps, IFilter } from './Types'
 import SelectMake from './SelectMake'
+import { capacityArray } from '../../helpers/calculator'
 
 const FilterFull: React.FC<FilterFullProps> = ({
   open,
@@ -26,13 +21,20 @@ const FilterFull: React.FC<FilterFullProps> = ({
   setFilter,
   loading,
 }): JSX.Element => {
-  const [vehicle, setVehicle] = useState<string>('AM')
-  const [bodyStyle, setBodyStyle] = useState('')
+  const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [marks, setMarks] = useState()
-  const [currentMark, setCurrentMark] = useState<string>()
-  const [currentModel, setCurrentModel] = useState<string>()
+  const [bodyStyles, setBodyStyles] = useState<string[]>([])
+  const [bodyStyle, setBodyStyle] = useState(
+    filter.bodyTypes?.length ? filter.marks[0] : ''
+  )
+  const [currentMark, setCurrentMark] = useState<string>(
+    filter.marks?.length ? filter.marks[0] : ''
+  )
+  const [currentModel, setCurrentModel] = useState<string>(
+    filter.models?.length ? filter.models[0] : ''
+  )
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
 
@@ -44,51 +46,33 @@ const FilterFull: React.FC<FilterFullProps> = ({
     setVehicle(target.value)
   }
 
-  const handleSubmit = (values: any) => {
-    setFilter({
-      ...filter,
-      type: values['transport-type'],
-      makes: currentMark,
-      models: currentModel,
-      yearMin: +values.fromYear,
-      yearMax: +values.toYear,
-      transmissionTypes: values.transmission,
-      fuelTypes: values.gas,
-      engine_min: +values.engineFrom,
-      engine_max: +values.engineTo,
-      odometerMin: +values.odometerMin,
-      odometerMax: +values.odometerMax,
-      bodyStyles: bodyStyle,
-    })
-    setOpen(false)
-    document.body.scrollIntoView({ behavior: 'smooth' })
-  }
-
   useEffect(() => {
-    const url = `/api/filter?filters=makes&type=${vehicle}`
+    const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
     fetch(url)
       .then((res) => res.json())
       .then((json) =>
         setMarks(
-          json?.data.attributes.makes.sort().map((val: string) => ({
+          json?.makes.sort().map((val: string) => ({
             label: val,
             value: val,
           })) || []
         )
       )
       .catch(() => setMarks(undefined))
-  }, [vehicle, fromYear, toYear])
+  }, [vehicle])
 
   useEffect(() => {
     if (currentMark) {
       setLoading(true)
-      setCurrentModel(undefined)
-      const url = `/api/filter?filters=models&type=${vehicle}&make=${currentMark}`
+      setCurrentModel('')
+      setBodyStyles([])
+      setBodyStyle('')
+      const url = `/api/filter?filters=makes,models&vehicleType=${vehicle}&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
         .then((json) =>
           setModels(
-            json?.data.attributes.models.sort().map((val: string) => ({
+            json?.models.sort().map((val: string) => ({
               label: val,
               value: val,
             })) || []
@@ -100,10 +84,78 @@ const FilterFull: React.FC<FilterFullProps> = ({
   }, [vehicle, currentMark])
 
   useEffect(() => {
+    if (currentModel) {
+      setBodyStyles([])
+      setBodyStyle('')
+      const url = `/api/filter?filters=makes,models,bodyStyles&vehicleType=${vehicle}&makes=${currentMark}&models=${currentModel}`
+      fetch(url)
+        .then((res) => res.json())
+        .then((json) => setBodyStyles(json?.bodyStyles.sort()))
+        .catch(() => {
+          setBodyStyles([])
+          setBodyStyle('')
+        })
+    }
+  }, [vehicle, currentMark, currentModel])
+
+  useEffect(() => {
     open
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'unset')
   }, [open])
+
+  const handleSubmit = (values: any) => {
+    const includeFilters = Object.keys(values).filter(
+      (k) =>
+        [
+          'auctions',
+          'bodyStyles',
+          'damageTypes',
+          'engineCapacities',
+          'engineCylinders',
+          'fuelTypes',
+          'drivelineTypes',
+          'makes',
+          'models',
+          'trims',
+          'saleDocumentsGroups',
+          'transmissionTypes',
+          'vehicleTypes',
+          'locations',
+          'vehicleConditions',
+          'features',
+          'countries',
+        ].includes(k) && values[k]
+    )
+
+    const newFilter: Partial<IFilter> = {
+      page: 1,
+      includeFilters,
+    }
+    if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
+    if (currentMark) newFilter.makes = [currentMark]
+    if (currentModel) newFilter.models = [currentModel]
+    if (values.engineFrom || values.engineTo) {
+      newFilter.engineCapacities = capacityArray(
+        values.engineFrom ? values.engineFrom : 0.7,
+        values.engineTo ? values.engineTo : 17
+      )
+      newFilter.includeFilters?.push('engineCapacities')
+    }
+    if (values.fromYear) newFilter.yearMin = values.fromYear
+    if (values.toYear) newFilter.yearMax = values.toYear
+
+    if (!Number.isNaN(+values.odometerMin) && values.odometerMax != '')
+      newFilter.odometerMin = +values.odometerMin
+    if (!Number.isNaN(+values.odometerMax) && values.odometerMax != '')
+      newFilter.odometerMax = +values.odometerMax
+
+    if (values.transmission) newFilter.transmissionTypes = [values.transmission]
+    setFilter(newFilter)
+    setOpen(false)
+
+    document.body.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <div className={open ? `filter-full filter-full--open` : 'filter-full'}>
@@ -115,15 +167,16 @@ const FilterFull: React.FC<FilterFullProps> = ({
       </button>
       <Formik
         initialValues={{
-          'transport-type': '',
-          'body-style': '',
+          vehicleTypes: vehicle,
+          bodyStyles: bodyStyle,
           fromYear: '',
           toYear: '',
           transmission: '',
           engineFrom: '',
           engineTo: '',
-          make: '',
-          model: '',
+          makes: '',
+          fuelTypes: '',
+          models: '',
           odometerMin: '',
           odometerMax: '',
         }}
@@ -137,7 +190,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
                 <Field
                   onClick={handleVehicle}
                   value={value}
-                  name="transport-type"
+                  name="vehicleTypes"
                   id={value}
                   type="radio"
                 />
@@ -148,26 +201,11 @@ const FilterFull: React.FC<FilterFullProps> = ({
               </div>
             ))}
           </div>
-          {vehicle === 'AM' && (
-            <div className="filter-full__transmission">
-              <h3 className="filter-full__title">Тип кузова</h3>
-              <Field
-                name={'bodyStyle'}
-                component={SelectMake}
-                options={bodyTypeArray.map((val) => ({
-                  label: val,
-                  value: val,
-                }))}
-                placeholder="Все"
-                setter={setBodyStyle}
-              />
-            </div>
-          )}
 
           <div className="filter-full__transmission">
             <h3 className="filter-full__title">Марка автомобиля</h3>
             <Field
-              name={'make'}
+              name={'makes'}
               component={SelectMake}
               options={marks}
               placeholder="Все"
@@ -178,11 +216,26 @@ const FilterFull: React.FC<FilterFullProps> = ({
             <div className="filter-full__transmission">
               <h3 className="filter-full__title">Модель автомобиля</h3>
               <Field
-                name={'model'}
+                name={'models'}
                 component={SelectMake}
                 options={models}
                 placeholder="Все"
                 setter={setCurrentModel}
+              />
+            </div>
+          )}
+          {vehicle === 'automobile' && currentModel && bodyStyles.length > 0 && (
+            <div className="filter-full__transmission">
+              <h3 className="filter-full__title">Тип кузова</h3>
+              <Field
+                name={'bodyStyle'}
+                component={SelectMake}
+                options={bodyStyles.map((val) => ({
+                  label: val,
+                  value: val,
+                }))}
+                placeholder="Все"
+                setter={setBodyStyle}
               />
             </div>
           )}

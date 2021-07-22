@@ -38,9 +38,9 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
                 <a className="catalog-grid__container-link">
                   <CatalogItem
                     fuelType={fuelType}
-                    hightBid={+currentBid}
+                    hightBid={+currentBid.value}
                     imageUrl={
-                      images ? images[0].thumb : '/assets/images/no-image.jpg'
+                      images ? images[0].full : '/assets/images/no-image.jpg'
                     }
                     lotNumber={`${lotNumber}`}
                     make={make}

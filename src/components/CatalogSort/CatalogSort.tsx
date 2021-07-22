@@ -6,6 +6,7 @@ import { CatalogSortProps } from './Types'
 
 const CatalogSort: React.FC<CatalogSortProps> = ({
   handleSort,
+  filter: { sortDirection, sortField },
   loading,
 }): JSX.Element => {
   const customStyle = {
@@ -15,13 +16,16 @@ const CatalogSort: React.FC<CatalogSortProps> = ({
     }),
     indicatorSeparator: () => ({}),
   }
+  const value = sort.find(
+    ({ value }) => value === `${sortField}--${sortDirection}`
+  )
   return (
     <div className="sort-field">
       <div className="sort-field__text">Сортировать</div>
       <div className="sort-field__select">
         <Select
           isDisabled={loading}
-          defaultValue={sort[0]}
+          defaultValue={value || sort[0]}
           onChange={handleSort}
           options={sort}
           styles={customStyle}

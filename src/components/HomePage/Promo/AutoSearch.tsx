@@ -24,16 +24,14 @@ const AutoSearch: FC<IAutoSearchProps> = ({
   const [yearFrom, setYearFrom] = useState<number>()
   const [yearTo, setYearTo] = useState<number>()
 
-  console.log(carType)
-
   useEffect(() => {
     setLoading(true)
-    const url = `/api/filter?filters=makes&type=${carType}`
+    const url = `/api/filter?filters=makes&vehicleType=${carType}`
     fetch(url)
       .then((res) => res.json())
       .then((json) =>
         setMarks(
-          json?.data.attributes.makes.sort().map((val: string) => ({
+          json?.makes.sort().map((val: string) => ({
             label: val,
             value: val,
           })) || []
@@ -46,12 +44,12 @@ const AutoSearch: FC<IAutoSearchProps> = ({
   useEffect(() => {
     if (currentMark) {
       setLoading(true)
-      const url = `/api/filter?filters=models&type=${carType}&make=${currentMark}`
+      const url = `/api/filter?filters=models&vehicleType=${carType}&makes=${currentMark}`
       fetch(url, {})
         .then((res) => res.json())
         .then((json) =>
           setModels(
-            json?.data.attributes.models.sort().map((val: string) => ({
+            json?.models.sort().map((val: string) => ({
               label: val,
               value: val,
             })) || []

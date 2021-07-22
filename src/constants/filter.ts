@@ -12,8 +12,8 @@ for (let i = 2010; i <= 2021; i++) {
 
 export const transmissions: any[] = [
   { label: 'Все', value: '' },
-  { label: 'Механическая', value: 1 },
-  { label: 'Автомат', value: 2 },
+  { label: 'Механическая', value: 'manual' },
+  { label: 'Автомат', value: 'automatic' },
 ]
 
 export const driveLineTypes = [
@@ -23,27 +23,27 @@ export const driveLineTypes = [
   'Полный привод',
 ]
 
-export const gas: any[] = [
+export const gas: { label: string; value: string }[] = [
   { label: 'Все', value: '' },
-  { label: 'Бензин', value: 1 },
-  { label: 'Дизель', value: 2 },
-  { label: 'Гибрид', value: 3 },
-  { label: 'Электро', value: 4 },
-  { label: 'Этанол 85', value: 5 },
-  { label: 'Газ', value: 6 },
-  { label: 'Конвертируется на газ', value: 7 },
-  { label: 'Водородный топливный элемент', value: 8 },
-  { label: 'Сжиженый газ', value: 10 },
-  { label: 'Другое', value: 9 },
+  { label: 'Бензин', value: 'gas' },
+  { label: 'Дизель', value: 'diesel' },
+  { label: 'Гибрид', value: 'hybrid-engine' },
+  { label: 'Электро', value: 'electric' },
+  { label: 'Этанол 85', value: 'flexible-fuel' },
+  { label: 'Газ', value: 'compressed-natural-gas' },
+  { label: 'Конвертируется на газ', value: 'convertible-to-gaseous-powered' },
+  { label: 'Водородный топливный элемент', value: 'hydrogen-fuel-cell' },
+  { label: 'Сжиженый газ', value: 'liquefied-petroleum-gas"' },
+  { label: 'Другое', value: 'other' },
 ]
 
-export const sort: any[] = [
-  { label: 'Дата создания лота ↑', value: 'added-asc' },
-  { label: 'Дата создания лота ↓', value: 'added-desc' },
-  { label: 'Дата аукциона ↑', value: 'sale-asc' },
-  { label: 'Дата аукциона ↓', value: 'sale-desc' },
-  { label: 'Ставка ↑', value: 'bid-asc' },
-  { label: 'Ставка ↓', value: 'bid-desc' },
+export const sort: { label: string; value: string }[] = [
+  { label: 'Дата создания лота ↑', value: 'added-date--asc' },
+  { label: 'Дата создания лота ↓', value: 'added-date--desc' },
+  { label: 'Дата аукциона ↑', value: 'auction-date--asc' },
+  { label: 'Дата аукциона ↓', value: 'auction-date--desc' },
+  { label: 'Ставка ↑', value: 'current-bid--asc' },
+  { label: 'Ставка ↓', value: 'current-bid--desc' },
   { label: 'Год выпуска ↑', value: 'year-asc' },
   { label: 'Год выпуска ↓', value: 'year-desc' },
   { label: 'Пробег ↑', value: 'odometer-asc' },
@@ -53,17 +53,17 @@ export const sort: any[] = [
 export const vehicleTypes = [
   {
     title: 'Легковые',
-    value: 'AM',
+    value: 'automobile',
     icon: CarSVG,
   },
   {
     title: 'Грузовые',
-    value: 'TR',
+    value: 'truck',
     icon: TruckSVG,
   },
   {
     title: 'Другие',
-    value: 'OTR',
+    value: 'other',
     icon: OtherCarSVG,
   },
 ]

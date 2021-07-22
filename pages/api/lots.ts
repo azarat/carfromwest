@@ -8,26 +8,21 @@ const filter: NextApiHandler = async (req, res) => {
     ) {
       return res.status(200).send({ data: [] })
     }
+    req.body
 
-    const queryParams = Object.keys(req.query)
-      .map((key) => `${key}=${req.query[key]}`)
-      .join('&')
-
-    const url = `https://api-stage.carsfromwest.com/search/v1/lots?${queryParams}`
+    const url = `https://api-stage.carsfromwest.com/search/v1/lots`
     const response = await fetch(url, {
+      method: 'POST',
       headers: {
-        Authorization: 'Basic cfw8/PZl0eg,B92',
+        Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
         'X-AUTH-TOKEN': '1d21e20bd0b8d46297b102d28d5d070eb9b626c3',
       },
+      body: JSON.stringify(req.body),
     })
-    console.log(response.status)
-    console.log(await response.text())
 
-    const data = await response.json()
-
+    const data = await response.text()
     return res.status(200).send(data)
   } catch (e) {
-    console.log(e)
     return res.status(500).send({ message: 'Server Error' })
   }
 }

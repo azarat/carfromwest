@@ -25,7 +25,6 @@ const Calculator: React.FC = () => {
         'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
       )
       const result = await res.json()
-      console.log('result:', result)
       const usdPrice = result.filter((item: any) => item.ccy === 'USD')[0].sale
       const eurPrice = result.filter((item: any) => item.ccy === 'EUR')[0].sale
       setCurrencyUSD(usdPrice / eurPrice)

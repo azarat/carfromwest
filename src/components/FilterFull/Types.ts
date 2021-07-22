@@ -3,35 +3,51 @@ import { Dispatch, SetStateAction } from 'react'
 export type FilterFullProps = {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
-  setFilter: Dispatch<SetStateAction<any>>
-  filter: any
+  setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
+  filter: Partial<IFilter>
   loading: boolean
 }
 
 export type FilterTableProps = {
-  setFilter: Dispatch<SetStateAction<any>>
-  filter: any
+  setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
+  filter: Partial<IFilter>
   loading: boolean
   setPage: Dispatch<SetStateAction<number>>
 }
 
 export interface IFilter {
   [key: string]: any
-  type: string
-  engine_min: number
-  engine_max: number
-  year_min: number
-  year_max: number
-  odometer_min: number
-  odometer_max: number
-  Price: number
-  //Price_max: Infinity;
-  Make: string
-  Body_Style: string
-  Drive: string
-  Buy_It_Now_Price_min: number
-  Buy_It_Now_Price_max: number
-  Fuel_Type: string
-  Transmission: string
-  filterBy: string
+  auctions: string[]
+  countries: string[]
+  makes: string[]
+  models: string[]
+  trims: string[]
+  vehicleConditions: string[]
+  fuelTypes: string[]
+  transmissionTypes: string[]
+  drivelineTypes: string[]
+  saleDocumentGroups: string[]
+  damageTypes: string[]
+  bodyStyles: string[]
+  facilities: string[]
+  features: string[]
+  engineCapacities: string[]
+  includeFilters: string[]
+  engineCylinders: string[]
+  vehicleType: string
+  yearMin: number | null
+  yearMax: number | null
+  odometerMin: number
+  odometerMax: number
+  buyNowAvailable: boolean
+  buyNowPriceMax: number
+  onlyActive: boolean
+  excludeWithoutAuctionDate: boolean
+  auctionDateMin: Date
+  auctionDateMax: Date
+  searchTerm: string
+  page: number
+  itemsPerPage: number
+  sortField: string
+  sortDirection: string
 }

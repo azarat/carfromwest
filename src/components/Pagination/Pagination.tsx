@@ -19,8 +19,7 @@ const Pagination: React.FC<PaginationProps> = ({
   cars,
   setPage,
 }): JSX.Element | null => {
-  const totalPages =
-    (cars && Math.ceil(cars.meta.totalItems / cars.meta.itemsPerPage)) || 0
+  const totalPages = (cars && Math.ceil(cars.total / 12)) || 0
 
   const pageNeighbours = 1
   const fetchPageNumbers = () => {
