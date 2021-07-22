@@ -20,6 +20,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
   filter,
   setPage,
 }): JSX.Element => {
+  console.log(filter)
+
   const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
@@ -31,9 +33,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [currentMark, setCurrentMark] = useState<string>(
     filter.marks?.length ? filter.marks[0] : ''
   )
+
   const [currentModel, setCurrentModel] = useState<string>(
     filter.models?.length ? filter.models[0] : ''
   )
+
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
 
@@ -44,6 +48,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
     const target = e.target as HTMLInputElement
     setVehicle(target.value)
   }
+
+  useEffect(() => {
+    setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
+    setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
+  }, [filter])
 
   useEffect(() => {
     const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
@@ -137,7 +146,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
     }
     if (values.fromYear) newFilter.yearMin = values.fromYear
     if (values.toYear) newFilter.yearMax = values.toYear
-
+    if (values.fuelTypes) newFilter.fuelType = values.fuelTypes
     if (!Number.isNaN(+values.odometerMin) && values.odometerMax != '')
       newFilter.odometerMin = +values.odometerMin
     if (!Number.isNaN(+values.odometerMax) && values.odometerMax != '')

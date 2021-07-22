@@ -5,6 +5,7 @@ import CatalogGridEmpty from './CatalogGridEmpty'
 // Types
 import { CatalogGridProps } from './Types'
 import Spinner from '../Spinner/Spinner'
+import { gas } from '../../constants/filter'
 
 const CatalogGrid: React.FC<CatalogGridProps> = ({
   children,
@@ -37,7 +38,9 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
               <Link key={vin} href={`/catalog/${auction}-${lotNumber}`}>
                 <a className="catalog-grid__container-link">
                   <CatalogItem
-                    fuelType={fuelType}
+                    fuelType={
+                      gas.find((f) => f.value === fuelType)?.label || ''
+                    }
                     hightBid={+currentBid.value}
                     imageUrl={
                       images ? images[0].full : '/assets/images/no-image.jpg'

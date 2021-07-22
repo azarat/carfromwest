@@ -34,6 +34,7 @@ export interface IFilter {
   engineCapacities: string[]
   includeFilters: string[]
   engineCylinders: string[]
+  fuelType: string
   vehicleType: string
   yearMin: number | null
   yearMax: number | null

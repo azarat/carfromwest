@@ -47,6 +47,11 @@ const FilterFull: React.FC<FilterFullProps> = ({
   }
 
   useEffect(() => {
+    setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
+    setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
+  }, [filter])
+
+  useEffect(() => {
     const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
     fetch(url)
       .then((res) => res.json())
@@ -144,13 +149,14 @@ const FilterFull: React.FC<FilterFullProps> = ({
     }
     if (values.fromYear) newFilter.yearMin = values.fromYear
     if (values.toYear) newFilter.yearMax = values.toYear
-
+    if (values.fuelTypes) newFilter.fuelType = values.fuelTypes
     if (!Number.isNaN(+values.odometerMin) && values.odometerMax != '')
       newFilter.odometerMin = +values.odometerMin
     if (!Number.isNaN(+values.odometerMax) && values.odometerMax != '')
       newFilter.odometerMax = +values.odometerMax
 
     if (values.transmission) newFilter.transmissionTypes = [values.transmission]
+
     setFilter(newFilter)
     setOpen(false)
     document.body.scrollIntoView({ behavior: 'smooth' })

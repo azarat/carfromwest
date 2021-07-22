@@ -34,6 +34,18 @@ const Index: NextPage<Partial<ICatalog>> = ({
     sortDirection: 'asc',
     includeFilters: ['auctions'],
   }
+  const includeFilters = ['vehicleTypes']
+  const initialMakes = []
+  const initialModels = []
+
+  if (makes) {
+    includeFilters.push('makes')
+    initialMakes.push(makes)
+  }
+  if (models) {
+    includeFilters.push('models')
+    initialModels.push(models)
+  }
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [cars, setCars] = useState<ICarsFetchTypes | undefined>(undefined)
@@ -41,10 +53,10 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
-          includeFilters: ['makes', 'vehicleTypes', 'models'],
-          makes: [makes],
-          vehicleType: type,
-          models: [models],
+          includeFilters: includeFilters,
+          makes: initialMakes,
+          vehicleType: type ? type : 'automobile',
+          models: initialModels,
           yearMin: yearMin ? +yearMin : null,
           yearMax: yearMax ? +yearMax : null,
         }
@@ -65,7 +77,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
         const response = await fetch(cfwURL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...filter, page }),
+          body: JSON.stringify({ ...filter, page, itemsPerPage: 12 }),
         })
         const cfwData = await response.json()
 
@@ -143,6 +155,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
                     ].includes(key)
                   )
                     return false
+                  if (Array.isArray(filter[key])) return filter[key].length > 0
                   return !!filter[key]
                 })
                 .map((key) => {
@@ -151,12 +164,10 @@ const Index: NextPage<Partial<ICatalog>> = ({
                     title = vehicleTypes.filter(
                       (val) => val.value === filter[key]
                     )[0].title
-                  if (key === 'fuelTypes')
-                    title = gas.filter(
-                      (val) =>
-                        filter.fuelTypes?.length &&
-                        val.value === filter.fuelTypes[0]
-                    )[0].label
+                  if (key === 'fuelType')
+                    title =
+                      gas.find((val) => val.value === filter.fuelType)?.label ||
+                      ''
                   if (
                     key === 'engineCapacities' &&
                     filter.engineCapacities?.length
@@ -205,7 +216,24 @@ const Index: NextPage<Partial<ICatalog>> = ({
                   )
                 })}
             </div>
-            {Object.keys(filter).filter((key) => !!filter[key]).length > 0 && (
+            {Object.keys(filter).filter((key) => {
+              if (
+                [
+                  'sortField',
+                  'sortDirection',
+                  'auctions',
+                  'vehicleType',
+                  'bodyStyles',
+                  'countries',
+                  'page',
+                  'itemsPerPage',
+                  'includeFilters',
+                ].includes(key)
+              )
+                return false
+              if (Array.isArray(filter[key])) return filter[key].length > 0
+              return !!filter[key]
+            }).length > 0 && (
               <button
                 className="filter-field__grid-item filter-field__grid-item--reset"
                 onClick={() => {
