@@ -305,7 +305,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       продавец:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.saleInfo.seller.displayName}
+                      {car.saleInfo.seller?.displayName || 'Не указан'}
                     </span>
                   </div>
                 </div>

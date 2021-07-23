@@ -76,6 +76,9 @@ body {
   &.fixed {
     overflow: hidden !important;
   }
+  &.mobile-fixed {
+    overflow: hidden;
+  }
 }
 
 html {
@@ -102,5 +105,11 @@ html {
       display: inline-flex;
       min-width: 100%;
     }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  body.mobile-fixed {
+    overflow: unset;
   }
 }

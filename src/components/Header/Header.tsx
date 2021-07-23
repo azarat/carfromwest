@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleOpenMenu = (): void => {
-    document.body.classList.toggle('fixed')
+    document.body.classList.toggle('mobile-fixed')
     setOpen((prev) => !prev)
   }
 
