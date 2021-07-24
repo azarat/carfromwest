@@ -33,7 +33,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
     sortField: 'added-date',
     sortDirection: 'asc',
     includeFilters: ['auctions'],
-    yearMin: 2010,
   }
   const includeFilters = ['vehicleTypes']
   const initialMakes = []
@@ -58,7 +57,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
           makes: initialMakes,
           vehicleType: type ? type : 'automobile',
           models: initialModels,
-          yearMin: yearMin ? +yearMin : 2010,
+          yearMin: yearMin ? +yearMin : null,
           yearMax: yearMax ? +yearMax : null,
         }
       : typeof localStorage !== 'undefined'
@@ -73,14 +72,19 @@ const Index: NextPage<Partial<ICatalog>> = ({
     (page = 1) =>
       (async (page) => {
         setLoading(true)
-        const cfwURL = '/api/lots'
+        const cfwURL = '/api/test-lots'
 
         const response = await fetch(cfwURL, {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
           },
-          body: JSON.stringify({ ...filter, page: page + 1, itemsPerPage: 12 }),
+          body: JSON.stringify({
+            ...filter,
+            page,
+            itemsPerPage: 12,
+            yearMin: filter.yearMin || 2010,
+          }),
         })
         const cfwData = await response.json()
 
