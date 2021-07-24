@@ -32,6 +32,19 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           gtag('config', 'G-26Q9M74LEJ');`,
           }}
         />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-117211462-5"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117211462-5');`,
+          }}
+        ></script>
         {/* Jivosite Code */}
         <script src="//code.jivosite.com/widget/UvLnO8ySQi" async></script>
         {/* Binotel Code */}
