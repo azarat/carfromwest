@@ -72,7 +72,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
     (page = 1) =>
       (async (page) => {
         setLoading(true)
-        const cfwURL = '/api/test-lots'
+        const cfwURL = '/api/lots'
 
         const response = await fetch(cfwURL, {
           method: 'POST',
