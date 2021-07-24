@@ -8,14 +8,13 @@ const filter: NextApiHandler = async (req, res) => {
     ) {
       return res.status(200).send({ data: [] })
     }
-    req.body
 
-    const url = `https://api-stage.carsfromwest.com/search/v1/lots`
+    const url = `https://api.carsfromwest.com/search/v1/lots`
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-        'X-AUTH-TOKEN': '1d21e20bd0b8d46297b102d28d5d070eb9b626c3',
+        'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(req.body),
     })
