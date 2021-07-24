@@ -76,8 +76,10 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
         const response = await fetch(cfwURL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...filter, page, itemsPerPage: 12 }),
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({ ...filter, page: page + 1, itemsPerPage: 12 }),
         })
         const cfwData = await response.json()
 
