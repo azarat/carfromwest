@@ -33,6 +33,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
     sortField: 'added-date',
     sortDirection: 'asc',
     includeFilters: ['auctions'],
+    yearMin: 2010,
   }
   const includeFilters = ['vehicleTypes']
   const initialMakes = []
@@ -57,7 +58,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
           makes: initialMakes,
           vehicleType: type ? type : 'automobile',
           models: initialModels,
-          yearMin: yearMin ? +yearMin : null,
+          yearMin: yearMin ? +yearMin : 2010,
           yearMax: yearMax ? +yearMax : null,
         }
       : typeof localStorage !== 'undefined'
