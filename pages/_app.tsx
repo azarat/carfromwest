@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           }}
         ></script>
         {/* Jivosite Code */}
-        <script src="//code.jivosite.com/widget/UvLnO8ySQi" async></script>
+        <script src="//code-eu1.jivosite.com/widget/DGWdAAXu7A" async></script>
         {/* Binotel Code */}
         <script
           dangerouslySetInnerHTML={{
