@@ -319,8 +319,8 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                     <span className="car-page__table-item-title">Статус:</span>
                     <span className="car-page__table-item-description">
                       {car.conditionInfo.condition === 'wont-start'
-                        ? 'Заводится'
-                        : 'Не заводится'}
+                        ? 'Не заводится'
+                        : 'Заводится'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
