@@ -7,19 +7,14 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import RightPolygonSVG from '../../src/assets/svg/right-polygon.svg'
 // Types
-import { CarPageProps, ILot } from '../../src/Types/Types'
+import { CarPageProps } from '../../src/Types/Types'
 import Countdown from '../../src/components/Countdown/Countdown'
 import { dateToText } from '../../src/helpers/dateToText'
-import SimilarCar from '../../src/components/SimilarCar/SimilarCar'
-import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 import Consultation from '../../src/components/Consultation/Consultation'
-import { IFilter } from '../../src/components/FilterFull/Types'
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const router = useRouter()
   const [car, setCar] = useState(carResponse)
-  const [similarCar, setSimilarCar] = useState<ILot[]>([])
-  const [loading, setLoading] = useState(true)
   const images = useMemo(
     () =>
       car.images
@@ -33,108 +28,6 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   useEffect(() => {
     setCar(carResponse)
   }, [carResponse])
-
-  useEffect(() => {
-    setLoading(true)
-    const defaultUrl = '/api/lots'
-
-    const defaultFilter: Partial<IFilter> = {
-      page: 1,
-      itemsPerPage: 12,
-      vehicleType: 'automobile',
-      includeFilters: ['vehicleTypes'],
-    }
-
-    const simillarFetches = [
-      fetch(defaultUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(defaultFilter),
-      }),
-      fetch(defaultUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...defaultFilter,
-          includeFilters: [
-            ...(defaultFilter.includeFilters as string[]),
-            'makes',
-          ],
-          makes: [car.lotInfo.make],
-        }),
-      }),
-      fetch(defaultUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...defaultFilter,
-          includeFilters: [
-            ...(defaultFilter.includeFilters as string[]),
-            'makes',
-            'models',
-          ],
-          makes: [car.lotInfo.make],
-          models: [car.lotInfo.model],
-        }),
-      }),
-      fetch(defaultUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...defaultFilter,
-          includeFilters: [
-            ...(defaultFilter.includeFilters as string[]),
-            'makes',
-            'models',
-          ],
-          makes: [car.lotInfo.make],
-          models: [car.lotInfo.model],
-          yearMin: car.lotInfo.year,
-          yearMax: car.lotInfo.year,
-        }),
-      }),
-      fetch(defaultUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...defaultFilter,
-          includeFilters: [
-            ...(defaultFilter.includeFilters as string[]),
-            'makes',
-            'models',
-          ],
-          makes: [car.lotInfo.make],
-          models: [car.lotInfo.model],
-          yearMin: car.lotInfo.year - 2,
-          yearMax: car.lotInfo.year + 2,
-        }),
-      }),
-    ]
-    Promise.all(simillarFetches)
-      .then((response) => Promise.all(response.map((resp) => resp.json())))
-      .then((data: ICarsFetchTypes[]) => {
-        const [byDefault, byMark, byModel, byYear, byYearAnother] = data.map(
-          (d) => {
-            const filtred =
-              d.items?.filter((c) => c.lotNumber !== car.lotNumber) || []
-            return {
-              totalItems: filtred.length,
-              data: filtred,
-            }
-          }
-        )
-
-        if (byYear.totalItems !== 0) setSimilarCar(byYear.data)
-        else if (byYearAnother.totalItems !== 0)
-          setSimilarCar(byYearAnother.data)
-        else if (byModel.totalItems !== 0) setSimilarCar(byModel.data)
-        else if (byMark.totalItems !== 0) setSimilarCar(byMark.data)
-        else if (byDefault.totalItems !== 0) setSimilarCar(byDefault.data)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [car])
 
   const certString = car.saleInfo
     ? `${car.saleInfo.saleDocument?.state || ''}-${
@@ -371,7 +264,6 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
             </div>
           </div>
         </div>
-        <SimilarCar data={similarCar} loading={loading} />
         <Consultation />
       </section>
     </div>
