@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { ILot } from '../Types/Types'
 
 export const getCarPageProps = async (
   context: GetServerSidePropsContext
@@ -15,8 +16,6 @@ export const getCarPageProps = async (
 
   const url = `https://api-stage.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
 
-  console.log(url)
-
   try {
     const res = await fetch(url, {
       headers: {
@@ -24,13 +23,12 @@ export const getCarPageProps = async (
         'X-AUTH-TOKEN': '1d21e20bd0b8d46297b102d28d5d070eb9b626c3',
       },
     })
-    const carResponse = await res.json()
-    console.log(carResponse)
+    const carResponse = (await res.json()) as ILot
 
-    if (res.status !== 200) {
+    if (res.status !== 200 && !carResponse.saleInfo.sold) {
       return {
         redirect: {
-          destination: '/catalog',
+          destination: '/order-page',
           permanent: true,
         },
       }
@@ -43,8 +41,10 @@ export const getCarPageProps = async (
   } catch (e) {
     console.error(e.message)
   }
-  console.log(context.params.vin)
   return {
-    props: { message: 'undefined vin' },
+    redirect: {
+      destination: '/order-page',
+      permanent: true,
+    },
   }
 }
