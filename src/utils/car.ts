@@ -14,22 +14,25 @@ export const getCarPageProps = async (
 
   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
 
-  const url = `https://api-stage.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
+  const url = `https://api.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
 
   try {
     const res = await fetch(url, {
       headers: {
         Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-        'X-AUTH-TOKEN': '1d21e20bd0b8d46297b102d28d5d070eb9b626c3',
+        'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
       },
     })
+
+    console.log(res)
+
     const carResponse = (await res.json()) as ILot
 
     if (res.status !== 200 && !carResponse.saleInfo.sold) {
       return {
         redirect: {
           destination: '/order-page',
-          permanent: true,
+          permanent: false,
         },
       }
     }
@@ -39,12 +42,12 @@ export const getCarPageProps = async (
       },
     }
   } catch (e) {
-    console.error(e.message)
+    console.log(e)
   }
   return {
     redirect: {
       destination: '/order-page',
-      permanent: true,
+      permanent: false,
     },
   }
 }
