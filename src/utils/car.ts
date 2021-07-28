@@ -35,12 +35,14 @@ export const getCarPageProps = async (
       if (!res.ok) {
         return {
           redirect: {
-            destination: '/order-form',
+            destination: '/error',
             permanent: false,
           },
         }
       }
     }
+
+    console.log(carResponse.saleInfo.sold)
 
     if (carResponse.saleInfo.sold)
       return {
@@ -60,7 +62,7 @@ export const getCarPageProps = async (
   }
   return {
     redirect: {
-      destination: '/order-form',
+      destination: '/error',
       permanent: false,
     },
   }
