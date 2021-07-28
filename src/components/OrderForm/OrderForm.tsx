@@ -54,7 +54,7 @@ const OrderForm: React.FC = () => {
       <div className="order-form__wrapper">
         <ArrowBackSVG
           className="order-form__back"
-          onClick={() => router.back()}
+          onClick={() => router.push('/catalog')}
         />
         <div className="order-form__title-wrapper">
           <h1 className="order-form__title">Этот лот уже продан:)</h1>
