@@ -8,7 +8,6 @@ const filter: NextApiHandler = async (req, res) => {
     ) {
       return res.status(200).send({ items: [] })
     }
-    req.body
 
     const url = `https://api.carsfromwest.com/search/v1/lots`
     const response = await fetch(url, {
