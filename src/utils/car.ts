@@ -15,7 +15,7 @@ export const getCarPageProps = async (
 
   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
 
-  const url = `https://api-stage.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
+  const url = `https://api.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
 
   try {
     let carResponse: ILot = cacheData.get(lot)
