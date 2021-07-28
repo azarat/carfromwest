@@ -36,19 +36,19 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <script src="//code-eu1.jivosite.com/widget/DGWdAAXu7A" async></script>
         {/* Binotel Code */}
         <script
+          type="text/javascript"
           dangerouslySetInnerHTML={{
             __html: `
-              (function(d, w, s) {
-              var widgetHash = '4v5d5f2mkx39hckkovwn', gcw = d.createElement(s); gcw.type = 'text/javascript';gcw.async = true;
-              gcw.src = '//widgets.binotel.com/getcall/widgets/'+ widgetHash +'.js';
-              var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(gcw, sn);
-              })(document, window, 'script');
-
-          `,
+        (function(d, w, s) {
+          var widgetHash = '0t662ww5q2blllap6anr', gcw = d.createElement(s); gcw.type = 'text/javascript'; gcw.async = true;
+          gcw.src = '//widgets.binotel.com/getcall/widgets/'+ widgetHash +'.js';
+          var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(gcw, sn);
+           })(document, window, 'script');
+        `,
           }}
-          type="text/javascript"
-        />
+        ></script>
         {/*SmartLook Code */}
+
         <script
           dangerouslySetInnerHTML={{
             __html: `window.smartlook||(function(d) {
