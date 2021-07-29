@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import '../styles/main.scss'
@@ -6,6 +7,12 @@ import Footer from '../src/components/Footer/Footer'
 import NextNprogress from 'nextjs-progressbar'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const initialLink = sessionStorage.getItem('initialLink')
+      if (!initialLink) sessionStorage.setItem('initialLink', location.href)
+    }
+  }, [])
   return (
     <>
       <Head>

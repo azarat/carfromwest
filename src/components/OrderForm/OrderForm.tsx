@@ -28,6 +28,9 @@ const OrderForm: React.FC = () => {
             phone,
             wishes,
             type: connectType,
+            initialLink: sessionStorage
+              ? sessionStorage.getItem('initialLink')
+              : false,
           }),
         }
       )

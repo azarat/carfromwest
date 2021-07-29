@@ -21,7 +21,13 @@ const ConsultForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: values.name, phone: values.phone }),
+        body: JSON.stringify({
+          name: values.name,
+          phone: values.phone,
+          initialLink: sessionStorage
+            ? sessionStorage.getItem('initialLink')
+            : false,
+        }),
       }).then(
         (res) =>
           res.status === 200 &&

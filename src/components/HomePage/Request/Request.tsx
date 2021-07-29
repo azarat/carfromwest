@@ -20,7 +20,12 @@ const Request: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          initialLink: sessionStorage
+            ? sessionStorage.getItem('initialLink')
+            : false,
+        }),
       }
     )
     if (res) {

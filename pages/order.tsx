@@ -29,6 +29,9 @@ const Order: NextPage = () => {
             phone,
             link: url,
             type: connectType,
+            initialLink: sessionStorage
+              ? sessionStorage.getItem('initialLink')
+              : false,
           }),
         }
       )

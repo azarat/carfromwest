@@ -29,6 +29,9 @@ const Check: NextPage = () => {
             phone,
             wishes,
             type: connectType,
+            initialLink: sessionStorage
+              ? sessionStorage.getItem('initialLink')
+              : false,
           }),
         }
       )
