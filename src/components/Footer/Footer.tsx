@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
           <div className="footer__contacts-address">
             <p>
               <a
-                href="https://goo.gl/maps/Ahc6Nndy4vtpVXcB6"
+                href="https://goo.gl/maps/2dmLtzjUyiyGTom26"
                 target="_blank"
                 rel="noopener noreferrer"
               >
