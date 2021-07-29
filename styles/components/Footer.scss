@@ -72,6 +72,7 @@
     }
     &-address {
       position: relative;
+      margin-bottom: 20px;
       padding-left: 32px;
       font-size: $fs-14;
       line-height: 120%;
@@ -133,7 +134,7 @@
     margin-left: 42px;
   }
   &__copyright {
-    margin-top: 50px;
+    margin-top: 40px;
     padding: 10px 20px;
     background: #1e1e1e;
     &-text {

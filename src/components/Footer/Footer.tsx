@@ -39,6 +39,17 @@ const Footer: React.FC = () => {
               </a>
             </p>
           </div>
+          <div className="footer__contacts-address">
+            <p>
+              <a
+                href="https://goo.gl/maps/Ahc6Nndy4vtpVXcB6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                г. Харьков, пл. <br /> Павловская, 10
+              </a>
+            </p>
+          </div>
         </div>
         <div className="footer__work-time">
           <h4 className="footer__work-time-title">График работы</h4>
