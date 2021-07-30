@@ -12,9 +12,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
   useEffect(() => {
     if (typeof ga != 'undefined') {
-      console.log('ga', router.pathname)
-
-      ga('set', 'page', router.pathname)
+      ga('set', 'page', router.asPath)
       ga('send', 'pageview')
     }
   }, [router])
