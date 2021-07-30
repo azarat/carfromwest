@@ -5,8 +5,17 @@ import '../styles/main.scss'
 import Header from '../src/components/Header/Header'
 import Footer from '../src/components/Footer/Footer'
 import NextNprogress from 'nextjs-progressbar'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  const router = useRouter()
+
+  useEffect(() => {
+    if (typeof ga != 'undefined') {
+      ga('send', 'pageview', router.pathname)
+    }
+  }, [router])
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const initialLink = sessionStorage.getItem('initialLink')

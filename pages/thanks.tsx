@@ -8,12 +8,6 @@ const Thanks: NextPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && typeof ga !== 'undefined') {
-      console.log('ga')
-
-      ga('set', 'page', location.pathname + location.search)
-      ga('send', 'pageview')
-    }
     if (typeof document !== 'undefined') {
       document.body.scrollIntoView()
     }
