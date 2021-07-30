@@ -8,3 +8,4 @@ declare module 'next-cookies' {
 }
 
 declare function ga(event: string, type: unknown, options?: unknown): void
+declare function gtag(event: string, type: unknown, options?: unknown): void
