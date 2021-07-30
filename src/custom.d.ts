@@ -7,4 +7,4 @@ declare module 'next-cookies' {
   export default nextCookie
 }
 
-declare function ga(event: string, type: string, options?: unknown): void
+declare function ga(event: string, type: unknown, options?: unknown): void
