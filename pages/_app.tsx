@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const router = useRouter()
 
   useEffect(() => {
-    if (typeof ga != 'undefined') {
+    if (typeof ga != 'undefined' && typeof gtag !== 'undefined') {
       ga('set', 'page', router.asPath)
       ga('send', 'pageview')
       ga('send', 'pageview', router.asPath)
@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         hitType: 'pageview',
         page: router.asPath,
       })
+      gtag('config', 'UA-1234567-89', { page_path: '/new-page.html' })
     }
   }, [router])
 
