@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     if (typeof ga != 'undefined') {
       ga('set', 'page', router.asPath)
       ga('send', 'pageview')
+      ga('send', 'pageview', router.asPath)
       ga('send', {
         hitType: 'pageview',
         page: router.asPath,
