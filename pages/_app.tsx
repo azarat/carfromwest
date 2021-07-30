@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         hitType: 'pageview',
         page: router.asPath,
       })
-      gtag('config', 'UA-1234567-89', { page_path: '/new-page.html' })
+      gtag('config', 'UA-117211462-5', { page_path: router.asPath })
     }
   }, [router])
 
