@@ -52,6 +52,8 @@
       }
     }
 
+    
+
     &-textarea-wrapper {
       position: relative;
       width: 100%;
@@ -102,7 +104,6 @@
       font-weight: $fw-600;
       font-size: $fs-18;
       line-height: 18px;
-      text-align: center;
     }
     &-checkbox {
       display: none;
@@ -126,6 +127,11 @@
       cursor: pointer;
     }
   }
+  &__img {
+    position: relative;
+    height: 322px;
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -146,6 +152,9 @@
     &__subtitle {
       text-align: left;
     }
+    &__img {
+        display: block;
+    }
   }
 }
 
@@ -153,8 +162,8 @@
   .order-form {
     height: 100vh;
     padding-top: 60px;
+    display: flex;
     &__form {
-      margin-top: unset;
       &-textarea {
         min-height: 50px;
       }
@@ -171,6 +180,12 @@
       top: 20px;
       left: 20px;
     }
+    &>div{
+      width: 50%;
+    }
+    &__img{
+      height: auto;
+    }
   }
 }
 
@@ -181,7 +196,7 @@
       line-height: 100%;
     }
     &__wrapper {
-      padding: 345px 305px 345px 215px;
+      padding: 270px 305px 345px 215px;
     }
   }
 }
