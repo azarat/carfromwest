@@ -62,7 +62,11 @@ const OrderForm: React.FC = () => {
         />
         <div className="order-form_wrapper">
           <div className="order-form__title-wrapper">
-            <h1 className="order-form__title">ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ</h1>
+            <h1 className="order-form__title">Этот лот уже продан:)</h1>
+            <h3 className="order-form__subtitle">
+              Напишите пожалуйста Ваш телефон, менеджер подберёт для Вас что-то
+              аналогичное или то, что захотите
+            </h3>
           </div>
           <form className="order-form__form">
             <input

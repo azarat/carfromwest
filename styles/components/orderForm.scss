@@ -51,9 +51,6 @@
         border: 1px solid $red-color;
       }
     }
-
-    
-
     &-textarea-wrapper {
       position: relative;
       width: 100%;
@@ -147,10 +144,6 @@
     }
     &__title {
       font-size: $fs-24;
-      text-align: left;
-    }
-    &__subtitle {
-      text-align: left;
     }
     &__img {
         display: block;
