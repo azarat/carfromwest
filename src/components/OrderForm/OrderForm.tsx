@@ -143,7 +143,7 @@ const OrderForm: React.FC = () => {
       <div className="order-form__img">
         <Image
           className=""
-          src="/assets/images/checkAuto-desktop.png"
+          src="/assets/images/Order-From-Auto.jpeg"
           layout="fill"
           objectFit="cover"
         />
