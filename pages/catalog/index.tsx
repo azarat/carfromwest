@@ -87,7 +87,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
           }),
         })
         const cfwData = await response.json()
-
         setCars(cfwData)
         setLoading(false)
       })(page),
@@ -101,7 +100,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
   useEffect(() => {
     if (typeof localStorage !== 'undefined')
       localStorage.setItem('filter', JSON.stringify(filter))
-
     fetchCars(page)
   }, [filter, page, fetchCars])
 
