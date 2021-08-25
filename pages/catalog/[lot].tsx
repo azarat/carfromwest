@@ -168,7 +168,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                       Количество цилиндров:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.engine.cylinders || ''}
+                      {car.specifications.engine?.cylinders || ''}
                     </span>
                   </div>
                   <div className="car-page__table-item">
