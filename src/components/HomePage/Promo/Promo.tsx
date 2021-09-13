@@ -2,23 +2,15 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import AutoSearch from './AutoSearch'
 import ArrowLinkSVG from '../../../assets/svg/right-arrow-link.svg'
-import PromoModal from './PromoModal'
 import { useRouter } from 'next/router'
 
 const Promo: React.FC = (): JSX.Element => {
   const [open] = useState(false)
   const router = useRouter()
 
-  const [showModal, setShowModal] = useState(false)
 
   const handleFormOpen = (): void => {
-    router.push('/consult')
-  }
-
-  const handleModalOpen = (): void => {
-    document.body.scrollIntoView()
-    document.body.classList.toggle('fixed')
-    setShowModal((prev) => !prev)
+    router.push('/selection')
   }
 
   return (
@@ -44,25 +36,22 @@ const Promo: React.FC = (): JSX.Element => {
             подробно расскажем как можно сэкономить на покупке автомобиля из США
             и подберем подходящие варианты
           </p>
-          <button onClick={handleFormOpen} className="promo__button">
-            НАЙТИ АВТО
-          </button>
           <div
             role="presentation"
-            onClick={handleModalOpen}
             className="promo__video"
           >
-            <div className="promo__video-image">
+            {/* <div className="promo__video-image">
               <span className="promo__video-play-button" />
-            </div>
+            </div> */}
             <div className="promo__video-link">
               <ArrowLinkSVG />
-              Посмотрите видео
+              <button onClick={handleFormOpen} className="promo__button">
+                Подобрать авто
+              </button>
             </div>
           </div>
         </div>
       </div>
-      {showModal ? <PromoModal close={handleModalOpen} /> : null}
     </>
   )
 }
