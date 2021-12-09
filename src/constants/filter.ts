@@ -44,10 +44,10 @@ export const sort: { label: string; value: string }[] = [
   { label: 'Дата аукциона ↓', value: 'auction-date--desc' },
   { label: 'Ставка ↑', value: 'current-bid--asc' },
   { label: 'Ставка ↓', value: 'current-bid--desc' },
-  { label: 'Год выпуска ↑', value: 'year-asc' },
-  { label: 'Год выпуска ↓', value: 'year-desc' },
-  { label: 'Пробег ↑', value: 'odometer-asc' },
-  { label: 'Пробег ↓', value: 'odometer-desc' },
+  { label: 'Год выпуска ↑', value: 'year--asc' },
+  { label: 'Год выпуска ↓', value: 'year--desc' },
+  { label: 'Пробег ↑', value: 'odometer--asc' },
+  { label: 'Пробег ↓', value: 'odometer--desc' },
 ]
 
 export const vehicleTypes = [
