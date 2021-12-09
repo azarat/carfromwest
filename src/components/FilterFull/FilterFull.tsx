@@ -20,6 +20,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
   filter,
   setFilter,
   loading,
+  makes,
 }): JSX.Element => {
   const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
@@ -212,7 +213,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             <Field
               name={'makes'}
               component={SelectMake}
-              options={marks}
+              options={makes || marks}
               placeholder="Все"
               setter={setCurrentMark}
             />

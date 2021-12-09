@@ -1,4 +1,7 @@
-import { NextPage, GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
+
+import { ParamType, aviableParams, range } from '../../src/helpers/urlToParams'
+
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -14,9 +17,10 @@ import { IFilter } from '../../src/components/FilterFull/Types'
 import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
-import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
 
-const Index: NextPage<Partial<ICatalog>> = ({
+const FiltersPage: NextPage<Partial<ICatalog>> = ({
+  currentPage,
+  currentParams,
   items,
   total,
   brands,
@@ -26,8 +30,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
   yearMax,
   models,
   searchTerm,
-  page,
   transport,
+  brandModels,
 }): JSX.Element => {
   const defaultFilter = {
     auctions: ['copart', 'iaai'],
@@ -53,7 +57,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
-  const [, setPage] = useState<number>(1)
+  const [page, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
@@ -109,11 +113,12 @@ const Index: NextPage<Partial<ICatalog>> = ({
         />
         <FilterTable
           transport={transport as string}
-          filter={filter}
+          filter={currentParams}
           setFilter={setFilter}
           loading={false}
           setPage={setPage}
           makes={brands}
+          brandModels={brandModels}
         />
         <div className="catalog__filters-wrapper">
           <CatalogSearch loading={false} handleSearch={handleSearch} />
@@ -128,9 +133,10 @@ const Index: NextPage<Partial<ICatalog>> = ({
             filter={filter}
             loading={false}
           />
-          <div className="filter-field__grid">
+          {/*TODO: Implements filters*/}
+          {/* <div className="filter-field__grid">
             <div className="filter-field__grid-list">
-              {Object.keys(filter)
+              {Object.keys(currentParams)
                 .filter((key) => {
                   if (
                     [
@@ -146,33 +152,34 @@ const Index: NextPage<Partial<ICatalog>> = ({
                     ].includes(key)
                   )
                     return false
-                  if (Array.isArray(filter[key])) return filter[key].length > 0
-                  return !!filter[key]
+                  if (Array.isArray(currentParams[key])) return currentParams[key].length > 0
+                  return !!currentParams[key]
                 })
                 .map((key) => {
-                  let title = filter[key]
+                  console.log(key)
+                  let title = currentParams[key]
                   if (key === 'type')
                     title = vehicleTypes.filter(
                       (val) => val.value === filter[key]
                     )[0].title
                   if (key === 'fuelType')
                     title =
-                      gas.find((val) => val.value === filter.fuelType)?.label ||
+                      gas.find((val) => val.value === currentParams.fuelType)?.label ||
                       ''
                   if (
                     key === 'engineCapacities' &&
-                    filter.engineCapacities?.length
+                    currentParams.engineCapacities?.length
                   )
-                    title = `${filter.engineCapacities[0]} - ${filter.engineCapacities[
-                      filter.engineCapacities.length - 1
+                    title = `${currentParams.engineCapacities[0]} - ${currentParams.engineCapacities[
+                      currentParams.engineCapacities.length - 1
                     ]
                       }`
 
                   if (key === 'transmissionTypes')
                     title = transmissions.filter(
                       (val) =>
-                        filter.transmissionTypes?.length &&
-                        val.value === filter.transmissionTypes[0]
+                        currentParams.transmissionTypes?.length &&
+                        val.value === currentParams.transmissionTypes[0]
                     )[0]?.label
                   if (/^year_min$/.test(key)) title = `c ${title}`
                   else if (/_min$/.test(key) || key === 'Price')
@@ -192,11 +199,11 @@ const Index: NextPage<Partial<ICatalog>> = ({
                         className="filter-field__grid-item-delete"
                         onClick={() => {
                           setFilter(
-                            Object.keys(filter)
-                              .filter((k) => !!filter[k] && k !== key)
+                            Object.keys(currentParams)
+                              .filter((k) => !!currentParams[k] && k !== key)
                               .reduce(
                                 (obj, key) =>
-                                  Object.assign(obj, { [key]: filter[key] }),
+                                  Object.assign(obj, { [key]: currentParams[key] }),
                                 {}
                               ) as IFilter
                           )
@@ -235,27 +242,92 @@ const Index: NextPage<Partial<ICatalog>> = ({
                   Сбросить фильтры
                 </button>
               )}
-          </div>
+          </div> */}
         </div>
 
         <CatalogGrid loading={false} cars={vehicle}>
-          {items && !!items.length && <Pagination page={page ? +page : 1} cars={vehicle} setPage={setPage} />}
+          {items && !!items.length && <Pagination page={currentPage as number} cars={vehicle} setPage={setPage} />}
         </CatalogGrid>
       </section>
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const filtersUrl = 'https://api.carsfromwest.com/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const transportParam = ((query?.filters || []) as string[]).find(f => f.includes('transport-is-'))
+  const brandParam = ((query?.filters || []) as string[]).find(f => f.includes('brand-is-'))
+  const currentParams = Object.keys(aviableParams).reduce(
+    (acc: any, param) => {
+      const currentParam = `${param}-is-`
+      const urlParam = ((query?.filters || []) as string[]).find((p) =>
+        p.includes(currentParam)
+      )
+
+      if (urlParam) {
+        const paramValue = urlParam.replace(currentParam, '')
+        const filterName =
+          aviableParams[param as keyof typeof aviableParams].filterName
+        const type = aviableParams[param as keyof typeof aviableParams].type
+        const name = aviableParams[param as keyof typeof aviableParams].name
+        if (filterName) {
+          acc.includeFilters.push(filterName)
+        }
+
+        if (type === ParamType.array) {
+          return {
+            ...acc,
+            [name]: [paramValue],
+          }
+        }
+
+        if (type === ParamType.string) {
+          return {
+            ...acc,
+            [name]: paramValue,
+          }
+        }
+
+        if (type === ParamType.number) {
+          return {
+            ...acc,
+            [name]: +paramValue,
+          }
+        }
+
+        if (type === ParamType.volume) {
+          const splited = paramValue.split('to')
+          return {
+            ...acc,
+            [name]: range(+splited[0], +splited[1], 0.1),
+          }
+        }
+
+        return {
+          ...acc,
+          [param]: urlParam.replace(currentParam, ''),
+        }
+      }
+
+      return acc
+    },
+    {
+      page: +query.page! || 1,
+      sortField: query.sortField || 'added-date',
+      sortDirection: query.sortDirection || 'asc',
+      includeFilters: [],
+      itemsPerPage: 12,
+    }
+  )
+  const filtersUrl = brandParam ?
+    `https://api.carsfromwest.com/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
+    'https://api.carsfromwest.com/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
     },
   })
-  const { makes } = await filterResponse.json();
-
+  const { makes, models } = await filterResponse.json()
   const carsUrl = `https://api.carsfromwest.com/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
@@ -264,27 +336,20 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      vehicleType: 'automobile',
-      page: +ctx.query.page! || 1,
-      itemsPerPage: 12,
-      yearMin: 2010,
-      sortField: ctx.query.sortField || 'added-date',
-      sortDirection: ctx.query.sortDirection || 'asc',
-    }),
+    body: JSON.stringify(currentParams),
   })
 
   const { items, total } = await carsResponse.json();
-
   return {
     props: {
+      currentParams,
       items,
       total,
       brands: makes,
-      transport: 'automobile',
-      ...ctx.query,
+      brandModels: models,
+      currentPage: +query.page! || 1,
+      transport: transportParam ? transportParam.replace('transport-is-', '') : 'automobile'
     },
   }
 }
-
-export default Index
+export default FiltersPage

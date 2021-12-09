@@ -24,6 +24,17 @@ const AutoSearch: FC<IAutoSearchProps> = ({
   const [yearFrom, setYearFrom] = useState<number>()
   const [yearTo, setYearTo] = useState<number>()
 
+  const getLink = () => {
+    let url = '';
+    if (carType) url += `/transport-is-${carType}`
+    if (currentMark) url += `/brand-is-${currentMark}`
+    if (currentModel) url += `/model-is-${currentModel}`
+    if (yearFrom) url += `/yearStart-is-${yearFrom}`
+    if (yearTo) url += `/yearEnd-is-${yearTo}`
+
+    return 'catalog' + url
+  }
+
   useEffect(() => {
     setLoading(true)
     const url = `/api/filter?filters=makes&vehicleType=${carType}`
@@ -130,16 +141,7 @@ const AutoSearch: FC<IAutoSearchProps> = ({
             .map((year) => ({ label: year, value: year }))}
         />
         <Link
-          href={{
-            pathname: '/catalog',
-            query: {
-              makes: currentMark,
-              models: currentModel,
-              type: carType,
-              yearMin: yearFrom,
-              yearMax: yearTo,
-            },
-          }}
+          href={getLink()}
         >
           <button className="auto-search__form-button" type="button">
             ИСКАТЬ

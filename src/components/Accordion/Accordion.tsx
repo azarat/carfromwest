@@ -2,13 +2,15 @@ import { useState } from 'react'
 
 type AccordionProps = {
   title: string
+  isOpenInner?: boolean
 }
 
 const Accordion: React.FC<AccordionProps> = ({
   title,
+  isOpenInner,
   children,
 }): JSX.Element => {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(!!isOpenInner)
   return (
     <div className="accordion">
       <div
@@ -19,9 +21,8 @@ const Accordion: React.FC<AccordionProps> = ({
         {title}
       </div>
       <div
-        className={`accordion__item ${
-          !isOpen ? 'accordion__item--collapsed' : ''
-        }`}
+        className={`accordion__item ${!isOpen ? 'accordion__item--collapsed' : ''
+          }`}
       >
         <div className="accordion__content">{children}</div>
       </div>

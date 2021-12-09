@@ -92,12 +92,20 @@ export interface ISimilarCar {
 }
 
 export interface ICatalog {
-  makes: string
+  currentPage: number,
+  currentParams: any
+  brands: string[]
+  makes: string[]
   type: string
   yearMin: number
   yearMax: number
   models: number | string
   searchTerm: string
+  items: ILot[]
+  total: number
+  page: string
+  transport: string
+  brandModels: string[]
 }
 
 export type carResponseTypes = {

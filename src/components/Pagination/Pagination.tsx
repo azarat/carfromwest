@@ -1,3 +1,6 @@
+import { useMemo } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { PaginationProps } from './Types'
 
 const LEFT_PAGE = 'LEFT'
@@ -17,9 +20,17 @@ const range = (from: number, to: number, step = 1) => {
 const Pagination: React.FC<PaginationProps> = ({
   page,
   cars,
-  setPage,
 }): JSX.Element | null => {
   const totalPages = (cars && Math.ceil(cars.total / 12)) || 0
+  const router = useRouter()
+  const getUrl = useMemo(() => (page: number) => {
+    const queryIndex = router.asPath.indexOf('?');
+    if (queryIndex === -1) {
+      return router.asPath + `?page=${page}`
+    }
+
+    return router.asPath.slice(0, queryIndex) + `?page=${page}`
+  }, [router.asPath]);
 
   const pageNeighbours = 1
   const fetchPageNumbers = () => {
@@ -69,20 +80,6 @@ const Pagination: React.FC<PaginationProps> = ({
     return null
   }
 
-  const handleMoveLeft = () => {
-    setPage((prev) => prev - 1)
-  }
-
-  const handleMoveRight = () => {
-    setPage((prev) => prev + 1)
-  }
-
-  const handleClickItem = (item: any) => {
-    if (typeof window !== 'undefined')
-      window.scrollTo({ behavior: 'smooth', top: 0 })
-    setPage(item)
-  }
-
   const pages: any[] = fetchPageNumbers()
 
   return (
@@ -93,43 +90,28 @@ const Pagination: React.FC<PaginationProps> = ({
             if (item === LEFT_PAGE)
               return (
                 <li key={`${item}${index}`} className="pagination__item">
-                  <button
-                    className="pagination__item-btn"
-                    aria-label="Previous"
-                    onClick={handleMoveLeft}
-                  >
-                    <span aria-hidden="true">&laquo;</span>
-                    <span className="sr-only">Previous</span>
-                  </button>
+                  <Link href={getUrl(page - 1)}>
+                    <a className="pagination__item-btn">&laquo;</a>
+                  </Link>
                 </li>
               )
             if (item === RIGHT_PAGE)
               return (
                 <li key={`${item}${index}`} className="pagination__item">
-                  <button
-                    className="pagination__item-btn"
-                    aria-label="Next"
-                    onClick={handleMoveRight}
-                  >
-                    <span aria-hidden="true">&raquo;</span>
-                    <span className="sr-only">Next</span>
-                  </button>
+                  <Link href={getUrl(page + 1)}>
+                    <a className="pagination__item-btn">&raquo;</a>
+                  </Link>
                 </li>
               )
             return (
               <li
                 key={`${page}${index}`}
-                className={`pagination__item ${
-                  item === page ? 'pagination__item--active' : ''
-                }`}
+                className={`pagination__item ${item === page ? 'pagination__item--active' : ''
+                  }`}
               >
-                <button
-                  className="pagination__item-btn"
-                  aria-label="Next"
-                  onClick={() => handleClickItem(item)}
-                >
-                  {item}
-                </button>
+                <Link href={getUrl(index + 1)}>
+                  <a className="pagination__item-btn">{item}</a>
+                </Link>
               </li>
             )
           })}

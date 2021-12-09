@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { Formik, Field, Form } from 'formik'
-import CustomSelect from './CustomSelect'
+// import CustomSelect from './CustomSelect'
 import SelectTransmission from './SelectTransmission'
 import Accordion from '../Accordion/Accordion'
 // SVG
@@ -9,19 +10,17 @@ import SpeedSVG from '../../assets/svg/speed.svg'
 // Constants
 import { years, gas, transmissions } from '../../constants/filter'
 // Types
-import { FilterTableProps, IFilter } from './Types'
+import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
-import { capacityArray } from '../../helpers/calculator'
 import { vehicleTypes } from '../../constants/filter'
 
 const FilterTable: React.FC<FilterTableProps> = ({
-  setFilter,
   loading,
   filter,
-  setPage,
+  makes,
+  transport,
+  brandModels,
 }): JSX.Element => {
-  console.log(filter)
-
   const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
@@ -31,15 +30,16 @@ const FilterTable: React.FC<FilterTableProps> = ({
     filter.bodyTypes?.length ? filter.marks[0] : ''
   )
   const [currentMark, setCurrentMark] = useState<string>(
-    filter.marks?.length ? filter.marks[0] : ''
+    filter.makes?.length ? filter.makes[0] : ''
   )
-
   const [currentModel, setCurrentModel] = useState<string>(
     filter.models?.length ? filter.models[0] : ''
   )
 
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
+
+  const router = useRouter()
 
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
@@ -72,7 +72,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
   useEffect(() => {
     if (currentMark) {
       setLoading(true)
-      setCurrentModel('')
       setBodyStyles([])
       setBodyStyle('')
       const url = `/api/filter?filters=makes,models&vehicleType=${vehicle}&makes=${currentMark}`
@@ -107,7 +106,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [vehicle, currentMark, currentModel])
 
   const handleSubmit = (values: any) => {
-    const includeFilters = Object.keys(values).filter(
+    Object.keys(values).filter(
       (k) =>
         [
           'auctions',
@@ -130,35 +129,41 @@ const FilterTable: React.FC<FilterTableProps> = ({
         ].includes(k) && values[k]
     )
 
-    const newFilter: Partial<IFilter> = {
-      page: 1,
-      includeFilters,
-    }
-    if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
-    if (currentMark) newFilter.makes = [currentMark]
-    if (currentModel) newFilter.models = [currentModel]
-    if (values.engineFrom || values.engineTo) {
-      newFilter.engineCapacities = capacityArray(
-        values.engineFrom ? values.engineFrom : 0.7,
-        values.engineTo ? values.engineTo : 17
-      )
-      newFilter.includeFilters?.push('engineCapacities')
-    }
-    if (values.fromYear) newFilter.yearMin = values.fromYear
-    if (values.toYear) newFilter.yearMax = values.toYear
-    if (values.fuelTypes) newFilter.fuelType = values.fuelTypes
-    if (!Number.isNaN(+values.odometerMin) && values.odometerMax != '')
-      newFilter.odometerMin = +values.odometerMin
-    if (!Number.isNaN(+values.odometerMax) && values.odometerMax != '')
-      newFilter.odometerMax = +values.odometerMax
+    let url = '';
+    if (values.vehicleTypes) url += `/transport-is-${values.vehicleTypes}`
+    if (values.makes) url += `/brand-is-${values.makes}`
+    if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
+    if (values.models) url += `/model-is-${values.models}`
+    if (values.engineFrom && values.engineTo) url += `/volume-is-${values.engineFrom}to${values.engineTo}`
+    if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
+    if (values.toYear) url += `/yearEnd-is-${values.toYear}`
+    if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
+    if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
+    router.push('/catalog' + url)
+    // if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
+    // if (currentMark) newFilter.makes = [currentMark]
+    // if (currentModel) newFilter.models = [currentModel]
+    // if (values.engineFrom || values.engineTo) {
+    //   newFilter.engineCapacities = capacityArray(
+    //     values.engineFrom ? values.engineFrom : 0.7,
+    //     values.engineTo ? values.engineTo : 17
+    //   )
+    //   newFilter.includeFilters?.push('engineCapacities')
+    // }
+    // if (values.fromYear) newFilter.yearMin = values.fromYear
+    // if (values.toYear) newFilter.yearMax = values.toYear
+    // if (values.fuelTypes) newFilter.fuelType = values.fuelTypes
+    // if (!Number.isNaN(+values.odometerMin) && values.odometerMax != '')
+    //   newFilter.odometerMin = +values.odometerMin
+    // if (!Number.isNaN(+values.odometerMax) && values.odometerMax != '')
+    //   newFilter.odometerMax = +values.odometerMax
 
-    if (values.transmission) newFilter.transmissionTypes = [values.transmission]
+    // if (values.transmission) newFilter.transmissionTypes = [values.transmission]
 
-    setFilter(newFilter)
-    setPage(1)
-    document.body.scrollIntoView({ behavior: 'smooth' })
+    // setFilter(newFilter)
+    // setPage(1)
+    // document.body.scrollIntoView({ behavior: 'smooth' })
   }
-
   return (
     <div className="filter-full--table">
       <Formik
@@ -170,22 +175,23 @@ const FilterTable: React.FC<FilterTableProps> = ({
           transmission: '',
           engineFrom: '',
           engineTo: '',
-          makes: '',
+          makes: currentMark,
           fuelTypes: '',
-          models: '',
+          models: currentModel,
           odometerMin: '',
           odometerMax: '',
         }}
         onSubmit={handleSubmit}
+        enableReinitialize={true}
       >
         <Form>
-          <Accordion title="Транспорт">
+          <Accordion title="Транспорт" isOpenInner={!!vehicle}>
             <div className="filter-full__vehicle">
               {vehicleTypes.map(({ title, value, ...restProps }) => (
                 <div key={title} className="filter-full__vehicle-item">
                   <Field
                     onClick={handleVehicle}
-                    value={value}
+                    value={value || vehicle}
                     name="vehicleTypes"
                     id={`table-${value}`}
                     type="radio"
@@ -198,14 +204,19 @@ const FilterTable: React.FC<FilterTableProps> = ({
               ))}
             </div>
           </Accordion>
-
           {vehicle !== '' && (
-            <Accordion title="Марка">
+            <Accordion title="Марка" isOpenInner={!!filter.makes}>
               <div className="filter-full__transmission">
                 <Field
-                  name={'makes'}
+                  name='makes'
+                  value={currentMark}
+                  filter='brand'
+                  transport={transport}
                   component={SelectMake}
-                  options={marks}
+                  options={makes?.length ? makes?.map((mark) => ({
+                    label: mark,
+                    value: mark,
+                  })) : marks}
                   placeholder="Все"
                   setter={setCurrentMark}
                 />
@@ -214,12 +225,18 @@ const FilterTable: React.FC<FilterTableProps> = ({
           )}
 
           {!isLoading && currentMark && (
-            <Accordion title="Модель">
+            <Accordion title="Модель" isOpenInner={!!filter.models}>
               <div className="filter-full__transmission">
                 <Field
-                  name={'models'}
+                  name='models'
+                  value={currentModel}
+                  filter='model'
+                  transport={transport}
                   component={SelectMake}
-                  options={models}
+                  options={brandModels?.length ? brandModels?.map((model) => ({
+                    label: model,
+                    value: model,
+                  })) : models}
                   placeholder="Все"
                   setter={setCurrentModel}
                 />
@@ -247,17 +264,21 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <div className="filter-full__year">
               <Field
                 name={'fromYear'}
-                component={CustomSelect}
+                component={SelectMake}
+                filter='yearStart'
+                transport={transport}
                 options={firstYears}
                 placeholder="c"
-                setYear={setFromYear}
+                setter={setFromYear}
               />
               <Field
                 name={'toYear'}
-                component={CustomSelect}
+                component={SelectMake}
+                filter='yearEnd'
+                transport={transport}
                 options={secondYears}
                 placeholder="по"
-                setYear={setToYear}
+                setter={setToYear}
               />
             </div>
           </Accordion>

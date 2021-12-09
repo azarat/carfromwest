@@ -24,6 +24,10 @@
       height: 100%;
       overflow: hidden;
       font-weight: $fw-700;
+      color: $black-color;
+      text-decoration: none;
+      line-height: 1.5;
+      text-align: center;
       text-overflow: ellipsis;
       word-wrap: none;
       border: none;

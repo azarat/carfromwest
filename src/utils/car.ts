@@ -42,8 +42,6 @@ export const getCarPageProps = async (
       }
     }
 
-    console.log(carResponse.saleInfo.sold)
-
     if (carResponse.saleInfo.sold)
       return {
         redirect: {

@@ -6,13 +6,17 @@ export type FilterFullProps = {
   setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
   filter: Partial<IFilter>
   loading: boolean
+  makes?: string[]
 }
 
 export type FilterTableProps = {
+  makes?: string[]
   setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
   filter: Partial<IFilter>
   loading: boolean
   setPage: Dispatch<SetStateAction<number>>
+  transport: string
+  brandModels?: string[]
 }
 
 export interface IFilter {
