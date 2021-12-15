@@ -8,7 +8,7 @@ const filter: NextApiHandler = async (req, res) => {
       .join('&')
 
     console.log(1);
-    const url = `http://localhost:8080/search/v1/filters?${queryParams}&auctions=iaai,copart`
+    const url = `http://46.101.185.57:8080/search/v1/filters?${queryParams}&auctions=iaai,copart`
     const response = await fetch(url, {
       headers: {
         Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',

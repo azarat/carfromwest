@@ -319,8 +319,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     }
   )
   const filtersUrl = brandParam ?
-    `http://localhost:8080/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
-    'http://localhost:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+    `http://46.101.185.57:8080/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
+    'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
   console.log(4);
   const filterResponse = await fetch(filtersUrl, {
     headers: {
@@ -329,7 +329,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   })
   const { makes, models } = await filterResponse.json()
-  const carsUrl = `http://localhost:8080/search/v1/lots`
+  const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   console.log(5);
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',

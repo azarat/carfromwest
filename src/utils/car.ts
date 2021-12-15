@@ -14,7 +14,7 @@ export const getCarPageProps = async (
 
   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
 
-  const url = `http://localhost:8080/search/v1/lots/${auction}/${lotNumber}`
+  const url = `http://46.101.185.57:8080/search/v1/lots/${auction}/${lotNumber}`
 
   try {
     console.log(8)

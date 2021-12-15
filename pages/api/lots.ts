@@ -10,7 +10,7 @@ const filter: NextApiHandler = async (req, res) => {
     }
 
     console.log(2);
-    const url = `http://localhost:8080/search/v1/lots`
+    const url = `http://46.101.185.57:8080/search/v1/lots`
     const response = await fetch(url, {
       method: 'POST',
       headers: {
