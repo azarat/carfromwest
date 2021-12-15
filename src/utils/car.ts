@@ -17,7 +17,6 @@ export const getCarPageProps = async (
   const url = `http://46.101.185.57:8080/search/v1/lots/${auction}/${lotNumber}`
 
   try {
-    console.log(8)
     const res = await fetch(url, {
       headers: {
         Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',

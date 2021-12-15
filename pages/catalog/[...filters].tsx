@@ -156,7 +156,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
                   return !!currentParams[key]
                 })
                 .map((key) => {
-                  console.log(key)
+                 key)
                   let title = currentParams[key]
                   if (key === 'type')
                     title = vehicleTypes.filter(
@@ -321,7 +321,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const filtersUrl = brandParam ?
     `http://46.101.185.57:8080/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
     'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
-  console.log(4);
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
@@ -330,7 +329,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   })
   const { makes, models } = await filterResponse.json()
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
-  console.log(5);
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
     headers: {
