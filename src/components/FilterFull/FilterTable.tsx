@@ -69,8 +69,9 @@ const FilterTable: React.FC<FilterTableProps> = ({
       .catch(() => setMarks(undefined))
   }, [vehicle])
 
+
   useEffect(() => {
-    if (currentMark) {
+    if (currentMark && !currentModel) {
       setLoading(true)
       setBodyStyles([])
       setBodyStyle('')
@@ -88,16 +89,22 @@ const FilterTable: React.FC<FilterTableProps> = ({
         .catch(() => setModels(undefined))
         .finally(() => setLoading(false))
     }
-  }, [vehicle, currentMark])
 
-  useEffect(() => {
     if (currentModel) {
       setBodyStyles([])
       setBodyStyle('')
       const url = `/api/filter?filters=makes,models,bodyStyles&vehicleType=${vehicle}&makes=${currentMark}&models=${currentModel}`
       fetch(url)
         .then((res) => res.json())
-        .then((json) => setBodyStyles(json?.bodyStyles.sort()))
+        .then((json) => {
+          setModels(
+            json?.models.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            })) || []
+          )
+          setBodyStyles(json?.bodyStyles.sort())
+        })
         .catch(() => {
           setBodyStyles([])
           setBodyStyle('')
