@@ -247,7 +247,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const filtersUrl = 'https://api.carsfromwest.com/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+  const filtersUrl = 'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+  console.log(6)
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
@@ -256,7 +257,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   })
   const { makes } = await filterResponse.json();
 
-  const carsUrl = `https://api.carsfromwest.com/search/v1/lots`
+  const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
+  console.log(7);
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
     headers: {

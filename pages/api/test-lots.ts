@@ -10,7 +10,8 @@ const filter: NextApiHandler = async (req, res) => {
     }
     req.body
 
-    const url = `https://api.carsfromwest.com/search/v1/lots`
+    console.log(3);
+    const url = `http://46.101.185.57:8080/search/v1/lots`
     const response = await fetch(url, {
       method: 'POST',
       headers: {

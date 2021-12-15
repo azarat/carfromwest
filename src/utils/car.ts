@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { ILot } from '../Types/Types'
-import cacheData from 'memory-cache'
 
 export const getCarPageProps = async (
   context: GetServerSidePropsContext
@@ -15,30 +14,25 @@ export const getCarPageProps = async (
 
   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
 
-  const url = `https://api.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
+  const url = `http://46.101.185.57:8080/search/v1/lots/${auction}/${lotNumber}`
 
   try {
-    let carResponse: ILot = cacheData.get(lot)
+    console.log(8)
+    const res = await fetch(url, {
+      headers: {
+        Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
+        'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
+      },
+    })
 
-    if (!carResponse) {
-      const res = await fetch(url, {
-        headers: {
-          Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-          'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
+    const carResponse = (await res.json()) as ILot
+
+    if (!res.ok) {
+      return {
+        redirect: {
+          destination: '/error',
+          permanent: false,
         },
-      })
-
-      carResponse = (await res.json()) as ILot
-
-      cacheData.put(lot, carResponse, 1000 * 60 * 60)
-
-      if (!res.ok) {
-        return {
-          redirect: {
-            destination: '/error',
-            permanent: false,
-          },
-        }
       }
     }
 

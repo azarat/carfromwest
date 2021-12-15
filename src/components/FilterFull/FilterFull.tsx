@@ -68,7 +68,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
   }, [vehicle])
 
   useEffect(() => {
-    if (currentMark) {
+    if (currentMark && !currentModel) {
       setLoading(true)
       setCurrentModel('')
       setBodyStyles([])
@@ -87,7 +87,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
         .catch(() => setModels(undefined))
         .finally(() => setLoading(false))
     }
-  }, [vehicle, currentMark])
+  }, [vehicle, currentMark, currentModel])
 
   useEffect(() => {
     if (currentModel) {
