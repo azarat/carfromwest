@@ -9,7 +9,6 @@ const filter: NextApiHandler = async (req, res) => {
       return res.status(200).send({ items: [] })
     }
 
-    console.log(2);
     const url = `http://46.101.185.57:8080/search/v1/lots`
     const response = await fetch(url, {
       method: 'POST',

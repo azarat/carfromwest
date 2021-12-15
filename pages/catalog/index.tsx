@@ -248,7 +248,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const filtersUrl = 'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
-  console.log(6)
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
@@ -257,8 +256,29 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   })
   const { makes } = await filterResponse.json();
 
+
+  const lotsBody = ctx.query.searchTerm ? {
+    "includeFilters": [
+      "vehicleTypes"
+    ],
+    makes: [],
+    vehicleType: "automobile",
+    models: [],
+    yearMin: 2010,
+    yearMax: null,
+    searchTerm: ctx.query.searchTerm,
+    page: 1,
+    itemsPerPage: 12
+  } : {
+    vehicleType: 'automobile',
+    page: +ctx.query.page! || 1,
+    itemsPerPage: 12,
+    yearMin: 2010,
+    sortField: ctx.query.sortField || 'added-date',
+    sortDirection: ctx.query.sortDirection || 'asc',
+  };
+
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
-  console.log(7);
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
     headers: {
@@ -266,14 +286,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      vehicleType: 'automobile',
-      page: +ctx.query.page! || 1,
-      itemsPerPage: 12,
-      yearMin: 2010,
-      sortField: ctx.query.sortField || 'added-date',
-      sortDirection: ctx.query.sortDirection || 'asc',
-    }),
+    body: JSON.stringify(lotsBody),
   })
 
   const { items, total } = await carsResponse.json();
