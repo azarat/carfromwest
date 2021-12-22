@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -5,23 +6,8 @@ import '../styles/main.scss'
 import Header from '../src/components/Header/Header'
 import Footer from '../src/components/Footer/Footer'
 import NextNprogress from 'nextjs-progressbar'
-import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  const router = useRouter()
-
-  useEffect(() => {
-    if (typeof ga != 'undefined' && typeof gtag !== 'undefined') {
-      ga('set', 'page', router.asPath)
-      ga('send', 'pageview')
-      ga('send', 'pageview', router.asPath)
-      ga('send', {
-        hitType: 'pageview',
-        page: router.asPath,
-      })
-      gtag('config', 'UA-117211462-5', { page_path: router.asPath })
-    }
-  }, [router])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -42,19 +28,20 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         />
 
         {/*  Global site tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-117211462-5"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-          window.dataLayer = window.dataLayer || [];
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-215694992-1"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'UA-117211462-5');`,
-          }}
-        ></script>
+          gtag('config', 'UA-215694992-1');`
+        }}></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MHFMKJC');`}}>
+        </script>
         {/* Jivosite Code */}
         <script src="//code-eu1.jivosite.com/widget/DGWdAAXu7A" async></script>
         {/* Binotel Code */}
@@ -115,6 +102,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         stopDelayMs={200}
         height={3}
       />
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHFMKJC"
+        height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
     </>
   )
 }
