@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { USER_AGENT } from '../constants/userAgent'
 import { ILot } from '../Types/Types'
 
 export const getCarPageProps = async (
@@ -19,6 +20,7 @@ export const getCarPageProps = async (
   try {
     const res = await fetch(url, {
       headers: {
+        'user-agent': context.req.headers['user-agent'] || USER_AGENT,
         Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
         'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
       },
