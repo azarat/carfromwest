@@ -15,6 +15,7 @@ import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
+import { USER_AGENT } from '../../src/constants/userAgent'
 
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
@@ -247,9 +248,10 @@ const Index: NextPage<Partial<ICatalog>> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const filtersUrl = 'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+  const filtersUrl = 'https://api.carsfromwest.com/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
   const filterResponse = await fetch(filtersUrl, {
     headers: {
+      'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
     },
@@ -278,10 +280,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     sortDirection: ctx.query.sortDirection || 'asc',
   };
 
-  const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
+  const carsUrl = `https://api.carsfromwest.com/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
     headers: {
+      'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
       'Content-Type': 'application/json',

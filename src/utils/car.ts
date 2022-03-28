@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { USER_AGENT } from '../constants/userAgent'
 import { ILot } from '../Types/Types'
 
 export const getCarPageProps = async (
@@ -14,11 +15,12 @@ export const getCarPageProps = async (
 
   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
 
-  const url = `http://46.101.185.57:8080/search/v1/lots/${auction}/${lotNumber}`
+  const url = `https://api.carsfromwest.com/search/v1/lots/${auction}/${lotNumber}`
 
   try {
     const res = await fetch(url, {
       headers: {
+        'user-agent': context.req.headers['user-agent'] || USER_AGENT,
         Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
         'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
       },

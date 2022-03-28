@@ -28,6 +28,7 @@ module.exports = {
         'plugin:prettier/recommended', // Prettier recommended rules
       ],
       rules: {
+        'prettier/prettier': 'off',
         'react/prop-types': 'off', // We will use TypeScript's types for component props instead
         'react/react-in-jsx-scope': 'off', // No need to import React when using Next.js
         'jsx-a11y/anchor-is-valid': 'off', // This rule is not compatible with Next.js's <Link /> components
@@ -41,7 +42,6 @@ module.exports = {
             allowConciseArrowFunctionExpressionsStartingWithVoid: true,
           },
         ],
-        'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Includes .prettierrc.js rules
       },
     },
   ],
