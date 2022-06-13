@@ -40,9 +40,9 @@ const HeaderMenu: React.FC<IHeaderMenu> = ({ open, setOpen }) => {
           </a>
           <a
             className="header-menu__phone-number-link header-menu__phone-number-link--mobile"
-            href="tel:0800215804"
+            href="tel:0683288818"
           >
-            0 800 215 804
+            068 328 88 18
           </a>
         </span>
         <span className="header-menu__phone-cost">Звонок бесплатный</span>

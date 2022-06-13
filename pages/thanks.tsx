@@ -28,8 +28,8 @@ const Thanks: NextPage = () => {
         </button>
         <div className="thanks__contacts">
           <p className="thanks__contacts-title">Cвяжитесь с нами</p>
-          <a className="thanks__contacts-phone" href="tel:0800215804">
-            0 800 215 804
+          <a className="thanks__contacts-phone" href="tel:0683288818">
+            068 328 88 18
           </a>
           <SocialLink />
         </div>
