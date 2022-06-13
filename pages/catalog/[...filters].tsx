@@ -320,8 +320,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
     }
   )
   const filtersUrl = brandParam ?
-    `https://api.carsfromwest.com/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
-    'https://api.carsfromwest.com/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+    `http://46.101.185.57:8080/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
+    'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       'user-agent': req.headers['user-agent'] || USER_AGENT,
@@ -330,7 +330,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
     },
   })
   const { makes, models } = await filterResponse.json()
-  const carsUrl = `https://api.carsfromwest.com/search/v1/lots`
+  const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
     headers: {

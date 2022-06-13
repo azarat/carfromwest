@@ -8,7 +8,7 @@ const filter: NextApiHandler = async (req, res) => {
       .sort()
       .join('&')
 
-    const url = `https://api.carsfromwest.com/search/v1/filters?${queryParams}&auctions=iaai,copart`
+    const url = `http://46.101.185.57:8080/search/v1/filters?${queryParams}&auctions=iaai,copart`
     const response = await fetch(url, {
       headers: {
         'user-agent': req.headers['user-agent'] || USER_AGENT,

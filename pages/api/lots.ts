@@ -10,7 +10,7 @@ const filter: NextApiHandler = async (req, res) => {
       return res.status(200).send({ items: [] })
     }
 
-    const url = `https://api.carsfromwest.com/search/v1/lots`
+    const url = `http://46.101.185.57:8080/search/v1/lots`
     const response = await fetch(url, {
       method: 'POST',
       headers: {
