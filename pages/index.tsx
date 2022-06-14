@@ -11,14 +11,18 @@ import ClientReviews from '../src/components/HomePage/ClientsReview/ClientReview
 import Faq from '../src/components/HomePage/Faq/Faq'
 import CheckAuto from '../src/components/HomePage/CheckAuto/CheckAuto'
 import Consult from '../src/components/HomePage/Consult/Consult'
+import Law from '../src/components/HomePage/Law/Law'
+
 
 const IndexPage: NextPage = () => {
   return (
     <>
       <Promo />
+      <Law />
+      <Request />
       <AboutUs />
       <Consult />
-      <Request />
+      
       <PopularAuto />
       <ClientReviews />
       <Advantages />

@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import { Formik } from 'formik'
 import InputMask from 'react-input-mask'
-import SubTitle from '../../SubTitle/SubTitle'
 import Title from '../../Title/Title'
 import { useRouter } from 'next/router'
 
@@ -36,11 +35,9 @@ const Request: React.FC = () => {
   return (
     <section className="request">
       <div className="request__info">
-        <SubTitle>Оставьте заявку</SubTitle>
-        <Title>АВТО “ПОД КЛЮЧ” С АУКЦИОНОВ ИЗ США</Title>
+        <Title>АВТО “ПІД КЛЮЧ” З АУКЦІОНІВ ІЗ США</Title>
         <div className="request__info-description">
-          Заполните форму, чтобы мы связались с Вами и сказали какой автомобиль
-          Вы можете себе пригнать из США, сэкономив до 40% его стоимости.
+            Заповніть форму, аби ми зв`язались з Вами та підібрали автомобіль, який ми можемо привезти із США для вас з економією в 40%.
         </div>
 
         <Formik

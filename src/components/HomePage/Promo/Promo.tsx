@@ -1,55 +1,71 @@
-import React, { useState } from 'react'
+import React/*  { useState } */ from 'react'
 import Image from 'next/image'
-import AutoSearch from './AutoSearch'
-import ArrowLinkSVG from '../../../assets/svg/right-arrow-link.svg'
-import { useRouter } from 'next/router'
+// import AutoSearch from './AutoSearch'
+// import ArrowLinkSVG from '../../../assets/svg/right-arrow-link.svg'
+// import { useRouter } from 'next/router'
 
 const Promo: React.FC = (): JSX.Element => {
-  const [open] = useState(false)
-  const router = useRouter()
+  // const [open] = useState(false)
+  // const router = useRouter()
 
 
-  const handleFormOpen = (): void => {
-    router.push('/selection')
-  }
+  // const handleFormOpen = (): void => {
+  //   router.push('/selection')
+  // }
 
   return (
     <>
       <div className="promo">
-        <div className="promo__bg">
+        {/* <div className="promo__bg">
           <Image
             objectFit="cover"
             layout="fill"
             src="/assets/images/promo-bg.jpeg"
           />
-        </div>
-        <div className="promo__filter">
+        </div> */}
+        {/* <div className="promo__filter">
           <AutoSearch isFormOpen={open} handleFormOpen={handleFormOpen} />
-        </div>
+        </div> */}
         <div className="promo__wrapper">
+        <div className="promo__wrapper-left">
           <h1 className="promo__title">
-            АВТО ИЗ США
-            <br /> С ЭКОНОМИЕЙ ДО 40%
+            АВТО ІЗ США
           </h1>
           <p className="promo__description">
-            Оставьте номер телефона – мы свяжемся с вами через несколько минут,
-            подробно расскажем как можно сэкономить на покупке автомобиля из США
-            и подберем подходящие варианты
+            Бажаєте підібрати найкращий варіант та цікавитесь як заощадити при покупці авто з США?
+            Залиште номер телефону і ми розповімо усі подробиці!
           </p>
-          <div
+          <form className="promo__form" action="">
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <button type='button'>Пошук</button>
+          </form>
+          </div>
+          <div className="promo__wrapper-right">
+          <div className="promo__image">
+          <Image 
+            objectFit="cover"
+            layout="fill"
+            src="/assets/images/hero.jpg"
+          />
+        </div>
+        </div>
+          {/* <div
             role="presentation"
             className="promo__video"
           >
-            {/* <div className="promo__video-image">
+            <div className="promo__video-image">
               <span className="promo__video-play-button" />
-            </div> */}
+            </div>
             <div className="promo__video-link">
               <ArrowLinkSVG />
               <button onClick={handleFormOpen} className="promo__button">
                 Подобрать авто
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
