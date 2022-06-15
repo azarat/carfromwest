@@ -1,5 +1,14 @@
 import React/*  { useState } */ from 'react'
 import Image from 'next/image'
+import Select from 'react-select'
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+];
+
+
 // import AutoSearch from './AutoSearch'
 // import ArrowLinkSVG from '../../../assets/svg/right-arrow-link.svg'
 // import { useRouter } from 'next/router'
@@ -36,11 +45,29 @@ const Promo: React.FC = (): JSX.Element => {
             Залиште номер телефону і ми розповімо усі подробиці!
           </p>
           <form className="promo__form" action="">
-            <input type="text" />
-            <input type="text" />
-            <input type="text" />
-            <input type="text" />
-            <button type='button'>Пошук</button>
+            <div className="promo__form-left">
+              <Select options={options} placeholder={""}
+              className={`promo__form-left__select`}/>
+              <Select options={options} placeholder={'Модель'}
+              className={`promo__form-left__select`} />
+            </div>
+            <div className="promo__form-right">
+              <div className="promo__form-right-info">
+                <span className={`promo__form-right__select-year`}>Рік</span>
+                <Select options={options} placeholder={'Від'}
+                className={`promo__form-right__select`} />
+                <Select options={options} placeholder={'До'}
+                className={`promo__form-right__select`}/>
+              </div>
+              <div className="promo__form-right-info">
+              <span className={`promo__form-right__select-price`}>Ціна</span>
+                <Select options={options} placeholder={'Від'}
+                className={`promo__form-right__select`} />
+                <Select options={options} placeholder={'До'}
+                className={`promo__form-right__select`}/>
+              </div>
+            </div>
+            <button className="promo__form__btn" type='button'>Пошук</button>
           </form>
           </div>
           <div className="promo__wrapper-right">

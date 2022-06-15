@@ -70,9 +70,9 @@ const Video: React.FC = () => {
     <section className="video-block">
       <div className="video-block__info">
         <h2 className="video-block__title">
-          Посмотрите видео и узнайте как мы привозим авто в Украину
+          Подивіться відео та дізнайтесь як ми привозимо авто в Україну
         </h2>
-        <p className="video-block__time">Длительность - 3 мин.</p>
+        <p className="video-block__time">Тривалість – 3 хв</p>
       </div>
       <div className="video-block__wrapper">
         <div

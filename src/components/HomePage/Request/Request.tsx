@@ -1,8 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { Formik } from 'formik'
 import InputMask from 'react-input-mask'
-import Title from '../../Title/Title'
 import { useRouter } from 'next/router'
 
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
@@ -35,11 +34,12 @@ const Request: React.FC = () => {
   return (
     <section className="request">
       <div className="request__info">
-        <Title>АВТО “ПІД КЛЮЧ” З АУКЦІОНІВ ІЗ США</Title>
+        <div className="request__info__text">
+        <h2 className='request__info-title'>АВТО “ПІД КЛЮЧ” З АУКЦІОНІВ ІЗ США</h2>
         <div className="request__info-description">
             Заповніть форму, аби ми зв`язались з Вами та підібрали автомобіль, який ми можемо привезти із США для вас з економією в 40%.
         </div>
-
+        </div>
         <Formik
           initialValues={{ name: '', phone: '', wishes: '' }}
           validate={(values) => {
@@ -61,7 +61,7 @@ const Request: React.FC = () => {
         >
           {({ values, touched, handleSubmit, handleChange, errors }) => (
             <form onSubmit={handleSubmit} className="request__info-form">
-              <div className="request__info-form-input--wrapper">
+              {/* <div className="request__info-form-input--wrapper">
                 <input
                   name="name"
                   id="request-name"
@@ -105,23 +105,38 @@ const Request: React.FC = () => {
                 {values.wishes.length === 0 && (
                   <label htmlFor="request-text">Введите ваши пожелания</label>
                 )}
-              </div>
-
+              </div> */}
+              <label className="request__info-form-field"
+            ><span className="request__info-form-field__label">Ваше ім’я</span>
+            <span className="request__info-form-field__thumb">
+              <input className="request__info-form-field__input" type="text" name="username" required placeholder='Олександр' />
+            </span>
+          </label>
+          <label className="request__info-form-field"
+            ><span className="request__info-form-field__label">Номер телефону</span>
+            <span className="request__info-form-field__thumb">
+              <input className="request__info-form-field__input" type="text" name="username" required placeholder='+380 (__) __ __ __'/>
+            </span>
+          </label>
+          <label className="request__info-form-field form-field--textarea"
+            ><span className="request__info-form-field__label">Коментар:</span>
+            <textarea className="request__info-form-field__textarea" name="comment" placeholder="Введіть Ваші побажання"></textarea>
+          </label>
               <button className="request__info-form-button" type="submit">
-                Подобрать лучшее авто
+                Підібрати краще авто
               </button>
             </form>
           )}
         </Formik>
       </div>
-      <div className="request__image">
+      {/* <div className="request__image">
         <h4 className="request__image-title">CARSFROMWEST</h4>
         <Image
           src={'/assets/images/request-vag.png'}
           layout="fill"
           objectFit="contain"
         />
-      </div>
+      </div> */}
     </section>
   )
 }

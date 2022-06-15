@@ -1,0 +1,48 @@
+.advantagesAuto {
+  background: #fff;
+  padding: 128px 350px;
+  &__title {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 62px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 16px;
+  }
+  &__pre-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #999999;
+    margin-bottom: 80px;
+  }
+  &__grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &-item {
+      width: 465px;
+      margin-right: 84px;
+      margin-bottom: 64px;
+      &-svg {
+        margin-bottom: 24px;
+      }
+      &-title {
+        margin-bottom: 8px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        color: #000000;
+      }
+      &-description {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        color: #999999;
+      }
+    }
+  }
+}

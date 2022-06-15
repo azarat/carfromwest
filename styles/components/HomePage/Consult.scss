@@ -9,19 +9,20 @@
     padding: 0 15px;
   }
   &__title {
-    color: #1f181a;
-    font-weight: $fw-800;
-    font-size: $fs-23;
-    line-height: 150%;
-    & span {
-      color: #a1231b;
-    }
+    color: #000000;
+    font-weight: $fw-700;
+    font-size: $fs-32;
+    line-height: 40px;
+    font-weight: 700;
+    margin-bottom: 24px;
   }
   &__text {
     margin-top: 20px;
-    color: #1f181a;
-    font-size: $fs-17;
-    line-height: 150%;
+    color: #000000;
+    font-size: $fs-18;
+    line-height: 25px;
+    font-weight: 400;
+    margin-bottom: 40px;
   }
   &__click {
     display: flex;
@@ -48,9 +49,9 @@
     font-size: $fs-12;
     line-height: 24px;
     text-transform: uppercase;
-    background: linear-gradient(91.77deg, #df453c 0.88%, #c93830 99.34%);
+    background: #E02C22;
     border: none;
-    border-radius: 2px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
   }
@@ -95,7 +96,7 @@
 @media screen and (min-width: 1800px) {
   .consult {
     &__inner {
-      max-width: 890px;
+      max-width: 505px;
     }
   }
 }
