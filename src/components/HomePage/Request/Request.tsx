@@ -1,7 +1,7 @@
 import React from 'react'
 // import Image from 'next/image'
 import { Formik } from 'formik'
-import InputMask from 'react-input-mask'
+// import InputMask from 'react-input-mask'
 import { useRouter } from 'next/router'
 
 const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
@@ -59,7 +59,8 @@ const Request: React.FC = () => {
             resetForm({})
           }}
         >
-          {({ values, touched, handleSubmit, handleChange, errors }) => (
+          {/* {({ values, touched, handleSubmit, handleChange, errors }) => (*/}
+          {({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className="request__info-form">
               {/* <div className="request__info-form-input--wrapper">
                 <input
