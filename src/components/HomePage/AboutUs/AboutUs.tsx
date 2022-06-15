@@ -1,41 +1,36 @@
 import React from 'react'
 import Image from 'next/image'
-import Title from '../../Title/Title'
 
 const AboutUs: React.FC = () => {
   return (
     <section id="section-about" className="about-us">
       <div className="about-us__text">
-        <Title>О НАШЕЙ КОМПАНИИ</Title>
+        <h2 className='about-us__title'>Про нашу компанію</h2>
         <div className="about-us__description">
-          <p>Уже 5 лет наша компания является дилером автомобилей из США.</p>
+          <p className='about-us__description-text'>Наша компанія вже 7 років є надійним дилером автомобілів з США.</p>
           <p>
-            Мы организовываем весь процесс привоза автомобиля из США, от
-            профессионального выбора, до ремонта и постановки на номера! Найдем
-            любой автомобиль, под любой вкус наших клиентов!
+          Ми організовуємо весь процес привезення автомобіля з США, від професійного вибору, до ремонту та постановки на облік! Знайдемо будь-який автомобіль на будь-який смак наших клієнтів!
           </p>
         </div>
         <div className="about-us__stats">
           <div className="about-us__stats-auto">
-            <div className="about-us__stats-number">5000+</div>
-            <p className="about-us__stats-text">Привезено автомобилей</p>
+            <div className="about-us__stats-number">9000+</div>
+            <p className="about-us__stats-text">привезено автомобілів</p>
           </div>
           <div className="about-us__stats-year">
-            <div className="about-us__stats-number">5 лет</div>
-            <p className="about-us__stats-text">На рынке Украины</p>
+            <div className="about-us__stats-number">7 років</div>
+            <p className="about-us__stats-text">на ринку України</p>
           </div>
           <div className="about-us__stats-money">
-            <div className="about-us__stats-number">20565000 $</div>
-            <p className="about-us__stats-text">Сэкономлено денег клиентами</p>
+            <div className="about-us__stats-number">2 країни</div>
+            <p className="about-us__stats-text">наші офіси в США та в Україні</p>
           </div>
         </div>
       </div>
       <div className="about-us__image">
-        <h4 className="about-us__image-title">5000+</h4>
-        <h5 className="about-us__image-sub-title">Машин</h5>
         <Image
           className="about-us__image-block"
-          src="/assets/images/about-us-auto.png"
+          src="/assets/images/team-m.jpg"
           layout="fill"
         />
       </div>

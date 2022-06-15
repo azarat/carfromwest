@@ -35,7 +35,7 @@ const SearchInput: React.FC<ISearchInput> = ({ id }) => {
       />
       {value.length === 0 && (
         <label className="search__label" htmlFor={id}>
-          Введите номер лота, VIN или название авто
+          Номер лоту, VIN чи назву авто
         </label>
       )}
       <SearchSVG onClick={handleSearch} />

@@ -1,40 +1,35 @@
-.about-us {
-  // background: $white-color;
-  padding: 128px 350px;
+.law {
+  background: $white-color;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 128px 388px;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F2F2F2;
+    width: 1144px;
+    border-radius: 10px;
+  }
   &__text {
-    width: 456px;
+    width: 476px;
+    padding-top: 96px ;
+    padding-bottom: 96px ;
+    padding-left: 86px;
+    margin-right: 44px;
   }
   &__title {
-    font-weight: 700;
-font-size: 48px;
-line-height: 62px;
-color: #000000;
-margin-bottom: 32px;
+    font-weight: $fw-700;
+    font-size: $fs-40;
+    line-height: 125%;
   }
   &__description {
-    &-text {
-      font-weight: 400;
-font-size: 18px;
-line-height: 25px;
-color: #000000;
-    }
-  }
-  &__text {
-    padding: 70px 15px 0;
-  }
-  &__image {
-        position: relative;
-        width: 562;
-        height: 409px;
-  }
-//   & .title {
-//     margin-top: 8px;
-//   }
-  &__description {
-    margin-top: 8px;
+    margin-top: 24px;
     & p {
-      font-weight: $fw-300;
-      font-size: $fs-16;
+      font-weight: $fw-400;
+      font-size: $fs-18;
+      line-height: 140%;
       & + p {
         margin-top: 1rem;
       }
@@ -69,10 +64,15 @@ color: #000000;
       font-size: $fs-16;
     }
   }
+
   &__image {
     position: relative;
-    height: 213px;
-    margin-top: 100px;
+    width: 537px;
+    height: 491px;
+    &-block {
+      background: linear-gradient(90deg, #F2F2F2 0%, rgba(242, 242, 242, 0) 100%, #F2F2F2 100%);
+      border-radius: 0px 10px 10px 0px;
+    }
     &-title {
       position: absolute;
       top: -40px;
@@ -90,7 +90,7 @@ color: #000000;
 }
 
 @media screen and (min-width: 768px) {
-  .about-us {
+  .law {
     &__stats {
       flex-direction: row;
       &-year,
@@ -105,7 +105,7 @@ color: #000000;
 }
 
 @media screen and (min-width: 1200px) {
-  .about-us {
+  .law {
     display: flex;
     padding: 50px 0;
     overflow: hidden;
@@ -145,7 +145,7 @@ color: #000000;
 }
 
 @media screen and (min-width: 1400px) {
-  .about-us {
+  .law {
     &__stats {
       &-money {
         margin-top: 0;
@@ -157,36 +157,36 @@ color: #000000;
   }
 }
 
-// @media screen and (min-width: 1800px) {
-//   .about-us {
-//     &__text {
-//       flex: 0 0 55%;
-//       height: max-content;
-//       padding-top: 100px;
-//       padding-right: 100px;
-//       padding-left: calc(100vw * 0.55 - 1530px * 0.55);
-//     }
-//     &__description {
-//       margin-top: 60px;
-//     }
-//     &__stats {
-//       margin-top: 60px;
-//       &-money {
-//         margin-top: 0;
-//       }
-//       &-number {
-//         font-size: $fs-60;
-//       }
-//       &-text {
-//         font-size: $fs-16;
-//         text-align: center;
-//       }
-//     }
-//     &__image {
-//       left: -60px;
-//       width: 895px;
-//       height: 595px;
-//       margin-top: 100px;
-//     }
-//   }
-// }
+@media screen and (min-width: 1800px) {
+  .law {
+    &__text {
+      flex: 0 0 55%;
+      height: max-content;
+      padding-top: 100px;
+      padding-right: 100px;
+      padding-left: calc(100vw * 0.55 - 1530px * 0.55);
+    }
+    &__description {
+      margin-top: 60px;
+    }
+    &__stats {
+      margin-top: 60px;
+      &-money {
+        margin-top: 0;
+      }
+      &-number {
+        font-size: $fs-60;
+      }
+      &-text {
+        font-size: $fs-16;
+        text-align: center;
+      }
+    }
+    &__image {
+      left: -60px;
+      width: 895px;
+      height: 595px;
+      margin-top: 100px;
+    }
+  }
+}

@@ -3,15 +3,20 @@
   flex-direction: column;
   padding: 75px 15px;
   background: #0f2442;
-  & .title {
+  &__title {
     margin-top: 8px;
     color: $white-color;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 62px;
+    text-align: center;
   }
   &__grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     margin-top: 8px;
     &-item {
+
       &-svg {
         position: relative;
         display: flex;
@@ -80,13 +85,18 @@
     }
     &__grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       justify-items: center;
-      margin-top: 60px;
-      column-gap: min(100px, 5%);
-      row-gap: min(100px, 10vh);
+      margin-top: 96px;
+      column-gap: min(20px, 5%);
+      row-gap: min(20px, 10vh);
+      &-item:hover {
+        background-color: #333399;
+      }
       &-item {
-        max-width: 500px;
+        max-width: 368px;
+        background-color: #0E1827;
+        padding: 85px 46px;
         &-svg {
           width: 100%;
           &:after {

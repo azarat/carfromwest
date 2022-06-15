@@ -16,14 +16,14 @@ const Footer: React.FC = () => {
           </Link>
         </div>
         <div className="footer__contacts">
-          <h4 className="footer__contacts-title">Контакты</h4>
+          <h4 className="footer__contacts-title">Контакти</h4>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
               <a href="tel:0443343869">(044) 334-38-69</a>
             </li>
             <li className="footer__contacts-item">
               <a href="tel:0800215804">
-                0800 215 804<span>(бесплатно по Украине)</span>
+                0800 215 804<span>(безкоштовно по Україні)</span>
               </a>
             </li>
           </ul>
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                г. Киев, пер. <br /> Коломиевский, 20
+                м. Київ, пр. Коломіївський, 20
               </a>
             </p>
           </div>
@@ -46,13 +46,13 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                г. Харьков, пл. <br /> Павловская, 10
+                м. Харків, пл. Павлівська, 10
               </a>
             </p>
           </div>
         </div>
         <div className="footer__work-time">
-          <h4 className="footer__work-time-title">График работы</h4>
+          <h4 className="footer__work-time-title">Графік роботи </h4>
           <p className="footer__work-time-date">24/7/365</p>
         </div>
         <SocialLink />
