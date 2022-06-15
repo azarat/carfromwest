@@ -1,37 +1,27 @@
 export const NavItems = [
+  { id: 0, title: 'Каталог', href: '/catalog' },
   {
-    id: 0,
-    title: 'Главная',
-    href: '/',
-  },
-  { id: 1, title: 'Каталог', href: '/catalog' },
-  {
-    id: 2,
-    title: 'О нас',
+    id: 1,
+    title: 'Про нас',
     href: '/#section-about',
   },
   {
-    id: 3,
-    title: 'Популярные авто',
+    id: 2,
+    title: 'Популярні авто',
     href: '/#section-popular',
   },
   {
-    id: 4,
-    title: 'Отзывы',
-    href: '/#client-reviews-section',
-  },
-  {
-    id: 5,
-    title: 'Преимущества',
+    id: 3,
+    title: 'Переваги',
     href: '/#advantages-section',
   },
   {
-    id: 6,
-    title: 'Процесс доставки',
+    id: 4,
+    title: 'Процес доставки',
     href: '/#delivery-section',
   },
   {
-    id: 7,
+    id: 5,
     title: 'FAQ',
     href: '/#section-faq',
   },
