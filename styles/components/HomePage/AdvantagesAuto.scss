@@ -1,6 +1,7 @@
 .advantagesAuto {
-  background: #fff;
-  padding: 128px 350px;
+  background: $white-color;
+  padding: 128px 0;
+  margin: 0 auto;
   &__title {
     font-weight: 700;
     font-size: 48px;
@@ -18,15 +19,16 @@
     margin-bottom: 80px;
   }
   &__grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 401px);
+    grid-template-rows: repeat(3, 1fr);
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-
+    grid-column-gap: 84px;
+    grid-row-gap: 64px;
+    
     &-item {
-      width: 465px;
-      margin-right: 84px;
-      margin-bottom: 64px;
+      // width: 465px;
       &-svg {
         margin-bottom: 24px;
       }
