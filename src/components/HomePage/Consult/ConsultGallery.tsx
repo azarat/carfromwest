@@ -22,15 +22,15 @@ const ConsultGallery: React.FC = () => {
       <div className="consult__gallery">
         <>
           <div className="consult__gallery-last">
-            И еще&nbsp;
+            Ще&nbsp;
             <span className="consult__gallery-last-mobile">
-              {consultGallery.length - 3}
+              {consultGallery.length - 3} +
             </span>
             <span className="consult__gallery-last-tablet">
-              {consultGallery.length - 6}
+              {consultGallery.length - 6} +
             </span>
             <span className="consult__gallery-last-desktop">
-              {consultGallery.length - 9}
+              {consultGallery.length - 9} +
             </span>
           </div>
           {consultGallery.map(({ id, url }, i) => (

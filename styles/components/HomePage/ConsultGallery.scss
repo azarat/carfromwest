@@ -5,7 +5,7 @@
     grid-template-rows: 200px 155px;
     grid-template-columns: repeat(2, 1fr);
     gap: 6px;
-    width: 100%;
+    width: 562px;
     margin: 50px 0px;
     &-last {
       position: absolute;
@@ -50,7 +50,6 @@
   .consult {
     &__gallery {
       margin: unset;
-      margin-left: 15px;
     }
   }
 }

@@ -13,6 +13,7 @@ import CheckAuto from '../src/components/HomePage/CheckAuto/CheckAuto'
 import Consult from '../src/components/HomePage/Consult/Consult'
 import Law from '../src/components/HomePage/Law/Law'
 import AdvantagesAuto from '../src/components/HomePage/AdvantagesAuto/AdvantagesAuto'
+import RequestBottom from '../src/components/HomePage/RequestBottom/RequestBottom'
 
 const IndexPage: NextPage = () => {
   return (
@@ -34,6 +35,7 @@ const IndexPage: NextPage = () => {
       <CheckAuto />
       {/* <WorkSum /> */}
       <Faq />
+      <RequestBottom/>
     </>
   )
 }

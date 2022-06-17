@@ -1,25 +1,16 @@
-.request {
+.requestBottom {
+  background-color: $white-color;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/assets/images/requestBg.png');
-  // padding: 75px 0 40px;
+  background-image:  url('../../../public/assets/images/requestBottom.jpg');
+  background-size: 90% 90%;
+  padding-top: 96px;
+  padding-left: 128px;
   overflow: hidden;
-  // background: #0f2442;
-  // & .title {
-  //   margin-top: 8px;
-  //   color: $white-color;
-  // }
-  padding-top: 128px;
-  padding-bottom: 134px;
   align-items: center;
   justify-content: center;
   &__info {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    // margin-top: 8px;
-    // padding: 0 15px;
     &__text {
       width: 465px;
       margin-right: 117px;
@@ -162,8 +153,6 @@
     position: relative;
     width: 100%;
     height: 210px;
-    margin-top: 50px;
-    padding: 0 15px;
     &-title {
       position: absolute;
       top: -15px;
@@ -177,25 +166,19 @@
 }
 
 @media screen and (min-width: 768px) {
-  .request {
+  .requestBottom {
     &__info {
-      padding: 0 30px;
       &-form {
         // max-width: 440px;
         // margin: 50px auto 0;
       }
     }
-    &__image {
-      height: 385px;
-      padding: 0 30px;
-    }
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .request {
+  .requestBottom {
     display: flex;
-    // padding: 75px;
     & .title {
       font-size: $fs-50;
     }
@@ -217,18 +200,3 @@
   }
 }
 
-@media screen and (min-width: 1800px) {
-  .request {
-    padding-right: 135px;
-    padding-left: 135px;
-    &__image {
-      height: 400px;
-      margin-top: 80px;
-      &-title {
-        right: 25%;
-        left: unset;
-        font-size: $fs-100;
-      }
-    }
-  }
-}

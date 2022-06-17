@@ -19,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
+    // margin-right: 20px;
     // margin-bottom: 0;
     &-svg {
       display: none;
@@ -124,7 +124,7 @@
     &__logo {
       order:2;
       margin-left: 40px;
-      margin-right: auto;
+      // margin-right: auto;
       &-img {
         max-width: 160px;
       }
@@ -268,7 +268,6 @@
     }
     &__search {
       display: block;
-      margin-right: 416px;
     }
     &__contact {
       

@@ -1,11 +1,16 @@
 .promo {
   position: relative;
-  height: 100vh;
-  padding: 80px 15px 10px;
+  height: auto;
+  padding: 80px 15px 137px;
+  // padding-bottom: 137px;
   &__image {
-    position: relative;
-    width: 730px;
-    height: 370px;
+    position: absolute;
+    width: 700px;
+    height: 340px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
   }
   &__wrapper {
     display: flex;
@@ -14,6 +19,42 @@
     margin-top: 30px;
     &-left {
       margin-right: 110px;
+    }
+    &-right {
+      width: 730px;
+      height: 370px;
+      position: relative;
+      &-blue {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+        width: 430px;
+        height: 196px;
+        background-color: #333399;
+        border-radius: 10px;
+      }
+      &-orange {
+        position: absolute;
+        width: 430.51px;
+        height: 228.36px;
+        background-color: #FF9900;;
+        border-radius: 10px;
+        top: 50%;
+        left:0;
+        transform: translate(-0, -50%); 
+      }
+      &-red {
+        position: absolute;
+        width: 430.51px;
+        height: 244.27px;
+        bottom:0;
+        right:0;
+        background-color: #AE2C23;
+        border-radius: 10px;
+      }
     }
   }
   &__title {
@@ -33,6 +74,7 @@
     line-height: 140%;
   }
   &__form {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     padding: 67px 40px 40px;
@@ -40,6 +82,20 @@
     margin-top: 56px;
     background-color: $white-color;
     border-radius: 10px;
+    &__discount {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 157px;
+      height: 35px;
+      background-color: #27AE60;
+      border-radius: 10px 0px;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 19px;
+      color: #FFFFFF;
+    }
     &-left__select {
       width: 237px;
       margin-right: 32px;
@@ -170,7 +226,7 @@
 
 @media screen and (min-width: 768px) {
   .promo {
-    max-height: 755px;
+    // max-height: 755px;
     padding: 70px 0 0;
     &__wrapper {
       margin-top: 96px;
@@ -186,10 +242,11 @@
       line-height: 150%;
     }
     &__description {
-      max-width: 470px;
-      font-weight: $fw-600;
-      font-size: $fs-22;
-      line-height: 150%;
+      max-width: 659px;
+      font-weight: $fw-500;
+      font-size: $fs-18;
+      line-height: 25px;
+      color: #000000;
     }
     &__video {
       display: block;
@@ -200,8 +257,9 @@
 
 @media screen and (min-width: 1200px) {
   .promo {
-    max-height: 688px;
-    padding-top: 60px;
+    // max-height: 688px;
+    padding-top: 65px;
+    padding-bottom: 137px;
     &__wrapper {
       padding-left: 291px;
     }
@@ -215,22 +273,169 @@
   }
 }
 
-@media screen and (min-width: 1800px) {
+// @media screen and (min-width: 1800px) {
+//   .promo {
+//     height: 100%;
+//     min-height: 880px;
+//     &__wrapper {
+//       margin-top: 128px;
+//     }
+//     &__title {
+//       max-width: 737px;
+//       font-size: $fs-55;
+//     }
+//     &__description {
+//       max-width: 650px;
+//     }
+//     &__video {
+//       margin-top: 67px;
+//     }
+//   }
+// }
+
+@media screen and (max-width: 1200px) { 
   .promo {
-    height: 100%;
-    min-height: 880px;
+    display: block;
+    padding-top: 50px;
+    padding-bottom: 137px;
+    &__image {
+      width: 557.69px;
+      height: 271.6px;
+    }
     &__wrapper {
-      margin-top: 200px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 55px;
+      padding-left: 0;
+      &-left {
+        order: 2;
+        margin-right: 0;
+      }
+      &-right {
+        order: 1;
+        width: 582px;
+        height: 295.48px;
+        margin-bottom: 64px;
+            &-blue {
+              width: 343.23px;
+              height: 156.69px;
+            }
+            &-orange {
+              width: 343.23px;
+              height: 182.06px;
+            }
+            &-red {
+              width: 343.23px;
+              height: 194.75px;             
+            }
     }
     &__title {
-      max-width: 737px;
-      font-size: $fs-55;
+      font-size: 48px;
     }
-    &__description {
-      max-width: 650px;
-    }
-    &__video {
-      margin-top: 67px;
+    &__form {
+      width: 704px;
     }
   }
+}
+}
+
+
+@media screen and (max-width: 768px) { 
+  .promo {
+    padding-top: 50px;
+    padding-bottom: 137px;
+    &__image {
+      width: 557.69px;
+      height: 271.6px;
+    }
+    &__wrapper {
+      // align-items: center;
+      // justify-content: center;
+      margin-top: 64px;
+      &-left {
+        order: 1;
+        margin-right: 0;
+        margin-bottom: 48px;
+      }
+      &-right {
+        order: 2;
+
+    }
+    &__image {
+    }
+    &__title {
+      font-size: 40px;
+      line-height: 125%;
+    }
+    &__description {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 140%;
+    }
+    
+  }
+  &__form {
+    display: block;
+    margin: 40px auto 0;
+    padding: 59px 24px;
+    width: 328px;
+    &-left {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &-left__select {
+      width: 280px;
+      margin-right: 0;
+      margin-top: 24px;
+    }
+    &-left__select:not(:last-child) {
+      margin-bottom: 0;
+    }
+    &-right {
+      &-info:not(:last-child) {
+        margin-bottom: 24px;
+      }
+      &-info {
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between
+      }
+      &__select {
+        
+        width: 116px;
+        margin-right: 8px;
+        &-year {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          // margin-right: 18px;
+        }
+        &-price {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          // margin-right: 5px;
+        }
+      }
+    }
+    &__btn {
+      // margin-left: auto;
+      width: 280px;
+      height: 40px;
+      margin-top: 48px;
+      padding: 10px 16px;
+      background-color: #E02C22;
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      color: #fff;
+    }
+  }
+  
+}
 }
