@@ -76,7 +76,7 @@ const Promo: React.FC = (): JSX.Element => {
             <div className='promo__wrapper-right-orange'></div>
             <div className='promo__wrapper-right-red'></div>
             <div className="promo__image">
-            <Image 
+            <Image className='promo__image-block'
               objectFit="cover"
               layout="fill"
               src="/assets/images/hero_1.jpg"
