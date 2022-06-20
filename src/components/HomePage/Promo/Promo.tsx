@@ -79,7 +79,7 @@ const Promo: React.FC = (): JSX.Element => {
             <Image className='promo__image-block'
               objectFit="cover"
               layout="fill"
-              src="/assets/images/hero_1.jpg"
+              src="/assets/images/hero.png"
             />
           </div>
         </div>

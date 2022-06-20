@@ -86,7 +86,6 @@ const Video: React.FC = () => {
           <span />
         </div>
         <div className="video-block__video">
-          <div className='video-block__video-bg'></div>
           <div
             className={`${
               startVideo
@@ -94,8 +93,10 @@ const Video: React.FC = () => {
                 : 'video-block__video-image'
             }`}
           />
+          
           <div id="player" />
         </div>
+        <div className='video-block__video-bg'></div>
       </div>
     </section>
   )

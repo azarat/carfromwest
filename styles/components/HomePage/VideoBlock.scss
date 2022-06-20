@@ -1,19 +1,21 @@
 .video-block {
   position: relative;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 300px;
-  padding: 30px 15px;
+  // width: 100%;
+  // padding: 193px 0 226px 388px;
   background: $white-color;
-  // background: linear-gradient(90deg, #1c2030 0, #0f0f0f 100%);
+  padding: 96px 96px 107px 388px;
+  &__info {
+    width: 465px;
+    margin: auto;
+  }
   &__title {
     color: $black-color;
     font-weight: $fw-700;
     font-size: $fs-48;
     font-family: $ff-commons;
     line-height: 62px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 32px;
   }
   &__time {
@@ -87,23 +89,23 @@
   }
   &__video {
     position: relative;
-    max-width: 251px;
-    height: 140px;
-    margin: 0 auto;
+    width: 905.24px;
+    height: 523.19px;
+    margin-left: 65px;
     // overflow: hidden;
-    box-shadow: 0 4px 24px rgb(0 0 0 / 25%);
+    // box-shadow: 0 4px 24px rgb(0 0 0 / 25%);
     &-bg {
       position: absolute;
-      width: 374.86px;
-      height: 629.26px;
+      height: 374.86px;
+      width: 629.26px;
       background: linear-gradient(180deg, #B9332B 0%, #95251F 100%);
       border-radius: 10px;
-      transform: rotate(90deg);
+      // transform: rotate(90deg);
       margin-left: auto;
       margin-right: auto;
-      left: 0;
+      left: 10%;
       right: 0;
-      bottom: 0;
+      top: 0;
       text-align: center;
     }
     &-embed {
@@ -114,12 +116,16 @@
     &-image {
       position: absolute;
       z-index: 5;
-      width: 100%;
-      height: 101%;
+      width: 95%;
+      height: 95%;
+      top: 50%;
+      right: 0;
+      transform: translate(0, -50%);
       background-image: url('/assets/images/video-bg.jpeg');
       background-repeat: no-repeat;
       background-size: cover;
       transition: all 0.5s;
+      border-radius: 10px;
       &--hide {
         z-index: -1;
         opacity: 0;
@@ -130,18 +136,17 @@
 
 @media screen and (min-width: 768px) {
   .video-block {
-    flex-direction: row;
+    // flex-direction: row;
     &__info {
-      display: flex;
-      // flex: 0 0 50%;
-      flex-direction: column;
-      justify-content: center;
-      width: 465px;
-      padding: 0 15px;
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      // width: 465px;
+      // padding: 0 15px;
     }
     &__title {
-      font-size: $fs-22;
-      text-align: left;
+      // font-size: $fs-22;
+      // text-align: left;
     }
     &__time {
       position: relative;
@@ -168,7 +173,6 @@
       display: flex;
       align-items: center;
       width: 100%;
-      padding: 0 30px;
     }
     &__play-button {
       right: 270px;
@@ -177,8 +181,8 @@
       height: 48px;
     }
     &__video {
-      max-width: 280px;
-      height: 160px;
+      // max-width: 280px;
+      // height: 160px;
       margin-right: 0;
       margin-left: auto;
     }
@@ -187,18 +191,17 @@
 
 @media screen and (min-width: 1200px) {
   .video-block {
-    height: 540px;
+    // height: 540px;
     // background: url('/assets/images/video-block-bg.png') no-repeat;
     // background-size: 100% 100%;
     &__info {
-      flex: 0 0 40%;
+      // flex: 0 0 40%;
     }
     &__title {
-      font-size: $fs-36;
+      // font-size: $fs-36;
     }
     &__wrapper {
-      margin-left: 9%;
-      padding: 0 50px;
+      // margin-left: 9%;
     }
     &__play-button {
       left: 50%;;
@@ -218,22 +221,22 @@
       }
     }
     &__video {
-      width: 100%;
+      // width: 100%;
       max-width: unset;
-      height: 303px;
+      // height: 303px;
     }
   }
 }
 
 @media screen and (min-width: 1800px) {
   .video-block {
-    height: 800px;
-    padding: 0 calc(50vw - 765px);
+    // height: 800px;
+    // padding: 0 calc(50vw - 765px);
     &__info {
       // flex: 0 0 45%;
     }
     &__title {
-      font-size: $fs-48;
+      // font-size: $fs-48;
     }
     &__time {
       font-size: $fs-26;
@@ -262,7 +265,7 @@
       }
     }
     &__video {
-      height: 411px;
+      // height: 411px;
     }
   }
 }
@@ -372,8 +375,13 @@
 }
 
 iframe {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  border-radius: 10px;
+  width: 95%;
+  height: 95%;
 }
 
 @keyframes greyBgMobile {
