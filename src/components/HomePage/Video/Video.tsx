@@ -86,6 +86,7 @@ const Video: React.FC = () => {
           <span />
         </div>
         <div className="video-block__video">
+          <div className='video-block__video-bg'></div>
           <div
             className={`${
               startVideo

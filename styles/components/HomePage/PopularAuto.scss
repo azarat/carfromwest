@@ -1,9 +1,14 @@
 .popular {
+  padding: 128px  0;
   font-family: $ff-commons;
   &__title {
-    margin: 20px auto 5px;
-    font-size: $fs-18;
+    margin: 0 auto 80px;
+    font-weight: 700;
+    font-size: $fs-48;
     text-align: center;
+    font-size: 48px;
+    line-height: 62px;
+    color: $black-color;
   }
 
   &__mobile-slider-wrapper {
@@ -53,10 +58,10 @@
           }
         }
         &-next {
-          background-image: url('../../../public/assets/svg/right-arrow.svg');
+          background-image: url('../../../public/assets/svg/arrow-left.svg');
         }
         &-prev {
-          background-image: url('../../../public/assets/svg/right-arrow.svg');
+          background-image: url('../../../public/assets/svg/arrow-right.svg');
           transform: rotate(180deg);
         }
       }
@@ -96,34 +101,47 @@
       font-size: $fs-16;
       text-align: center;
       cursor: pointer;
+      
     }
     &__price {
       font-size: $fs-16;
     }
     &__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 175px;
-      height: 30px;
-      margin: 20px auto 0;
+      width: 170px;
+      padding: 10px 16px;
+      font-weight: 700;
+      line-height: 17px;
+      text-align: center;
       color: $white-color;
-      font-weight: $fw-800;
-      font-size: $fs-10;
-      line-height: 24px;
-      text-transform: uppercase;
-      background: -webkit-linear-gradient(
-        358.23deg,
-        #df453c 0.88%,
-        #c93830 99.34%
-      );
-      background: linear-gradient(91.77deg, #df453c 0.88%, #c93830 99.34%);
+      font-size: $fs-14;
+      background-color: #E02C22;
+      border-radius: 10px;
       border: none;
-      border-radius: 2px;
-      outline: none;
-      cursor: pointer;
     }
+    // &__btn {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   width: 100%;
+    //   max-width: 175px;
+    //   height: 30px;
+    //   margin: 20px auto 0;
+    //   color: $white-color;
+    //   font-weight: $fw-800;
+    //   font-size: $fs-10;
+    //   line-height: 24px;
+    //   text-transform: uppercase;
+    //   background: -webkit-linear-gradient(
+    //     358.23deg,
+    //     #df453c 0.88%,
+    //     #c93830 99.34%
+    //   );
+    //   background: linear-gradient(91.77deg, #df453c 0.88%, #c93830 99.34%);
+    //   border: none;
+    //   border-radius: 2px;
+    //   outline: none;
+    //   cursor: pointer;
+    // }
   }
   &__desktop-slider-wrapper {
     display: none;
@@ -133,7 +151,7 @@
 @media screen and (min-width: 768px) {
   .popular {
     position: relative;
-    padding: 40px 0;
+
     &::before {
       position: absolute;
       top: 0;
@@ -143,7 +161,7 @@
       z-index: -1;
       width: 260px;
       margin: 0 auto;
-      background: #760000;
+      background: $white-color;
       content: '';
     }
     &__mobile-slider-wrapper {
@@ -153,22 +171,26 @@
       display: block;
     }
     &__title {
-      max-width: 205px;
-      margin: unset;
-      margin-left: 30px;
-      font-size: $fs-22;
-      text-align: left;
+      // max-width: 205px;
+      // margin: unset;
+      // margin-left: 30px;
+      // font-size: $fs-22;
+      // text-align: left;
     }
     & .slider-item {
       &__name {
         margin: 10px 0;
       }
       &__btn {
-        max-width: 205px;
-        height: 45px;
-        font-size: $fs-12;
-        background: $transparent;
-        border: 1px solid $white-color;
+        max-width: 170px;
+        padding: 10px 16px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: center;
+        color: $white-color;
+        font-size: $fs-14;
+        background-color: #E02C22;
+        border-radius: 10px;
       }
     }
   }
@@ -176,17 +198,14 @@
 
 @media screen and (min-width: 1200px) {
   .popular {
-    padding: 85px 0;
     &::before {
-      width: 430px;
+      width: 562px;
     }
     &__title {
-      margin-left: 70px;
-      font-size: $fs-36;
     }
     & .slider-item {
       &__inner {
-        padding-bottom: 5px;
+        // padding-bottom: 5px;
       }
       &__name,
       &__price {
@@ -199,12 +218,12 @@
 @media screen and (min-width: 1800px) {
   .popular {
     &::before {
-      width: 600px;
+      // width: 600px;
     }
     &__title {
-      max-width: 380px;
-      margin-left: 150px;
-      font-size: $fs-48;
+      // max-width: 380px;
+      // margin-left: 150px;
+      // font-size: $fs-48;
     }
   }
 }

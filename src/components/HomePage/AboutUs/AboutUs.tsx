@@ -30,12 +30,29 @@ const AboutUs: React.FC = () => {
       <div className="about-us__image">
         <Image
           className="about-us__image-block"
+          src="/assets/images/team-xl.jpg"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+      {/* <div className="about-us__image-tab">
+        <Image
+          className="about-us__image-block"
           src="/assets/images/team-m.jpg"
           layout="fill"
         />
       </div>
+      <div className="about-us__image-mob">
+          <Image
+          className="about-us__image-block"
+          src="/assets/images/team-s.jpg"
+          layout="fill"
+        />
+      </div> */}
     </section>
   )
 }
+
+        
 
 export default AboutUs

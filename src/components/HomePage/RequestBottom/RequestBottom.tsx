@@ -65,14 +65,14 @@ const RequestBottom: React.FC = () => {
               {/* <div className="request__info-form-input--wrapper">
                 <input
                   name="name"
-                  id="requestBottom-name"
+                  id="request-name"
                   type="text"
                   className="request__info-form-input"
                   value={values.name}
                   onChange={handleChange}
                 />
                 {values.name.length === 0 && (
-                  <label htmlFor="requestBottom-name">Введите ваше имя</label>
+                  <label htmlFor="request-name">Введите ваше имя</label>
                 )}
                 {errors.name && touched.name && (
                   <p className="request__info-form-input-error">
@@ -98,13 +98,13 @@ const RequestBottom: React.FC = () => {
               <div className="request__info-form-input--wrapper request__info-form-textarea--wrapper">
                 <textarea
                   name="wishes"
-                  id="requestBottom-text"
+                  id="request-text"
                   className="request__info-form-textarea"
                   value={values.wishes}
                   onChange={handleChange}
                 />
                 {values.wishes.length === 0 && (
-                  <label htmlFor="requestBottom-text">Введите ваши пожелания</label>
+                  <label htmlFor="request-text">Введите ваши пожелания</label>
                 )}
               </div> */}
               <label className="requestBottom__info-form-field"
@@ -130,7 +130,14 @@ const RequestBottom: React.FC = () => {
           )}
         </Formik>
       </div>
-
+      {/* <div className="request__image">
+        <h4 className="request__image-title">CARSFROMWEST</h4>
+        <Image
+          src={'/assets/images/request-vag.png'}
+          layout="fill"
+          objectFit="contain"
+        />
+      </div> */}
     </section>
   )
 }
