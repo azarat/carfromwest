@@ -5,16 +5,16 @@
   width: 100%;
   height: 300px;
   padding: 30px 15px;
-  background: #1c2030;
-  background: linear-gradient(90deg, #1c2030 0, #0f0f0f 100%);
+  background: $white-color;
+  // background: linear-gradient(90deg, #1c2030 0, #0f0f0f 100%);
   &__title {
-    margin: 22px 0 15px;
-    color: $white-color;
+    color: $black-color;
     font-weight: $fw-700;
-    font-size: $fs-18;
+    font-size: $fs-48;
     font-family: $ff-commons;
-    line-height: 120%;
+    line-height: 62px;
     text-align: center;
+    margin-bottom: 32px;
   }
   &__time {
     display: none;
@@ -90,8 +90,22 @@
     max-width: 251px;
     height: 140px;
     margin: 0 auto;
-    overflow: hidden;
+    // overflow: hidden;
     box-shadow: 0 4px 24px rgb(0 0 0 / 25%);
+    &-bg {
+      position: absolute;
+      width: 374.86px;
+      height: 629.26px;
+      background: linear-gradient(180deg, #B9332B 0%, #95251F 100%);
+      border-radius: 10px;
+      transform: rotate(90deg);
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+    }
     &-embed {
       display: block;
       width: 100%;
@@ -99,7 +113,7 @@
     }
     &-image {
       position: absolute;
-      z-index: 3;
+      z-index: 5;
       width: 100%;
       height: 101%;
       background-image: url('/assets/images/video-bg.jpeg');
@@ -119,13 +133,13 @@
     flex-direction: row;
     &__info {
       display: flex;
-      flex: 0 0 50%;
+      // flex: 0 0 50%;
       flex-direction: column;
       justify-content: center;
+      width: 465px;
       padding: 0 15px;
     }
     &__title {
-      margin: 22px 0;
       font-size: $fs-22;
       text-align: left;
     }
@@ -133,11 +147,11 @@
       position: relative;
       display: unset;
       padding-left: 45px;
-      color: rgba(255, 255, 255, 0.5);
-      font-weight: $fw-400;
-      font-size: $fs-16;
-      font-style: italic;
-      line-height: 180%;
+      color: #999999;
+      font-weight: $fw-500;
+      font-size: $fs-18;
+      font-size: 18px;
+      line-height: 25px;
       &::before {
         position: absolute;
         top: 50%;
@@ -174,13 +188,12 @@
 @media screen and (min-width: 1200px) {
   .video-block {
     height: 540px;
-    background: url('/assets/images/video-block-bg.png') no-repeat;
-    background-size: 100% 100%;
+    // background: url('/assets/images/video-block-bg.png') no-repeat;
+    // background-size: 100% 100%;
     &__info {
       flex: 0 0 40%;
     }
     &__title {
-      margin: 45px 0;
       font-size: $fs-36;
     }
     &__wrapper {
@@ -188,7 +201,7 @@
       padding: 0 50px;
     }
     &__play-button {
-      left: 40px;
+      left: 50%;;
       width: 90px;
       height: 90px;
       & span {
@@ -217,10 +230,9 @@
     height: 800px;
     padding: 0 calc(50vw - 765px);
     &__info {
-      flex: 0 0 45%;
+      // flex: 0 0 45%;
     }
     &__title {
-      margin: 60px 0;
       font-size: $fs-48;
     }
     &__time {

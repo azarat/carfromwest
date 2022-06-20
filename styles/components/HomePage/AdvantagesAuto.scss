@@ -1,6 +1,7 @@
 .advantagesAuto {
-  background: #fff;
-  padding: 128px 350px;
+  background: $white-color;
+  padding: 128px 0;
+  margin: 0 auto;
   &__title {
     font-weight: 700;
     font-size: 48px;
@@ -18,15 +19,16 @@
     margin-bottom: 80px;
   }
   &__grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 401px);
+    grid-template-rows: repeat(3, 1fr);
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-
+    grid-column-gap: 84px;
+    grid-row-gap: 64px;
+    
     &-item {
-      width: 465px;
-      margin-right: 84px;
-      margin-bottom: 64px;
+      // width: 465px;
       &-svg {
         margin-bottom: 24px;
       }
@@ -42,6 +44,48 @@
         font-size: 16px;
         line-height: 22px;
         color: #999999;
+      }
+    }
+  }
+}
+
+@media screen and(max-width:1200px) {
+  .advantagesAuto { 
+    padding: 96px 32px;
+    // margin: 0 auto;
+    &__title {
+      line-height: 50px;
+      margin-bottom: 8px;
+    }
+    &__pre-title {
+      margin-bottom: 64px;
+    }
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 342px);
+      grid-template-rows: repeat(3, 1fr);
+      grid-column-gap: 20px;
+      grid-row-gap: 64px;
+    }
+  }
+}
+
+@media screen and(max-width:768px) {
+  .advantagesAuto { 
+    padding: 80px 16px;
+    margin: 0;
+    &__title {
+      margin-bottom: 16px;
+      text-align: start;
+    }
+    &__pre-title {
+      margin-bottom: 48px;
+      text-align: start;
+    }
+    &__grid {
+      display: block;
+      &-item:not(:last-child) {
+        margin-bottom: 48px;
       }
     }
   }

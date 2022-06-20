@@ -1,23 +1,22 @@
 .law {
   background: $white-color;
   display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 128px 388px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 128px;
+  padding-bottom: 128px;
   &__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    padding-top: 96px ;
+    padding-bottom: 96px ;
+    padding-left: 86px;
     background: #F2F2F2;
     width: 1144px;
     border-radius: 10px;
   }
   &__text {
     width: 476px;
-    padding-top: 96px ;
-    padding-bottom: 96px ;
-    padding-left: 86px;
-    margin-right: 44px;
+    // margin-right: 44px;
   }
   &__title {
     font-weight: $fw-700;
@@ -66,83 +65,92 @@
   }
 
   &__image {
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 537px;
-    height: 491px;
+    height: 100%;
+    border-radius: 10px;
+    
     &-block {
-      background: linear-gradient(90deg, #F2F2F2 0%, rgba(242, 242, 242, 0) 100%, #F2F2F2 100%);
       border-radius: 0px 10px 10px 0px;
     }
-    &-title {
-      position: absolute;
-      top: -40px;
-      right: 15px;
-      z-index: 1;
-      color: $red-color;
-      font-weight: $fw-800;
-      font-size: $fs-75;
-      font-family: $ff-commons;
-    }
-    &-sub-title {
-      display: none;
-    }
+    
   }
 }
 
-@media screen and (min-width: 768px) {
+
+@media screen and (max-width: 1200px) {
   .law {
-    &__stats {
-      flex-direction: row;
-      &-year,
-      &-money {
-        margin-top: 0;
+    padding: 96px 32px;
+  &__container {
+    padding-top: 85px ;
+    padding-bottom: 79px ;
+    padding-left: 32px;
+    width: 704px;
+  }
+  &__text {
+    width: 371px;
+    // margin-right: 44px;
+  }
+  &__title {
+    font-size: $fs-32;
+  }
+  &__description {
+    & p {
+      & + p {
+        margin-top: 1rem;
       }
     }
-    &__image {
-      height: 512px;
-    }
+  }
+
+  &__image {
+    width: 367px;
+  }
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 768px) {
   .law {
-    display: flex;
-    padding: 50px 0;
-    overflow: hidden;
-    &__text {
-      flex: 0 0 50%;
-      padding: 50px 70px;
-      background: #f4f4f4;
-    }
-    &__stats {
-      flex-wrap: wrap;
-      &-money {
-        margin-top: 15px;
-      }
-    }
-    &__image {
-      left: -30px;
-      width: 512px;
-      height: 340px;
-      margin-top: 75px;
-      &-title {
-        right: 20%;
-        font-size: $fs-100;
-      }
-      &-sub-title {
-        position: absolute;
-        top: -100px;
-        left: calc(100% - 230px);
-        display: unset;
-        color: rgba(244, 244, 244, 0.7);
-        font-weight: $fw-800;
-        font-size: $fs-100;
-        font-family: $ff-commons;
-        text-transform: uppercase;
+    display: block;
+    padding: 80px 16.5px 25px;
+  &__container {
+    padding-top: 0 ;
+    padding-bottom: 0 ;
+    padding-left: 0;
+    width: auto;
+    background: $white-color;
+  }
+  &__text {
+    width: auto;
+    // margin-right: 44px;
+  }
+  &__title {
+    font-size: $fs-32;
+    
+  }
+  &__description {
+    margin-top: 16px;
+    margin-bottom: 40px;
+    & p {
+      & + p {
+        margin-top: 1rem;
       }
     }
   }
+
+  &__image {
+    position: relative;
+    width: 361px;
+    height: 317px;
+    margin: 0 auto;
+    &-block {
+      border-radius: 0 0 0 0;
+    }
+  }
+  }
 }
+
 
 @media screen and (min-width: 1400px) {
   .law {
@@ -157,36 +165,52 @@
   }
 }
 
-@media screen and (min-width: 1800px) {
+// @media screen and (min-width: 1800px) {
+//   .law {
+//     &__text {
+//       flex: 0 0 55%;
+//       height: max-content;
+//       padding-top: 100px;
+//       padding-right: 100px;
+//       padding-left: calc(100vw * 0.55 - 1530px * 0.55);
+//     }
+//     &__description {
+//       margin-top: 60px;
+//     }
+//     &__stats {
+//       margin-top: 60px;
+//       &-money {
+//         margin-top: 0;
+//       }
+//       &-number {
+//         font-size: $fs-60;
+//       }
+//       &-text {
+//         font-size: $fs-16;
+//         text-align: center;
+//       }
+//     }
+//     &__image {
+//     }
+//   }
+// }
+
+
+@media screen and (max-width: 768px) {
   .law {
-    &__text {
-      flex: 0 0 55%;
-      height: max-content;
-      padding-top: 100px;
-      padding-right: 100px;
-      padding-left: calc(100vw * 0.55 - 1530px * 0.55);
-    }
-    &__description {
-      margin-top: 60px;
+    &__container {
+      display: block;
     }
     &__stats {
-      margin-top: 60px;
+      flex-direction: row;
+      &-year,
       &-money {
         margin-top: 0;
       }
-      &-number {
-        font-size: $fs-60;
-      }
-      &-text {
-        font-size: $fs-16;
-        text-align: center;
-      }
     }
     &__image {
-      left: -60px;
-      width: 895px;
-      height: 595px;
-      margin-top: 100px;
+      // height: 512px;
+
     }
   }
 }

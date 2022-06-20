@@ -1,11 +1,12 @@
-.request {
+.requestBottom {
+  padding: 128px 0;
+  border: 127px solid $white-color;
+  border-radius: 138px;
   background-position: center;
   background-repeat: no-repeat;
+  background-image:  url('../../../public/assets/images/requestBotDesc.jpg');
   background-size: cover;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/assets/images/requestBg.png');
-  overflow: hidden;
-  padding-top: 128px;
-  padding-bottom: 134px;
+  
   &__info {
     display: flex;
     align-items: center;
@@ -167,9 +168,10 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .request {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/assets/images/requestBgTab.jpg');
-  padding: 96px 92px;
+  .requestBottom {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/assets/images/requestBotTab.jpg');
+  padding: 80px 135px;
+  border: 15px solid $white-color;
   &__info {
     display: block;
     
@@ -186,7 +188,7 @@
     }
     &-form {
       margin: 0 auto;
-      max-width: 584px;
+      max-width: 465px;
     }
   }
 }
@@ -195,8 +197,8 @@
 
 
 @media screen and (max-width: 768px) {
-  .request {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/assets/images/requestBgMob.jpg');
+  .requestBottom {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/assets/images/requestBotMob.jpg');
   padding: 80px 16.5px;
   &__info {
     display: block;

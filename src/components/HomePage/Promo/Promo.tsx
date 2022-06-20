@@ -45,8 +45,9 @@ const Promo: React.FC = (): JSX.Element => {
             Залиште номер телефону і ми розповімо усі подробиці!
           </p>
           <form className="promo__form" action="">
+            <div className="promo__form__discount">Економія до 40%</div>
             <div className="promo__form-left">
-              <Select options={options} placeholder={""}
+              <Select options={options} placeholder={"Марка"}
               className={`promo__form-left__select`}/>
               <Select options={options} placeholder={'Модель'}
               className={`promo__form-left__select`} />
@@ -71,13 +72,16 @@ const Promo: React.FC = (): JSX.Element => {
           </form>
           </div>
           <div className="promo__wrapper-right">
-          <div className="promo__image">
-          <Image 
-            objectFit="cover"
-            layout="fill"
-            src="/assets/images/hero.jpg"
-          />
-        </div>
+            <div className='promo__wrapper-right-blue'></div>
+            <div className='promo__wrapper-right-orange'></div>
+            <div className='promo__wrapper-right-red'></div>
+            <div className="promo__image">
+            <Image className='promo__image-block'
+              objectFit="cover"
+              layout="fill"
+              src="/assets/images/hero_1.jpg"
+            />
+          </div>
         </div>
           {/* <div
             role="presentation"

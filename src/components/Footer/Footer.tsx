@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import React from 'react'
 import SocialLink from '../SocialLink/SocialLink'
 import LogoSVG from '../../assets/svg/logo.svg'
@@ -56,27 +55,9 @@ const Footer: React.FC = () => {
           <p className="footer__work-time-date">24/7/365</p>
         </div>
         <SocialLink />
-        <div className="footer__development">
-          <a
-            href="https://goodpage.studio/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="footer__development-image">
-              <Image src="/assets/images/gp-logo.png" layout="fill" />
-            </div>
-            <p className="footer__development-text">
-              Сайт разработан GoodPage.studio
-            </p>
-          </a>
-        </div>
+        
       </div>
-      <div className="footer__copyright">
-        <p className="footer__copyright-text">
-          © Copyright - Все права защищены 2021.
-          <br /> CARSFROMWEST
-        </p>
-      </div>
+      
     </footer>
   )
 }
