@@ -10,7 +10,8 @@ const Accordion: React.FC<AccordionProps> = ({
   isOpenInner,
   children,
 }): JSX.Element => {
-  const [isOpen, setOpen] = useState(!!isOpenInner)
+  // const [isOpen, setOpen] = useState(!!isOpenInner)
+  const isOpen = true;
   return (
     <div className="accordion">
       <div
