@@ -68,6 +68,7 @@ const Video: React.FC = () => {
 
   return (
     <section className="video-block">
+      <div className="video-block-container">
       <div className="video-block__info">
         <h2 className="video-block__title">
           Подивіться відео та дізнайтесь як ми привозимо авто в Україну
@@ -97,6 +98,7 @@ const Video: React.FC = () => {
           <div id="player" />
         </div>
         <div className='video-block__video-bg'></div>
+      </div>
       </div>
     </section>
   )

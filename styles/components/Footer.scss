@@ -2,6 +2,7 @@
   overflow: hidden;
   color: $white-transparent-04-color;
   background: #0f2442;
+  padding: 64px 0 80px;
   &__container {
     display: grid;
     grid-template-columns: 1fr;
@@ -28,11 +29,11 @@
     margin-left: 20px;
     padding: 0 15px;
     &-title {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       color: $white-color;
-      font-weight: $fw-500;
+      font-weight: $fw-700;
       font-size: $fs-16;
-      line-height: 120%;
+      line-height: 24px;
     }
     &-list {
       list-style: none;
@@ -41,14 +42,16 @@
       & a {
         position: relative;
         display: block;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
         padding-left: 32px;
-        color: $white-transparent-04-color;
-        font-size: $fs-16;
+        color: #F2F2F2;
+        opacity: 0.9;
+        font-size: $fs-12;
         font-family: $ff-commons;
-        line-height: 120%;
-        letter-spacing: 0.09em;
+        line-height: 18px;
+        letter-spacing: 1px;
         text-decoration: none;
+        font-weight: 500;
 
         &::before {
           position: absolute;
@@ -76,6 +79,7 @@
       padding-left: 32px;
       font-size: $fs-14;
       line-height: 120%;
+      
       &::before {
         position: absolute;
         top: 0;
@@ -89,8 +93,14 @@
         content: '';
       }
       a {
-        color: $white-transparent-04-color;
+        color: #F2F2F2;
+        opacity: 0.9;
+        font-size: $fs-12;
+        font-family: $ff-commons;
+        line-height: 18px;
+        letter-spacing: 1px;
         text-decoration: none;
+        font-weight: 500;
       }
     }
   }
@@ -98,16 +108,19 @@
     margin-top: 20px;
     margin-left: 42px;
     &-title {
+      margin-bottom: 16px;
       color: $white-color;
-      font-weight: $fw-500;
+      font-weight: $fw-700;
       font-size: $fs-16;
-      line-height: 120%;
+      line-height: 24px;
     }
     &-date {
-      margin-top: 20px;
-      font-size: $fs-14;
-      line-height: 120%;
-      letter-spacing: 0.09em;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 1px;
+      color: #F2F2F2;
+      opacity: 0.9;
     }
   }
   &__development {
@@ -147,7 +160,7 @@
 @media screen and (min-width: 768px) {
   .footer {
     position: relative;
-    padding-top: 60px;
+    // padding-top: 60px;
     &__container {
       grid-template-columns: 1fr 1fr 1fr;
     }

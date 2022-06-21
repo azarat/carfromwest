@@ -27,7 +27,15 @@ const AboutUs: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="about-us__image">
+      <div className="about-us__image about-us__image-desc">
+        <Image
+          className="about-us__image-block"
+          src="/assets/images/team-m.jpg"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+      <div className="about-us__image about-us__image-tab">
         <Image
           className="about-us__image-block"
           src="/assets/images/team-xl.jpg"
@@ -35,20 +43,14 @@ const AboutUs: React.FC = () => {
           objectFit="cover"
         />
       </div>
-      {/* <div className="about-us__image-tab">
-        <Image
-          className="about-us__image-block"
-          src="/assets/images/team-m.jpg"
-          layout="fill"
-        />
-      </div>
-      <div className="about-us__image-mob">
+      <div className="about-us__image about-us__image-mob">
           <Image
           className="about-us__image-block"
-          src="/assets/images/team-s.jpg"
+          src="/assets/images/team-xl.jpg"
           layout="fill"
+          objectFit="cover"
         />
-      </div> */}
+      </div>
     </section>
   )
 }

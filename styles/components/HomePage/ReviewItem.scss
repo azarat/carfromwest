@@ -1,26 +1,27 @@
 .reviews-item {
   font-family: $ff-commons;
   &__wrapper {
-    padding: 28px 15px 20px;
+    padding: 48px;
     text-align: left;
     background: #fff;
     box-shadow: 0 0 10px rgb(0 0 0 / 5%);
   }
   &__name {
-    color: #192a3e;
+    color: $black-color;
     font-weight: $fw-700;
-    font-size: $fs-18;
-    line-height: 21px;
+    font-size: $fs-20;
+    line-height: 28px;
   }
   &__text {
     max-width: 275px;
     height: 70px;
     margin-top: 5px;
     overflow: hidden;
-    color: #323c47;
-    font-weight: $fw-300;
-    font-size: $fs-16;
-    line-height: 18px;
+    color: $black-color;
+    font-weight: $fw-500;
+    font-size: $fs-18;
+    line-height: 25px;
+    font-family: 'Gilroy';
   }
   &__btn-wrapper {
     display: flex;
@@ -28,17 +29,18 @@
     justify-content: center;
     max-width: 200px;
     margin-top: 10px;
-    margin-left: auto;
+    // margin-left: auto;
     padding: 10px;
     cursor: pointer;
   }
   &__btn {
     position: relative;
-    color: #9f2000;
-    font-size: $fs-16;
+    color: $black-color;
+    font-size: $fs-18;
     font-family: $ff-commons;
-    line-height: 13px;
+    line-height: 25px;
     background: $transparent;
+    font-weight: 700;
     border: none;
     outline: none;
     cursor: pointer;
@@ -50,8 +52,8 @@
       height: 10px;
       border-right: 1px solid #9f2000;
       border-bottom: 1px solid #9f2000;
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
       content: '';
     }
   }
@@ -125,7 +127,7 @@
       line-height: 25px;
     }
     &__btns-wrapper {
-      display: flex;
+      // display: flex;
       flex-direction: row-reverse;
       grid-row: 2/4;
       grid-column: 2;

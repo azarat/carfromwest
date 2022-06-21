@@ -1,9 +1,9 @@
 export const popularAuto = [
   {
-    name: '2015 MAZDA 6',
+    name: 'Mazda 6 2015',
     usaPrice: '12000',
     uaPrice: '15000',
-    img: '/assets/images/mazda6.png',
+    img: '/assets/images/mazda_6.png',
     filterParams: {
       makes: 'Mazda',
       models: '6',
@@ -12,10 +12,10 @@ export const popularAuto = [
   },
 
   {
-    name: '2015 MAZDA CX-5',
+    name: 'Chevrolet Volt',
     usaPrice: '14000',
     uaPrice: '18000',
-    img: '/assets/images/2015_Mazda_CX-5.png',
+    img: '/assets/images/chevrolet_volt.png',
     filterParams: {
       makes: 'Mazda',
       models: 'CX-5',
@@ -23,10 +23,10 @@ export const popularAuto = [
     },
   },
   {
-    name: '2015 FORD ESCAPE',
+    name: 'Kia Niro Hybrid',
     usaPrice: '12000',
     uaPrice: '15000',
-    img: '/assets/images/2013_Ford_Escape.png',
+    img: '/assets/images/kia-niro.png',
     filterParams: {
       makes: 'Ford',
       models: 'Escape',
@@ -34,10 +34,10 @@ export const popularAuto = [
     },
   },
   {
-    name: '2013 FORD FUSION',
+    name: 'Ford Fusion Hybrid',
     usaPrice: '10000',
     uaPrice: '13000',
-    img: '/assets/images/2013_Ford_Fusion.png',
+    img: '/assets/images/ford_fusion.png',
     filterParams: {
       makes: 'Ford',
       models: 'Fusion',
@@ -45,10 +45,10 @@ export const popularAuto = [
     },
   },
   {
-    name: '2015 SUBARU FORESTER',
+    name: 'Tesla 3',
     usaPrice: '13000',
     uaPrice: '17000',
-    img: '/assets/images/Subaru.png',
+    img: '/assets/images/tesla_3.png',
     filterParams: {
       makes: 'Subaru',
       models: 'Forester',
@@ -56,10 +56,10 @@ export const popularAuto = [
     },
   },
   {
-    name: '2017 HONDA CIVIC',
+    name: 'Toyota Prius Prime',
     usaPrice: '12000',
     uaPrice: '16000',
-    img: '/assets/images/2017_Honda_Civic.png',
+    img: '/assets/images/Toyota_Prius_Prime.png',
     filterParams: {
       makes: 'Honda',
       models: 'Civic',
@@ -78,10 +78,10 @@ export const popularAuto = [
     },
   },
   {
-    name: '2017 CHEVROLET MALIBU',
+    name: 'Chevrolet Malibu',
     usaPrice: '11000',
     uaPrice: '15000',
-    img: '/assets/images/malibu.png',
+    img: '/assets/images/chevrolet_malibu.png',
     filterParams: {
       makes: 'Chevrolet',
       models: 'Malibu',

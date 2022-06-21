@@ -30,6 +30,9 @@
         -ms-flex-align: center;
         & .slider-item {
           pointer-events: none;
+          &__img {
+            width: 600px;
+          }
         }
         &-active {
           transform: scale(1.2);
