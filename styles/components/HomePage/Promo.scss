@@ -5,7 +5,7 @@
   // padding-bottom: 137px;
   &__image {
     position: absolute;
-    width: 700px;
+    width: 95%;
     height: 340px;
     top: 50%;
     left: 50%;
@@ -37,14 +37,14 @@
         left: 0;
         right: 0;
         text-align: center;
-        width: 430px;
+        width: 50%;
         height: 196px;
         background-color: #333399;
         border-radius: 10px;
       }
       &-orange {
         position: absolute;
-        width: 430.51px;
+        width: 50%;
         height: 228.36px;
         background-color: #FF9900;;
         border-radius: 10px;
@@ -54,7 +54,7 @@
       }
       &-red {
         position: absolute;
-        width: 430.51px;
+        width: 50%;
         height: 244.27px;
         bottom:0;
         right:0;
@@ -296,15 +296,15 @@
         height: 295.48px;
         margin-bottom: 64px;
             &-blue {
-              width: 343.23px;
+              width: 50%;
               height: 156.69px;
             }
             &-orange {
-              width: 343.23px;
+              width: 50%;
               height: 182.06px;
             }
             &-red {
-              width: 343.23px;
+              width: 50%;
               height: 194.75px;             
             }
     }
