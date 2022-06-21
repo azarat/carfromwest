@@ -4,6 +4,7 @@ import React from 'react'
 const CheckAuto: React.FC = () => {
   return (
     <div className="check">
+      <div className="check__container">
       <div className="check__wrapper">
         <h2 className="check__title">
           Вже обрали собі авто з іншою компанією?
@@ -18,6 +19,7 @@ const CheckAuto: React.FC = () => {
         </Link>
       </div>
       <div className="check__img" />
+      </div>
     </div>
   )
 }

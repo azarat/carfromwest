@@ -169,6 +169,7 @@
     &__tablet-slider {
       display: block;
       .swiper {
+        
         &-wrapper {
           align-items: center;
           min-height: 300px;
@@ -212,6 +213,7 @@
       // line-height: 36px;
     }
     & .swiper {
+      
       &-wrapper {
         min-height: 390px;
       }
@@ -239,10 +241,10 @@
       }
       &-button {
         &-prev {
-          left: 48%;
+          left: 40%;
         }
         &-next {
-          right: 48%;
+          right: 40%;
         }
       }
     }
