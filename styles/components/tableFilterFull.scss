@@ -9,8 +9,8 @@
     margin-top: 55px;
     padding: 10px;
     background: $white-color;
-    border-radius: 5px;
-    box-shadow: 0px 6px 15px rgba(34, 86, 21, 0.05);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
     & .filter-full__vehicle,
     & .filter-full__year,
     & .filter-full__price,
@@ -20,9 +20,23 @@
       border: none;
     }
     & .filter-full__button {
-      margin: 0 auto;
-      margin-top: 60px;
+      // margin: 0 auto;
+      // margin-top: 60px;
       cursor: pointer;
+
+      margin: 60px -11px -11px;
+      width: calc(100% + 22px);
+      display: block;
+      max-width: none;
+
+      background: #0F2442;
+      border: none;
+      color: #ffffff;
+      font-size: $fs-20;
+      line-height: $fs-24;
+      font-weight: $fw-700;
+      text-transform: none;
+      border-radius: 0px 0px 10px 10px;
     }
   }
 }

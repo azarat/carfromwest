@@ -27,6 +27,7 @@ const CatalogSearch: React.FC<CatalogSearchProps> = ({
 
   return (
     <form className="catalog__search" onSubmit={handleSubmit}>
+      <SearchSVG />
       <input
         disabled={loading}
         className="catalog__search-input"
@@ -40,7 +41,7 @@ const CatalogSearch: React.FC<CatalogSearchProps> = ({
         disabled={loading}
         className="catalog__search-btn"
       >
-        <SearchSVG />
+        Знайти
       </button>
     </form>
   )

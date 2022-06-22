@@ -13,18 +13,18 @@ const Accordion: React.FC<AccordionProps> = ({
   const [isOpen, setOpen] = useState(!!isOpenInner)
   console.log(isOpen);
 
-  const isOpenMock = true;
+  // const isOpenMock = true;
   return (
     <div className="accordion">
       <div
         role="presentation"
-        className={`accordion__title ${isOpenMock ? 'accordion__title--open' : ''}`}
+        className={`accordion__title ${isOpen ? 'accordion__title--open' : ''}`}
         onClick={() => setOpen((prev) => !prev)}
       >
         {title}
       </div>
       <div
-        className={`accordion__item ${!isOpenMock ? 'accordion__item--collapsed' : ''
+        className={`accordion__item ${!isOpen ? 'accordion__item--collapsed' : ''
           }`}
       >
         <div className="accordion__content">{children}</div>

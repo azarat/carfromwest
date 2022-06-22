@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import FilterSVG from '../../assets/svg/filter.svg'
+import AuctionSVG from '../../assets/svg/auction.svg'
 import { IFilter } from '../FilterFull/Types'
 
 type FilterFieldProps = {
@@ -18,9 +18,9 @@ const FilterField: React.FC<FilterFieldProps> = ({ setOpen }): JSX.Element => {
         className="filter-field__button"
       >
         <div className="filter-field__button-icon">
-          <FilterSVG />
+          <AuctionSVG />
         </div>
-        <div className="filter-field__button-text">Фильтр</div>
+        <div className="filter-field__button-text">Авто з аукционів</div>
       </div>
     </div>
   )

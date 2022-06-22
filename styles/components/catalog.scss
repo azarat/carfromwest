@@ -9,7 +9,9 @@
 
     &__filters-wrapper {
       display: grid;
-      grid-template-columns: 180px auto auto;
+      align-items: center;
+      grid-template-columns: 350px auto auto;
+      column-gap: 20px;
     }
   }
 }

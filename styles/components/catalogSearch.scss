@@ -2,9 +2,22 @@
   &__search {
     display: flex;
     width: 100%;
-    max-width: 375px;
-    height: 38px;
-    border-bottom: 1px solid $black-color;
+    // max-width: 375px;
+    // height: 38px;
+    // border-bottom: 1px solid $black-color;
+
+    height: 66px;
+    padding: 18px 20px;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+    position: relative;
+    padding-right: 145px;
+
+    & > svg {
+      margin-right: 20px;
+    }
+
     &-input {
       width: 100%;
       background-color: $transparent;
@@ -14,9 +27,20 @@
     &-btn {
       min-width: 50px;
       height: 100%;
-      background-color: $transparent;
+      background-color: #0F2442;
       border: none;
       cursor: pointer;
+      padding: 18px 27px 18px 36px;
+      color: #ffffff;
+      border-radius: 10px;
+      font-size: $fs-20;
+      line-height: $fs-24;
+      font-weight: $fw-700;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+
+
       & svg {
         width: 20px;
         height: 20px;
@@ -45,8 +69,9 @@
     &__search {
       grid-row: 1;
       grid-column: 2;
-      height: 38px;
-      margin-left: 190px;
+      // height: 38px;
+      height: 66px;
+      // margin-left: 190px;
     }
   }
 }
