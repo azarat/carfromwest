@@ -77,23 +77,61 @@
             position: absolute;
             right: 0px;
             bottom: 5px;
-            width: 15px;
-            height: 15px;
-            border-right: 2px solid black;
-            border-bottom: 2px solid black;
-            transform: rotate(135deg);
+            width: 30px;
+            height: 30px;
+            
+            // border-right: 2px solid black;
+            // border-bottom: 2px solid black;
+            // transform: rotate(135deg);
             content: '';
           }
         }
         &-prev {
+          // background-image: url('../../../public/assets/svg/arrow-right.svg');
           bottom: 45px;
           left: 120px;
+          &::after {
+            // transform: rotate(-45deg);
+            background-image: url('../../../public/assets/svg/arrow-left.svg');
+          }
         }
         &-next {
+          
           right: 120px;
           bottom: 45px;
           &::after {
-            transform: rotate(-45deg);
+            // transform: rotate(-45deg);
+            background-image: url('../../../public/assets/svg/arrow-right1.svg');
+          }
+        }
+      }
+      &-pagination {
+        &-bullet {
+          position: relative;
+          margin: 0 8px !important;
+          background: $black-color !important;
+          opacity: 0.2;
+          &::before {
+            position: absolute;
+            // top: -3px;
+            right: 0;
+            bottom: 0;
+            // left: -4px;
+            display: block;
+            // width: 8px;
+            // height: 16px;
+            background: $black-color !important;
+            border-radius: 50%;
+            opacity: 0.2;
+            // transition: opacity 0.2s ease;
+            content: '';
+          }
+          &-active {
+            opacity: 1;
+            
+            &::before {
+              opacity: 1;
+            }
           }
         }
       }
@@ -131,6 +169,7 @@
     &__tablet-slider {
       display: block;
       .swiper {
+        
         &-wrapper {
           align-items: center;
           min-height: 300px;
@@ -174,6 +213,7 @@
       // line-height: 36px;
     }
     & .swiper {
+      
       &-wrapper {
         min-height: 390px;
       }
@@ -201,10 +241,10 @@
       }
       &-button {
         &-prev {
-          left: 48%;
+          left: 40%;
         }
         &-next {
-          right: 48%;
+          right: 40%;
         }
       }
     }
