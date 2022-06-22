@@ -11,7 +11,7 @@ import DriveTypeSVG from '../../../src/assets/svg/drive_type.svg'
 
 const CatalogItem: React.FC<CatalogItemProps> = ({
   fuelType,
-  hightBid,
+  // hightBid,
   imageUrl,
   lotNumber,
   make,
