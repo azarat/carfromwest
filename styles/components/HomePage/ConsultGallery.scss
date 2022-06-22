@@ -62,13 +62,13 @@
 @media only screen and (min-width: 1200px) {
   .consult {
     &__gallery {
-      grid-template-rows: 230px 130px;
+      grid-template-rows: 230px 135px;
       grid-template-columns: repeat(4, 1fr);
       &-last {
         top: 236px;
         right: 0px;
         width: calc(25% - 3px);
-        height: 130px;
+        height: 135px;
         &-mobile {
           display: none;
         }
@@ -137,4 +137,99 @@
       }
     }
   }
+}
+
+
+@media screen and(max-width: 1200px) {
+  .consult {
+    &__gallery {
+      position: relative;
+      display: grid;
+      grid-template-rows: 230px 135px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      width: 100%;
+      margin: 0;
+      &-last {
+        top: 236px;
+        right: 0px;
+        width: calc(25% - 3px);
+        height: 135px;
+        &-mobile {
+          display: none;
+        }
+        &-tablet {
+          display: inline;
+        }
+      }
+      &-img {
+        border-radius: 10px;
+        &:nth-of-type(3) {
+          grid-row: 1;
+          grid-column: span 2;
+          height: 100%;
+        }
+        &:nth-of-type(n + 5) {
+          display: block;
+        }
+        &:nth-of-type(n + 8) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          filter: unset;
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+@media screen and(max-width: 768px) {
+  .consult {
+    &__gallery {
+      position: relative;
+      display: grid;
+      grid-template-rows: 230px 156px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      width: 100%;
+      margin: 0;
+      &-last {
+        top: 236px;
+        right: 0px;
+        width: calc(50% - 3px);
+        height: 156px;
+        &-mobile {
+          display: none;
+        }
+        &-tablet {
+          display: inline;
+        }
+      }
+      &-img {
+        border-radius: 10px;
+        &:nth-of-type(3) {
+          grid-row: 2;
+          grid-column: span 1;
+          height: 100%;
+        }
+        &:nth-of-type(n + 5) {
+          display: block;
+        }
+        &:nth-of-type(n + 8) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          filter: unset;
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
 }

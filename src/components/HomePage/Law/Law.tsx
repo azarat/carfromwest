@@ -15,11 +15,22 @@ const Law: React.FC = () => {
         </div>
       </div>
       <div className="law__image">
-        <Image
+        <div className="law__image-desc"><Image
           className="law__image-block"
-          src="/assets/images/law.jpg"
+          src="/assets/images/jeep-desc.png"
           layout="fill"
-        />
+        /></div>
+        <div className="law__image-tab"><Image
+          className="law__image-block"
+          src="/assets/images/jeep-tab.png"
+          layout="fill"
+        /></div>
+        <div className="law__image-mob"><Image
+          className="law__image-block"
+          src="/assets/images/jeep-mob.png"
+          layout="fill"
+        /></div>
+        
       </div>
       </div>
     </section>

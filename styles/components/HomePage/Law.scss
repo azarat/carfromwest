@@ -74,6 +74,13 @@
     width: 537px;
     height: 100%;
     border-radius: 10px;
+
+    &-tab {
+      display: none;
+    }
+    &-mob {
+      display: none;
+    }
     
     &-block {
       border-radius: 0px 10px 10px 0px;
@@ -94,6 +101,7 @@
 @media screen and (max-width: 1200px) {
   .law {
     padding: 96px 32px;
+
   &__container {
     padding-top: 85px ;
     padding-bottom: 79px ;
@@ -117,6 +125,12 @@
   
   &__image {
     width: 367px;
+    &-desc {
+      display: none;
+    }
+    &-tab {
+      display: block;
+    }
   }
   }
 }
@@ -152,9 +166,15 @@
 
   &__image {
     position: relative;
-    width: 361px;
+    width: 100%;
     height: 317px;
     margin: 0 auto;
+    &-desc {
+      display: none;
+    }
+    &-mob {
+      display: block;
+    }
     &-block {
       border-radius: 0 0 0 0;
     }
