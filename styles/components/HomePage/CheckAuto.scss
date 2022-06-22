@@ -1,9 +1,14 @@
 .check {
-  padding-top: 246px;
-  padding-bottom: 246px;
-  padding-left: 390px;
+  
   overflow: hidden;
   background-color: $white-color;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 246px 0 166px;
+    width: 1144px;
+  }
   & a {
     text-decoration: none;
   }
@@ -77,7 +82,7 @@
     }
     &__img {
       position: absolute;
-      top: calc(50% - 185px);
+      // top: calc(50% - 185px);
       right: -5px;
       width: 392px;
       height: 370px;
@@ -101,9 +106,9 @@
     &__text {
     }
     &__img {
-    transform: translate(0, -50%);
-      width: 948px;
-      height: 633px;
+      bottom: 40%;
+      width: 800px;
+      height: 500px;
       background-image: url(/assets/images/checkBg-desktop.png);
     }
   }

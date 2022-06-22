@@ -22,6 +22,26 @@ const Header: React.FC = () => {
   return (
     <>
       <header className="header">
+        <div className='header__wrapper-left'>
+        <div
+          role="presentation"
+          onClick={handleOpenMenu}
+          className="header__menu"
+        >
+          <div
+            className={
+              open
+                ? `header__menu-burger header__menu-burger--open`
+                : 'header__menu-burger'
+            }
+          >
+           {open ? <MenuBurgerCloseSVG width={17} height={14}/> : <MenuBurgerOpenSVG width={17} height={14}/>} 
+            
+            {/* <span className="header__menu-burger-stroke-top" />
+            <span className="header__menu-burger-stroke" />
+            <span className="header__menu-burger-stroke-bottom" /> */}
+          </div>
+        </div>
         <div className="header__logo">
           <Link href="/">
             <a>
@@ -34,6 +54,8 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
+        </div>
+        
         <div className="header__search">
           <SearchInput id="header-search" />
         </div>
@@ -69,25 +91,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        <div
-          role="presentation"
-          onClick={handleOpenMenu}
-          className="header__menu"
-        >
-          <div
-            className={
-              open
-                ? `header__menu-burger header__menu-burger--open`
-                : 'header__menu-burger'
-            }
-          >
-           {open ? <MenuBurgerCloseSVG width={17} height={14}/> : <MenuBurgerOpenSVG width={17} height={14}/>} 
-            
-            {/* <span className="header__menu-burger-stroke-top" />
-            <span className="header__menu-burger-stroke" />
-            <span className="header__menu-burger-stroke-bottom" /> */}
-          </div>
-        </div>
+        
         
       </header>
       <HeaderMenu open={open} setOpen={handleOpenMenu} />
