@@ -131,13 +131,14 @@
     }
     & .line {
       position: absolute;
-      top: 50%;
+      top: calc(50% - 3px);
       left: 0;
       display: block;
       max-width: 100%;
-      height: 2px;
-      background: #000;
+      height: 5px;
+      background: #0F2442;
       transition: 1s linear;
+      z-index: 2;
       &.start {
         transition: none;
       }
@@ -164,14 +165,14 @@
       left: 0;
       z-index: 1;
       width: 100%;
-      height: 2px;
+      height: 5px;
       transform: translateY(-50%);
       background: #f2f2f2;
       &:after {
         position: absolute;
         width: 100%;
         height: 100%;
-        background: #0F2442;
+        background: #f2f2f2;
         content: '';
       }
     }
