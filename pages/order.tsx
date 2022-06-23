@@ -1,12 +1,11 @@
 import { NextPage } from 'next'
 import React, { MouseEventHandler, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import InputMask from 'react-input-mask'
-import ArrowBackSVG from '../src/assets/svg/arrowBack.svg'
+// import InputMask from 'react-input-mask'
 import Link from 'next/link'
 import RightPolygonSVG from '../src/assets/svg/right-polygon.svg'
 
-const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
+// const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const Order: NextPage = () => {
   const [connectType, setConnectType] = useState<string>('tel')
@@ -121,8 +120,8 @@ const Order: NextPage = () => {
           onChange={(e) => setName(e.target.value)} />
         </span>
         <span className="order__form__thumb">
-          <InputMask
-          alwaysShowMask
+          <input
+          // alwaysShowMask
           type="text"
           className={`order__form-input ${
             errors.includes('phone') ? 'order__form-input--error' : ''
