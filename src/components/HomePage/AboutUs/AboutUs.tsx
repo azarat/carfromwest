@@ -38,7 +38,7 @@ const AboutUs: React.FC = () => {
       <div className="about-us__image about-us__image-tab">
         <Image
           className="about-us__image-block"
-          src="/assets/images/team-xl.jpg"
+          src="/assets/images/team-m.jpg"
           layout="fill"
           objectFit="cover"
         />
@@ -46,7 +46,7 @@ const AboutUs: React.FC = () => {
       <div className="about-us__image about-us__image-mob">
           <Image
           className="about-us__image-block"
-          src="/assets/images/team-xl.jpg"
+          src="/assets/images/team-m.jpg"
           layout="fill"
           objectFit="cover"
         />

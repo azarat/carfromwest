@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 
 const CheckAuto: React.FC = () => {
@@ -18,7 +19,29 @@ const CheckAuto: React.FC = () => {
           </a>
         </Link>
       </div>
-      <div className="check__img" />
+      <div className="check__img">
+        <div className="check__img-desc">
+          <Image
+              src="/assets/images/check-xl.png"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="check__img-tab">
+          <Image
+              src="/assets/images/check-m.png"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="check__img-mob">
+          <Image
+              src="/assets/images/check-s.png"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+      </div>
       </div>
     </div>
   )

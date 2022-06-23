@@ -1,7 +1,6 @@
 .consult {
   position: relative;
-  padding-top: 96px;
-  padding-bottom: 96px;
+  padding: 96px 0;
   overflow: hidden;
   background-color: $white-color;
   & a {
@@ -51,7 +50,6 @@
     width: 100%;
     max-width: 215px;
     height: 45px;
-    margin-top: 20px;
     color: $white-color;
     font-weight: $fw-800;
     font-size: $fs-12;
@@ -103,4 +101,71 @@
       max-width: 505px;
     }
   }
+}
+
+
+@media screen and (max-width: 1200px)  {
+  .consult {
+    padding: 80px 32px;
+    &__wrapper {
+      display: block;
+    }
+    &__inner {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__title {
+      margin-bottom: 16px;
+    }
+    
+    &__click {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      &-text {
+        margin-right: 15px;
+        color: #1f181a;
+        font-weight: $fw-600;
+        font-size: $fs-22;
+        line-height: 150%;
+      }
+    }
+    &__btn {
+      margin-bottom: 64px;
+    }
+  }
+  
+  
+}
+
+@media screen and (max-width: 768px)  {
+  .consult {
+    padding: 64px 16px;
+    
+    &__inner {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__title {
+      margin-bottom: 16px;
+      font-size: 26px;
+      line-height: 32px;
+    }
+    
+    &__click {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      &-text {
+        margin-right: 15px;
+        color: #1f181a;
+        font-weight: $fw-600;
+        font-size: $fs-22;
+        line-height: 150%;
+      }
+    }
+    &__btn {
+      margin-bottom: 54px;
+    }
+  }  
 }

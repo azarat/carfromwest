@@ -16,6 +16,13 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
   return (
     <div className="reviews-item">
       <div className="reviews-item__wrapper">
+      <div className="reviews-item__photos">
+          {images.slice(0, 4).map((el) => (
+            <div key={el} className="reviews-item__photo-wrapper">
+              <Image src={el} layout="fill" />
+            </div>
+          ))}
+        </div>
         <div className="reviews-item__review">
           <p className="reviews-item__name">{name}</p>
           <div
@@ -32,7 +39,7 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
                 handleFullReview()
               }}
             >
-              Развернуть отзыв
+              Розгорнути відгук
             </button>
           </div>
           {/* <a
@@ -45,13 +52,7 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
           </a> */}
         </div>
 
-        <div className="reviews-item__photos">
-          {images.slice(0, 4).map((el) => (
-            <div key={el} className="reviews-item__photo-wrapper">
-              <Image src={el} layout="fill" />
-            </div>
-          ))}
-        </div>
+        
       </div>
     </div>
   )

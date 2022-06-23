@@ -132,6 +132,8 @@
             &::before {
               opacity: 1;
             }
+            
+           
           }
         }
       }
@@ -234,7 +236,10 @@
             }
             &__photo-wrapper {
               width: 165px;
-              height: 125px;
+              height: 100%;
+              & div {
+                border-radius: 10px;
+              }
             }
           }
         }
@@ -266,5 +271,35 @@
         width: 60% !important;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .client-reviews {
+    padding-top: 96px;
+    padding-bottom: 96px;
+    &__title {
+      font-size: 40px;
+      line-height: 125%;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .client-reviews {
+    padding: 80px 16px;
+
+    &__title {
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+}
+
+.reviews-item__photo-wrapper {
+  & div {
+    border-radius: 10px;
   }
 }
