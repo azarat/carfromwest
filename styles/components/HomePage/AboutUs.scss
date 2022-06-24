@@ -200,7 +200,7 @@
     &__image {
       position: relative;
       // height: 255px;
-      width: 100%;
+      width: 460px;
       margin: 0 auto;
       &-tab {
         display: none;
@@ -210,6 +210,19 @@
       }
       &-mob {
         display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-us {
+    &__image {
+      width: calc(100% + 32px);
+      height: 255px;
+      margin: 0 -16px;
+      &-block {
+        border-radius: 0;
       }
     }
   }
