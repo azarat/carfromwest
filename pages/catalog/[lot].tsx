@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import CarPageCarousel from '../../src/components/CarPageCarousel/CarPageCarousel'
 // SVG
-import InfoSVG from '../../src/assets/svg/info.svg'
+// import InfoSVG from '../../src/assets/svg/info.svg'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -29,8 +29,8 @@ import ClockSVG from '../../src/assets/svg/clock.svg'
 // Types
 import { CarPageProps } from '../../src/Types/Types'
 import Countdown from '../../src/components/Countdown/Countdown'
-import { dateToText } from '../../src/helpers/dateToText'
-import Consultation from '../../src/components/Consultation/Consultation'
+// import { dateToText } from '../../src/helpers/dateToText'
+// import Consultation from '../../src/components/Consultation/Consultation'
 
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
@@ -120,21 +120,23 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <p>текущая ставка</p>
                   <span>${car.saleInfo.currentBid.value}</span>
                 </div> */}
+                {car.auctionDate && (
                   <>
-                    <div className="car-page__timer-wrapper">
-                      <div className="car-page__timer-left">
-                        <img loading="lazy" src="/assets/images/copart.png" alt="" />
+                  <div className="car-page__timer-wrapper">
+                    <div className="car-page__timer-left">
+                      <img loading="lazy" src="/assets/images/copart.png" alt="" />
+                    </div>
+                    <div className="car-page__timer-right">
+                      <div className="car-page__time">
+                        ДО СТАРТУ ТОРГІВ ЗАЛИШИЛОСЬ
                       </div>
-                      <div className="car-page__timer-right">
-                        <div className="car-page__time">
-                          ДО СТАРТУ ТОРГІВ ЗАЛИШИЛОСЬ
-                        </div>
-                        <div className="car-page__timer">
-                          <Countdown date={`11:12:22 20.02.2023`} />
-                        </div>
+                      <div className="car-page__timer">
+                        <Countdown date={auctionDateEnd.toISOString()} />
                       </div>
                     </div>
-                  </>
+                  </div>
+                </>
+              )}
 
                 <div className="car-page__btn">
                   <button

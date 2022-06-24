@@ -22,7 +22,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   brandModels,
 }): JSX.Element => {
   const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
-  const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
+  // const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [marks, setMarks] = useState()
@@ -39,6 +39,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
+  console.log(isLoading);
+  
 
   const router = useRouter()
 
@@ -55,20 +57,20 @@ const FilterTable: React.FC<FilterTableProps> = ({
     setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
   }, [filter])
 
-  // useEffect(() => {
-  //   const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((json) =>
-  //       setMarks(
-  //         json?.makes.sort().map((val: string) => ({
-  //           label: val,
-  //           value: val,
-  //         })) || []
-  //       )
-  //     )
-  //     .catch(() => setMarks(undefined))
-  // }, [vehicle])
+  useEffect(() => {
+    const url = `/api/filter?filters=makes`
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) =>
+        setMarks(
+          json?.makes.sort().map((val: string) => ({
+            label: val,
+            value: val,
+          })) || []
+        )
+      )
+      .catch(() => setMarks(undefined))
+  }, [])
 
 
   useEffect(() => {

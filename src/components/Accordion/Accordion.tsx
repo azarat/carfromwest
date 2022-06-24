@@ -10,7 +10,7 @@ const Accordion: React.FC<AccordionProps> = ({
   isOpenInner,
   children,
 }): JSX.Element => {
-  const [isOpen, setOpen] = useState(!!isOpenInner ? isOpenInner : true)
+  const [isOpen, setOpen] = useState<boolean>(!!isOpenInner ? isOpenInner : true)
 
   // const isOpenMock = true;
   return (

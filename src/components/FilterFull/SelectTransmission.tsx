@@ -41,26 +41,26 @@ const SelectTransmission: React.FC<FieldProps & CustomSelectProps> = ({
 
 
   const selectStyles = {
-    option: (provided, state) => ({
+    option: (provided: any) => ({
       ...provided
     }),
-    control: (provided, state) => ({
+    control: (provided: any) => ({
       ...provided,
       borderColor: '#E0E0E0',
       borderRadius: '10px',
       minHeight: (windowDimensions.width <= 1920) ? '40px' : '60px'
     }),
-    input: (provided, state) => ({
+    input: (provided: any) => ({
       ...provided,
     }),
-    placeholder: (provided, state) => ({
+    placeholder: (provided: any) => ({
       ...provided,
       fontSize: (windowDimensions.width <= 1920) ? '14px' : '20px',
       lineHeight: (windowDimensions.width <= 1920) ? '16px' : '24px',
       fontWeight: '500',
       color: '#BDBDBD'
     }),
-    singleValue: (provided, state) => ({
+    singleValue: (provided: any) => ({
       ...provided,
       fontSize: (windowDimensions.width <= 1920) ? '14px' : '20px',
       lineHeight: (windowDimensions.width <= 1920) ? '16px' : '24px',
@@ -69,7 +69,7 @@ const SelectTransmission: React.FC<FieldProps & CustomSelectProps> = ({
     })
   }
 
-  const DropdownIndicator = props => {
+  const DropdownIndicator = (props: any) => {
     return (
       <components.DropdownIndicator {...props}>
         <ArrowSVG />

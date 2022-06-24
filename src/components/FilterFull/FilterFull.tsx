@@ -8,7 +8,7 @@ import EngineSVG from '../../assets/svg/engine.svg'
 import SpeedSVG from '../../assets/svg/speed.svg'
 
 // Constants
-import { years, gas, transmissions, vehicleTypes } from '../../constants/filter'
+import { years, gas, transmissions } from '../../constants/filter'
 
 import { FilterFullProps, IFilter } from './Types'
 import SelectMake from './SelectMake'
@@ -22,7 +22,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
   loading,
   makes,
 }): JSX.Element => {
-  const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
+  // const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [marks, setMarks] = useState()
@@ -42,10 +42,10 @@ const FilterFull: React.FC<FilterFullProps> = ({
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
-  const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement
-    setVehicle(target.value)
-  }
+  // const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
+  //   const target = e.target as HTMLInputElement
+  //   setVehicle(target.value)
+  // }
 
   useEffect(() => {
     setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
@@ -53,7 +53,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
   }, [filter])
 
   useEffect(() => {
-    const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
+    const url = `/api/filter?filters=makes`
     fetch(url)
       .then((res) => res.json())
       .then((json) =>
@@ -65,7 +65,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
         )
       )
       .catch(() => setMarks(undefined))
-  }, [vehicle])
+  }, [])
 
   useEffect(() => {
     if (currentMark && !currentModel) {
@@ -73,7 +73,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
       setCurrentModel('')
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models&vehicleType=${vehicle}&makes=${currentMark}`
+      const url = `/api/filter?filters=makes,models&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
         .then((json) =>
@@ -87,13 +87,13 @@ const FilterFull: React.FC<FilterFullProps> = ({
         .catch(() => setModels(undefined))
         .finally(() => setLoading(false))
     }
-  }, [vehicle, currentMark, currentModel])
+  }, [currentMark, currentModel])
 
   useEffect(() => {
     if (currentModel) {
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models,bodyStyles&vehicleType=${vehicle}&makes=${currentMark}&models=${currentModel}`
+      const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}&models=${currentModel}`
       fetch(url)
         .then((res) => res.json())
         .then((json) => setBodyStyles(json?.bodyStyles.sort()))
@@ -102,7 +102,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
           setBodyStyle('')
         })
     }
-  }, [vehicle, currentMark, currentModel])
+  }, [currentMark, currentModel])
 
   useEffect(() => {
     open
@@ -126,7 +126,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
           'trims',
           'saleDocumentsGroups',
           'transmissionTypes',
-          'vehicleTypes',
+          // 'vehicleTypes',
           'locations',
           'vehicleConditions',
           'features',
@@ -138,7 +138,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
       page: 1,
       includeFilters,
     }
-    if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
+    // if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
     if (currentMark) newFilter.makes = [currentMark]
     if (currentModel) newFilter.models = [currentModel]
     if (values.engineFrom || values.engineTo) {
@@ -173,7 +173,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
       </button>
       <Formik
         initialValues={{
-          vehicleTypes: vehicle,
+          // vehicleTypes: vehicle,
           bodyStyles: bodyStyle,
           fromYear: '',
           toYear: '',
@@ -213,7 +213,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
               />
             </div>
           )}
-          {vehicle === 'automobile' && currentModel && bodyStyles.length > 0 && (
+          {currentModel && bodyStyles.length > 0 && (
             <div className="filter-full__transmission">
               <h3 className="filter-full__title">Тип кузова</h3>
               <Field
