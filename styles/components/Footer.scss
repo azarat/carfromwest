@@ -1,7 +1,7 @@
 .footer {
   overflow: hidden;
   color: $white-transparent-04-color;
-  background: #0f2442;
+  background: #0F2442;
   padding: 64px 0 80px;
   &__container {
     display: grid;
@@ -11,7 +11,6 @@
     padding: 0 15px;
   }
   &__logo {
-    margin-top: 20px;
     margin-bottom: 0;
     margin-left: 20px;
     padding: 0 15px;
@@ -24,7 +23,6 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    margin-top: 20px;
     margin-bottom: 0;
     margin-left: 20px;
     padding: 0 15px;
@@ -59,7 +57,7 @@
           left: 0;
           width: 20px;
           height: 20px;
-          background: url('/assets/svg/phone.svg');
+          background: url('/assets/svg/phone_foo.svg');
           background-repeat: no-repeat;
           background-position: center center;
           background-size: 15px 15px;
@@ -86,7 +84,7 @@
         left: 0;
         width: 20px;
         height: 20px;
-        background: url('/assets/svg/location.svg');
+        background: url('/assets/svg/address-foo.svg');
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 15px 15px;
@@ -105,7 +103,6 @@
     }
   }
   &__work-time {
-    margin-top: 20px;
     margin-left: 42px;
     &-title {
       margin-bottom: 16px;
@@ -124,7 +121,6 @@
     }
   }
   &__development {
-    margin-top: 20px;
 
     & a {
       display: flex;
@@ -157,30 +153,56 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1199px) {
   .footer {
-    position: relative;
-    // padding-top: 60px;
+    padding: 48px 32px;
     &__container {
-      grid-template-columns: 1fr 1fr 1fr;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
     }
-    &__copyright {
-      & br {
-        display: none;
-      }
+    &__logo {
+      margin-bottom: 40px;
+      margin-left: 0;
+      padding: 0;
+      grid-column: span 3;
+    
     }
-    &__development {
-      position: absolute;
-      right: 50px;
-      bottom: 40px;
-      &-text {
-        max-width: unset;
-      }
-    }
-    & .social-link {
-      grid-column: 2;
+    &__contacts {
+      margin-bottom: 0;
+      margin-left: 0;
+      padding: 0;
     }
   }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 16px 16px;
+
+    &__container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+    &__logo {
+      margin-bottom: 48px;
+      grid-column: span 2;
+    
+    }
+    &__work-time {
+      margin-left: auto;
+    }
+    
+    & .social-link {
+      display: none;
+    }
+  }
+  
 }
 
 @media screen and (min-width: 1200px) {
@@ -225,4 +247,8 @@
       right: calc(50vw - 650px);
     }
   }
+}
+
+.social-link {
+  margin-top: 0;
 }
