@@ -32,6 +32,7 @@ import Countdown from '../../src/components/Countdown/Countdown'
 import { dateToText } from '../../src/helpers/dateToText'
 import Consultation from '../../src/components/Consultation/Consultation'
 
+
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const router = useRouter()
   const [car, setCar] = useState(carResponse)
@@ -58,6 +59,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const handleCost = () => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('url', window.location.href)
+      localStorage.setItem('autoVin', car.lotInfo.vin)
       router.push({ pathname: '/order' })
     }
   }
