@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
 import { NavItems } from '../../constants/NavItems'
 import SocialLink from '../SocialLink/SocialLink'
-
+import SearchInput from '../SearchInput/SearchInput'
 interface IHeaderMenu {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -11,6 +11,9 @@ interface IHeaderMenu {
 const HeaderMenu: React.FC<IHeaderMenu> = ({ open, setOpen }) => {
   return (
     <div className={`header-menu ${open ? 'header-menu--open' : ''}`}>
+      <div className="header__search header__search-mob">
+          <SearchInput id="header-search" />
+        </div>
       <nav className="header-menu__nav">
         <ul className="header-menu__nav-list">
           {NavItems.map(({ id, href, title }, idx) => (
@@ -30,23 +33,6 @@ const HeaderMenu: React.FC<IHeaderMenu> = ({ open, setOpen }) => {
         </ul>
       </nav>
       <SocialLink />
-      <div className="header-menu__phone">
-        <span className="header-menu__phone-number">
-          <a
-            className="header-menu__phone-number-link header-menu__phone-number-link--desktop"
-            href="tel:+380443343869"
-          >
-            +38 (044) 334-38-69
-          </a>
-          <a
-            className="header-menu__phone-number-link header-menu__phone-number-link--mobile"
-            href="tel:0683288818"
-          >
-            068 328 88 18
-          </a>
-        </span>
-        <span className="header-menu__phone-cost">Звонок бесплатный</span>
-      </div>
     </div>
   )
 }
