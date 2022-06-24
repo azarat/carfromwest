@@ -1,18 +1,18 @@
 import { NextPage } from 'next'
 import React, { MouseEventHandler, useState } from 'react'
-import { useRouter } from 'next/router'
-import InputMask from 'react-input-mask'
-import ArrowBackSVG from '../src/assets/svg/arrowBack.svg'
+// import InputMask from 'react-input-mask'
+import Link from 'next/link'
 
-const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
+// const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const Check: NextPage = () => {
+  const [wishes, setWishes] = useState<string>('')
   const [connectType, setConnectType] = useState<string>('tel')
   const [name, setName] = useState<string>('')
-  const [wishes, setWishes] = useState<string>('')
   const [phone, setPhone] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
-  const router = useRouter()
+  const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  // const router = useRouter()
 
   const handleSend: MouseEventHandler = async (e) => {
     e.preventDefault()
@@ -40,7 +40,7 @@ const Check: NextPage = () => {
         setName('')
         setPhone('')
         localStorage.removeItem('url')
-        router.push({ pathname: '/thanks' })
+        setIsFormSend(true)
       }
     }
   }
@@ -48,85 +48,101 @@ const Check: NextPage = () => {
   const validate = (): string[] => {
     const initErrors: string[] = []
     if (name.length < 2) initErrors.push('name')
-    if (!numberRegEpx.test(phone)) initErrors.push('phone')
+    // if (!numberRegEpx.test(phone)) initErrors.push('phone')
     setErrors([...initErrors])
     return initErrors
   }
 
+
   return (
-    <div className="check-auto">
-      <div className="check-auto__wrapper">
-        <ArrowBackSVG className="check__back" onClick={() => router.back()} />
-        <h1 className="check-auto__title">проверить авто</h1>
-        <form className="check-auto__form">
+    <div className="order">
+      
+      <div className="order__wrapper">
+        
+        
+       {isFormSend ? <form className="order__form">
+        <h1 className="order__title-thanks">ДЯКУЄМО
+        ЗА ЗАЯВКУ<span className='order__form-title'>!</span></h1>
+        <p className='order__text'>Наш менеджер зв’яжеться з Вами в найближчий час</p>
+        <button className="order__form-btn" >
+        <Link href="/">
+                  <a>
+                    На головну 
+                  </a>
+                </Link>
+          </button>
+      </form>
+        : 
+      <form className="order__form order__form" style={{marginTop: "5%"}}>
+      <h1 className="order__title"><span className='order__form__line-start'></span>Перевірити авто<span style={{width: "50%", marginLeft: "10px"}} className='order__form__line-end'></span></h1>
+      <div className="order__form__input-wrapper">
+        <span className="order__form__thumb">
+          <input 
+          className={`order__form-input ${
+          errors.includes('name') ? 'order__form-input--error' : ''
+          }`}
+          placeholder="Ваше ім’я"
+          value={name}
+          onChange={(e) => setName(e.target.value)} />
+        </span>
+        <span className="order__form__thumb">
           <input
-            type="text"
-            className={`check-auto__form-input ${
-              errors.includes('name') ? 'check-auto__form-input--error' : ''
-            }`}
-            placeholder="Ваше имя"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+          // alwaysShowMask
+          type="text"
+          className={`order__form-input ${
+            errors.includes('phone') ? 'order__form-input--error' : ''
+          }`}
+          placeholder="Номер телефону"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           />
-          <InputMask
-            mask="+380\(99) 999-99-99"
-            alwaysShowMask
-            type="text"
-            className={`check-auto__form-input ${
-              errors.includes('phone') ? 'check-auto__form-input--error' : ''
-            }`}
-            placeholder="Ваш телефон"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <div className="check-auto__form-textarea-wrapper">
+        </span>
+        <span className="order__form__thumb">
             <textarea
               name="wishes"
-              className="check-auto__form-textarea"
+              className="order__form-input"
+              placeholder='Ваш коментар'
               value={wishes as string}
               onChange={(e) => setWishes(e.target.value)}
             />
-            {wishes?.length === 0 && (
-              <label
-                className="check-auto__form-textarea-label"
-                htmlFor="wishes"
-              >
-                Комментарий
-              </label>
-            )}
-          </div>
-          <div className="check-auto__form-checkbox-wrapper">
-            <input
-              id="tel"
-              name="tel"
-              type="checkbox"
-              className="check-auto__form-checkbox"
-              onChange={() => setConnectType('tel')}
-              checked={connectType === 'tel'}
-            />
-            <label className="check-auto__form-label" htmlFor="tel">
-              Консультация по телефону
-            </label>
-          </div>
-          <div className="check-auto__form-checkbox-wrapper">
-            <input
-              type="checkbox"
-              id="messanger"
-              name="messanger"
-              className="check-auto__form-checkbox"
-              onChange={() => setConnectType('messanger')}
-              checked={connectType === 'messanger'}
-            />
-            <label className="check-auto__form-label" htmlFor="messanger">
-              <span>Отправить информацию в Вайбер/Телеграм</span>
-            </label>
-          </div>
-          <button className="check-auto__form-btn" onClick={handleSend}>
-            отправить
-          </button>
-        </form>
+        </span>
       </div>
-      <div className="check-auto__img" />
+      <div className="order__form-checkbox-wrappers">
+        <div className="order__form-checkbox-wrapper">
+          <input
+            id="tel"
+            name="tel"
+            type="checkbox"
+            className="order__form-checkbox"
+            onChange={() => setConnectType('tel')}
+            checked={connectType === 'tel'}
+          />
+          <label className="order__form-label" htmlFor="tel">
+            Консультація по телефону
+          </label>
+        </div>
+        
+        <div className="order__form-checkbox-wrapper">
+          <input
+            type="checkbox"
+            id="messanger"
+            name="messanger"
+            className="order__form-checkbox"
+            onChange={() => setConnectType('messanger')}
+            checked={connectType === 'messanger'}
+          />
+          <label className="order__form-label" htmlFor="messanger">
+            Відправити інформацію в Вайбер/Телеграм
+          </label>
+        </div>
+      </div>
+      <button className="order__form-btn" onClick={handleSend}>
+        Відправити
+      </button>
+    </form> 
+      } 
+      
+      </div>
     </div>
   )
 }
