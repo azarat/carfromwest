@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { reviews } from '../../../constants/reviews'
 import { FullReviewProps } from './Types'
 import Image from 'next/image'
-import { Swiper, SwiperSlide } from 'swiper/react'
+// import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
 
 // Import Swiper styles
@@ -25,8 +25,8 @@ const FullReview: React.FC<FullReviewProps> = ({
 
   const [isFullImgOpen, setFullImgOpen] = useState<boolean>(false)
   //initial slide for full size slider
-  const [initialSlide, setInitialSlide] = useState<number>(0)
-
+  // const [initialSlide, setInitialSlide] = useState<number>(0)
+  const initialSlide = 0;
   return (
     <>
     
