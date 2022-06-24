@@ -101,7 +101,7 @@ const Check: NextPage = () => {
             <textarea
               name="wishes"
               className="order__form-input"
-              placeholder='Ваш коментар'
+              placeholder='Коментар'
               value={wishes as string}
               onChange={(e) => setWishes(e.target.value)}
             />
