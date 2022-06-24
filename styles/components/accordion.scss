@@ -1,5 +1,5 @@
 .accordion {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.13);
   & + * {
     margin-top: 0.5em;
   }
@@ -30,13 +30,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5em 1.5em;
+    padding: 0px;
     color: $black-color;
     font-size: $fs-20;
     line-height: $fs-24;
     font-weight: $fw-500;
-    // text-transform: uppercase;
     cursor: pointer;
+
+    @media (max-width: 1920px) {
+      font-size: $fs-14;
+      line-height: $fs-16;
+    }
+    // text-transform: uppercase;
     // &::after {
     //   position: absolute;
     //   right: 25px;
@@ -48,7 +53,7 @@
     // }
     &::before {
       position: absolute;
-      right: 18px;
+      right: 0px;
       width: 18px;
       height: 10px;
       background-color: #ffffff;
@@ -69,7 +74,7 @@
     }
   }
   &__content {
-    padding: 1em 1.5em;
+    padding: 23px 0px;
   }
 }
 

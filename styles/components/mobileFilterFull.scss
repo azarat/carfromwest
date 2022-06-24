@@ -49,7 +49,7 @@
       position: relative;
       width: 100%;
       height: 115px;
-      margin-top: 40px;
+      margin-top: 10px;
       padding: 5px;
       font-weight: $fw-400;
       font-size: $fs-18;
@@ -89,12 +89,12 @@
   &__year {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
     -moz-column-gap: 10px;
     column-gap: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
     & .select {
-      margin-top: 40px;
+      margin-top: 0px;
       background: $transparent;
     }
   }
@@ -129,27 +129,27 @@
   }
   &__transmission {
     display: grid;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
     & .select {
       grid-column: 1/3;
-      margin-top: 40px;
+      margin-top: 0px;
     }
   }
   &__gas {
     display: grid;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
     & .select {
       grid-column: 1/3;
-      margin-top: 40px;
+      margin-top: 0px;
     }
   }
   &__engine {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
     -moz-column-gap: 10px;
     column-gap: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
@@ -159,7 +159,7 @@
       width: 100%;
       max-width: 345px;
       height: 50px;
-      margin-top: 40px;
+      margin-top: 0px;
       padding: 0 10px;
       border: 1px solid rgba(0, 0, 0, 0.13);
       border-radius: 5px;

@@ -1,16 +1,29 @@
 .filter-full--table {
-  display: none;
+  // display: none;
   grid-row: 3/4;
   grid-column: 1;
+
+  form {
+    display: none;
+  }
 }
 @media screen and (min-width: 1024px) {
   .filter-full--table {
     display: block;
     margin-top: 55px;
-    padding: 10px;
+    padding: 30px;
     background: $white-color;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+
+    form {
+      display: block;
+    }  
+
+    @media (max-width: 1920px) {
+      margin-top: 20px;
+    }
+
     & .filter-full__vehicle,
     & .filter-full__year,
     & .filter-full__price,
@@ -24,8 +37,8 @@
       // margin-top: 60px;
       cursor: pointer;
 
-      margin: 60px -11px -11px;
-      width: calc(100% + 22px);
+      margin: 20px -30px -30px;
+      width: calc(100% + 60px);
       display: block;
       max-width: none;
 
@@ -37,6 +50,16 @@
       font-weight: $fw-700;
       text-transform: none;
       border-radius: 0px 0px 10px 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .filter-full--table {
+    form {
+      &.active-mobile {
+
+      }
     }
   }
 }

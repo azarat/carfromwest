@@ -189,27 +189,10 @@ const FilterFull: React.FC<FilterFullProps> = ({
         onSubmit={handleSubmit}
       >
         <Form>
-          <div className="filter-full__vehicle">
-            <h3 className="filter-full__title">Транспорт</h3>
-            {vehicleTypes.map(({ title, value, ...restProps }) => (
-              <div key={title} className="filter-full__vehicle-item">
-                <Field
-                  onClick={handleVehicle}
-                  value={value}
-                  name="vehicleTypes"
-                  id={value}
-                  type="radio"
-                />
-                <label htmlFor={value}>
-                  <restProps.icon />
-                  {title}
-                </label>
-              </div>
-            ))}
-          </div>
+
 
           <div className="filter-full__transmission">
-            <h3 className="filter-full__title">Марка автомобиля</h3>
+            <h3 className="filter-full__title">Марка</h3>
             <Field
               name={'makes'}
               component={SelectMake}
@@ -220,7 +203,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
           </div>
           {!isLoading && currentMark && (
             <div className="filter-full__transmission">
-              <h3 className="filter-full__title">Модель автомобиля</h3>
+              <h3 className="filter-full__title">Модель</h3>
               <Field
                 name={'models'}
                 component={SelectMake}
@@ -246,7 +229,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             </div>
           )}
           <div className="filter-full__year">
-            <h3 className="filter-full__title">год</h3>
+            <h3 className="filter-full__title">Рік</h3>
             <Field
               name={'fromYear'}
               component={CustomSelect}
@@ -272,7 +255,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             />
           </div>
           <div className="filter-full__gas">
-            <h3 className="filter-full__title">Тип топлива</h3>
+            <h3 className="filter-full__title">Тип палива</h3>
             <Field
               name={'gas'}
               component={SelectTransmission}
@@ -281,7 +264,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             />
           </div>
           <div className="filter-full__engine">
-            <h3 className="filter-full__title">Объем двигателя (л)</h3>
+            <h3 className="filter-full__title">Об’єм двигуна</h3>
             <div className="filter-full__engine-input">
               <Field placeholder="Прим. 1.1" type="number" name="engineForm" />
               <EngineSVG />
@@ -292,7 +275,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             </div>
           </div>
           <div className="filter-full__engine">
-            <h3 className="filter-full__title">Пробег (миль)</h3>
+            <h3 className="filter-full__title">Пробіг</h3>
             <div className="filter-full__engine-input">
               <Field placeholder="Пр. 10000" type="number" name="odometerMin" />
               <SpeedSVG />

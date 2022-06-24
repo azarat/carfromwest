@@ -1,20 +1,26 @@
 .customDropDown {
   min-width: 100%;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 0px;
   &__header {
-    margin-bottom: 0.8em;
-    padding: 0.4em 1em 0.4em 1em;
-    border: 1px solid rgba(0, 0, 0, 0.26);
-    font-weight: 500;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #000;
+    margin-bottom: 0em;
+    padding: 18px 20px;
+    border: 1px solid #E0E0E0;
+    font-weight: $fw-500;
+    border-radius: 10px;
+    font-size: $fs-20;
+    line-height: $fs-24;
+    color: #BDBDBD;
     background: #ffffff;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 1920px) {
+      padding: 7px 20px;
+    }
+
     &-arrow {
       width: 20px;
       height: 10px;

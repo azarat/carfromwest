@@ -12,7 +12,7 @@ import { years, gas, transmissions } from '../../constants/filter'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
-import { vehicleTypes } from '../../constants/filter'
+// import { vehicleTypes } from '../../constants/filter'
 
 const FilterTable: React.FC<FilterTableProps> = ({
   loading,
@@ -21,6 +21,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   transport,
   brandModels,
 }): JSX.Element => {
+  const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
@@ -44,38 +45,40 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
-  const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement
-    setVehicle(target.value)
-  }
+  // const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
+  //   const target = e.target as HTMLInputElement
+  //   setVehicle(target.value)
+  // }
 
   useEffect(() => {
     setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
     setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
   }, [filter])
 
-  useEffect(() => {
-    const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) =>
-        setMarks(
-          json?.makes.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          })) || []
-        )
-      )
-      .catch(() => setMarks(undefined))
-  }, [vehicle])
+  // useEffect(() => {
+  //   const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((json) =>
+  //       setMarks(
+  //         json?.makes.sort().map((val: string) => ({
+  //           label: val,
+  //           value: val,
+  //         })) || []
+  //       )
+  //     )
+  //     .catch(() => setMarks(undefined))
+  // }, [vehicle])
 
 
   useEffect(() => {
+    console.log('currentMark', currentMark);
+    
     if (currentMark && !currentModel) {
       setLoading(true)
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models&vehicleType=${vehicle}&makes=${currentMark}`
+      const url = `/api/filter?filters=makes,models&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
         .then((json) =>
@@ -93,7 +96,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (currentModel) {
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models,bodyStyles&vehicleType=${vehicle}&makes=${currentMark}&models=${currentModel}`
+      const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}&models=${currentModel}`
       fetch(url)
         .then((res) => res.json())
         .then((json) => {
@@ -110,7 +113,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
           setBodyStyle('')
         })
     }
-  }, [vehicle, currentMark, currentModel])
+  }, [currentMark, currentModel])
 
   const handleSubmit = (values: any) => {
     Object.keys(values).filter(
@@ -128,7 +131,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
           'trims',
           'saleDocumentsGroups',
           'transmissionTypes',
-          'vehicleTypes',
           'locations',
           'vehicleConditions',
           'features',
@@ -137,7 +139,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
     )
 
     let url = '';
-    if (values.vehicleTypes) url += `/transport-is-${values.vehicleTypes}`
     if (values.makes) url += `/brand-is-${values.makes}`
     if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
     if (values.models) url += `/model-is-${values.models}`
@@ -147,35 +148,18 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
     if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
     router.push('/catalog' + url)
-    // if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
-    // if (currentMark) newFilter.makes = [currentMark]
-    // if (currentModel) newFilter.models = [currentModel]
-    // if (values.engineFrom || values.engineTo) {
-    //   newFilter.engineCapacities = capacityArray(
-    //     values.engineFrom ? values.engineFrom : 0.7,
-    //     values.engineTo ? values.engineTo : 17
-    //   )
-    //   newFilter.includeFilters?.push('engineCapacities')
-    // }
-    // if (values.fromYear) newFilter.yearMin = values.fromYear
-    // if (values.toYear) newFilter.yearMax = values.toYear
-    // if (values.fuelTypes) newFilter.fuelType = values.fuelTypes
-    // if (!Number.isNaN(+values.odometerMin) && values.odometerMax != '')
-    //   newFilter.odometerMin = +values.odometerMin
-    // if (!Number.isNaN(+values.odometerMax) && values.odometerMax != '')
-    //   newFilter.odometerMax = +values.odometerMax
-
-    // if (values.transmission) newFilter.transmissionTypes = [values.transmission]
-
-    // setFilter(newFilter)
-    // setPage(1)
-    // document.body.scrollIntoView({ behavior: 'smooth' })
   }
+
+  const toggleFilter = () => {
+    setActiveMobFilter(!activeMobFilter)
+  }
+
   return (
     <div className="filter-full--table">
+      <button className='mobile-filter-btn' onClick={toggleFilter}> Фільтр</button>
+
       <Formik
         initialValues={{
-          vehicleTypes: vehicle,
           bodyStyles: bodyStyle,
           fromYear: '',
           toYear: '',
@@ -191,87 +175,13 @@ const FilterTable: React.FC<FilterTableProps> = ({
         onSubmit={handleSubmit}
         enableReinitialize={true}
       >
-        <Form>
-          <Accordion title="Транспорт" isOpenInner={!!vehicle}>
-            <div className="filter-full__vehicle">
-              {vehicleTypes.map(({ title, value, ...restProps }) => (
-                <div key={title} className="filter-full__vehicle-item">
-                  <Field
-                    onClick={handleVehicle}
-                    value={value || vehicle}
-                    name="vehicleTypes"
-                    id={`table-${value}`}
-                    type="radio"
-                  />
-                  <label htmlFor={`table-${value}`}>
-                    <restProps.icon />
-                    {title}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </Accordion>
-          {vehicle !== '' && (
-            <Accordion title="Марка" isOpenInner={!!filter.makes}>
-              <div className="filter-full__transmission">
-                <Field
-                  name='makes'
-                  value={currentMark}
-                  filter='brand'
-                  transport={transport}
-                  component={SelectMake}
-                  options={makes?.length ? makes?.map((mark) => ({
-                    label: mark,
-                    value: mark,
-                  })) : marks}
-                  placeholder="Все"
-                  setter={setCurrentMark}
-                />
-              </div>
-            </Accordion>
-          )}
+        <Form className={activeMobFilter ? `active-mobile` : ``}>
 
-          {!isLoading && currentMark && (
-            <Accordion title="Модель" isOpenInner={!!filter.models}>
-              <div className="filter-full__transmission">
-                <Field
-                  name='models'
-                  value={currentModel}
-                  filter='model'
-                  transport={transport}
-                  component={SelectMake}
-                  options={brandModels?.length ? brandModels?.map((model) => ({
-                    label: model,
-                    value: model,
-                  })) : models}
-                  placeholder="Все"
-                  setter={setCurrentModel}
-                />
-              </div>
-            </Accordion>
-          )}
-          {bodyStyles.length > 0 && currentMark && (
-            <Accordion title="Тип кузова">
-              <div className="filter-full__transmission">
-                <Field
-                  name={'bodyStyle'}
-                  component={SelectMake}
-                  options={bodyStyles.map((val) => ({
-                    label: val,
-                    value: val,
-                  }))}
-                  placeholder="Все"
-                  setter={setBodyStyle}
-                />
-              </div>
-            </Accordion>
-          )}
-
-          <Accordion title="год">
+          <Accordion title="Рік">
             <div className="filter-full__year">
               <Field
                 name={'fromYear'}
-                component={SelectMake}
+                component={SelectTransmission}
                 filter='yearStart'
                 transport={transport}
                 options={firstYears}
@@ -280,7 +190,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               />
               <Field
                 name={'toYear'}
-                component={SelectMake}
+                component={SelectTransmission}
                 filter='yearEnd'
                 transport={transport}
                 options={secondYears}
@@ -289,6 +199,58 @@ const FilterTable: React.FC<FilterTableProps> = ({
               />
             </div>
           </Accordion>
+
+          <Accordion title="Марка" isOpenInner={true}>
+            <div className="filter-full__transmission">
+              <Field
+                name='makes'
+                value={currentMark}
+                filter='brand'
+                transport={transport}
+                component={SelectMake}
+                options={makes?.length ? makes?.map((mark) => ({
+                  label: mark,
+                  value: mark,
+                })) : marks}
+                placeholder="Все"
+                setter={setCurrentMark}
+              />
+            </div>
+          </Accordion>
+
+          <Accordion title="Модель" isOpenInner={true}>
+            <div className="filter-full__transmission">
+              <Field
+                name='models'
+                value={currentModel}
+                filter='model'
+                transport={transport}
+                component={SelectTransmission}
+                options={brandModels?.length ? brandModels?.map((model) => ({
+                  label: model,
+                  value: model,
+                })) : models}
+                placeholder="Все"
+                setter={setCurrentModel}
+              />
+            </div>
+          </Accordion>
+
+          <Accordion title="Тип кузова">
+            <div className="filter-full__transmission">
+              <Field
+                name={'bodyStyle'}
+                component={SelectTransmission}
+                options={bodyStyles.map((val) => ({
+                  label: val,
+                  value: val,
+                }))}
+                placeholder="Все"
+                setter={setBodyStyle}
+              />
+            </div>
+          </Accordion>
+
           <Accordion title="Коробка передач">
             <div className="filter-full__transmission">
               <Field
@@ -299,7 +261,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               />
             </div>
           </Accordion>
-          <Accordion title="Тип топлива">
+          <Accordion title="Тип палива">
             <div className="filter-full__gas">
               <Field
                 name={'fuelTypes'}
@@ -309,7 +271,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               />
             </div>
           </Accordion>
-          <Accordion title="Объем двигателя (л)">
+          <Accordion title="Об’єм двигуна">
             <div className="filter-full__engine">
               <div className="filter-full__engine-input">
                 <Field
@@ -325,7 +287,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               </div>
             </div>
           </Accordion>
-          <Accordion title="Пробег (миль)">
+          <Accordion title="Пробіг">
             <div className="filter-full__engine">
               <div className="filter-full__engine-input">
                 <Field

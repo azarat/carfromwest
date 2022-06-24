@@ -61,8 +61,6 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
             <TransmissionSVG />
             Автомат
           </div>
-        </div>
-        <div className="catalog-grid__item-descr">
           <div className="catalog-grid__item-drivetype">
             <DriveTypeSVG />
             Передний привод
@@ -76,7 +74,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
             {year}
           </div>
         </div>
-        <div className="catalog-grid__item-descr">
+        <div className="catalog-grid__item-descr nowrap">
           <CrashTypeSVG />
           <div className="catalog-grid__item-crash-type">
             <div className="catalog-grid__item-crash-type-label">Основне пошкодження</div>

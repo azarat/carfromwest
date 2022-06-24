@@ -6,9 +6,12 @@
   .carousel-grid {
     display: block;
     grid-row: 2;
+    width: 100%;
+    overflow: hidden;
     &__list {
       display: flex;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
+      width: fit-content;
     }
     &__item {
       width: 122px;
@@ -22,6 +25,8 @@
       &-img {
         width: 100%;
         height: 100%;
+
+        border-radius: 10px;
       }
     }
   }
@@ -30,10 +35,10 @@
 @media screen and(min-width:1800px) {
   .carousel-grid {
     &__item {
-      width: 205px;
-      height: 166px;
+      width: 150px;
+      height: auto;
       &:not(:nth-child(4n)) {
-        margin-right: unset;
+        // margin-right: unset;
       }
       &:not(:nth-child(5n)) {
         margin-right: 10px;

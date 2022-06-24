@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { FieldProps } from 'formik'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Select from 'react-select'
-import Arrow from '../../assets/svg/arrowSelect.svg'
+import Arrow from '../../assets/svg/chevron_down.svg'
 
 type CustomSelectProps = {
   options: any
@@ -33,7 +33,6 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
   onChange,
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
-  //const [selectedOption, setSelectedOption] = useState(field.value)
   const handleChange = (e: any) => {
     form.setFieldValue(field.name, e.value)
     setter(e.value)
@@ -42,26 +41,42 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
     }
   }
 
-  //console.log('SelectMake 39', field)
+  const selectStyles = {
+    option: (provided, state) => ({
+      ...provided
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: '#E0E0E0',
+      borderRadius: '10px',
+      minHeight: '60px'
+    }),
+    input: (provided, state) => ({
+      ...provided,
+    }),
+    placeholder: (provided, state) => ({
+      ...provided,
+      fontSize: '20px',
+      lineHeight: (typeof window !== "undefined" && window.innerWidth <= 1920) ? '16px' : '24px',
+      fontWeight: '500',
+      color: '#BDBDBD'
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      fontSize: '20px',
+      lineHeight: (typeof window !== "undefined" && window.innerWidth <= 1920) ? '16px' : '24px',
+      fontWeight: '500',
+      color: '#0F2442'
+    })
+  }
 
   const toggling = () => setIsOpen(!isOpen)
 
   const onOptionClicked = (value: any) => () => {
-    //setSelectedOption(value.label)
     setIsOpen(false)
     handleChange(value)
   }
 
-  useEffect(() => {
-    // if (options && options.length !== 0) {
-    //   if (options[0].label !== 'Все') {
-    //     options.unshift({
-    //       label: 'Все',
-    //       value: 'All',
-    //     })
-    //   }
-    // }
-  }, [options])
 
   if (model) {
     return (
@@ -71,6 +86,7 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
         options={options}
         name={field.name}
         onChange={handleChange}
+        styles={selectStyles}
         value={
           options
             ? options.find((option: any) => option.value === field.value)

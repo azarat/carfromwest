@@ -346,10 +346,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
   return {
     props: {
       currentParams,
-      items,
-      total,
+      items: items ?? [],
+      total: total ?? 0,
       brands: makes,
-      brandModels: models,
+      brandModels: models ?? null,
       currentPage: +query.page! || 1,
       transport: transportParam ? transportParam.replace('transport-is-', '') : 'automobile'
     },

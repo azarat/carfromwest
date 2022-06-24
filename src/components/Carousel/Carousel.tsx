@@ -100,9 +100,9 @@ const Carousel: React.FC<ICarousel> = ({
   }
 
   useEffect(() => {
-    carousel.current.style.transform = `translateX(-${
+    carousel.current.style.transform = `translateX(calc(-${
       100 * (slide + +infinity)
-    }%)`
+    }% - ${slide * 10}px))`
     callback(slide)
     const touchcleanUp = handleTouch()
     return () => {
