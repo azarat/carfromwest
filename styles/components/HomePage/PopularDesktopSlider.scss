@@ -1,11 +1,17 @@
 .popular {
   &__desktop-slider-wrapper {
+    overflow: hidden;
+
     .swiper {
       &-container {
-        position: unset !important;
-        width: 100%;
+        position: relative;
+        width: 1600px;
         height: 750px;
-        padding: 70px 0px !important;
+        padding: 0px 0px 100px !important;
+        margin: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-sizing: content-box;
       }
 
       &-slide {
@@ -28,15 +34,25 @@
         -ms-flex-pack: center;
         -webkit-box-align: center;
         -ms-flex-align: center;
+        padding: 0px 70px;
+
+        // &.swiper-fixed-width-300 {
+        //   width: 300px !important;
+        // }
+
         & .slider-item {
           pointer-events: none;
+          width: 100%;
           &__img {
-            width: 600px;
+            // width: 600px;
+            width: 100%;
+
+            max-width: 100%;
           }
         }
         &-active {
           transform: scale(1.2);
-          padding: 0 70px;
+          padding: 0;
           width: 460px;
           filter: opacity(1);
           transition: transform 0.3s ease, opacity 0.5s ease;

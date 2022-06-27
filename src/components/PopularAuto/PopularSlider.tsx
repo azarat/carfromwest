@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -19,16 +19,20 @@ SwiperCore.use([Navigation, Thumbs])
 
 export const PopularSlider: React.FC = () => {
   const { push } = useRouter()
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null)
+  // const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null)
 
   return (
     <>
       <Swiper
-        spaceBetween={10}
+        spaceBetween={16}
         loop
-        navigation
+        // navigation
+        navigation={true}
+        pagination={{
+          clickable: true,
+        }}
         className="popular__mobile-main-slider"
-        thumbs={{ swiper: thumbsSwiper }}
+        // thumbs={{ swiper: thumbsSwiper }}
       >
         {popularAuto.map(({ name, uaPrice, usaPrice, img, filterParams }) => {
           return (
@@ -53,7 +57,7 @@ export const PopularSlider: React.FC = () => {
           )
         })}
       </Swiper>
-      <Swiper
+      {/* <Swiper
         onSwiper={(swiper) => setThumbsSwiper(swiper)}
         spaceBetween={10}
         slidesPerView={4}
@@ -67,7 +71,7 @@ export const PopularSlider: React.FC = () => {
             <img src={img} alt="car" />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
     </>
   )
 }
