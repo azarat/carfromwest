@@ -24,7 +24,7 @@
   &__title {
     margin: 0 auto;
     font-size: $fs-48;
-    font-family: $ff-commons;
+    font-family: $ff-gilroy;
     line-height: 62px;
     text-align: center;
     font-weight: 700;
@@ -41,6 +41,8 @@
       &-container {
         width: 100%;
         height: 100%;
+
+        padding-bottom: 80px;
       }
 
       &-wrapper {
@@ -196,10 +198,10 @@
         &-button {
           &-prev {
             bottom: 0px;
-            left: 45%;
+            left: 38%;
           }
           &-next {
-            right: 45%;
+            right: 38%;
             bottom: 0px;
           }
         }
