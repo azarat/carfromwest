@@ -17,6 +17,9 @@ import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
 import { USER_AGENT } from '../../src/constants/userAgent'
 
+import FilterSVG from '../../src/assets/svg/filter_1.svg'
+
+
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
   total,
@@ -43,7 +46,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const includeFilters = ['vehicleTypes']
   const initialMakes = []
   const initialModels = []
-
+  
   if (makes) {
     includeFilters.push('makes')
     initialMakes.push(makes)
@@ -53,6 +56,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
     initialModels.push(models)
   }
   const router = useRouter()
+  const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
@@ -97,6 +101,11 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }
 
   const vehicle = { items, total } as ICarsFetchTypes
+
+  const toggleFilter = () => {
+    setActiveMobFilter(!activeMobFilter)
+  }
+
   return (
     <div className="catalog__wrapper">
       <section className="catalog">
@@ -115,20 +124,28 @@ const Index: NextPage<Partial<ICatalog>> = ({
           loading={false}
           setPage={setPage}
           makes={brands}
+          mobileActive={activeMobFilter}
         />
         <div className="catalog__filters-wrapper">
-          <CatalogSearch loading={false} handleSearch={handleSearch} />
           <FilterField
             loading={false}
             setOpen={setOpenFilter}
             filter={filter}
             setFilter={setFilter}
           />
-          <CatalogSort
-            handleSort={handleSort}
-            filter={filter}
-            loading={false}
-          />
+          <CatalogSearch loading={false} handleSearch={handleSearch} />
+          <div className='catalog-sort-wrap'>
+            <button className='mobile-filter-btn' onClick={toggleFilter}>
+              <FilterSVG />
+              Фільтр
+            </button>
+
+            <CatalogSort
+              handleSort={handleSort}
+              filter={filter}
+              loading={false}
+            />
+          </div>
           <div className="filter-field__grid">
             <div className="filter-field__grid-list">
               {Object.keys(filter)

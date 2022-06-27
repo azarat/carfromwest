@@ -7,6 +7,7 @@ type FilterFieldProps = {
   setOpen: Dispatch<SetStateAction<boolean>>
   filter: Partial<IFilter>
   setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
+  mobileActive?: boolean
 }
 
 const FilterField: React.FC<FilterFieldProps> = ({ setOpen }): JSX.Element => {

@@ -65,6 +65,16 @@
   }
 }
 
+.catalog-sort-wrap {
+  display: flex;
+  width: 100%;
+  column-gap: 10px;
+
+  .sort-field {
+    flex: 1;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .catalog {
     &__search {

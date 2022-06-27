@@ -1,6 +1,9 @@
 .catalog-grid {
   min-height: calc(100vh - 400px);
   margin-top: 50px;
+  @media (max-width: 767px) {
+    margin-top: 0px;
+  }
   &__title {
     margin: 0;
     font-weight: $fw-700;

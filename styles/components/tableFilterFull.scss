@@ -5,8 +5,60 @@
 
   form {
     display: none;
+
+    @media (max-width: 767px) {
+      &.active-mobile {
+        display: block;
+        position: fixed;
+        background: #ffffff;
+        z-index: 9999;
+        top: 0px;
+        left: 0px;
+        padding: 64px 24px 24px;
+        height: 100%;
+        overflow: scroll;
+      }
+    }
+  }
+
+  &-wrap {
+    padding: 22px 17px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
   }
 }
+
+.mobile-filter-btn {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  background: #ffffff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  margin-top: 20px;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  svg {
+    margin-right: 9px;
+  }
+
+  &--close {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    display: block;
+    padding: 7px 7px 5px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .filter-full--table {
     display: block;

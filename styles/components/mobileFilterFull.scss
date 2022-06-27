@@ -93,6 +93,9 @@
     -moz-column-gap: 10px;
     column-gap: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+    @media (max-width: 767px) {
+      border: none;
+    }
     & .select {
       margin-top: 0px;
       background: $transparent;
@@ -106,6 +109,9 @@
     -moz-column-gap: 10px;
     column-gap: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+    @media (max-width: 767px) {
+      border: none;
+    }
     &-input {
       display: flex;
       align-items: center;
@@ -116,7 +122,10 @@
       padding: 0 10px;
       border: 1px solid rgba(0, 0, 0, 0.13);
       border-radius: 5px;
-      & input {
+      @media (max-width: 767px) {
+        border: none;
+      }
+        & input {
         width: 100%;
         max-width: 100%;
         height: 100%;
@@ -131,6 +140,9 @@
     display: grid;
     padding-bottom: 0px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+    @media (max-width: 767px) {
+      border: none;
+    }
     & .select {
       grid-column: 1/3;
       margin-top: 0px;
@@ -140,6 +152,9 @@
     display: grid;
     padding-bottom: 0px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+    @media (max-width: 767px) {
+      border: none;
+    }
     & .select {
       grid-column: 1/3;
       margin-top: 0px;
@@ -153,6 +168,10 @@
     -moz-column-gap: 10px;
     column-gap: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+    @media (max-width: 767px) {
+      border: none;
+    }
+
     &-input {
       display: flex;
       align-items: center;
