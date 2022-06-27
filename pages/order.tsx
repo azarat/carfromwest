@@ -62,7 +62,7 @@ const Order: NextPage = () => {
       
       <div className="order__wrapper">
         <div className="containers">
-          <nav className="car-page__breadcrumbs">
+          <nav className="car-page__breadcrumbs order-sec">
             <ul>
               <li  className="car-page__breadcrumbs-link">
                 <Link href="/">
