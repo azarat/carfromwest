@@ -104,27 +104,27 @@
 
         &.first {
           &::before {
-            background-image: url('/assets/svg/time-line-person-black.svg');
+            background-image: url('../../../public/assets/svg/time-line-person-black.svg');
           }
         }
         &.second {
           &::before {
-            background-image: url('/assets/svg/time-line-auction-black.svg');
+            background-image: url('../../../public/assets/svg/time-line-auction-black.svg');
           }
         }
         &.third {
           &::before {
-            background-image: url('/assets/svg/time-line-steps-black.svg');
+            background-image: url('../../../public/assets/svg/time-line-steps-black.svg');
           }
         }
         &.fourth {
           &::before {
-            background-image: url('/assets/svg/time-line-boat-black.svg');
+            background-image: url('../../../public/assets/svg/time-line-boat-black.svg');
           }
         }
         &.fifth {
           &::before {
-            background-image: url('/assets/svg/time-line-car-black.svg');
+            background-image: url('../../../public/assets/svg/time-line-car-black.svg');
           }
         }
       }
@@ -149,7 +149,7 @@
         z-index: 50;
         width: 47px;
         height: 19px;
-        background-image: url('/assets/svg/time-line-car2.svg');
+        background-image: url('../../../public/assets/svg/time-line-car2.svg');
         background-repeat: no-repeat;
         background-size: cover;
         content: '';
