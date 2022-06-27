@@ -20,13 +20,14 @@ const ReviewsSlider: React.FC = () => {
       <Swiper navigation={true} pagination={{
                 clickable: true,
               }} loop={true}>
-        {reviews.map(({ name, images, text }, index) => (
+        {reviews.map(({ name, images, text, profileLink }, index) => (
           <SwiperSlide key={name}>
             <ReviewsItem
               name={name}
               images={images}
               text={text}
               index={index}
+              profileLink={profileLink}
               
             />
           </SwiperSlide>

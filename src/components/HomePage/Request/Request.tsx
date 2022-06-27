@@ -107,6 +107,7 @@ const Request: React.FC = () => {
                   <label htmlFor="request-text">Введите ваши пожелания</label>
                 )}
               </div> */}
+              <div className="request__info-form-field-wrapper">
               <label className="request__info-form-field"
             ><span className="request__info-form-field__label">Ваше ім’я</span>
             <span className="request__info-form-field__thumb">
@@ -123,6 +124,7 @@ const Request: React.FC = () => {
             ><span className="request__info-form-field__label">Коментар:</span>
             <textarea className="request__info-form-field__textarea" name="comment" placeholder="Введіть Ваші побажання"></textarea>
           </label>
+          </div>
               <button className="request__info-form-button" type="submit">
                 Підібрати краще авто
               </button>
