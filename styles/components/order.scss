@@ -1,4 +1,4 @@
-.car-page__breadcrumbs {
+.car-page__breadcrumbs.order-sec {
   margin-left: 9%;
   padding-top: 20px;
   margin-bottom: 65px;
@@ -539,7 +539,7 @@
 }
 
 @media screen and (min-width: 1920px) {
-  .car-page__breadcrumbs {
+  .car-page__breadcrumbs.order-sec {
     margin-left: 15%;
     padding-top: 50px;
     margin-bottom: 234px;

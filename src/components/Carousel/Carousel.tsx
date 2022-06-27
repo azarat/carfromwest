@@ -136,13 +136,13 @@ const Carousel: React.FC<ICarousel> = ({
         ))}
         {infinity && <div className="carousel-list-item">{children[0]}</div>}
       </div>
-      <div className="carousel-buttons">
+      {/* <div className="carousel-buttons"> */}
         <div className="carousel-buttons-prev" onClick={handlePrevSlide}>
           {buttonPrev}
         </div>
         <div className="carousel-buttons-next" onClick={handleNextSlide}>
           {buttonNext}
-        </div>
+        {/* </div> */}
       </div>
       {withDots && (
         <div className="carousel-dots">
