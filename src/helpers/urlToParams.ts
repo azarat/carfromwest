@@ -41,6 +41,16 @@ export const aviableParams = {
     name: 'yearMax',
     type: ParamType.number,
   },
+  priceStart: {
+    filterName: '',
+    name: 'priceMin',
+    type: ParamType.number,
+  },
+  priceEnd: {
+    filterName: '',
+    name: 'priceMax',
+    type: ParamType.number,
+  },
   mileageStart: {
     filterName: '',
     name: 'odometerMin',

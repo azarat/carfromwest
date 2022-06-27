@@ -259,6 +259,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
   const brandParam = ((query?.filters || []) as string[]).find(f => f.includes('brand-is-'))
   const currentParams = Object.keys(aviableParams).reduce(
     (acc: any, param) => {
+      
       const currentParam = `${param}-is-`
       const urlParam = ((query?.filters || []) as string[]).find((p) =>
         p.includes(currentParam)
@@ -329,6 +330,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
     },
   })
+
   const { makes, models } = await filterResponse.json()
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
