@@ -21,29 +21,40 @@ const Order: NextPage = () => {
     const url = localStorage.getItem('url')
     e.preventDefault()
     if (validate().length == 0) {
-      const res = await fetch(
-        'https://admin.webrains.studio/sendCFWLandingMessage',
-        {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            phone,
-            link: url,
-            type: connectType,
-            initialLink: sessionStorage
-              ? sessionStorage.getItem('initialLink')
-              : false,
-          }),
-        }
-      )
-      if (res.status === 200) {
+
+      const data = {
+        title: 'Форма: Нове замовлення',
+        name,
+        phone,
+        link: url,
+        type: connectType,
+        initialLink: localStorage
+          ? localStorage.getItem('url')
+          : false,
+      };
+
+      const JSONdata = JSON.stringify(data)
+
+      const endpoint = '/api/tg_bot'
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSONdata
+      }
+
+      const response = await fetch(endpoint, options)
+
+      const result = await response.json()
+
+      console.log(result);
+
+      if (result.status === 200) {
         setName('')
         setPhone('')
         // localStorage.removeItem('url')
-        // router.push({ pathname: '/thanks' })
         setIsFormSend(true)
       }
     }

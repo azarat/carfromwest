@@ -17,26 +17,36 @@ const Check: NextPage = () => {
   const handleSend: MouseEventHandler = async (e) => {
     e.preventDefault()
     if (validate().length == 0) {
-      const res = await fetch(
-        'https://admin.webrains.studio/sendCFWLandingMessage',
-        {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            phone,
-            wishes,
-            type: connectType,
-            initialLink: sessionStorage
-              ? sessionStorage.getItem('initialLink')
-              : false,
-          }),
-        }
-      )
+      const data = {
+        title: 'Форма: Замовити дзвінок',
+        name,
+        phone,
+        wishes,
+        type: connectType,
+        initialLink: localStorage
+          ? localStorage.getItem('url')
+          : false,
+      };
 
-      if (res.status === 200) {
+      const JSONdata = JSON.stringify(data)
+
+      const endpoint = '/api/tg_bot'
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSONdata
+      }
+
+      const response = await fetch(endpoint, options)
+
+      const result = await response.json()
+
+      console.log(result);
+
+      if (result.status === 200) {
         setName('')
         setPhone('')
         localStorage.removeItem('url')
