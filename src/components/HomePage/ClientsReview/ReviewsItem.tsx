@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { ReviewsItemProps } from './Types'
 import FullReviewContext from '../../../context/fullReviewContext'
 import { FullReviewContextTypes } from '../../../context/Types'
+import FbSVG from '../../../assets/svg/fb-review.svg'
 
 const ReviewsItem: React.FC<ReviewsItemProps> = ({
   name,
   text,
   images,
+  profileLink,
   index,
 }) => {
   const { setActiveReview, handleFullReview } = useContext(
@@ -24,7 +26,11 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
           ))}
         </div>
         <div className="reviews-item__review">
-          <p className="reviews-item__name">{name}</p>
+        <a className="reviews-item__name" href={profileLink}> 
+                    {name} <FbSVG className='reviews-item__name-svg'/>
+                  </a>
+          {/* <p className="reviews-item__name">{name}</p> */}
+          
           <div
             className="reviews-item__text"
             dangerouslySetInnerHTML={{ __html: text }}

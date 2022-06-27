@@ -4,7 +4,7 @@ import { FullReviewProps } from './Types'
 import Image from 'next/image'
 // import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
-
+import FbSVG from '../../../assets/svg/fb-review.svg'
 // Import Swiper styles
 import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css'
@@ -42,9 +42,12 @@ const FullReview: React.FC<FullReviewProps> = ({
               role="presentation"
             />
           <div className="full-review__left">
+            <a className="full-review__link" href={reviews[activeReview as number].profileLink}>
             <p className="full-review__name">
               {reviews[activeReview as number].name}
+              <FbSVG className='reviews-item__name-svg'/>
             </p>
+            </a>
             <div
             className="full-review__text"
             dangerouslySetInnerHTML={{

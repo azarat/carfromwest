@@ -11,6 +11,10 @@
     font-weight: $fw-700;
     font-size: $fs-20;
     line-height: 28px;
+    display: flex;
+    & svg {
+      margin-left: 16px;
+    }
   }
   &__text {
     max-width: 275px;
