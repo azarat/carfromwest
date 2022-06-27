@@ -31,9 +31,11 @@
       &-title {
         position: relative;
         padding-left: 20px;
-        color: $very-dark-blue-color;
-        font-weight: $fw-500;
-        font-size: $fs-16;
+        color: $black-color;
+        font-weight: $fw-600;
+        font-size: $fs-22;
+        font-weight: 600;
+        line-height: 140%;
         cursor: pointer;
         -webkit-tap-highlight-color: $transparent;
 
@@ -99,13 +101,13 @@
       &-item {
         &-title {
           padding-left: 35px;
-          font-size: $fs-18;
-          line-height: 21px;
+          // font-size: $fs-18;
+          // line-height: 21px;
         }
         &-text {
           padding-left: 35px;
-          font-size: $fs-18;
-          line-height: 18px;
+          // font-size: $fs-18;
+          // line-height: 18px;
         }
       }
     }

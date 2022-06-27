@@ -3,7 +3,6 @@ import React, { MouseEventHandler, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 // import InputMask from 'react-input-mask'
 import Link from 'next/link'
-import RightPolygonSVG from '../src/assets/svg/right-polygon.svg'
 
 // const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
@@ -65,24 +64,25 @@ const Order: NextPage = () => {
         <div className="containers">
           <nav className="car-page__breadcrumbs">
             <ul>
-              <li className="car-page__breadcrumbs-link">
+              <li  className="car-page__breadcrumbs-link">
                 <Link href="/">
                   <a>
-                    Головна <RightPolygonSVG />
+                    Головна →
                   </a>
                 </Link>
+               
               </li>
               <li className="car-page__breadcrumbs-link">
                 <Link href="/catalog">
                   <a>
-                    Каталог авто <RightPolygonSVG />
+                    Каталог авто →
                   </a>
                 </Link>
+                
               </li>
               <li className="car-page__breadcrumbs-link">
                  <a onClick={() => router.back()}>
-                      {autoVin} <RightPolygonSVG />
-                  </a>
+                      {autoVin} →</a>
                    </li>
                 <li className="car-page__breadcrumbs-link">
                 <Link href="/order">

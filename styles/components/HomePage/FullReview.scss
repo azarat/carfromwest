@@ -53,11 +53,16 @@
     // justify-content: space-between;
   }
   &__name {
+    display: flex;
     font-weight: 700;
     font-size: 20px;
     line-height: 140%;
     color: #000000;
+    text-decoration: none;
     margin-bottom: 16px;
+    & svg {
+      margin-left: 16px;
+    }
   }
   &__link {
     color: $dark-red-color;
