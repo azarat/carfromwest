@@ -74,6 +74,7 @@ export interface ILot {
       type: string
     }
     seller: {
+      group: string
       displayName: string
     }
   }

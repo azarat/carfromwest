@@ -30,10 +30,12 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
               auction,
               lotNumber,
               lotInfo: { vin, make, model, year },
-              specifications: { fuelType },
-              conditionInfo: { odometer },
+              specifications: { fuelType, engine, transmissionType, drivelineType },
+              conditionInfo: { odometer, condition, primaryDamage, secondaryDamage },
               saleInfo: { currentBid },
               images,
+              auctionDate
+              
             }) => (
               <Link key={vin} href={`/catalog/${auction}-${lotNumber}`}>
                 <a className="catalog-grid__container-link">
@@ -51,6 +53,14 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
                     odometer={odometer?.value || 0}
                     vin={vin}
                     year={year}
+                    auctionDate={auctionDate}
+                    engine={engine?.capacity}
+                    transmissionType={transmissionType}
+                    drivelineType={drivelineType}
+                    condition={condition}
+                    primaryDamage={primaryDamage}
+                    secondaryDamage={secondaryDamage}
+                    auction={auction}
                   />
                 </a>
               </Link>

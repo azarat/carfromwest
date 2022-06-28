@@ -108,6 +108,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
     open
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'unset')
+      
   }, [open])
 
   const handleSubmit = (values: any) => {
@@ -197,7 +198,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
               name={'makes'}
               component={SelectMake}
               options={makes || marks}
-              placeholder="Все"
+              placeholder="Всі"
               setter={setCurrentMark}
             />
           </div>
@@ -208,7 +209,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
                 name={'models'}
                 component={SelectMake}
                 options={models}
-                placeholder="Все"
+                placeholder="Всі"
                 setter={setCurrentModel}
               />
             </div>
@@ -223,7 +224,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
                   label: val,
                   value: val,
                 }))}
-                placeholder="Все"
+                placeholder="Всі"
                 setter={setBodyStyle}
               />
             </div>
@@ -234,7 +235,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
               name={'fromYear'}
               component={CustomSelect}
               options={firstYears}
-              placeholder="c"
+              placeholder="з"
               setYear={setFromYear}
             />
             <Field
@@ -251,7 +252,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
               name={'transmission'}
               component={SelectTransmission}
               options={transmissions}
-              placeholder="Все"
+              placeholder="Всі"
             />
           </div>
           <div className="filter-full__gas">
@@ -266,22 +267,22 @@ const FilterFull: React.FC<FilterFullProps> = ({
           <div className="filter-full__engine">
             <h3 className="filter-full__title">Об’єм двигуна</h3>
             <div className="filter-full__engine-input">
-              <Field placeholder="Прим. 1.1" type="number" name="engineForm" />
+              <Field placeholder="Від" type="number" name="engineForm" min="0"/>
               <EngineSVG />
             </div>
             <div className="filter-full__engine-input">
-              <Field placeholder="Прим. 2" type="number" name="engineTo" />
+              <Field placeholder="До" type="number" name="engineTo" min="0"/>
               <EngineSVG />
             </div>
           </div>
           <div className="filter-full__engine">
             <h3 className="filter-full__title">Пробіг</h3>
             <div className="filter-full__engine-input">
-              <Field placeholder="Пр. 10000" type="number" name="odometerMin" />
+              <Field placeholder="Пр. 10000" type="number" name="odometerMin" min="0"/>
               <SpeedSVG />
             </div>
             <div className="filter-full__engine-input">
-              <Field placeholder="Пр. 50000" type="number" name="odometerMax" />
+              <Field placeholder="Пр. 50000" type="number" name="odometerMax" min="0"/>
               <SpeedSVG />
             </div>
           </div>

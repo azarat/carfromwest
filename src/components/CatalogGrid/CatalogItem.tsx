@@ -8,6 +8,7 @@ import CalendarSVG from '../../../src/assets/svg/calendar.svg'
 import TransmissionSVG from '../../../src/assets/svg/transmission.svg'
 import CrashTypeSVG from '../../../src/assets/svg/crash_type.svg'
 import DriveTypeSVG from '../../../src/assets/svg/drive_type.svg'
+import carFeatures from '../../../src/constants/carFeatures'
 
 const CatalogItem: React.FC<CatalogItemProps> = ({
   fuelType,
@@ -18,7 +19,38 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
   modelGroup,
   odometer,
   year,
+  auctionDate,
+  engine,
+  transmissionType,
+  drivelineType,
+  condition,
+  primaryDamage,
+  secondaryDamage,
+  auction
 }): JSX.Element => {
+
+  function matchCarsFeatures(char: any) {
+    const match: any = carFeatures.filter(item => item.eng === char)
+    
+    if(match.length > 0) {
+      return match[0].ua
+    }
+    return
+  }
+
+  let localeDate
+  let localeTime
+  let auctionDateEnd
+  if(auctionDate) {
+  auctionDateEnd = new Date(auctionDate)
+
+  const optionsTime: any = {  hour: "numeric", minute: "numeric" };
+  const optionsDate: any = {  year: 'numeric', month: 'numeric', day: 'numeric' };
+  
+  localeDate = auctionDateEnd.toLocaleString("ua", optionsDate);
+  localeTime = auctionDateEnd.toLocaleString("ua", optionsTime);
+}
+  
   return (
     <div className="catalog-grid__item">
       <div className="catalog-grid__item-image">
@@ -28,14 +60,14 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
             Початок аукціону
           </div>
           <div className="catalog-grid__item-auction-date-value">
-            20:00 16.02.2022
+           {localeTime || 'Н/Д'} {localeDate}
           </div>
         </div>
       </div>
       <div className="catalog-grid__item-info">
         <div className="catalog-grid__item-header">
           <div className="catalog-grid__item-header-logo">
-            <img loading="lazy" src="/assets/images/copart.png" alt="" />
+           {auction === 'copart' ? <img loading="lazy" src="/assets/images/copart.png" alt="" /> : <img loading="lazy" src="/assets/images/iaai.png" alt="" />} 
           </div>
           <div className="catalog-grid__item-header-title">
             <h6 className="catalog-grid__item-lot">#{lotNumber}</h6>
@@ -47,42 +79,42 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
         <div className="catalog-grid__item-descr">
           <div className="catalog-grid__item-mileage">
             <MileageSVG />
-            {odometer} км
+            {`${odometer} км` || 'Н/Д'}
           </div>
           <div className="catalog-grid__item-engine">
             <EngineVolumeSVG />
-            2.2л
+            {`${engine} л` || 'Н/Д'}
           </div>
           <div className="catalog-grid__item-gas">
             <FuelTypeSVG />
-            {fuelType}
+            {matchCarsFeatures(fuelType) || fuelType || 'Н/Д'}
           </div>
           <div className="catalog-grid__item-transmission">
             <TransmissionSVG />
-            Автомат
+            {matchCarsFeatures(transmissionType) || transmissionType || 'Н/Д'}
           </div>
           <div className="catalog-grid__item-drivetype">
             <DriveTypeSVG />
-            Передний привод
+            {matchCarsFeatures(drivelineType) || drivelineType || "Н/Д"}
           </div>
           <div className="catalog-grid__item-health">
             <HeathSVG />
-            Заводится
+            {matchCarsFeatures(condition) || condition || 'Н/Д'}
           </div>
           <div className="catalog-grid__item-year">
             <CalendarSVG />
-            {year}
+            {year || 'Н/Д'}
           </div>
         </div>
         <div className="catalog-grid__item-descr nowrap">
           <CrashTypeSVG />
           <div className="catalog-grid__item-crash-type">
             <div className="catalog-grid__item-crash-type-label">Основне пошкодження</div>
-            <div className="catalog-grid__item-crash-type-value">Передній удар</div>
+            <div className="catalog-grid__item-crash-type-value">{matchCarsFeatures(primaryDamage) || primaryDamage || 'Відсутнє'}</div>
           </div>
           <div className="catalog-grid__item-crash-type">
             <div className="catalog-grid__item-crash-type-label">Другорядне пошкодження</div>
-            <div className="catalog-grid__item-crash-type-value">Боковой удар</div>
+            <div className="catalog-grid__item-crash-type-value">{matchCarsFeatures(secondaryDamage) || secondaryDamage || 'Відсутнє'}</div>
           </div>
         </div>
         <div className="catalog-grid__item-descr pb-0">

@@ -43,6 +43,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
   console.log(isLoading);
+  console.log(bodyStyles);
   
 
   const router = useRouter()
@@ -79,6 +80,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   useEffect(() => {
     console.log('currentMark', currentMark);
     
+    
     if (currentMark && !currentModel) {
       setLoading(true)
       setBodyStyles([])
@@ -86,8 +88,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
       const url = `/api/filter?filters=makes,models&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
-        .then((json) =>
-          setModels(
+        .then((json) => setModels(
             json?.models.sort().map((val: string) => ({
               label: val,
               value: val,
@@ -111,6 +112,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               value: val,
             })) || []
           )
+          
           setBodyStyles(json?.bodyStyles.sort())
         })
         .catch(() => {
@@ -194,8 +196,9 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   filter='yearStart'
                   transport={transport}
                   options={firstYears}
-                  placeholder="c"
+                  placeholder="з"
                   setter={setFromYear}
+                  
                 />
                 <Field
                   name={'toYear'}
@@ -221,7 +224,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                     label: mark,
                     value: mark,
                   })) : marks}
-                  placeholder="Все"
+                  placeholder="Всі"
                   setter={setCurrentMark}
                 />
               </div>
@@ -239,7 +242,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                     label: model,
                     value: model,
                   })) : models}
-                  placeholder="Все"
+                  placeholder="Всі"
                   setter={setCurrentModel}
                 />
               </div>
@@ -250,11 +253,15 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 <Field
                   name={'bodyStyle'}
                   component={SelectTransmission}
-                  options={bodyStyles.map((val) => ({
-                    label: val,
-                    value: val,
-                  }))}
-                  placeholder="Все"
+                  // options={bodyStyles.map((val) => ({
+                  //   label: val,
+                  //   value: val,
+                  // }))}
+                  options={['sedan'].map(val => ({
+                      label: val,
+                      value: val,
+                    }))}
+                  placeholder="Всі"
                   setter={setBodyStyle}
                 />
               </div>
@@ -266,7 +273,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   name="transmission"
                   component={SelectTransmission}
                   options={transmissions}
-                  placeholder="Все"
+                  placeholder="Всі"
                 />
               </div>
             </Accordion>
@@ -276,7 +283,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   name={'fuelTypes'}
                   component={SelectTransmission}
                   options={gas}
-                  placeholder="Все"
+                  placeholder="Всі"
                 />
               </div>
             </Accordion>
@@ -284,14 +291,15 @@ const FilterTable: React.FC<FilterTableProps> = ({
               <div className="filter-full__engine">
                 <div className="filter-full__engine-input">
                   <Field
-                    placeholder="Прим. 1.1"
+                    placeholder="Від"
                     type="number"
                     name="engineFrom"
+                    min="0"
                   />
                   <EngineSVG />
                 </div>
                 <div className="filter-full__engine-input">
-                  <Field placeholder="Прим. 2" type="number" name="engineTo" />
+                  <Field placeholder="До" type="number" name="engineTo" min="0"/>
                   <EngineSVG />
                 </div>
               </div>
@@ -300,17 +308,19 @@ const FilterTable: React.FC<FilterTableProps> = ({
               <div className="filter-full__engine">
                 <div className="filter-full__engine-input">
                   <Field
-                    placeholder="Пр. 10000"
+                    placeholder="Від"
                     type="number"
                     name="odometerMin"
+                    min="0"
                   />
                   <SpeedSVG />
                 </div>
                 <div className="filter-full__engine-input">
                   <Field
-                    placeholder="Пр. 50000"
+                    placeholder="До"
                     type="number"
                     name="odometerMax"
+                    min="0"
                   />
                   <SpeedSVG />
                 </div>
