@@ -58,7 +58,7 @@ const SelectTransmission: React.FC<FieldProps & CustomSelectProps> = ({
       fontSize: (windowDimensions.width <= 1920) ? '14px' : '20px',
       lineHeight: (windowDimensions.width <= 1920) ? '16px' : '24px',
       fontWeight: '500',
-      color: '#BDBDBD'
+      color: '#333333'
     }),
     singleValue: (provided: any) => ({
       ...provided,

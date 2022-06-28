@@ -9,7 +9,6 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
   name,
   text,
   images,
-  profileLink,
   index,
 }) => {
   const { setActiveReview, handleFullReview } = useContext(
@@ -26,10 +25,8 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
           ))}
         </div>
         <div className="reviews-item__review">
-        <a className="reviews-item__name" href={profileLink}> 
-                    {name} <FbSVG className='reviews-item__name-svg'/>
-                  </a>
-          {/* <p className="reviews-item__name">{name}</p> */}
+        
+          <p className="reviews-item__name">{name}</p>
           
           <div
             className="reviews-item__text"

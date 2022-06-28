@@ -75,7 +75,7 @@ const Order: NextPage = () => {
         <div className="containers">
           <nav className="car-page__breadcrumbs order-sec">
             <ul>
-              <li  className="car-page__breadcrumbs-link">
+              <li  className="car-page__breadcrumbs-link order-sec">
                 <Link href="/">
                   <a>
                     Головна →
@@ -83,7 +83,7 @@ const Order: NextPage = () => {
                 </Link>
                
               </li>
-              <li className="car-page__breadcrumbs-link">
+              <li className="car-page__breadcrumbs-link order-sec">
                 <Link href="/catalog">
                   <a>
                     Каталог авто →
@@ -91,11 +91,11 @@ const Order: NextPage = () => {
                 </Link>
                 
               </li>
-              <li className="car-page__breadcrumbs-link">
+              <li className="car-page__breadcrumbs-link order-sec">
                  <a onClick={() => router.back()}>
                       {autoVin} →</a>
                    </li>
-                <li className="car-page__breadcrumbs-link">
+                <li className="car-page__breadcrumbs-link order-sec">
                 <Link href="/order">
                   <a>
                     Форма

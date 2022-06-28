@@ -86,4 +86,12 @@ export type CatalogItemProps = {
   odometer: number
   vin: string
   year: number
+  auctionDate: string
+  engine: string
+  transmissionType: string
+  drivelineType: string
+  condition: string
+  primaryDamage: string
+  secondaryDamage: string
+  auction: string
 }

@@ -43,9 +43,18 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
         : ['/assets/images/no-image.jpg'],
     [car]
   )
+    let localeDate
+    let localeTime
+    let auctionDateEnd
+  if(carResponse?.auctionDate) {
+    auctionDateEnd = new Date(carResponse.auctionDate)
 
-  const auctionDateEnd = new Date(carResponse.auctionDate)
-
+    const optionsTime: any = {  hour: "numeric", minute: "numeric" };
+    const optionsDate: any = {  year: 'numeric', month: 'numeric', day: 'numeric' };
+    
+    localeDate = auctionDateEnd.toLocaleString("ua", optionsDate);
+    localeTime = auctionDateEnd.toLocaleString("ua", optionsTime);
+}
   useEffect(() => {
     setCar(carResponse)
   }, [carResponse])
@@ -124,7 +133,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <>
                   <div className="car-page__timer-wrapper">
                     <div className="car-page__timer-left">
-                      <img loading="lazy" src="/assets/images/copart.png" alt="" />
+                    {car.auction === 'copart' ? <img loading="lazy" src="/assets/images/copart.png" alt="" /> : <img loading="lazy" src="/assets/images/iaai.png" alt="" />} 
                     </div>
                     <div className="car-page__timer-right">
                       <div className="car-page__time">
@@ -158,22 +167,22 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <CrashTypeSVG />
                   <div className="car-page__info-crash-primary">
                     <div className="car-page__info-crash-label">Основне пошкодження</div>
-                    <div className="car-page__info-crash-value">Передній удар</div>
+                    <div className="car-page__info-crash-value">{car.conditionInfo?.primaryDamage || 'Відсутнє'} </div>
                   </div>
                   <div className="car-page__info-crash-secondary">
                     <div className="car-page__info-crash-label">Другорядне пошкодження</div>
-                    <div className="car-page__info-crash-value">Боковой удар</div>
+                    <div className="car-page__info-crash-value">{car.conditionInfo?.secondaryDamage || 'Відсутнє'}</div>
                   </div>
                 </div>
                 <div className="car-page__table car-page__info-table">
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><DocumentTypeSVG />тип документа:</span>
+                    <span className="car-page__table-item-title"><DocumentTypeSVG />Тип документа:</span>
                     <span className="car-page__table-item-description">
-                      {car.saleInfo.saleDocument?.type || ''}
+                      {car.saleInfo.saleDocument?.type || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><MileageSVG />Пробег:</span>
+                    <span className="car-page__table-item-title"><MileageSVG />Пробіг:</span>
                     <span className="car-page__table-item-description">
                       {car.conditionInfo.odometer?.value || 0} миль
                     </span>
@@ -181,43 +190,43 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><FuelTypeSVG />Топливо:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.fuelType}
+                      {car.specifications.fuelType || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><TransmissionSVG />Трансмиссия:</span>
+                    <span className="car-page__table-item-title"><TransmissionSVG />Трансмісія:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.transmissionType}
+                      {car.specifications.transmissionType || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><EngineVolumeSVG />Объём двигателя:</span>
+                    <span className="car-page__table-item-title"><EngineVolumeSVG />Об'єм двигуна:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.engine?.capacity || ''}
+                      {car.specifications.engine?.capacity || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><HeathSVG />Стан:</span>
                     <span className="car-page__table-item-description">
-                      Заводится
+                      {car.conditionInfo?.condition || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><CarBodySVG />Кузов:</span>
                     <span className="car-page__table-item-description">
-                      Седан
+                      {car.specifications?.bodyStyle?.type || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><DriveTypeSVG />Привод:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.drivelineType}
+                      {car.specifications.drivelineType || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><KeysSVG />Наличие ключей:</span>
+                    <span className="car-page__table-item-title"><KeysSVG />Наявність ключів:</span>
                     <span className="car-page__table-item-description">
-                      {car.conditionInfo.keys ? 'В наличии' : 'Нету в наличии'}
+                      {car.conditionInfo.keys ? 'В наявності' : 'Немає в наявності'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -229,31 +238,31 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><StarSVG />Тип продавця</span>
                     <span className="car-page__table-item-description">
-                      Cтрахова компанія
+                      {car.saleInfo.seller?.group || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><CalendarSVG />Год:</span>
+                    <span className="car-page__table-item-title"><CalendarSVG />Рік:</span>
                     <span className="car-page__table-item-description">
-                      {car.lotInfo.year}
+                      {car.lotInfo.year || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><SellerSVG />продавец:</span>
+                    <span className="car-page__table-item-title"><SellerSVG />Продавець:</span>
                     <span className="car-page__table-item-description">
-                      {car.saleInfo.seller?.displayName || 'Не указан'}
+                      {car.saleInfo.seller?.displayName || 'Не вказаний'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><ColorSVG />Колір:</span>
                     <span className="car-page__table-item-description">
-                      Білий
+                      {car.specifications?.color || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><ClockSVG />Початок аукціону:</span>
                     <span className="car-page__table-item-description">
-                      20:00 16.02.2022
+                     {localeTime || 'Н/Д'} {localeDate}
                     </span>
                   </div>
                 </div>

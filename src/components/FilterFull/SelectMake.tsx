@@ -59,7 +59,7 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
       fontSize: '20px',
       lineHeight: (typeof window !== "undefined" && window.innerWidth <= 1920) ? '16px' : '24px',
       fontWeight: '500',
-      color: '#BDBDBD'
+      color: '#333333'
     }),
     singleValue: (provided: any) => ({
       ...provided,
