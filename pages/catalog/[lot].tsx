@@ -25,10 +25,10 @@ import ClockSVG from '../../src/assets/svg/clock.svg'
 
 
 
-
 // Types
 import { CarPageProps } from '../../src/Types/Types'
 import Countdown from '../../src/components/Countdown/Countdown'
+import carFeatures from '../../src/constants/carFeatures'
 // import { dateToText } from '../../src/helpers/dateToText'
 // import Consultation from '../../src/components/Consultation/Consultation'
 
@@ -43,6 +43,18 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
         : ['/assets/images/no-image.jpg'],
     [car]
   )
+  console.log(car);
+  console.log(carFeatures);
+  
+    function matchCarsFeatures(char: any) {
+      const match: any = carFeatures.filter(item => item.eng === char)
+      
+      if(match.length > 0) {
+        return match[0].ua
+      }
+      return
+    }
+
     let localeDate
     let localeTime
     let auctionDateEnd = new Date(carResponse.auctionDate)
@@ -82,7 +94,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
               <li className="car-page__breadcrumbs-link">
                 <Link href="/">
                   <a>
-                    главная <RightPolygonSVG />
+                    головна <RightPolygonSVG />
                   </a>
                 </Link>
               </li>
@@ -167,18 +179,18 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <CrashTypeSVG />
                   <div className="car-page__info-crash-primary">
                     <div className="car-page__info-crash-label">Основне пошкодження</div>
-                    <div className="car-page__info-crash-value">{car.conditionInfo?.primaryDamage || 'Відсутнє'} </div>
+                    <div className="car-page__info-crash-value">{matchCarsFeatures(car.conditionInfo?.primaryDamage) || car.conditionInfo?.primaryDamage || 'Відсутнє'} </div>
                   </div>
                   <div className="car-page__info-crash-secondary">
                     <div className="car-page__info-crash-label">Другорядне пошкодження</div>
-                    <div className="car-page__info-crash-value">{car.conditionInfo?.secondaryDamage || 'Відсутнє'}</div>
+                    <div className="car-page__info-crash-value">{matchCarsFeatures(car.conditionInfo?.secondaryDamage) || car.conditionInfo?.secondaryDamage || 'Відсутнє'}</div>
                   </div>
                 </div>
                 <div className="car-page__table car-page__info-table">
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><DocumentTypeSVG />Тип документа:</span>
                     <span className="car-page__table-item-description">
-                      {car.saleInfo.saleDocument?.type || 'Н/Д'}
+                      {matchCarsFeatures(car.saleInfo.saleDocument?.type) || car.saleInfo.saleDocument?.type || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -190,37 +202,37 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><FuelTypeSVG />Топливо:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.fuelType || 'Н/Д'}
+                       {matchCarsFeatures(car.specifications.fuelType) || car.specifications.fuelType || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><TransmissionSVG />Трансмісія:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.transmissionType || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.transmissionType) || car.specifications.transmissionType || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><EngineVolumeSVG />Об'єм двигуна:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.engine?.capacity || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.engine?.capacity) || car.specifications.engine?.capacity || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><HeathSVG />Стан:</span>
                     <span className="car-page__table-item-description">
-                      {car.conditionInfo?.condition || 'Н/Д'}
+                      {matchCarsFeatures(car.conditionInfo?.condition) || car.conditionInfo?.condition || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><CarBodySVG />Кузов:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications?.bodyStyle?.type || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications?.bodyStyle?.type) || car.specifications?.bodyStyle?.type || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><DriveTypeSVG />Привод:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications.drivelineType || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.drivelineType) || car.specifications.drivelineType || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -238,7 +250,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><StarSVG />Тип продавця</span>
                     <span className="car-page__table-item-description">
-                      {car.saleInfo?.seller?.group || 'Н/Д'}
+                      {matchCarsFeatures(car.saleInfo?.seller?.group) || car.saleInfo?.seller?.group || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
@@ -256,7 +268,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><ColorSVG />Колір:</span>
                     <span className="car-page__table-item-description">
-                      {car.specifications?.color || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications?.color) || car.specifications?.color || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">

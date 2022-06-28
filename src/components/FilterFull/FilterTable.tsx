@@ -43,6 +43,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
   console.log(isLoading);
+  console.log(bodyStyles);
   
 
   const router = useRouter()
@@ -252,10 +253,14 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 <Field
                   name={'bodyStyle'}
                   component={SelectTransmission}
-                  options={bodyStyles.map((val) => ({
-                    label: val,
-                    value: val,
-                  }))}
+                  // options={bodyStyles.map((val) => ({
+                  //   label: val,
+                  //   value: val,
+                  // }))}
+                  options={['sedan'].map(val => ({
+                      label: val,
+                      value: val,
+                    }))}
                   placeholder="Всі"
                   setter={setBodyStyle}
                 />
