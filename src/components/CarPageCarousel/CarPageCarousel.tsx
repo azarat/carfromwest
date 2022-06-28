@@ -1,8 +1,10 @@
 import Carousel from '../Carousel/Carousel'
 // SVG
-import ArrowSVG from '../../assets/svg/carouselArrow.svg'
-import FullSizeSVG from '../../assets/svg/fullsize.svg'
-import PhotoSVG from '../../assets/svg/photo.svg'
+import ArrowRightSVG from '../../assets/svg/arrow-right-car.svg'
+import ArrowLeftSVG from '../../assets/svg/arrow-left-car.svg'
+
+import FullSizeSVG from '../../assets/svg/full-size.svg'
+import PhotoSVG from '../../assets/svg/total-carus.svg'
 import { useState } from 'react'
 import CarouselModal from '../CarouselModal/CarouselModal'
 import CarouselImage from './CarouselImage'
@@ -32,8 +34,8 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
           <FullSizeSVG />
         </div>
         <Carousel
-          buttonNext={<ArrowSVG />}
-          buttonPrev={<ArrowSVG />}
+          buttonNext={<ArrowRightSVG />}
+          buttonPrev={<ArrowLeftSVG />}
           callback={setCurrentSlide}
           initialSlide={currentSlide}
         >
