@@ -31,7 +31,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
   let localeDate
   let localeTime
   let auctionDateEnd
-if(auctionDate) {
+  if(auctionDate) {
   auctionDateEnd = new Date(auctionDate)
 
   const optionsTime: any = {  hour: "numeric", minute: "numeric" };

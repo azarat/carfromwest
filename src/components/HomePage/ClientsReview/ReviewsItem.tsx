@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { ReviewsItemProps } from './Types'
 import FullReviewContext from '../../../context/fullReviewContext'
 import { FullReviewContextTypes } from '../../../context/Types'
-import FbSVG from '../../../assets/svg/fb-review.svg'
 
 const ReviewsItem: React.FC<ReviewsItemProps> = ({
   name,

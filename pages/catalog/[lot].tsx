@@ -45,7 +45,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   )
     let localeDate
     let localeTime
-    let auctionDateEnd
+    let auctionDateEnd = new Date(carResponse.auctionDate)
   if(carResponse?.auctionDate) {
     auctionDateEnd = new Date(carResponse.auctionDate)
 
@@ -238,7 +238,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                   <div className="car-page__table-item">
                     <span className="car-page__table-item-title"><StarSVG />Тип продавця</span>
                     <span className="car-page__table-item-description">
-                      {car.saleInfo.seller?.group || 'Н/Д'}
+                      {car.saleInfo?.seller?.group || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
