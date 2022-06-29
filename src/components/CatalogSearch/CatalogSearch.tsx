@@ -31,7 +31,7 @@ const CatalogSearch: React.FC<CatalogSearchProps> = ({
       <input
         disabled={loading}
         className="catalog__search-input"
-        placeholder="Введите номер лота, VIN или название авто"
+        placeholder="Номер лоту, VIN чи назву авто"
         onChange={handleChange}
         value={searchValue}
         type="text"

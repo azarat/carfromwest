@@ -21,7 +21,7 @@ const FilterField: React.FC<FilterFieldProps> = ({ setOpen }): JSX.Element => {
         <div className="filter-field__button-icon">
           <AuctionSVG />
         </div>
-        <div className="filter-field__button-text">Авто з аукционів</div>
+        <div className="filter-field__button-text">Авто з аукціонів</div>
       </div>
     </div>
   )

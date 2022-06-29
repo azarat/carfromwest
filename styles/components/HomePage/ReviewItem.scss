@@ -285,7 +285,7 @@
    }
    &__text {
      max-width: 275px;
-     height: 70px;
+     height: 200px;
      margin-top: 16px;
      overflow: hidden;
      color: $black-color;
@@ -299,7 +299,8 @@
      align-items: center;
      justify-content: start;
      max-width: 200px;
-     margin-top: 10px;
+     margin-top: 24px;
+     margin-bottom: 48px;
      // margin-left: auto;
      cursor: pointer;
    }
@@ -338,14 +339,15 @@
    &__photos {
      display: grid;
      grid-template-columns: 1fr 1fr;
+     order: 3;
      gap: 10px;
      max-width: 100%;
      margin: 0 auto;
+    //  width: 125px;
    }
    &__photo-wrapper {
      position: relative;
-     width: 100%;
-     
+     width: 125px;
      height: 169px;
    }
   }
