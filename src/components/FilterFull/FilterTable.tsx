@@ -111,8 +111,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               label: val,
               value: val,
             })) || []
-          )
-          
+          )          
           setBodyStyles(json?.bodyStyles.sort())
         })
         .catch(() => {
@@ -237,7 +236,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   value={currentModel}
                   filter='model'
                   transport={transport}
-                  component={SelectTransmission}
+                  component={SelectMake}
                   options={brandModels?.length ? brandModels?.map((model) => ({
                     label: model,
                     value: model,
@@ -253,14 +252,14 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 <Field
                   name={'bodyStyle'}
                   component={SelectTransmission}
-                  // options={bodyStyles.map((val) => ({
-                  //   label: val,
-                  //   value: val,
-                  // }))}
-                  options={['sedan'].map(val => ({
-                      label: val,
-                      value: val,
-                    }))}
+                  options={bodyStyles.map((val) => ({
+                    label: val,
+                    value: val,
+                  }))}
+                  // options={['sedan'].map(val => ({
+                  //     label: val,
+                  //     value: val,
+                  //   }))}
                   placeholder="Всі"
                   setter={setBodyStyle}
                 />
