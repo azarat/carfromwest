@@ -198,6 +198,10 @@ const Promo: React.FC = (): JSX.Element => {
               src="/assets/images/hero.png"
             />
           </div>
+          <div className="promo__image-mob">
+              <img className='promo__image-mob-block' src="/assets/images/hero.png"
+              />
+          </div>
         </div>
           {/* <div
             role="presentation"

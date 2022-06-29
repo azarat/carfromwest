@@ -29,8 +29,11 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
   auction
 }): JSX.Element => {
 
-  function matchCarsFeatures(char: any) {
-    const match: any = carFeatures.filter(item => item.eng === char)
+  function matchCarsFeatures(parameter: any) {
+    if(parameter) {
+      parameter = parameter.toLowerCase()
+    }
+    const match: any = carFeatures.filter(item => item.eng.toLowerCase() === parameter)
     
     if(match.length > 0) {
       return match[0].ua
