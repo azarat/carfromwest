@@ -40,7 +40,8 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
     }
     return
   }
-
+  console.log(condition);
+  
   let localeDate
   let localeTime
   let auctionDateEnd

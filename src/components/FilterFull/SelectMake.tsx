@@ -124,7 +124,7 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
               </li>
             )) : (
               <li className="customDropDown__list-item">
-                Нет элементов
+                Немає елементів
               </li>
             )
           }

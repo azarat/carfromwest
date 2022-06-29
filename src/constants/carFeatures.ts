@@ -409,6 +409,11 @@ const carFeatures = [
     eng: 'Left side',
     ua: 'Ліва сторона',
   },
+  { 
+    id: 83,
+    eng: 'Історія пошкоджень', 
+    ua: 'damage history' 
+  }, 
   
 ]
 
