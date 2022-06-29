@@ -6,8 +6,8 @@
       &-container {
         position: relative;
         width: 1600px;
-        height: 700px;
-        padding: 0px 0px 50px !important;
+        height: 600px;
+        padding: 0px 0px 25px !important;
         margin: 0px;
         left: 50%;
         transform: translateX(-50%);
@@ -62,10 +62,10 @@
 
             & img {
               display: block;
-              width: 100%;
+              width: 75%;
               // height: 100%;
               // max-width: 507px;
-              // height: auto;
+              height: auto;
               margin: 0 auto;
               object-fit: cover;
               margin-bottom: 20px;
@@ -73,10 +73,10 @@
             }
             &__name {
               font-weight: 700;
-              font-size: 40px;
-              line-height: 50px;
+              font-size: 30px;
+              line-height: 40px;
               color: $black-color;
-              margin: 0 0 24px
+              margin: 0 0 18px
             };
             &__price {
               font-weight: 700;
@@ -90,7 +90,7 @@
                 font-size: 28px;
                 line-height: 35px;
                 color: #999999;
-                margin-bottom: 30px;
+                margin-bottom: 24px;
               }
             }
           }
