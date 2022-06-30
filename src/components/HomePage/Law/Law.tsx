@@ -8,30 +8,38 @@ const Law: React.FC = () => {
       <div className="law__text">
         <h2 className='law__title'>ТЕПЕР АВТО З США ЩЕ ВИГІДНІШЕ!</h2>
         <div className="law__description">
-          <p>В Україні діє закон про безкоштовне розмитнення транспортних засобів.</p>
+        <p>В Україні діє закон про <span className='law__description-bold'>безкоштовне розмитнення гібридних авто та електромобілів.</span> І цей закон не планують відміняти! </p>
           <p>
-            20% ПДВ для імпорту легкових та вантажних автомобілів, а також мотоциклів, автобусів та кузовів <span className='law__description-bold'>скасовано для всіх</span>. А фізичні особи не платять мито (7%) та акциз.
+            Вигідне авто з США і ніяких проблем з пошуками палива!
           </p>
         </div>
       </div>
-      <div className="law__image">
-        <div className="law__image-desc"><Image
-          className="law__image-block"
-          src="/assets/images/jeep-desc.png"
+      <div className="law__image-desc">
+       <Image
+          className="law__image-desc-block"
+          src="/assets/images/lawM.png"
           layout="fill"
-        /></div>
-        <div className="law__image-tab"><Image
+        />
+        
+        {/* <div className="law__image-tab"><Image
           className="law__image-block"
-          src="/assets/images/jeep-tab.png"
+          src="/assets/images/lawM.png"
           layout="fill"
         /></div>
         <div className="law__image-mob"><Image
           className="law__image-block"
-          src="/assets/images/jeep-mob.png"
+          src="/assets/images/lawM.png"
           layout="fill"
-        /></div>
+        /></div> */}
         
       </div>
+      <div className="law__image-mob">
+      <img
+          className="law__image-mob-block"
+          src="/assets/images/lawM.png"
+         
+        />
+        </div>
       </div>
     </section>
   )
