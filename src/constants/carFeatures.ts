@@ -2,7 +2,7 @@ const carFeatures = [
   {
     id: 1,
     eng: 'gas',
-    ua: 'Газ',
+    ua: 'Бензин',
   },
   {
     id: 2,
