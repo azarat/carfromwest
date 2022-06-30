@@ -46,6 +46,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   console.log(car);
   console.log(carFeatures);
   
+  
   function matchCarsFeatures(parameter: any) {
     if(parameter) {
       parameter = parameter.toLowerCase()

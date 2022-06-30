@@ -10,7 +10,7 @@ import SpeedSVG from '../../assets/svg/speed.svg'
 // import FilterSVG from '../../assets/svg/filter_1.svg'
 import CloseSVG from '../../assets/svg/times.svg'
 // Constants
-import { years, gas, transmissions } from '../../constants/filter'
+import { years, gas, transmissions, driveLineTypes, primaryDamage, secondaryDamage, condition } from '../../constants/filter'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
@@ -141,6 +141,9 @@ const FilterTable: React.FC<FilterTableProps> = ({
           'vehicleConditions',
           'features',
           'countries',
+          'primaryDamage',
+          'secondaryDamage',
+          'condition'
         ].includes(k) && values[k]
     )
 
@@ -152,7 +155,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
     if (values.toYear) url += `/yearEnd-is-${values.toYear}`
     if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
-    if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
+    if (values.primaryDamage) url += `/primaryDamage-is-${values.primaryDamage}`
+    if (values.secondaryDamage) url += `/secondaryDamage-is-${values.secondaryDamage}`
+    if (values.condition) url += `/condition-is-${values.condition}`
+    if (values.driveLineTypes) url += `/driveLineTypes-is-${values.driveLineTypes}`
     router.push('/catalog' + url)
   }
 
@@ -176,6 +182,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
           models: currentModel,
           odometerMin: '',
           odometerMax: '',
+          vehicleConditions: '',
+          driveLineTypes: '',
+          primaryDamage: '',
+          secondaryDamage: '',
+          condition: ''
         }}
         onSubmit={handleSubmit}
         enableReinitialize={true}
@@ -247,45 +258,29 @@ const FilterTable: React.FC<FilterTableProps> = ({
               </div>
             </Accordion>
 
-            <Accordion title="Тип кузова">
-              <div className="filter-full__transmission">
-                <Field
-                  name={'bodyStyle'}
-                  component={SelectTransmission}
-                  options={bodyStyles.map((val) => ({
-                    label: val,
-                    value: val,
-                  }))}
-                  // options={['sedan'].map(val => ({
-                  //     label: val,
-                  //     value: val,
-                  //   }))}
-                  placeholder="Всі"
-                  setter={setBodyStyle}
-                />
-              </div>
-            </Accordion>
-
             <Accordion title="Коробка передач">
               <div className="filter-full__transmission">
                 <Field
                   name="transmission"
                   component={SelectTransmission}
                   options={transmissions}
-                  placeholder="Всі"
+                  placeholder="Оберіть вашу коробку"
                 />
               </div>
             </Accordion>
+
             <Accordion title="Тип палива">
               <div className="filter-full__gas">
                 <Field
                   name={'fuelTypes'}
+                  filter='fuel'
                   component={SelectTransmission}
                   options={gas}
-                  placeholder="Всі"
+                  placeholder="Оберіть тип палива"
                 />
               </div>
             </Accordion>
+
             <Accordion title="Об’єм двигуна">
               <div className="filter-full__engine">
                 <div className="filter-full__engine-input">
@@ -303,6 +298,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 </div>
               </div>
             </Accordion>
+
             <Accordion title="Пробіг">
               <div className="filter-full__engine">
                 <div className="filter-full__engine-input">
@@ -325,13 +321,92 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 </div>
               </div>
             </Accordion>
+
+            <Accordion title="Стан">
+              <div className="filter-full__transmission">
+                <Field
+                  name={'condition'}
+                  component={SelectTransmission}
+                  options={condition}
+                  placeholder="Оберіть стан"
+                />
+              </div>
+            </Accordion>
+
+            <Accordion title="Тип кузова">
+              <div className="filter-full__transmission">
+                <Field
+                  name={'bodyStyle'}
+                  component={SelectTransmission}
+                  options={bodyStyles.map((val) => ({
+                    label: val,
+                    value: val,
+                  }))}
+                  placeholder="Всі"
+                  setter={setBodyStyle}
+                />
+              </div>
+            </Accordion>
+
+            <Accordion title="Тип привода">
+              <div className="filter-full__transmission">
+                <Field
+                  name={'driveLineTypes'}
+                  component={SelectTransmission}
+                  options={driveLineTypes}
+                  placeholder="Оберіть тип привода"
+                  filter='driveLineTypes'
+                />
+              </div>
+            </Accordion>
+
+            <Accordion title="Продавець">
+              <div className="filter-full__year">
+                <label>
+                <Field
+                  type="radio"
+                /> Страхова
+                </label>
+                <label>
+                <Field
+                  type="radio"
+                /> Перекуп
+                </label>
+              </div>
+            </Accordion>
+
+            <Accordion title="Основні пошкодження">
+              <div className="filter-full__transmission">
+                <Field
+                  name={'primaryDamage'}
+                  component={SelectTransmission}
+                  options={primaryDamage}
+                  placeholder="Оберіть пошкодження"
+                  filter='primaryDamage'
+                />
+              </div>
+            </Accordion>
+
+            <Accordion title="Другорядне пошкодження">
+              <div className="filter-full__transmission">
+                <Field
+                  name={'secondaryDamage'}
+                  component={SelectTransmission}
+                  filter='secondaryDamage'
+                  options={secondaryDamage}
+                  placeholder="Оберіть пошкодження"
+                />
+              </div>
+            </Accordion>
+
+           
           </div>
           <button
             disabled={loading}
             type="submit"
             className="filter-full__button"
           >
-            Применить фильтр
+            Застосувати фільтр
           </button>
         </Form>
       </Formik>

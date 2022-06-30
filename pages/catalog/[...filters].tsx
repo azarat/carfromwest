@@ -332,6 +332,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
   })
 
   const { makes, models } = await filterResponse.json()
+  
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',

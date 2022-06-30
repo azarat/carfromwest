@@ -291,7 +291,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             type="submit"
             className="filter-full__button"
           >
-            Применить фильтр
+            Застосувати фільтр
           </button>
         </Form>
       </Formik>

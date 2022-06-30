@@ -61,6 +61,26 @@ export const aviableParams = {
     name: 'odometerMax',
     type: ParamType.number,
   },
+  primaryDamage: {
+    filterName: '',
+    name: 'primaryDamage',
+    type: ParamType.string,
+  },
+  secondaryDamage: {
+    filterName: '',
+    name: 'secondaryDamage',
+    type: ParamType.string,
+  },
+  condition: {
+    filterName: '',
+    name: 'condition',
+    type: ParamType.string,
+  },
+  driveLineTypes: {
+    filterName: '',
+    name: 'driveLineTypes',
+    type: ParamType.string,
+  },
 }
 
 export const range = (start: number, stop: number, step: number): string[] =>

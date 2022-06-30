@@ -11,20 +11,50 @@ for (let i = 2010; i <= 2021; i++) {
 }
 
 export const transmissions: any[] = [
-  { label: 'Все', value: '' },
+  { label: 'Всі', value: '' },
   { label: 'Механічна', value: 'manual' },
   { label: 'Автоматична', value: 'automatic' },
 ]
 
-export const driveLineTypes = [
-  'Передній привід',
-  'Задній привід',
-  '4x4',
-  'Повний привід',
+export const driveLineTypes: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Передній привід', value: 'front' },
+  { label: 'Задній привід', value: 'rear' },
+  { label: '4x4', value: 'four' },
+  { label: 'Повний привід', value: 'all' },
+]
+
+export const primaryDamage: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Ходова частина', value: 'Undercarriage' },
+  { label: 'Передня частина', value: 'Front End' },
+  { label: 'Задня частина', value: 'rear end' },
+  { label: 'Вода/повінь', value: 'Water/flood' },
+  { label: 'Сторона', value: 'side' },
+  { label: 'Ліва передня частина', value: 'Left Front' },
+  { label: 'Історія пошкоджень', value: 'damage history' },  
+]
+
+export const secondaryDamage: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Підвіска', value: 'Suspension' },
+  { label: 'Невеликі подряпини і вм’ятини', value: 'Minor Dent/scratches' },
+  { label: 'Ліва сторона', value: 'Left side' },
+  { label: 'Задня частина', value: 'rear end' },
+  { label: 'Вода/повінь', value: 'Water/flood' },
+  { label: 'Сторона', value: 'side' },
+  { label: 'Ліва передня частина', value: 'Left Front' }, 
+]
+
+export const condition: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Їде', value: 'runs' },
+  { label: 'Заводиться', value: 'starts' },
+  { label: 'Не заводиться', value: 'wont-start' },
 ]
 
 export const gas: { label: string; value: string }[] = [
-  { label: 'Все', value: '' },
+  { label: 'Всі', value: '' },
   { label: 'Бензин', value: 'gas' },
   { label: 'Дизель', value: 'diesel' },
   { label: 'Гібрид', value: 'hybrid-engine' },
