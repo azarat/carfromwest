@@ -167,7 +167,7 @@ const carFeatures = [
   {
     id: 34,
     eng: 'rear',
-    ua: 'Удар ззаду (rear-end)',
+    ua: 'Удар ззаду',
   },
   {
     id: 35,
@@ -232,7 +232,7 @@ const carFeatures = [
   {
     id: 47,
     eng: 'Left Front',
-    ua: 'Ліва передня частина (left-front)',
+    ua: 'Ліва передня частина',
   },
   {
     id: 48,
@@ -297,7 +297,7 @@ const carFeatures = [
   {
     id: 60,
     eng: 'Front & Rear',
-    ua: 'Удар спереду і ззаду (front-rear)',
+    ua: 'Удар спереду і ззаду',
   },
   {
     id: 61,
@@ -392,7 +392,7 @@ const carFeatures = [
   {
     id: 79,
     eng: 'Front End',
-    ua: 'Передня частина (front-end)',
+    ua: 'Передня частина',
   },
   {
     id: 80,
