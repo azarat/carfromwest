@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Formik, Field, Form } from 'formik'
 // import CustomSelect from './CustomSelect'
+import Spinner from '../Spinner/Spinner'
 import SelectTransmission from './SelectTransmission'
 import Accordion from '../Accordion/Accordion'
 // SVG
@@ -42,7 +43,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
-  console.log('isLoading', isLoading);
+  // console.log('isLoading', isLoading);
   // console.log(bodyStyles);
   
 
@@ -62,44 +63,47 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [filter])
 
   useEffect(() => {
-    const url = `/api/filter?filters=makes`
+    setLoading(true)
+    const url = `/api/filter?filters=makes,bodyStyles`
     fetch(url)
       .then((res) => res.json())
-      .then((json) =>
+      .then((json) => {
         setMarks(
           json?.makes.sort().map((val: string) => ({
             label: val,
             value: val,
           })) || []
         )
-      )
+        setBodyStyles(json?.bodyStyles.sort())
+      })
       .catch(() => setMarks(undefined))
-  }, [])
+      .finally(() => setLoading(false))
+    }, [])
 
 
   useEffect(() => {
-    // console.log('currentMark', currentMark);
-    
-    
     if (currentMark && !currentModel) {
       setLoading(true)
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models&makes=${currentMark}`
+      const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
-        .then((json) => setModels(
+        .then((json) => {
+          setModels(
             json?.models.sort().map((val: string) => ({
               label: val,
               value: val,
             })) || []
           )
-        )
+          setBodyStyles(json?.bodyStyles.sort())
+        })
         .catch(() => setModels(undefined))
         .finally(() => setLoading(false))
     }
 
     if (currentModel) {
+      setLoading(true)
       setBodyStyles([])
       setBodyStyle('')
       const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}&models=${currentModel}`
@@ -118,11 +122,12 @@ const FilterTable: React.FC<FilterTableProps> = ({
           setBodyStyles([])
           setBodyStyle('')
         })
+        .finally(() => setLoading(false))
     }
   }, [currentMark, currentModel])
 
   const handleSubmit = (values: any) => {
-    // console.log(values);
+    setLoading(true)
     
     Object.keys(values).filter(
       (k) =>
@@ -176,11 +181,15 @@ const FilterTable: React.FC<FilterTableProps> = ({
     mobileFilterBtn.click();
   }
 
-  // console.log('filter', filter);
-  
+  const resetFilters = () => {
+    setLoading(true)
+    router.push('/catalog')
+  }
   
   return (
     <div className="filter-full--table">
+      <div className={`filter-spinner${isLoading ? ' loading' : ''}`}><Spinner /></div>
+
       <Formik
         initialValues={{
           bodyStyles: bodyStyle,
@@ -205,6 +214,15 @@ const FilterTable: React.FC<FilterTableProps> = ({
         enableReinitialize={true}
       >
         <Form className={(!!mobileActive && mobileActive == true) ? `active-mobile` : ``}>
+          <button
+            onClick={resetFilters}
+            disabled={loading}
+            type="button"
+            className="filter-full__button reset-filters"
+          >
+            Застосувати фільтр
+          </button>
+
 
           <button type='button' className='mobile-filter-btn--close' onClick={toggleFilter}>
             <CloseSVG />
