@@ -6,7 +6,7 @@ import CoupeCarSVG from '../assets/svg/coupe.svg'
 import PickupCarSVG from '../assets/svg/pickup.svg'
 
 export const years: any[] = []
-for (let i = 2010; i <= 2021; i++) {
+for (let i = 2021; i >= 1960; i--) {
   years.push({ label: i, value: i })
 }
 
@@ -28,23 +28,23 @@ export const primaryDamage: any[] = [
   { label: 'Всі', value: '' },
   { label: 'Ходова частина', value: 'Undercarriage' },
   { label: 'Передня частина', value: 'Front End' },
-  { label: 'Задня частина', value: 'rear end' },
+  { label: 'Задня частина', value: 'Rear End' },
   { label: 'Вода/повінь', value: 'Water/flood' },
   { label: 'Сторона', value: 'side' },
   { label: 'Ліва передня частина', value: 'Left Front' },
   { label: 'Історія пошкоджень', value: 'damage history' },  
 ]
 
-export const secondaryDamage: any[] = [
-  { label: 'Всі', value: '' },
-  { label: 'Підвіска', value: 'Suspension' },
-  { label: 'Невеликі подряпини і вм’ятини', value: 'Minor Dent/scratches' },
-  { label: 'Ліва сторона', value: 'Left side' },
-  { label: 'Задня частина', value: 'rear end' },
-  { label: 'Вода/повінь', value: 'Water/flood' },
-  { label: 'Сторона', value: 'side' },
-  { label: 'Ліва передня частина', value: 'Left Front' }, 
-]
+// export const secondaryDamage: any[] = [
+//   { label: 'Всі', value: '' },
+//   { label: 'Підвіска', value: 'Suspension' },
+//   { label: 'Невеликі подряпини і вм’ятини', value: 'Minor Dent/scratches' },
+//   { label: 'Ліва сторона', value: 'Left side' },
+//   { label: 'Задня частина', value: 'rear end' },
+//   { label: 'Вода/повінь', value: 'Water/flood' },
+//   { label: 'Сторона', value: 'side' },
+//   { label: 'Ліва передня частина', value: 'Left Front' }, 
+// ]
 
 export const condition: any[] = [
   { label: 'Всі', value: '' },

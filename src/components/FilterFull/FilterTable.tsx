@@ -10,7 +10,7 @@ import SpeedSVG from '../../assets/svg/speed.svg'
 // import FilterSVG from '../../assets/svg/filter_1.svg'
 import CloseSVG from '../../assets/svg/times.svg'
 // Constants
-import { years, gas, transmissions, driveLineTypes, primaryDamage, secondaryDamage, condition } from '../../constants/filter'
+import { years, gas, transmissions, driveLineTypes, primaryDamage, condition } from '../../constants/filter'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
@@ -42,8 +42,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
-  console.log(isLoading);
-  console.log(bodyStyles);
+  console.log('isLoading', isLoading);
+  // console.log(bodyStyles);
   
 
   const router = useRouter()
@@ -78,7 +78,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
 
   useEffect(() => {
-    console.log('currentMark', currentMark);
+    // console.log('currentMark', currentMark);
     
     
     if (currentMark && !currentModel) {
@@ -122,6 +122,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [currentMark, currentModel])
 
   const handleSubmit = (values: any) => {
+    // console.log(values);
+    
     Object.keys(values).filter(
       (k) =>
         [
@@ -142,23 +144,30 @@ const FilterTable: React.FC<FilterTableProps> = ({
           'features',
           'countries',
           'primaryDamage',
-          'secondaryDamage',
+          // 'secondaryDamage',
           'condition'
         ].includes(k) && values[k]
     )
 
     let url = '';
     if (values.makes) url += `/brand-is-${values.makes}`
-    if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
     if (values.models) url += `/model-is-${values.models}`
+    if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
     if (values.engineFrom && values.engineTo) url += `/volume-is-${values.engineFrom}to${values.engineTo}`
     if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
     if (values.toYear) url += `/yearEnd-is-${values.toYear}`
     if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
-    if (values.primaryDamage) url += `/primaryDamage-is-${values.primaryDamage}`
-    if (values.secondaryDamage) url += `/secondaryDamage-is-${values.secondaryDamage}`
+    if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
+    if (values.primaryDamage) url += `/damageTypes-is-${values.primaryDamage}`
+    // if (values.secondaryDamage) url += `/secondaryDamage-is-${values.secondaryDamage}`
+    if (values.transmission) url += `/transmissionTypes-is-${values.transmission}`
+    if (values.saleDocumentsGroups) url += `/saleDocumentsGroups-is-${values.saleDocumentsGroups}`
+    if (values.sellerType) url += `/sellerType-is-${values.sellerType}`
+    if (values.bodyStyle) url += `/bodyStyles-is-${values.bodyStyle}`
     if (values.condition) url += `/condition-is-${values.condition}`
     if (values.driveLineTypes) url += `/driveLineTypes-is-${values.driveLineTypes}`
+    // console.log(values);
+    
     router.push('/catalog' + url)
   }
 
@@ -167,26 +176,30 @@ const FilterTable: React.FC<FilterTableProps> = ({
     mobileFilterBtn.click();
   }
 
+  // console.log('filter', filter);
+  
+  
   return (
     <div className="filter-full--table">
       <Formik
         initialValues={{
           bodyStyles: bodyStyle,
-          fromYear: '',
-          toYear: '',
-          transmission: '',
-          engineFrom: '',
-          engineTo: '',
+          fromYear: filter.yearMin ?? '',
+          toYear: filter.yearMax ?? '',
+          sellerType: filter.sellerType ?? '',
+          transmission: filter.transmissionTypes ? filter.transmissionTypes[0] : '',
+          engineFrom: filter.engineCapacities ? filter.engineCapacities[0] : '',
+          engineTo: filter.engineCapacities ? (parseFloat(filter.engineCapacities[filter.engineCapacities.length - 1]) + 0.1) : '',
           makes: currentMark,
-          fuelTypes: '',
+          fuelTypes: filter.fuelTypes ? filter.fuelTypes[0] : '',
           models: currentModel,
-          odometerMin: '',
-          odometerMax: '',
-          vehicleConditions: '',
-          driveLineTypes: '',
-          primaryDamage: '',
-          secondaryDamage: '',
-          condition: ''
+          odometerMin: filter.odometerMin ?? '',
+          odometerMax: filter.odometerMax ?? '',
+          vehicleConditions: filter.vehicleConditions ? filter.vehicleConditions[0] : '',
+          driveLineTypes: filter.driveLineTypes ? filter.driveLineTypes[0] : '',
+          primaryDamage: filter.damageTypes ? filter.damageTypes[0] : '',
+          // secondaryDamage: '',
+          condition: filter.vehicleConditions ? filter.vehicleConditions[0] : ''
         }}
         onSubmit={handleSubmit}
         enableReinitialize={true}
@@ -288,12 +301,19 @@ const FilterTable: React.FC<FilterTableProps> = ({
                     placeholder="Від"
                     type="number"
                     name="engineFrom"
+                    step="any"
                     min="0"
                   />
                   <EngineSVG />
                 </div>
                 <div className="filter-full__engine-input">
-                  <Field placeholder="До" type="number" name="engineTo" min="0"/>
+                  <Field 
+                    placeholder="До" 
+                    type="number" 
+                    name="engineTo" 
+                    step="any"
+                    min="0"
+                  />
                   <EngineSVG />
                 </div>
               </div>
@@ -363,19 +383,23 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Продавець">
               <div className="filter-full__year">
                 <label>
-                <Field
-                  type="radio"
-                /> Страхова
+                  <Field
+                    type="radio"
+                    name="sellerType"
+                    value="insurance"
+                    /> Страхова
                 </label>
                 <label>
-                <Field
-                  type="radio"
-                /> Перекуп
+                  <Field
+                    type="radio"
+                    name="sellerType"
+                    value="other"
+                  /> Перекуп
                 </label>
               </div>
             </Accordion>
 
-            <Accordion title="Основні пошкодження">
+            <Accordion title="Пошкодження">
               <div className="filter-full__transmission">
                 <Field
                   name={'primaryDamage'}
@@ -387,7 +411,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               </div>
             </Accordion>
 
-            <Accordion title="Другорядне пошкодження">
+            {/* <Accordion title="Другорядне пошкодження">
               <div className="filter-full__transmission">
                 <Field
                   name={'secondaryDamage'}
@@ -397,7 +421,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   placeholder="Оберіть пошкодження"
                 />
               </div>
-            </Accordion>
+            </Accordion> */}
 
            
           </div>

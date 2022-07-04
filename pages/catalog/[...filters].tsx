@@ -43,7 +43,9 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     sortField: 'added-date',
     sortDirection: 'asc',
     includeFilters: ['auctions'],
+    excludeFilters: [],
   }
+  const excludeFilters: string[] = []
   const includeFilters = ['vehicleTypes']
   const initialMakes = []
   const initialModels = []
@@ -62,6 +64,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
+        excludeFilters: excludeFilters,
         includeFilters: includeFilters,
         makes: initialMakes,
         vehicleType: type ? type : 'automobile',
@@ -255,6 +258,26 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
+  // const apiFields = [
+  //   "auctions", 
+  //   "bodyStyles", 
+  //   "damageTypes", 
+  //   "engineCapacities", 
+  //   "engineCylinders", 
+  //   "fuelTypes", 
+  //   "drivelineTypes", 
+  //   "makes", 
+  //   "models", 
+  //   "trims", 
+  //   "saleDocumentsGroups", 1 2 3 4
+  //   "transmissionTypes", 
+  //   "vehicleTypes", 
+  //   "locations", 
+  //   "vehicleConditions", 
+  //   "features", 
+  //   "countries"
+  // ];
+  
   const transportParam = ((query?.filters || []) as string[]).find(f => f.includes('transport-is-'))
   const brandParam = ((query?.filters || []) as string[]).find(f => f.includes('brand-is-'))
   const currentParams = Object.keys(aviableParams).reduce(
@@ -266,6 +289,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
       )
 
       if (urlParam) {
+        // console.log('param', param);
+        
         const paramValue = urlParam.replace(currentParam, '')
         const filterName =
           aviableParams[param as keyof typeof aviableParams].filterName
@@ -273,6 +298,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
         const name = aviableParams[param as keyof typeof aviableParams].name
         if (filterName) {
           acc.includeFilters.push(filterName)
+        } else {
+          acc.excludeFilters.push(name)
         }
 
         if (type === ParamType.array) {
@@ -316,13 +343,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
       page: +query.page! || 1,
       sortField: query.sortField || 'added-date',
       sortDirection: query.sortDirection || 'asc',
+      excludeFilters: [],
       includeFilters: [],
       itemsPerPage: 12,
     }
   )
-  const filtersUrl = brandParam ?
+  const filtersUrl = !!brandParam ?
     `http://46.101.185.57:8080/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
     'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+  
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       'user-agent': req.headers['user-agent'] || USER_AGENT,
@@ -332,7 +361,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
   })
 
   const { makes, models } = await filterResponse.json()
-  
+ 
+  // console.log('currentParams', currentParams);
+
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
@@ -344,13 +375,43 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
     },
     body: JSON.stringify(currentParams),
   })
+  
+  const response = await carsResponse.json();
+  const { items } = response;
 
-  const { items, total } = await carsResponse.json();
+  // console.log(response.violations);
+  
+  let items_filtered = items ?? [];
+
+  if (items_filtered.length && currentParams.excludeFilters.length) {
+    currentParams.excludeFilters.forEach((exFilter: string)=>{
+      items_filtered = items_filtered.filter((item: any)=>{
+        switch (exFilter) {
+          // case 'odometerMax':
+            // return item.conditionInfo.odometer.value <= currentParams[exFilter]
+          // case 'odometerMin':
+            // return item.conditionInfo.odometer.value >= currentParams[exFilter]
+          case 'sellerType':
+            const itemSellerType = item.saleInfo.seller?.group ?? 'other';
+            const filterSellerType = currentParams[exFilter];
+
+            if (filterSellerType == 'insurance') {
+              return filterSellerType == itemSellerType;
+            } else {
+              return filterSellerType != 'insurance';
+            }
+          default:
+            return true
+        }    
+      })
+    })
+  }
+  
   return {
     props: {
       currentParams,
-      items: items ?? [],
-      total: total ?? 0,
+      items: items_filtered,
+      total: items_filtered.length ?? 0,
       brands: makes,
       brandModels: models ?? null,
       currentPage: +query.page! || 1,

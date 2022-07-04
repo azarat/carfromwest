@@ -116,7 +116,7 @@ const carFeatures = [
   },
   {
     id: 24,
-    eng: 'rear end',
+    eng: 'Rear End',
     ua: 'Задня частина',
   },
   {

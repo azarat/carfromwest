@@ -46,7 +46,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const includeFilters = ['vehicleTypes']
   const initialMakes = []
   const initialModels = []
-  
+
   if (makes) {
     includeFilters.push('makes')
     initialMakes.push(makes)

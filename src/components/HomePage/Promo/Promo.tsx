@@ -40,14 +40,14 @@ const Promo: React.FC = (): JSX.Element => {
   }, [])
 
   useEffect(() => {
-    console.log('currentMark', currentMark);
+    // console.log('currentMark', currentMark);
     
     if (currentMark && !currentModel) {
       const url = `/api/filter?filters=makes,models&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
         .then((json) => {
-            console.log('sdfsd', json?.models);
+            // console.log('sdfsd', json?.models);
             
             setModels(
               json?.models.sort().map((val: string) => ({

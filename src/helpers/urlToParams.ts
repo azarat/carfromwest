@@ -18,8 +18,8 @@ export const aviableParams = {
   },
   fuel: {
     filterName: 'fuelTypes',
-    name: 'fuelType',
-    type: ParamType.string
+    name: 'fuelTypes',
+    type: ParamType.array
   },
   model: {
     filterName: 'models',
@@ -61,24 +61,44 @@ export const aviableParams = {
     name: 'odometerMax',
     type: ParamType.number,
   },
-  primaryDamage: {
-    filterName: '',
-    name: 'primaryDamage',
-    type: ParamType.string,
+  damageTypes: {
+    filterName: 'damageTypes',
+    name: 'damageTypes',
+    type: ParamType.array,
   },
-  secondaryDamage: {
-    filterName: '',
-    name: 'secondaryDamage',
-    type: ParamType.string,
-  },
+  // secondaryDamage: {
+  //   filterName: '',
+  //   name: 'secondaryDamage',
+  //   type: ParamType.string,
+  // },
   condition: {
-    filterName: '',
-    name: 'condition',
-    type: ParamType.string,
+    filterName: 'vehicleConditions',
+    name: 'vehicleConditions',
+    type: ParamType.array,
+  },
+  transmissionTypes: {
+    filterName: 'transmissionTypes',
+    name: 'transmissionTypes',
+    type: ParamType.array,
+  },
+  bodyStyles: {
+    filterName: 'bodyStyles',
+    name: 'bodyStyles',
+    type: ParamType.array,
   },
   driveLineTypes: {
-    filterName: '',
+    filterName: 'drivelineTypes',
     name: 'driveLineTypes',
+    type: ParamType.array,
+  },
+  saleDocumentsGroups: {
+    filterName: 'saleDocumentsGroups',
+    name: 'saleDocumentsGroups',
+    type: ParamType.array,
+  },
+  sellerType: {
+    filterName: '',
+    name: 'sellerType',
     type: ParamType.string,
   },
 }
