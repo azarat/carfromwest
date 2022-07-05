@@ -7,7 +7,7 @@
   form {
     display: none;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1023px) {
       &.active-mobile {
         display: block;
         position: fixed;
@@ -36,6 +36,7 @@
       font-size: 16px;
       padding: 10px;
       height: auto;
+      max-width: none;
     }
   }
 }
@@ -70,6 +71,10 @@
     display: none;
   }
 
+  @media (max-width: 1023px) and (min-width: 768px) {
+    margin: 0px;
+  }
+
   svg {
     margin-right: 9px;
   }
@@ -84,7 +89,7 @@
     display: block;
     padding: 7px 7px 5px;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       display: none;
     }
   }

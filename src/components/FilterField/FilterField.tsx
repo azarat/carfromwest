@@ -10,12 +10,14 @@ type FilterFieldProps = {
   mobileActive?: boolean
 }
 
-const FilterField: React.FC<FilterFieldProps> = ({ setOpen }): JSX.Element => {
+const FilterField: React.FC<FilterFieldProps> = (
+  // { setOpen }
+  ): JSX.Element => {
   return (
     <div className="filter-field">
       <div
-        role="presentation"
-        onClick={() => setOpen((prev: any) => !prev)}
+        // role="presentation"
+        // onClick={() => setOpen((prev: any) => !prev)}
         className="filter-field__button"
       >
         <div className="filter-field__button-icon">
