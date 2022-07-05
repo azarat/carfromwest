@@ -1,36 +1,36 @@
 import Link from 'next/link'
-import CarPageCarousel from '../../src/components/CarPageCarousel/CarPageCarousel'
+import CarPageCarousel from '../../../src/components/CarPageCarousel/CarPageCarousel'
 // SVG
-// import InfoSVG from '../../src/assets/svg/info.svg'
+// import InfoSVG from '../../../src/assets/svg/info.svg'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
-import RightPolygonSVG from '../../src/assets/svg/right-polygon.svg'
-import CrashTypeSVG from '../../src/assets/svg/crash_type.svg'
-import MileageSVG from '../../src/assets/svg/mileage.svg'
-import EngineVolumeSVG from '../../src/assets/svg/engine_volume.svg'
-import FuelTypeSVG from '../../src/assets/svg/fuel_type.svg'
-import TransmissionSVG from '../../src/assets/svg/transmission.svg'
-import CalendarSVG from '../../src/assets/svg/calendar.svg'
-import HeathSVG from '../../src/assets/svg/heath.svg'
-import CarBodySVG from '../../src/assets/svg/carbody.svg'
-import DriveTypeSVG from '../../src/assets/svg/drive_type.svg'
-import SellerSVG from '../../src/assets/svg/seller.svg'
-import StarSVG from '../../src/assets/svg/star.svg'
-import KeysSVG from '../../src/assets/svg/keys.svg'
-import DocumentTypeSVG from '../../src/assets/svg/document-type.svg'
-import StateSVG from '../../src/assets/svg/state.svg'
-import ColorSVG from '../../src/assets/svg/color.svg'
-import ClockSVG from '../../src/assets/svg/clock.svg'
+import RightPolygonSVG from '../../../src/assets/svg/right-polygon.svg'
+import CrashTypeSVG from '../../../src/assets/svg/crash_type.svg'
+import MileageSVG from '../../../src/assets/svg/mileage.svg'
+import EngineVolumeSVG from '../../../src/assets/svg/engine_volume.svg'
+import FuelTypeSVG from '../../../src/assets/svg/fuel_type.svg'
+import TransmissionSVG from '../../../src/assets/svg/transmission.svg'
+import CalendarSVG from '../../../src/assets/svg/calendar.svg'
+import HeathSVG from '../../../src/assets/svg/heath.svg'
+import CarBodySVG from '../../../src/assets/svg/carbody.svg'
+import DriveTypeSVG from '../../../src/assets/svg/drive_type.svg'
+import SellerSVG from '../../../src/assets/svg/seller.svg'
+import StarSVG from '../../../src/assets/svg/star.svg'
+import KeysSVG from '../../../src/assets/svg/keys.svg'
+import DocumentTypeSVG from '../../../src/assets/svg/document-type.svg'
+import StateSVG from '../../../src/assets/svg/state.svg'
+import ColorSVG from '../../../src/assets/svg/color.svg'
+import ClockSVG from '../../../src/assets/svg/clock.svg'
 
 
 
 // Types
-import { CarPageProps } from '../../src/Types/Types'
-import Countdown from '../../src/components/Countdown/Countdown'
-import carFeatures from '../../src/constants/carFeatures'
-// import { dateToText } from '../../src/helpers/dateToText'
-// import Consultation from '../../src/components/Consultation/Consultation'
+import { CarPageProps } from '../../../src/Types/Types'
+import Countdown from '../../../src/components/Countdown/Countdown'
+import carFeatures from '../../../src/constants/carFeatures'
+// import { dateToText } from '../../../src/helpers/dateToText'
+// import Consultation from '../../../src/components/Consultation/Consultation'
 
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
@@ -292,6 +292,6 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   )
 }
 
-export { getCarPageProps as getServerSideProps } from '../../src/utils/car'
+export { getCarPageProps as getServerSideProps } from '../../../src/utils/car'
 
 export default CarPage
