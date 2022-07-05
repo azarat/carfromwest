@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import CatalogGrid from '../../src/components/CatalogGrid/CatalogGrid'
 import CatalogSort from '../../src/components/CatalogSort/CatalogSort'
 import FilterField from '../../src/components/FilterField/FilterField'
-import FilterFull from '../../src/components/FilterFull/FilterFull'
+// import FilterFull from '../../src/components/FilterFull/FilterFull'
 import FilterTable from '../../src/components/FilterFull/FilterTable'
 // Types
 import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
@@ -107,14 +107,14 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
   return (
     <div className="catalog__wrapper">
       <section className="catalog">
-        <FilterFull
+        {/* <FilterFull
           makes={brands}
           filter={filter}
           setFilter={setFilter}
           open={openFilter}
           setOpen={setOpenFilter}
           loading={false}
-        />
+        /> */}
         <FilterTable
           transport={transport as string}
           filter={currentParams}

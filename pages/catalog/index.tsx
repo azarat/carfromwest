@@ -250,7 +250,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
                     setPage(1)
                   }}
                 >
-                  Сбросить фильтры
+                  Скинути фільтри
                 </button>
               )}
           </div>
