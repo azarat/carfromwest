@@ -127,8 +127,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [currentMark, currentModel])
 
   const handleSubmit = (values: any) => {
-    setLoading(true)
-    
     Object.keys(values).filter(
       (k) =>
         [
@@ -182,13 +180,20 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }
 
   const resetFilters = () => {
-    setLoading(true)
     router.push('/catalog')
   }
 
-  useEffect(()=>{
-    setLoading(false)
-  }, [router])
+  useEffect(() => {
+    router.events.on('routeChangeStart', ()=>setLoading(true))
+    router.events.on('routeChangeComplete', ()=>setLoading(false))
+    router.events.on('routeChangeError',  ()=>setLoading(false))
+
+    return () => {
+        router.events.off('routeChangeStart', ()=>setLoading(true))
+        router.events.off('routeChangeComplete',  ()=>setLoading(false))
+        router.events.off('routeChangeError',  ()=>setLoading(false))
+    }
+  })
   
   return (
     <div className="filter-full--table">
