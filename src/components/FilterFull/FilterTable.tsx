@@ -185,6 +185,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
     setLoading(true)
     router.push('/catalog')
   }
+
+  useEffect(()=>{
+    setLoading(false)
+  }, [router])
   
   return (
     <div className="filter-full--table">
@@ -220,7 +224,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             type="button"
             className="filter-full__button reset-filters"
           >
-            Застосувати фільтр
+            Скинути фільтр
           </button>
 
 
