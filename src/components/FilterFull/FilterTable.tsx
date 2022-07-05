@@ -12,6 +12,7 @@ import SpeedSVG from '../../assets/svg/speed.svg'
 import CloseSVG from '../../assets/svg/times.svg'
 // Constants
 import { years, gas, transmissions, driveLineTypes, primaryDamage, condition } from '../../constants/filter'
+import { acceptedBodyStyles } from '../../constants/bodyStyles'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
@@ -30,7 +31,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [marks, setMarks] = useState()
-  const [bodyStyles, setBodyStyles] = useState<string[]>([])
+  const [bodyStyles, setBodyStyles] = useState<any>([])
   const [bodyStyle, setBodyStyle] = useState(
     filter.bodyTypes?.length ? filter.marks[0] : ''
   )
@@ -57,12 +58,34 @@ const FilterTable: React.FC<FilterTableProps> = ({
   //   setVehicle(target.value)
   // }
 
+  const filterBodyStyles = (bodyStyles: string[]) => {
+    const filteredBodyStyles = bodyStyles.filter((bv: string)=>{
+      const acceptedBodyStylesEn = acceptedBodyStyles.map((av: any)=>av.en)
+      return acceptedBodyStylesEn.includes(bv)
+    })
+
+    const mapedBodyStyles = filteredBodyStyles.map((fv: string)=>{
+      const label = acceptedBodyStyles.filter((av: any) => av.en == fv)[0].ua
+
+      return {
+        value: fv,
+        label: label
+      }
+    })
+
+    console.log(mapedBodyStyles);
+    
+
+    return mapedBodyStyles
+  }
+
   useEffect(() => {
     setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
     setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
   }, [filter])
 
   useEffect(() => {
+    
     setLoading(true)
     const url = `/api/filter?filters=makes,bodyStyles`
     fetch(url)
@@ -73,8 +96,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
             label: val,
             value: val,
           })) || []
-        )
-        setBodyStyles(json?.bodyStyles.sort())
+        )        
+        setBodyStyles(filterBodyStyles(json?.bodyStyles.sort()))
       })
       .catch(() => setMarks(undefined))
       .finally(() => setLoading(false))
@@ -96,7 +119,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               value: val,
             })) || []
           )
-          setBodyStyles(json?.bodyStyles.sort())
+          setBodyStyles(filterBodyStyles(json?.bodyStyles.sort()))
         })
         .catch(() => setModels(undefined))
         .finally(() => setLoading(false))
@@ -116,7 +139,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               value: val,
             })) || []
           )          
-          setBodyStyles(json?.bodyStyles.sort())
+          setBodyStyles(filterBodyStyles(json?.bodyStyles.sort()))
         })
         .catch(() => {
           setBodyStyles([])
@@ -201,7 +224,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
       <Formik
         initialValues={{
-          bodyStyles: bodyStyle,
+          bodyStyles: '',
           fromYear: filter.yearMin ?? '',
           toYear: filter.yearMax ?? '',
           sellerType: filter.sellerType ?? '',
@@ -385,10 +408,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 <Field
                   name={'bodyStyle'}
                   component={SelectTransmission}
-                  options={bodyStyles.map((val) => ({
-                    label: val,
-                    value: val,
-                  }))}
+                  options={bodyStyles}
                   placeholder="Всі"
                   setter={setBodyStyle}
                 />
