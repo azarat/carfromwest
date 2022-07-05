@@ -4,7 +4,7 @@ import { IFilter } from '../FilterFull/Types'
 
 type FilterFieldProps = {
   loading: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
+  // setOpen: Dispatch<SetStateAction<boolean>>
   filter: Partial<IFilter>
   setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
   mobileActive?: boolean

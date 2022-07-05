@@ -59,7 +59,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     initialModels.push(models)
   }
   const router = useRouter()
-  const [openFilter, setOpenFilter] = useState<boolean>(false)
+  // const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
@@ -128,7 +128,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
           <CatalogSearch loading={false} handleSearch={handleSearch} />
           <FilterField
             loading={false}
-            setOpen={setOpenFilter}
+            // setOpen={setOpenFilter}
             filter={filter}
             setFilter={setFilter}
           />

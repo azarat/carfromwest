@@ -224,7 +224,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
       <Formik
         initialValues={{
-          bodyStyles: '',
+          bodyStyles: bodyStyle ?? '',
           fromYear: filter.yearMin ?? '',
           toYear: filter.yearMax ?? '',
           sellerType: filter.sellerType ?? '',
