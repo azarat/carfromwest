@@ -90,9 +90,6 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
-
-        
-        
       </header>
       <HeaderMenu open={open} setOpen={handleOpenMenu} />
     </>
