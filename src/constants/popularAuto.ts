@@ -51,7 +51,7 @@ export const popularAuto = [
     img: '/assets/images/tesla_3.png',
     filterParams: {
       makes: 'Tesla',
-      models: '3',
+      models: 'Model 3',
       yearMin: 2019,
     },
   },

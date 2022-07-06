@@ -1,4 +1,4 @@
-import Link from 'next/link'
+// import Link from 'next/link'
 // Components
 import CatalogItem from './CatalogItem'
 import CatalogGridEmpty from './CatalogGridEmpty'
@@ -37,8 +37,8 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
               auctionDate
               
             }) => (
-              <Link key={vin} href={`/catalog/${auction}-${lotNumber}`}>
-                <a className="catalog-grid__container-link">
+              // <Link key={vin} href={`/catalog/lot/${auction}-${lotNumber}`}>
+                <div className="catalog-grid__container-link">
                   <CatalogItem
                     fuelType={
                       gas.find((f) => f.value === fuelType)?.label || ''
@@ -62,8 +62,8 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
                     secondaryDamage={secondaryDamage}
                     auction={auction}
                   />
-                </a>
-              </Link>
+                </div>
+              // </Li nk>
             )
           )}
       </div>
