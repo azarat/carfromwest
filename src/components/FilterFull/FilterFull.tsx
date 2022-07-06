@@ -8,7 +8,7 @@ import EngineSVG from '../../assets/svg/engine.svg'
 import SpeedSVG from '../../assets/svg/speed.svg'
 
 // Constants
-import { years, gas, transmissions, vehicleTypes } from '../../constants/filter'
+import { years, gas, transmissions } from '../../constants/filter'
 
 import { FilterFullProps, IFilter } from './Types'
 import SelectMake from './SelectMake'
@@ -22,7 +22,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
   loading,
   makes,
 }): JSX.Element => {
-  const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
+  // const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [marks, setMarks] = useState()
@@ -42,10 +42,10 @@ const FilterFull: React.FC<FilterFullProps> = ({
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
-  const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement
-    setVehicle(target.value)
-  }
+  // const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
+  //   const target = e.target as HTMLInputElement
+  //   setVehicle(target.value)
+  // }
 
   useEffect(() => {
     setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
@@ -53,7 +53,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
   }, [filter])
 
   useEffect(() => {
-    const url = `/api/filter?filters=makes&vehicleType=${vehicle}`
+    const url = `/api/filter?filters=makes`
     fetch(url)
       .then((res) => res.json())
       .then((json) =>
@@ -65,7 +65,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
         )
       )
       .catch(() => setMarks(undefined))
-  }, [vehicle])
+  }, [])
 
   useEffect(() => {
     if (currentMark && !currentModel) {
@@ -73,7 +73,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
       setCurrentModel('')
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models&vehicleType=${vehicle}&makes=${currentMark}`
+      const url = `/api/filter?filters=makes,models&makes=${currentMark}`
       fetch(url)
         .then((res) => res.json())
         .then((json) =>
@@ -87,13 +87,13 @@ const FilterFull: React.FC<FilterFullProps> = ({
         .catch(() => setModels(undefined))
         .finally(() => setLoading(false))
     }
-  }, [vehicle, currentMark, currentModel])
+  }, [currentMark, currentModel])
 
   useEffect(() => {
     if (currentModel) {
       setBodyStyles([])
       setBodyStyle('')
-      const url = `/api/filter?filters=makes,models,bodyStyles&vehicleType=${vehicle}&makes=${currentMark}&models=${currentModel}`
+      const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}&models=${currentModel}`
       fetch(url)
         .then((res) => res.json())
         .then((json) => setBodyStyles(json?.bodyStyles.sort()))
@@ -102,12 +102,13 @@ const FilterFull: React.FC<FilterFullProps> = ({
           setBodyStyle('')
         })
     }
-  }, [vehicle, currentMark, currentModel])
+  }, [currentMark, currentModel])
 
   useEffect(() => {
     open
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'unset')
+      
   }, [open])
 
   const handleSubmit = (values: any) => {
@@ -126,7 +127,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
           'trims',
           'saleDocumentsGroups',
           'transmissionTypes',
-          'vehicleTypes',
+          // 'vehicleTypes',
           'locations',
           'vehicleConditions',
           'features',
@@ -138,7 +139,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
       page: 1,
       includeFilters,
     }
-    if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
+    // if (values.vehicleTypes) newFilter.vehicleType = values.vehicleTypes
     if (currentMark) newFilter.makes = [currentMark]
     if (currentModel) newFilter.models = [currentModel]
     if (values.engineFrom || values.engineTo) {
@@ -173,7 +174,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
       </button>
       <Formik
         initialValues={{
-          vehicleTypes: vehicle,
+          // vehicleTypes: vehicle,
           bodyStyles: bodyStyle,
           fromYear: '',
           toYear: '',
@@ -189,48 +190,31 @@ const FilterFull: React.FC<FilterFullProps> = ({
         onSubmit={handleSubmit}
       >
         <Form>
-          <div className="filter-full__vehicle">
-            <h3 className="filter-full__title">Транспорт</h3>
-            {vehicleTypes.map(({ title, value, ...restProps }) => (
-              <div key={title} className="filter-full__vehicle-item">
-                <Field
-                  onClick={handleVehicle}
-                  value={value}
-                  name="vehicleTypes"
-                  id={value}
-                  type="radio"
-                />
-                <label htmlFor={value}>
-                  <restProps.icon />
-                  {title}
-                </label>
-              </div>
-            ))}
-          </div>
+
 
           <div className="filter-full__transmission">
-            <h3 className="filter-full__title">Марка автомобиля</h3>
+            <h3 className="filter-full__title">Марка</h3>
             <Field
               name={'makes'}
               component={SelectMake}
               options={makes || marks}
-              placeholder="Все"
+              placeholder="Всі"
               setter={setCurrentMark}
             />
           </div>
           {!isLoading && currentMark && (
             <div className="filter-full__transmission">
-              <h3 className="filter-full__title">Модель автомобиля</h3>
+              <h3 className="filter-full__title">Модель</h3>
               <Field
                 name={'models'}
                 component={SelectMake}
                 options={models}
-                placeholder="Все"
+                placeholder="Всі"
                 setter={setCurrentModel}
               />
             </div>
           )}
-          {vehicle === 'automobile' && currentModel && bodyStyles.length > 0 && (
+          {currentModel && bodyStyles.length > 0 && (
             <div className="filter-full__transmission">
               <h3 className="filter-full__title">Тип кузова</h3>
               <Field
@@ -240,18 +224,18 @@ const FilterFull: React.FC<FilterFullProps> = ({
                   label: val,
                   value: val,
                 }))}
-                placeholder="Все"
+                placeholder="Всі"
                 setter={setBodyStyle}
               />
             </div>
           )}
           <div className="filter-full__year">
-            <h3 className="filter-full__title">год</h3>
+            <h3 className="filter-full__title">Рік</h3>
             <Field
               name={'fromYear'}
               component={CustomSelect}
               options={firstYears}
-              placeholder="c"
+              placeholder="з"
               setYear={setFromYear}
             />
             <Field
@@ -268,11 +252,11 @@ const FilterFull: React.FC<FilterFullProps> = ({
               name={'transmission'}
               component={SelectTransmission}
               options={transmissions}
-              placeholder="Все"
+              placeholder="Всі"
             />
           </div>
           <div className="filter-full__gas">
-            <h3 className="filter-full__title">Тип топлива</h3>
+            <h3 className="filter-full__title">Тип палива</h3>
             <Field
               name={'gas'}
               component={SelectTransmission}
@@ -281,24 +265,24 @@ const FilterFull: React.FC<FilterFullProps> = ({
             />
           </div>
           <div className="filter-full__engine">
-            <h3 className="filter-full__title">Объем двигателя (л)</h3>
+            <h3 className="filter-full__title">Об’єм двигуна</h3>
             <div className="filter-full__engine-input">
-              <Field placeholder="Прим. 1.1" type="number" name="engineForm" />
+              <Field placeholder="Від" type="number" name="engineForm" min="0"/>
               <EngineSVG />
             </div>
             <div className="filter-full__engine-input">
-              <Field placeholder="Прим. 2" type="number" name="engineTo" />
+              <Field placeholder="До" type="number" name="engineTo" min="0"/>
               <EngineSVG />
             </div>
           </div>
           <div className="filter-full__engine">
-            <h3 className="filter-full__title">Пробег (миль)</h3>
+            <h3 className="filter-full__title">Пробіг</h3>
             <div className="filter-full__engine-input">
-              <Field placeholder="Пр. 10000" type="number" name="odometerMin" />
+              <Field placeholder="Пр. 10000" type="number" name="odometerMin" min="0"/>
               <SpeedSVG />
             </div>
             <div className="filter-full__engine-input">
-              <Field placeholder="Пр. 50000" type="number" name="odometerMax" />
+              <Field placeholder="Пр. 50000" type="number" name="odometerMax" min="0"/>
               <SpeedSVG />
             </div>
           </div>
@@ -307,7 +291,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
             type="submit"
             className="filter-full__button"
           >
-            Применить фильтр
+            Застосувати фільтр
           </button>
         </Form>
       </Formik>

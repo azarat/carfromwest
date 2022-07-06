@@ -25,7 +25,7 @@ const ClientReviews: React.FC = () => {
       <div id="client-reviews-section" className="client-reviews">
         <div className="client-reviews__wrapper">
           <h2 className="client-reviews__title">
-            Наши клиенты которые уже получили свои машины из США
+            Наші клієнти, які вже отримали свої машини з США
           </h2>
           <div className="client-reviews__slider">
             <ReviewsSlider />

@@ -6,9 +6,13 @@ import '../styles/main.scss'
 import Header from '../src/components/Header/Header'
 import Footer from '../src/components/Footer/Footer'
 import NextNprogress from 'nextjs-progressbar'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  const router = useRouter()
+  const shouldShowFooter = router.pathname !== '/order'
 
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const initialLink = sessionStorage.getItem('initialLink')
@@ -109,7 +113,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <main>
         <Component {...pageProps} />
       </main>
-      <Footer />
+      {shouldShowFooter && <Footer />} 
       <NextNprogress
         color="#e02c22"
         startPosition={0.3}

@@ -16,7 +16,7 @@ const FaqAccordion: React.FC = () => {
           role="presentation"
         >
           <p className="faq__accordion-item-title">{question}</p>
-          <span className="faq__accordion-item-text">{answer}</span>
+          <span className="faq__accordion-item-text"  dangerouslySetInnerHTML={{__html: answer}}/>
         </div>
       ))}
     </div>

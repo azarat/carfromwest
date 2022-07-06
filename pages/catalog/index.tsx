@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import CatalogGrid from '../../src/components/CatalogGrid/CatalogGrid'
 import CatalogSort from '../../src/components/CatalogSort/CatalogSort'
 import FilterField from '../../src/components/FilterField/FilterField'
-import FilterFull from '../../src/components/FilterFull/FilterFull'
+// import FilterFull from '../../src/components/FilterFull/FilterFull'
 import FilterTable from '../../src/components/FilterFull/FilterTable'
 // Types
 import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
@@ -16,6 +16,9 @@ import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
 import { USER_AGENT } from '../../src/constants/userAgent'
+
+import FilterSVG from '../../src/assets/svg/filter_1.svg'
+
 
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
@@ -53,7 +56,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
     initialModels.push(models)
   }
   const router = useRouter()
-  const [openFilter, setOpenFilter] = useState<boolean>(false)
+  const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
+  // const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
@@ -97,17 +101,22 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }
 
   const vehicle = { items, total } as ICarsFetchTypes
+
+  const toggleFilter = () => {
+    setActiveMobFilter(!activeMobFilter)
+  }
+
   return (
     <div className="catalog__wrapper">
       <section className="catalog">
-        <FilterFull
+        {/* <FilterFull
           makes={brands}
           filter={filter}
           setFilter={setFilter}
           open={openFilter}
           setOpen={setOpenFilter}
           loading={false}
-        />
+        /> */}
         <FilterTable
           transport={transport as string}
           filter={filter}
@@ -115,20 +124,28 @@ const Index: NextPage<Partial<ICatalog>> = ({
           loading={false}
           setPage={setPage}
           makes={brands}
+          mobileActive={activeMobFilter}
         />
         <div className="catalog__filters-wrapper">
-          <CatalogSearch loading={false} handleSearch={handleSearch} />
           <FilterField
             loading={false}
-            setOpen={setOpenFilter}
+            // setOpen={setOpenFilter}
             filter={filter}
             setFilter={setFilter}
           />
-          <CatalogSort
-            handleSort={handleSort}
-            filter={filter}
-            loading={false}
-          />
+          <CatalogSearch loading={false} handleSearch={handleSearch} />
+          <div className='catalog-sort-wrap'>
+            <button className='mobile-filter-btn' onClick={toggleFilter}>
+              <FilterSVG />
+              Фільтр
+            </button>
+
+            <CatalogSort
+              handleSort={handleSort}
+              filter={filter}
+              loading={false}
+            />
+          </div>
           <div className="filter-field__grid">
             <div className="filter-field__grid-list">
               {Object.keys(filter)
@@ -233,7 +250,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
                     setPage(1)
                   }}
                 >
-                  Сбросить фильтры
+                  Скинути фільтри
                 </button>
               )}
           </div>

@@ -1,26 +1,31 @@
 .reviews-item {
-  font-family: $ff-commons;
+  font-family: $ff-gilroy;
   &__wrapper {
-    padding: 28px 15px 20px;
+    padding: 48px;
     text-align: left;
     background: #fff;
     box-shadow: 0 0 10px rgb(0 0 0 / 5%);
   }
   &__name {
-    color: #192a3e;
+    color: $black-color;
     font-weight: $fw-700;
-    font-size: $fs-18;
-    line-height: 21px;
+    font-size: $fs-20;
+    line-height: 28px;
+    display: flex;
+    & svg {
+      margin-left: 16px;
+    }
   }
   &__text {
     max-width: 275px;
     height: 70px;
-    margin-top: 5px;
+    margin-top: 16px;
     overflow: hidden;
-    color: #323c47;
-    font-weight: $fw-300;
-    font-size: $fs-16;
-    line-height: 18px;
+    color: $black-color;
+    font-weight: $fw-500;
+    font-size: $fs-18;
+    line-height: 25px;
+    font-family: 'Gilroy';
   }
   &__btn-wrapper {
     display: flex;
@@ -28,17 +33,18 @@
     justify-content: center;
     max-width: 200px;
     margin-top: 10px;
-    margin-left: auto;
-    padding: 10px;
+    // margin-left: auto;
+    // padding: 10px;
     cursor: pointer;
   }
   &__btn {
     position: relative;
-    color: #9f2000;
-    font-size: $fs-16;
-    font-family: $ff-commons;
-    line-height: 13px;
+    color: $black-color;
+    font-size: $fs-18;
+    font-family: $ff-gilroy;
+    line-height: 25px;
     background: $transparent;
+    font-weight: 700;
     border: none;
     outline: none;
     cursor: pointer;
@@ -50,8 +56,8 @@
       height: 10px;
       border-right: 1px solid #9f2000;
       border-bottom: 1px solid #9f2000;
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
       content: '';
     }
   }
@@ -59,7 +65,7 @@
     display: block;
     margin-top: 10px;
     color: #9f2000;
-    font-family: $ff-commons;
+    font-family: $ff-gilroy;
     text-align: right;
     text-decoration: none;
   }
@@ -72,7 +78,7 @@
   }
   &__photo-wrapper {
     position: relative;
-    height: 80px;
+    height: 100%;
   }
 }
 
@@ -88,15 +94,15 @@
     }
     &__photos {
       grid-row: 1/4;
-      grid-column: 1;
+      grid-column: 2;
     }
     &__review {
       grid-row: 1;
-      grid-column: 2;
+      grid-column: 0;
     }
     &__btn-wrapper {
       grid-row: 2;
-      grid-column: 2;
+      grid-column: 1;
     }
   }
 }
@@ -125,10 +131,11 @@
       line-height: 25px;
     }
     &__btns-wrapper {
-      display: flex;
+      // display: flex;
+      margin-top: 24px;
       flex-direction: row-reverse;
-      grid-row: 2/4;
-      grid-column: 2;
+      // grid-row: 2/4;
+      // grid-column: 2;
       align-items: flex-end;
       justify-content: space-between;
     }
@@ -138,7 +145,7 @@
       line-height: 100%;
       &::after {
         right: -13px;
-        bottom: 15px;
+        bottom: 35%;
       }
     }
     &__btn-wrapper {
@@ -161,7 +168,7 @@
   .reviews-item {
     &__photo-wrapper {
       width: 195px;
-      height: 145px;
+      height: 100%;
     }
     &__name {
       font-size: $fs-28;
@@ -174,3 +181,174 @@
     }
   }
 }
+
+
+@media screen and(max-width: 1199px) {
+ .reviews-item{ 
+  
+  &__wrapper {
+    padding: 48px 32px;
+    text-align: left;
+    background: #fff;
+    box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+  }
+  &__name {
+    color: $black-color;
+    font-weight: $fw-700;
+    font-size: $fs-20;
+    line-height: 28px;
+  }
+  &__text {
+    max-width: 275px;
+    height: 70px;
+    margin-top: 16px;
+    overflow: hidden;
+    color: $black-color;
+    font-weight: $fw-500;
+    font-size: $fs-18;
+    line-height: 25px;
+    font-family: 'Gilroy';
+  }
+  &__btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    max-width: 200px;
+    margin-top: 10px;
+    // margin-left: auto;
+    cursor: pointer;
+  }
+  &__btn {
+    position: relative;
+    color: $black-color;
+    font-size: $fs-18;
+    font-family: $ff-gilroy;
+    line-height: 25px;
+    background: $transparent;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &::after {
+      position: absolute;
+      right: -30px;
+      bottom: 5px;
+      width: 10px;
+      height: 10px;
+      border-right: 1px solid #9f2000;
+      border-bottom: 1px solid #9f2000;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      content: '';
+    }
+  }
+  &__more-reviews {
+    display: block;
+    margin-top: 10px;
+    color: #9f2000;
+    font-family: $ff-gilroy;
+    text-align: right;
+    text-decoration: none;
+  }
+  &__photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 210px;
+    margin: 0 auto;
+  }
+  &__photo-wrapper {
+    position: relative;
+    height: 100%;
+  }
+ }
+}
+
+
+
+@media screen and(max-width: 768px) {
+  .reviews-item{ 
+   
+   &__wrapper {
+    display: flex;
+    flex-direction: column;
+     padding: 32px 24px;
+     text-align: left;
+     background: #fff;
+     box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+   }
+   &__name {
+     color: $black-color;
+     font-weight: $fw-700;
+     font-size: $fs-20;
+     line-height: 28px;
+   }
+   &__text {
+     max-width: 275px;
+     height: 200px;
+     margin-top: 16px;
+     overflow: hidden;
+     color: $black-color;
+     font-weight: $fw-500;
+     font-size: $fs-18;
+     line-height: 25px;
+     font-family: 'Gilroy';
+   }
+   &__btn-wrapper {
+     display: flex;
+     align-items: center;
+     justify-content: start;
+     max-width: 200px;
+     margin-top: 24px;
+     margin-bottom: 48px;
+     // margin-left: auto;
+     cursor: pointer;
+   }
+   &__btn {
+     position: relative;
+     color: $black-color;
+     font-size: $fs-18;
+     font-family: $ff-gilroy;
+     line-height: 25px;
+     background: $transparent;
+     font-weight: 700;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     &::after {
+       position: absolute;
+       right: -30px;
+       bottom: 5px;
+       width: 10px;
+       height: 10px;
+       border-right: 1px solid #9f2000;
+       border-bottom: 1px solid #9f2000;
+       -webkit-transform: rotate(-45deg);
+       transform: rotate(-45deg);
+       content: '';
+     }
+   }
+   &__more-reviews {
+     display: block;
+     margin-top: 10px;
+     color: #9f2000;
+     font-family: $ff-gilroy;
+     text-align: right;
+     text-decoration: none;
+   }
+   &__photos {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     order: 3;
+     gap: 10px;
+     max-width: 100%;
+     margin: 0 auto;
+    //  width: 125px;
+   }
+   &__photo-wrapper {
+     position: relative;
+     width: 125px;
+     height: 169px;
+   }
+  }
+ }

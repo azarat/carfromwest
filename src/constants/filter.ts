@@ -6,63 +6,93 @@ import CoupeCarSVG from '../assets/svg/coupe.svg'
 import PickupCarSVG from '../assets/svg/pickup.svg'
 
 export const years: any[] = []
-for (let i = 2010; i <= 2021; i++) {
+for (let i = 2021; i >= 1960; i--) {
   years.push({ label: i, value: i })
 }
 
 export const transmissions: any[] = [
-  { label: 'Все', value: '' },
-  { label: 'Механическая', value: 'manual' },
-  { label: 'Автомат', value: 'automatic' },
+  { label: 'Всі', value: '' },
+  { label: 'Механічна', value: 'manual' },
+  { label: 'Автоматична', value: 'automatic' },
 ]
 
-export const driveLineTypes = [
-  'Передний привод',
-  'Задний привод',
-  '4x4',
-  'Полный привод',
+export const driveLineTypes: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Передній привід', value: 'front' },
+  { label: 'Задній привід', value: 'rear' },
+  { label: '4x4', value: 'four' },
+  { label: 'Повний привід', value: 'all' },
+]
+
+export const primaryDamage: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Ходова частина', value: 'Undercarriage' },
+  { label: 'Передня частина', value: 'Front End' },
+  { label: 'Задня частина', value: 'Rear End' },
+  { label: 'Вода/повінь', value: 'Water/flood' },
+  { label: 'Сторона', value: 'side' },
+  { label: 'Ліва передня частина', value: 'Left Front' },
+  { label: 'Історія пошкоджень', value: 'damage history' },  
+]
+
+// export const secondaryDamage: any[] = [
+//   { label: 'Всі', value: '' },
+//   { label: 'Підвіска', value: 'Suspension' },
+//   { label: 'Невеликі подряпини і вм’ятини', value: 'Minor Dent/scratches' },
+//   { label: 'Ліва сторона', value: 'Left side' },
+//   { label: 'Задня частина', value: 'rear end' },
+//   { label: 'Вода/повінь', value: 'Water/flood' },
+//   { label: 'Сторона', value: 'side' },
+//   { label: 'Ліва передня частина', value: 'Left Front' }, 
+// ]
+
+export const condition: any[] = [
+  { label: 'Всі', value: '' },
+  { label: 'Їде', value: 'runs' },
+  { label: 'Заводиться', value: 'starts' },
+  { label: 'Не заводиться', value: 'wont-start' },
 ]
 
 export const gas: { label: string; value: string }[] = [
-  { label: 'Все', value: '' },
+  { label: 'Всі', value: '' },
   { label: 'Бензин', value: 'gas' },
   { label: 'Дизель', value: 'diesel' },
-  { label: 'Гибрид', value: 'hybrid-engine' },
-  { label: 'Электро', value: 'electric' },
-  { label: 'Этанол 85', value: 'flexible-fuel' },
+  { label: 'Гібрид', value: 'hybrid-engine' },
+  { label: 'Електро', value: 'electric' },
+  { label: 'Етанол 85', value: 'flexible-fuel' },
   { label: 'Газ', value: 'compressed-natural-gas' },
-  { label: 'Конвертируется на газ', value: 'convertible-to-gaseous-powered' },
-  { label: 'Водородный топливный элемент', value: 'hydrogen-fuel-cell' },
-  { label: 'Сжиженый газ', value: 'liquefied-petroleum-gas"' },
-  { label: 'Другое', value: 'other' },
+  { label: 'Конвертується на газ', value: 'convertible-to-gaseous-powered' },
+  { label: 'Водень', value: 'hydrogen-fuel-cell' },
+  { label: 'Зріджений газ', value: 'liquefied-petroleum-gas"' },
+  { label: 'Інше', value: 'other' },
 ]
 
 export const sort: { label: string; value: string }[] = [
-  { label: 'Дата создания лота ↑', value: 'added-date--asc' },
-  { label: 'Дата создания лота ↓', value: 'added-date--desc' },
-  { label: 'Дата аукциона ↑', value: 'auction-date--asc' },
-  { label: 'Дата аукциона ↓', value: 'auction-date--desc' },
+  { label: 'Дата створення лота ↑', value: 'added-date--asc' },
+  { label: 'Дата створення лота ↓', value: 'added-date--desc' },
+  { label: 'Дата аукціона ↑', value: 'auction-date--asc' },
+  { label: 'Дата аукціона ↓', value: 'auction-date--desc' },
   { label: 'Ставка ↑', value: 'current-bid--asc' },
   { label: 'Ставка ↓', value: 'current-bid--desc' },
-  { label: 'Год выпуска ↑', value: 'year--asc' },
-  { label: 'Год выпуска ↓', value: 'year--desc' },
-  { label: 'Пробег ↑', value: 'odometer--asc' },
-  { label: 'Пробег ↓', value: 'odometer--desc' },
+  { label: 'Рік випуску ↑', value: 'year--asc' },
+  { label: 'Рік випуску ↓', value: 'year--desc' },
+  { label: 'Пробіг ↑', value: 'odometer--asc' },
+  { label: 'Пробіг ↓', value: 'odometer--desc' },
 ]
 
 export const vehicleTypes = [
   {
-    title: 'Легковые',
+    title: 'Легкові',
     value: 'automobile',
     icon: CarSVG,
   },
   {
-    title: 'Грузовые',
+    title: 'Грузові',
     value: 'truck',
     icon: TruckSVG,
   },
   {
-    title: 'Другие',
+    title: 'Інші',
     value: 'other',
     icon: OtherCarSVG,
   },
@@ -72,8 +102,8 @@ export const bodyTypes = [
   { title: 'Седан', value: 'SEDAN', icon: CarSVG },
   { title: 'Хетчбек', value: 'HATCHBAC', icon: HatchbackCarSVG },
   { title: 'Купе', value: 'COUPE', icon: CoupeCarSVG },
-  { title: 'Пикап', value: 'PICKUP', icon: PickupCarSVG },
-  { title: 'другие', value: 'OTHER', icon: CarSVG },
+  { title: 'Пікап', value: 'PICKUP', icon: PickupCarSVG },
+  { title: 'Інші', value: 'OTHER', icon: CarSVG },
 ]
 
 export const bodyTypeArray = [

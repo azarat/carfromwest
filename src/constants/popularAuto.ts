@@ -1,9 +1,9 @@
 export const popularAuto = [
   {
-    name: '2015 MAZDA 6',
+    name: 'Mazda 6 2015',
     usaPrice: '12000',
     uaPrice: '15000',
-    img: '/assets/images/mazda6.png',
+    img: '/assets/images/mazda_6.png',
     filterParams: {
       makes: 'Mazda',
       models: '6',
@@ -12,58 +12,58 @@ export const popularAuto = [
   },
 
   {
-    name: '2015 MAZDA CX-5',
-    usaPrice: '14000',
-    uaPrice: '18000',
-    img: '/assets/images/2015_Mazda_CX-5.png',
+    name: 'Chevrolet Volt',
+    usaPrice: '19000',
+    uaPrice: '23000',
+    img: '/assets/images/chevrolet_volt.png',
     filterParams: {
-      makes: 'Mazda',
-      models: 'CX-5',
-      yearMin: 2015,
+      makes: 'Chevrolet',
+      models: 'Volt',
+      yearMin: 2018,
     },
   },
   {
-    name: '2015 FORD ESCAPE',
-    usaPrice: '12000',
-    uaPrice: '15000',
-    img: '/assets/images/2013_Ford_Escape.png',
+    name: 'Kia Niro Hybrid',
+    usaPrice: '17000',
+    uaPrice: '21000',
+    img: '/assets/images/kia-niro.png',
     filterParams: {
-      makes: 'Ford',
-      models: 'Escape',
-      yearMin: 2015,
+      makes: 'Kia',
+      models: 'Niro',
+      yearMin: 2017,
     },
   },
   {
-    name: '2013 FORD FUSION',
-    usaPrice: '10000',
-    uaPrice: '13000',
-    img: '/assets/images/2013_Ford_Fusion.png',
+    name: 'Ford Fusion Hybrid',
+    usaPrice: '16000',
+    uaPrice: '19000',
+    img: '/assets/images/ford_fusion.png',
     filterParams: {
       makes: 'Ford',
       models: 'Fusion',
-      yearMin: 2013,
-    },
-  },
-  {
-    name: '2015 SUBARU FORESTER',
-    usaPrice: '13000',
-    uaPrice: '17000',
-    img: '/assets/images/Subaru.png',
-    filterParams: {
-      makes: 'Subaru',
-      models: 'Forester',
-      yearMin: 2015,
-    },
-  },
-  {
-    name: '2017 HONDA CIVIC',
-    usaPrice: '12000',
-    uaPrice: '16000',
-    img: '/assets/images/2017_Honda_Civic.png',
-    filterParams: {
-      makes: 'Honda',
-      models: 'Civic',
       yearMin: 2017,
+    },
+  },
+  {
+    name: 'Tesla 3',
+    usaPrice: '30000',
+    uaPrice: '35000',
+    img: '/assets/images/tesla_3.png',
+    filterParams: {
+      makes: 'Tesla',
+      models: '3',
+      yearMin: 2019,
+    },
+  },
+  {
+    name: 'Toyota Prius Prime',
+    usaPrice: '19000',
+    uaPrice: '24000',
+    img: '/assets/images/Toyota_Prius_Prime.png',
+    filterParams: {
+      makes: 'Toyota',
+      models: 'Prius Prime',
+      yearMin: 2018,
     },
   },
   {
@@ -78,10 +78,10 @@ export const popularAuto = [
     },
   },
   {
-    name: '2017 CHEVROLET MALIBU',
+    name: 'Chevrolet Malibu',
     usaPrice: '11000',
     uaPrice: '15000',
-    img: '/assets/images/malibu.png',
+    img: '/assets/images/chevrolet_malibu.png',
     filterParams: {
       makes: 'Chevrolet',
       models: 'Malibu',

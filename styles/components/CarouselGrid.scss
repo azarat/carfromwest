@@ -4,40 +4,92 @@
 
 @media screen and (min-width: 1200px) {
   .carousel-grid {
+    position: relative;
     display: block;
     grid-row: 2;
+    width: 100%;
+    &__wrapper {
+      overflow: hidden;
+      position: relative;
+    &::after {
+      position: absolute;
+      top: calc(0% + 14px);
+      right: 0;
+      border-radius: 0px 10px 10px 0px;
+      width: 139px;
+      height: 105px;
+      background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+      @media (min-width: 1900px) {
+        top: calc(0% + 16px);
+        width: 142px;
+        height: 109px;
+      }
+      content: ''
+      
+      
+    }
+    
+    }
     &__list {
       display: flex;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
+      width: fit-content;
+      position: relative;
+      transition: all ease 300ms;
+    }
+    &__btn {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      top: 43%;
+      right: -15px;
+      outline: none;
+      border: none;
+      background: #0F2442;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+      border-radius: 10px;
+      cursor: pointer;
+      & svg {
+        & path {
+          fill: white;
+        }
+      }
     }
     &__item {
-      width: 122px;
-      height: 100px;
-      margin-top: 10px;
+      width: 139px;
+      height: 105px;
+      margin-top: 14px;
+      margin-right: 14px;
       cursor: pointer;
-      &:not(:nth-child(4n)) {
-        margin-right: 10px;
+      @media (min-width: 1900px) {
+        width: 142px;
+        height: 109px;
+        margin-top: 16px;
+        margin-right: 16px;
       }
-
       &-img {
         width: 100%;
         height: 100%;
+        border-radius: 10px;
       }
     }
   }
 }
 
-@media screen and(min-width:1800px) {
-  .carousel-grid {
-    &__item {
-      width: 205px;
-      height: 166px;
-      &:not(:nth-child(4n)) {
-        margin-right: unset;
-      }
-      &:not(:nth-child(5n)) {
-        margin-right: 10px;
-      }
-    }
-  }
-}
+// @media screen and(min-width:1800px) {
+//   .carousel-grid {
+//     &__item {
+//       width: 150px;
+//       height: auto;
+//       &:not(:nth-child(4n)) {
+//         margin-right: unset;
+//       }
+//       &:not(:nth-child(5n)) {
+//         margin-right: 10px;
+//       }
+//     }
+//   }
+// }

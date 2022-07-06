@@ -14,7 +14,13 @@ const SliderItem: React.FC<SliderItemProps> = ({
   const handleCatalog = (): void => {
     if (typeof document !== 'undefined') {
       document.body.scrollIntoView()
-      push({ pathname: '/catalog', query: filterParams })
+
+      let url = '';
+      if (filterParams.makes) url += `/brand-is-${filterParams.makes}`
+      if (filterParams.models) url += `/model-is-${filterParams.models}`
+      if (filterParams.yearMin) url += `/yearStart-is-${filterParams.yearMin}`
+
+      push('/catalog' + url)
     }
   }
 
@@ -24,12 +30,12 @@ const SliderItem: React.FC<SliderItemProps> = ({
       <div className="slider-item__inner">
         <p className="slider-item__name">{name}</p>
         <p className="slider-item__price">
-          <strong>$ {usaPrice}</strong> из США с ремонтом
+           {usaPrice}$ з США з ремонтом
         </p>
-        <p className="slider-item__price">
-          <strong>$ {uaPrice}</strong> аналог в Украине
+        <p className="slider-item__price-ua">
+          {uaPrice}$ аналог в Україні
         </p>
-        <button className="slider-item__btn">Посмотреть в каталоге</button>
+        <button className="slider-item__btn">Подивитись</button>
       </div>
     </div>
   )

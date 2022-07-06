@@ -1,7 +1,8 @@
 .footer {
   overflow: hidden;
   color: $white-transparent-04-color;
-  background: #0f2442;
+  background: #0F2442;
+  padding: 64px 0 80px;
   &__container {
     display: grid;
     grid-template-columns: 1fr;
@@ -10,7 +11,6 @@
     padding: 0 15px;
   }
   &__logo {
-    margin-top: 20px;
     margin-bottom: 0;
     margin-left: 20px;
     padding: 0 15px;
@@ -23,16 +23,15 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    margin-top: 20px;
     margin-bottom: 0;
     margin-left: 20px;
     padding: 0 15px;
     &-title {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       color: $white-color;
-      font-weight: $fw-500;
+      font-weight: $fw-700;
       font-size: $fs-16;
-      line-height: 120%;
+      line-height: 24px;
     }
     &-list {
       list-style: none;
@@ -41,14 +40,16 @@
       & a {
         position: relative;
         display: block;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
         padding-left: 32px;
-        color: $white-transparent-04-color;
-        font-size: $fs-16;
-        font-family: $ff-commons;
-        line-height: 120%;
-        letter-spacing: 0.09em;
+        color: #F2F2F2;
+        opacity: 0.9;
+        font-size: $fs-12;
+        font-family: $ff-gilroy;
+        line-height: 18px;
+        letter-spacing: 1px;
         text-decoration: none;
+        font-weight: 500;
 
         &::before {
           position: absolute;
@@ -56,7 +57,7 @@
           left: 0;
           width: 20px;
           height: 20px;
-          background: url('/assets/svg/phone.svg');
+          background: url('/assets/svg/phone_foo.svg');
           background-repeat: no-repeat;
           background-position: center center;
           background-size: 15px 15px;
@@ -76,42 +77,50 @@
       padding-left: 32px;
       font-size: $fs-14;
       line-height: 120%;
+      
       &::before {
         position: absolute;
         top: 0;
         left: 0;
         width: 20px;
         height: 20px;
-        background: url('/assets/svg/location.svg');
+        background: url('/assets/svg/address-foo.svg');
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 15px 15px;
         content: '';
       }
       a {
-        color: $white-transparent-04-color;
+        color: #F2F2F2;
+        opacity: 0.9;
+        font-size: $fs-12;
+        font-family: $ff-gilroy;
+        line-height: 18px;
+        letter-spacing: 1px;
         text-decoration: none;
+        font-weight: 500;
       }
     }
   }
   &__work-time {
-    margin-top: 20px;
     margin-left: 42px;
     &-title {
+      margin-bottom: 16px;
       color: $white-color;
-      font-weight: $fw-500;
+      font-weight: $fw-700;
       font-size: $fs-16;
-      line-height: 120%;
+      line-height: 24px;
     }
     &-date {
-      margin-top: 20px;
-      font-size: $fs-14;
-      line-height: 120%;
-      letter-spacing: 0.09em;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 1px;
+      color: #F2F2F2;
+      opacity: 0.9;
     }
   }
   &__development {
-    margin-top: 20px;
 
     & a {
       display: flex;
@@ -144,30 +153,56 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1199px) {
   .footer {
-    position: relative;
-    padding-top: 60px;
+    padding: 48px 32px;
     &__container {
-      grid-template-columns: 1fr 1fr 1fr;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
     }
-    &__copyright {
-      & br {
-        display: none;
-      }
+    &__logo {
+      margin-bottom: 40px;
+      margin-left: 0;
+      padding: 0;
+      grid-column: span 3;
+    
     }
-    &__development {
-      position: absolute;
-      right: 50px;
-      bottom: 40px;
-      &-text {
-        max-width: unset;
-      }
-    }
-    & .social-link {
-      grid-column: 2;
+    &__contacts {
+      margin-bottom: 0;
+      margin-left: 0;
+      padding: 0;
     }
   }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 16px 16px;
+
+    &__container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+    &__logo {
+      margin-bottom: 48px;
+      grid-column: span 2;
+    
+    }
+    &__work-time {
+      margin-left: auto;
+    }
+    
+    & .social-link {
+      display: none;
+    }
+  }
+  
 }
 
 @media screen and (min-width: 1200px) {
@@ -212,4 +247,8 @@
       right: calc(50vw - 650px);
     }
   }
+}
+
+.social-link {
+  margin-top: 0;
 }

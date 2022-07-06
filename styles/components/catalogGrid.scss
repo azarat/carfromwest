@@ -1,6 +1,9 @@
 .catalog-grid {
   min-height: calc(100vh - 400px);
   margin-top: 50px;
+  @media (max-width: 767px) {
+    margin-top: 0px;
+  }
   &__title {
     margin: 0;
     font-weight: $fw-700;
@@ -18,9 +21,10 @@
   }
   &__container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
+    // grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
     gap: 20px;
     justify-content: space-around;
+
     &-link {
       display: flex;
       justify-content: center;
@@ -32,50 +36,236 @@
     width: 100%;
     min-width: 250px;
     height: auto;
-    margin: 20px 0;
+    margin: 15px 0;
+    padding: 24px;
     background-color: $white-color;
-    border-radius: 5px;
-    box-shadow: 0px 6px 15px rgba(28, 78, 16, 0.05);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px;
     cursor: pointer;
+
+    @media (max-width: 1920px) {
+      margin: 10px 0;
+      grid-gap: 20px;
+      grid-template-columns: 3fr 5fr;
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+
     &-image {
       width: 100%;
-      height: 200px;
-      border-radius: 5px;
+      padding-bottom: 60px;
+      // height: 200px;
+      // border-radius: 10px;
+      // overflow: hidden;
+
+      @media (max-width: 1920px) {
+        padding-bottom: 53px;
+      }
+
       & img {
         width: 100%;
         height: 100%;
-        border-radius: 5px 5px 0 0;
+        border-radius: 10px;
+
+        position: relative;
+        z-index: 2;
+      // @media (max-width: 1920px) {
+        // }
       }
     }
+
+    &-details-btn {
+      background: #F2F2F2;
+      color: #0F2442;
+      font-size: $fs-20;
+      line-height: $fs-24;
+      font-weight: $fw-700;
+      padding: 18px 34px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      
+      @media (max-width: 1920px) {
+        font-size: $fs-14;
+        line-height: $fs-17;
+        padding: 12px 30px;
+      }
+    }
+
+    &-calculate-btn {
+      padding: 18px 34px;
+      color: #ffffff;
+      background: #E02C22;
+      border-radius: 10px;
+      font-size: $fs-20;
+      line-height: $fs-24;
+      font-weight: $fw-700;
+      border: none;
+      margin-right: 30px;
+      cursor: pointer;
+      
+      @media (max-width: 1920px) {
+        font-size: $fs-14;
+        line-height: $fs-17;
+        padding: 12px 30px;
+        margin-right: 12px;
+      }
+    }
+
+    &-auction-date {
+      background: #0F2442;
+      text-align: center;
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 46px 0px 8px;
+      position: relative;
+      margin-top: -43px;
+      z-index: 1;
+
+      @media (max-width: 1920px) {
+        padding: 49px 0px 11px;
+      }
+
+      // @media (max-width: 1024px) {
+      //   z-index: 1;
+      // }
+
+      &-label {
+        font-size: $fs-16;
+        line-height: $fs-19;
+        font-weight: $fw-500;
+
+        @media (max-width: 1920px) {
+          font-size: $fs-12;
+          line-height: $fs-14;
+        }
+      }
+
+      &-value {
+        font-size: $fs-20;
+        line-height: $fs-24;
+        font-weight: $fw-700;
+
+        @media (max-width: 1920px) {
+          font-size: $fs-14;
+          line-height: $fs-17;
+        }
+      }
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
     &-header {
+      display: flex;
+      align-items: center;
       height: min-content;
-      padding: 15px 10px;
-      border-bottom: 1px solid $light-gray-color-01;
+      // padding: 15px 10px;
+      margin-bottom: 20px;
+      // border-bottom: 1px solid $light-gray-color-01;
+
+      @media (max-width: 1024px) {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      // &-title {}
+
+      &-logo {
+        margin-right: 16px;
+
+        img {
+          height: 44px;
+
+          @media (max-width: 1920px) {
+            height: 39px;
+          }
+        }
+      }
     }
     &-title {
-      font-weight: $fw-800;
-      font-size: $fs-18;
+      font-weight: $fw-700;
+      font-size: $fs-28;
       text-transform: uppercase;
+
+      @media (max-width: 1920px) {
+        font-size: $fs-18;
+        line-height: $fs-22;
+      }
     }
     &-lot {
       margin-top: 5px;
       font-weight: $fw-400;
-      font-size: $fs-18;
+      font-size: $fs-12;
+      line-height: $fs-14;
       text-transform: uppercase;
     }
     &-descr {
-      padding: 15px 10px;
-    }
-    &-mileage,
-    &-engine,
-    &-gas {
-      margin-top: 15px;
-      font-size: $fs-16;
-      text-transform: uppercase;
-      & span {
-        font-weight: $fw-600;
+      display: flex;
+      font-weight: $fw-500;
+      font-size: $fs-22;
+      line-height: $fs-26;
+      padding: 12px 0px;
+      row-gap: 20px;
+      flex-wrap: wrap;
+
+      @media (max-width: 1920px) {
+        font-size: $fs-16;
+        line-height: $fs-19;
+        row-gap: 15px;
+      }
+
+      &.nowrap {
+        flex-wrap: nowrap;
+      }
+
+      &.pb-0 {
+        padding-bottom: 0px;
+
+        @media (max-width: 1024px) {
+          display: grid;
+          grid-template-columns: 5fr 3fr;
+        }
+      }
+
+      svg {
+        margin-right: 20px;
+        
+        @media (max-width: 1920px) {
+          margin-right: 8px;
+          transform: scale(.8);
+        }
+      }
+
+      & > div {
+        display: flex;
+        align-items: center;
+        margin-right: 25px;
+
+        @media (max-width: 1920px) {
+          margin-right: 20px;
+        }
       }
     }
+    // &-mileage,
+    // &-engine,
+    // &-gas {
+    //   margin-top: 15px;
+    //   font-size: $fs-16;
+    //   text-transform: uppercase;
+    //   & span {
+    //     font-weight: $fw-600;
+    //   }
+    // }
     &-price {
       display: flex;
       flex-wrap: nowrap;
@@ -90,13 +280,43 @@
         font-size: $fs-14;
       }
     }
+
+    &-crash-type {
+      flex-direction: column;
+      align-items: flex-start !important;
+      margin-right: 55px !important;
+      justify-content: center;
+
+      &-label {
+        font-size: $fs-16;
+        line-height: $fs-19;
+        font-weight: $fw-400;
+        color: $color-gray-3;
+
+        @media (max-width: 1920px) {
+          font-size: $fs-12;
+          line-height: $fs-14;  
+        }
+      }
+      &-value {
+        font-size: $fs-22;
+        line-height: $fs-27;
+        font-weight: $fw-700;
+        color: #0F2442;
+
+        @media (max-width: 1920px) {
+          font-size: $fs-14;
+          line-height: $fs-17;  
+        }
+      }
+    }
   }
 }
 
 @media screen and (min-width: 768px) {
   .catalog-grid {
     &__container {
-      grid-template-columns: repeat(auto-fit, minmax(auto, 226px));
+      // grid-template-columns: repeat(auto-fit, minmax(auto, 226px));
     }
     &__item {
       &-price {
@@ -112,10 +332,16 @@
     grid-column: 2 / span 2;
     width: 100%;
     max-width: 100%;
-    margin-top: 40px;
+    margin-top: 30px;
+
+    @media (max-width: 1920px) {
+      margin-top: 10px;
+    }
+
     &__container {
-      grid-template-columns: repeat(auto-fit, minmax(auto, 260px));
-      gap: 20px;
+      // grid-template-columns: repeat(auto-fit, minmax(auto, 260px));
+      grid-template-columns: 1fr;
+      gap: 0px;
       justify-content: space-around;
     }
   }
@@ -139,35 +365,35 @@
           object-fit: cover;
         }
       }
-      &::after {
-        position: absolute;
-        bottom: 0;
-        z-index: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        width: 100%;
-        height: 40px;
-        color: $white-color;
-        font-weight: $fw-700;
-        font-size: $fs-12;
-        background-color: $red-color;
-        border-radius: 0 0 5px 5px;
-        opacity: 0;
-        transition: bottom 0.3s ease-in-out, opacity 0.3s 0.2s;
-        content: 'УЗНАТЬ ПОДРОБНЕЕ';
-        &:hover {
-          bottom: -40px;
-          opacity: 1;
-        }
-      }
+      // &::after {
+      //   position: absolute;
+      //   bottom: 0;
+      //   z-index: 0;
+      //   display: flex;
+      //   align-items: center;
+      //   justify-content: center;
+      //   box-sizing: border-box;
+      //   width: 100%;
+      //   height: 40px;
+      //   color: $white-color;
+      //   font-weight: $fw-700;
+      //   font-size: $fs-12;
+      //   background-color: $red-color;
+      //   border-radius: 0 0 5px 5px;
+      //   opacity: 0;
+      //   transition: bottom 0.3s ease-in-out, opacity 0.3s 0.2s;
+      //   content: 'УЗНАТЬ ПОДРОБНЕЕ';
+      //   &:hover {
+      //     bottom: -40px;
+      //     opacity: 1;
+      //   }
+      // }
       &:hover {
         overflow: visible;
-        &::after {
-          bottom: -40px;
-          opacity: 1;
-        }
+        // &::after {
+        //   bottom: -40px;
+        //   opacity: 1;
+        // }
       }
     }
   }
@@ -176,7 +402,7 @@
 @media screen and (min-width: 1600px) {
   .catalog-grid {
     &__container {
-      grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
+      grid-template-columns: 1fr;
       justify-content: end;
     }
   }

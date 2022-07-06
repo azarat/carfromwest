@@ -100,9 +100,9 @@ const Carousel: React.FC<ICarousel> = ({
   }
 
   useEffect(() => {
-    carousel.current.style.transform = `translateX(-${
+    carousel.current.style.transform = `translateX(calc(-${
       100 * (slide + +infinity)
-    }%)`
+    }% - ${slide * 10}px))`
     callback(slide)
     const touchcleanUp = handleTouch()
     return () => {
@@ -136,13 +136,13 @@ const Carousel: React.FC<ICarousel> = ({
         ))}
         {infinity && <div className="carousel-list-item">{children[0]}</div>}
       </div>
-      <div className="carousel-buttons">
+      {/* <div className="carousel-buttons"> */}
         <div className="carousel-buttons-prev" onClick={handlePrevSlide}>
           {buttonPrev}
         </div>
         <div className="carousel-buttons-next" onClick={handleNextSlide}>
           {buttonNext}
-        </div>
+        {/* </div> */}
       </div>
       {withDots && (
         <div className="carousel-dots">

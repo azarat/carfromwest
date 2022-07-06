@@ -1,35 +1,68 @@
 .full-review {
+ 
   position: fixed;
+ 
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 15;
   display: none;
-  padding: 0 15px;
-  font-family: $ff-commons;
-  background-color: $white-color;
+  font-family: $ff-gilroy;
+  background: #909090;
+  &__main-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    padding: 64px;
+  }
+  &__title {
+    width: 757px;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 130%;
+    text-align: center;
+    margin: 0 auto;
+    color: #000000;
+    margin-bottom: 32px;
+  }
   & ul {
     list-style: none;
   }
   &--open {
     display: block;
+    z-index: 22222222222;
   }
   &__wrapper {
-    height: 100%;
-    padding: 65px 10px 25px;
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    max-height: 540px;
+    padding: 48px;
+    border-radius: 10px;
+    background: $white-color;
+    width: 949px;
     overflow-y: auto;
     box-shadow: 0 0 10px rgb(0 0 0 / 5%);
   }
 
-  &__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  &__left {
+    width: 500px;
+    margin-right: 30px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
   }
   &__name {
-    font-weight: $fw-500;
-    font-size: $fs-22;
+    display: flex;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    color: #000000;
+    text-decoration: none;
+    margin-bottom: 16px;
+    & svg {
+      margin-left: 16px;
+    }
   }
   &__link {
     color: $dark-red-color;
@@ -37,25 +70,34 @@
     text-decoration: none;
   }
   &__text {
-    margin-top: 10px;
-    font-size: $fs-14;
-    line-height: 1.5;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 140%;
+    color: #000000;
+  }
+  &__photos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px;
+
   }
 
   &__photo-wrapper {
     position: relative;
-    width: 150px;
-    height: 100px;
-    margin: 0 auto;
+    width: 154px;
+    height: 192px;
+    & img {
+      border-radius: 10px;
+    }
   }
-  &__photos {
-    margin-top: 20px;
-  }
+  
 
   &__close {
-    position: relative;
+    position: absolute;
     width: 30px;
     height: 30px;
+    right: 24px;
+    top: 24px;
     cursor: pointer;
     &::before,
     &::after {
@@ -111,60 +153,89 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1199px) {
   .full-review {
+    &__main-wrapper {
+      padding: 48px;
+    }
+    &__title {
+      width: 620px;
+      font-size: 40px;
+      line-height: 110%;
+      margin-bottom: 26px;
+    }
     &__wrapper {
-      padding: 75px 35px 55px;
+      position: relative;
+      display: flex;
+      padding: 48px;
+      width: 680px;
     }
-    &__photo-wrapper {
-      width: 185px;
-      height: 220px;
-      & img {
-        object-fit: cover;
-      }
-    }
-    & .swiper {
-      &-button {
-        &-prev,
-        &-next {
-          top: 50%;
-        }
-        &-prev {
-          left: 40px;
-        }
-        &-next {
-          right: 40px;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .full-review {
-    &__wrapper {
-      width: 100%;
-      max-width: 730px;
-      margin: 0 auto;
-      padding: 80px 50px 60px;
+  
+    &__left {
+      width: 500px;
+      margin-right: 20px;
     }
     &__name {
-      font-size: $fs-24;
+      margin-bottom: 14px;
+    }
+    &__link {
+      color: $dark-red-color;
+      font-weight: $fw-400;
+      text-decoration: none;
     }
     &__text {
-      font-size: $fs-16;
+      font-size: 16px;
+      line-height: 130%;
+    }
+    &__photos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 6px;
+  
+    }
+  
+    &__photo-wrapper {
+      position: relative;
+      width: 125px;
+      height: 170px;
+    }
+    &__close {
+      right: 15px;
+      top: 15px;
     }
   }
 }
 
-@media screen and (min-width: 1800px) {
+@media screen and (max-width: 767px) {
   .full-review {
-    &__wrapper {
-      max-width: 990px;
+    &__main-wrapper {
+      padding: 48px 16px 32px;
     }
+    &__title {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    &__wrapper {
+      padding: 40px;
+      width: 100%;
+    }
+  
+    &__left {
+      width: 100%;
+      margin-right: 15px;
+    }
+    &__name {
+      margin-bottom: 12px;
+    }
+    &__text {
+      font-size: 14px;
+      line-height: 120%;
+    }
+  
     &__photo-wrapper {
-      width: 240px;
-      height: 220px;
+      position: relative;
+      width: 100px;
+      height: 130px;
     }
   }
 }

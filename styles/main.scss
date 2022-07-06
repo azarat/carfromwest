@@ -1,6 +1,7 @@
 @import './variables/variables';
 @import './fonts/commons';
 @import './fonts/opensans';
+@import './fonts/gilroy';
 
 // Components
 @import './components/accordion';
@@ -28,6 +29,8 @@
 @import './components/tableFilterFull';
 @import './components/thanks';
 @import './components/Title';
+@import './components/HomePage/Law';
+@import './components/HomePage/AdvantagesAuto.scss';
 @import './components/HomePage/AboutUs';
 @import './components/HomePage/Advantages';
 @import './components/HomePage/AutoSearch';
@@ -43,6 +46,7 @@
 @import './components/HomePage/PopularDesktopSlider';
 @import './components/HomePage/Promo';
 @import './components/HomePage/Request';
+@import './components/HomePage/RequestBottom.scss';
 @import './components/HomePage/ReviewItem';
 @import './components/HomePage/VideoBlock';
 @import './components/HomePage/WorkSum';
@@ -72,7 +76,7 @@ input {
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  font-family: $ff-opensans;
+  font-family: $ff-gilroy;
   background: #f2f2f2;
   &.fixed {
     overflow: hidden !important;

@@ -21,7 +21,6 @@ const CatalogSort: React.FC<CatalogSortProps> = ({
   )
   return (
     <div className="sort-field">
-      <div className="sort-field__text">Сортировать</div>
       <div className="sort-field__select">
         <Select
           isDisabled={loading}

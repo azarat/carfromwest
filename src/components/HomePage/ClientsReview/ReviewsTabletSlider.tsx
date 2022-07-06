@@ -26,6 +26,9 @@ export const ReviewsTabletSlider: React.FC = () => {
         initialSlide={1}
         grabCursor={true}
         slideToClickedSlide={true}
+        pagination={{
+          clickable: true,
+        }}
         breakpoints={{
           1800: { spaceBetween: 250 },
           2300: { spaceBetween: 500 },

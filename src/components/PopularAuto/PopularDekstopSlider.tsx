@@ -19,7 +19,7 @@ const PopularDesktopSlider: React.FC = () => {
       <Swiper
         slidesPerView={3}
         centeredSlides={true}
-        spaceBetween={0}
+        spaceBetween={30}
         loop={true}
         navigation={true}
         pagination={{

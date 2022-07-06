@@ -1,42 +1,48 @@
 .faq {
-  font-family: $ff-commons;
-  background-image: url(/assets/images/FAQ-bg.jpg);
-  background-repeat: no-repeat;
-  background-position: 0px 300px;
-  background-size: contain;
+  font-family: $ff-gilroy;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  background-color: $white-color;
+  &__list-item {
+    margin: 5px 0;
+    margin-left: 2%;
+  }
   &__wrapper {
-    padding: 30px 30px 0px 30px;
   }
   &__title {
-    color: $very-dark-blue-color;
+    color: $black-color;
     font-weight: $fw-700;
-    font-size: $fs-16;
+    font-size: $fs-48;
     text-align: center;
+    line-height: 130%;
+    margin-bottom: 96px;
   }
   &__accordion {
     display: grid;
     gap: 30px;
     margin-top: 20px;
-    padding: 20px 25px;
+    // padding: 20px 25px;
     background-color: $white-color;
     &-item {
       &:not(:last-of-type) {
-        padding-bottom: 20px;
+        padding-bottom: 32px;
         border-bottom: 1px solid rgba($color: $gray-color, $alpha: 0.5);
       }
       &-title {
         position: relative;
         padding-left: 20px;
-        color: $very-dark-blue-color;
-        font-weight: $fw-500;
-        font-size: $fs-16;
+        color: $black-color;
+        font-weight: $fw-600;
+        font-size: $fs-22;
+        font-weight: 600;
+        line-height: 140%;
         cursor: pointer;
         -webkit-tap-highlight-color: $transparent;
 
-        &::before {
+        &::after {
           position: absolute;
           top: 0s;
-          left: -20px;
+          left: 98%;
           width: 8px;
           height: 8px;
           border-right: 2px solid #9f2000;
@@ -61,7 +67,7 @@
       }
       &--open {
         & .faq__accordion-item-title {
-          &::before {
+          &::after {
             transform: rotate(45deg);
           }
         }
@@ -79,8 +85,6 @@
   .faq {
     position: relative;
     z-index: 15;
-    margin-top: -160px;
-    padding: 45px 0px;
     background-position: 0px 140px;
     &__wrapper {
       max-width: 600px;
@@ -88,12 +92,49 @@
       background-color: $white-color;
     }
     &__title {
-      font-size: $fs-22;
+      // font-size: $fs-22;
     }
     &__accordion {
       max-width: 600px;
       margin: 0 auto;
-      padding: 40px 100px 85px;
+      // padding: 40px 100px 85px;
+      &-item {
+        &-title {
+          padding-left: 35px;
+          // font-size: $fs-18;
+          // line-height: 21px;
+        }
+        &-text {
+          padding-left: 35px;
+          // font-size: $fs-18;
+          // line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width:768px) {
+  .faq {
+    padding: 64px 16px;
+    position: relative;
+    z-index: 15;
+    background-position: 0px 140px;
+    &__wrapper {
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: $white-color;
+    }
+    &__title {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 125%;
+      margin-bottom: 64px;
+    }
+    &__accordion {
+      max-width: 600px;
+      margin: 0 auto;
+      // padding: 40px 100px 85px;
       &-item {
         &-title {
           padding-left: 35px;
@@ -110,9 +151,48 @@
   }
 }
 
+@media screen and(max-width: 1200px) {
+  .faq {
+    padding: 80px 32px;
+    position: relative;
+    z-index: 15;
+    background-position: 0px 140px;
+    &__wrapper {
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: $white-color;
+    }
+    &__title {
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 125%;
+      margin-bottom: 80px;
+    }
+    &__accordion {
+      max-width: 600px;
+      margin: 0 auto;
+      // padding: 40px 100px 85px;
+      &-item {
+        &-title {
+          padding-left: 35px;
+          font-size: $fs-18;
+          line-height: 21px;
+        }
+        &-text {
+          padding-left: 35px;
+          font-size: $fs-18;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
 @media screen and(min-width:1200px) {
   .faq {
-    margin-top: -250px;
     &__wrapper {
       max-width: 950px;
     }
@@ -124,12 +204,11 @@
 
 @media screen and(min-width:1800px) {
   .faq {
-    margin-top: -395px;
     background-size: cover;
 
     &__title {
-      font-weight: $fw-700;
-      font-size: $fs-48;
+      // font-weight: $fw-700;
+      // font-size: $fs-48;
     }
     &__wrapper {
       max-width: 1275px;

@@ -24,6 +24,7 @@ export interface ILot {
       cylinders: number
     }
     fuelType: string
+    transmissionType: string
     drivelineType: string
     color: string
   }
@@ -73,6 +74,7 @@ export interface ILot {
       type: string
     }
     seller: {
+      group: string
       displayName: string
     }
   }

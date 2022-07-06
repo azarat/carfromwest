@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import CatalogGrid from '../../src/components/CatalogGrid/CatalogGrid'
 import CatalogSort from '../../src/components/CatalogSort/CatalogSort'
 import FilterField from '../../src/components/FilterField/FilterField'
-import FilterFull from '../../src/components/FilterFull/FilterFull'
+// import FilterFull from '../../src/components/FilterFull/FilterFull'
 import FilterTable from '../../src/components/FilterFull/FilterTable'
 // Types
 import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
@@ -43,7 +43,9 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     sortField: 'added-date',
     sortDirection: 'asc',
     includeFilters: ['auctions'],
+    excludeFilters: [],
   }
+  const excludeFilters: string[] = []
   const includeFilters = ['vehicleTypes']
   const initialMakes = []
   const initialModels = []
@@ -57,11 +59,12 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     initialModels.push(models)
   }
   const router = useRouter()
-  const [openFilter, setOpenFilter] = useState<boolean>(false)
+  // const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
+        excludeFilters: excludeFilters,
         includeFilters: includeFilters,
         makes: initialMakes,
         vehicleType: type ? type : 'automobile',
@@ -104,14 +107,14 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
   return (
     <div className="catalog__wrapper">
       <section className="catalog">
-        <FilterFull
+        {/* <FilterFull
           makes={brands}
           filter={filter}
           setFilter={setFilter}
           open={openFilter}
           setOpen={setOpenFilter}
           loading={false}
-        />
+        /> */}
         <FilterTable
           transport={transport as string}
           filter={currentParams}
@@ -125,7 +128,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
           <CatalogSearch loading={false} handleSearch={handleSearch} />
           <FilterField
             loading={false}
-            setOpen={setOpenFilter}
+            // setOpen={setOpenFilter}
             filter={filter}
             setFilter={setFilter}
           />
@@ -255,16 +258,39 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
+  // const apiFields = [
+  //   "auctions", 
+  //   "bodyStyles", 
+  //   "damageTypes", 
+  //   "engineCapacities", 
+  //   "engineCylinders", 
+  //   "fuelTypes", 
+  //   "drivelineTypes", 
+  //   "makes", 
+  //   "models", 
+  //   "trims", 
+  //   "saleDocumentsGroups", 1 2 3 4
+  //   "transmissionTypes", 
+  //   "vehicleTypes", 
+  //   "locations", 
+  //   "vehicleConditions", 
+  //   "features", 
+  //   "countries"
+  // ];
+  
   const transportParam = ((query?.filters || []) as string[]).find(f => f.includes('transport-is-'))
   const brandParam = ((query?.filters || []) as string[]).find(f => f.includes('brand-is-'))
   const currentParams = Object.keys(aviableParams).reduce(
     (acc: any, param) => {
+      
       const currentParam = `${param}-is-`
       const urlParam = ((query?.filters || []) as string[]).find((p) =>
         p.includes(currentParam)
       )
 
       if (urlParam) {
+        // console.log('param', param);
+        
         const paramValue = urlParam.replace(currentParam, '')
         const filterName =
           aviableParams[param as keyof typeof aviableParams].filterName
@@ -272,6 +298,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
         const name = aviableParams[param as keyof typeof aviableParams].name
         if (filterName) {
           acc.includeFilters.push(filterName)
+        } else {
+          acc.excludeFilters.push(name)
         }
 
         if (type === ParamType.array) {
@@ -315,13 +343,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
       page: +query.page! || 1,
       sortField: query.sortField || 'added-date',
       sortDirection: query.sortDirection || 'asc',
+      excludeFilters: [],
       includeFilters: [],
       itemsPerPage: 12,
     }
   )
-  const filtersUrl = brandParam ?
+  const filtersUrl = !!brandParam ?
     `http://46.101.185.57:8080/search/v1/filters?filters=makes,models&makes=${(brandParam as string).replace('brand-is-', '')}&vehicleType=automobile&auctions=iaai,copart` :
     'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+  
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       'user-agent': req.headers['user-agent'] || USER_AGENT,
@@ -329,7 +359,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
     },
   })
+
   const { makes, models } = await filterResponse.json()
+ 
+  // console.log('currentParams', currentParams);
+
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
     method: 'POST',
@@ -341,15 +375,45 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
     },
     body: JSON.stringify(currentParams),
   })
+  
+  const response = await carsResponse.json();
+  const { items } = response;
 
-  const { items, total } = await carsResponse.json();
+  // console.log(response.violations);
+  
+  let items_filtered = items ?? [];
+
+  if (items_filtered.length && currentParams.excludeFilters.length) {
+    currentParams.excludeFilters.forEach((exFilter: string)=>{
+      items_filtered = items_filtered.filter((item: any)=>{
+        switch (exFilter) {
+          // case 'odometerMax':
+            // return item.conditionInfo.odometer.value <= currentParams[exFilter]
+          // case 'odometerMin':
+            // return item.conditionInfo.odometer.value >= currentParams[exFilter]
+          case 'sellerType':
+            const itemSellerType = item.saleInfo.seller?.group ?? 'other';
+            const filterSellerType = currentParams[exFilter];
+
+            if (filterSellerType == 'insurance') {
+              return filterSellerType == itemSellerType;
+            } else {
+              return filterSellerType != 'insurance';
+            }
+          default:
+            return true
+        }    
+      })
+    })
+  }
+  
   return {
     props: {
       currentParams,
-      items,
-      total,
+      items: items_filtered,
+      total: items_filtered.length ?? 0,
       brands: makes,
-      brandModels: models,
+      brandModels: models ?? null,
       currentPage: +query.page! || 1,
       transport: transportParam ? transportParam.replace('transport-is-', '') : 'automobile'
     },

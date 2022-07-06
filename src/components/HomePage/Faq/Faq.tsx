@@ -5,7 +5,7 @@ const Faq: React.FC = () => {
   return (
     <div id="section-faq" className="faq">
       <div className="faq__wrapper">
-        <h2 className="faq__title">Ответы на вопросы</h2>
+        <h2 className="faq__title">Відповіді на питання</h2>
         <FaqAccordion />
       </div>
     </div>

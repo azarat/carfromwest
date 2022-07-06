@@ -1,11 +1,56 @@
+.car-page__breadcrumbs.order-sec {
+  margin-left: 9%;
+  padding-top: 20px;
+  margin-bottom: 65px;
+  &-link {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-left: 5px;
+  }
+  & a {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #E0E0E0;
+    &:hover {
+      color: $white-color;
+    }
+    & svg {
+      & path {
+        fill: #E0E0E0;
+      }
+    }
+  }
+}
 .order {
   height: 100vh;
-  min-height: 550px;
+  // min-height: 550px;
   overflow: hidden;
-  background: #494949;
+  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../public/assets/images/order1900.png');
   &__wrapper {
     position: relative;
-    padding: 110px 15px 75px;
+    padding: 65px 15px 75px;
+  }
+  &__title-thanks {
+    font-family: 'Gilroy';
+    color: $white-color;
+    font-weight: $fw-700;
+    font-size: 42px;
+    line-height: 51px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  &__text {
+      color: $white-color;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 21px;
+      margin-bottom: 40px;
   }
   &__back {
     position: absolute;
@@ -14,137 +59,614 @@
     cursor: pointer;
   }
   &__title {
+    font-family: 'Gilroy';
     color: $white-color;
-    font-weight: $fw-800;
-    font-size: $fs-22;
-    line-height: 100%;
-    text-align: center;
+    font-weight: $fw-700;
+    font-size: 42px;
+    line-height: 51px;
     text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 34px;
   }
   &__form {
-    display: grid;
-    gap: 40px;
-    margin-top: 40px;
-    &-input {
-      padding: 5px 0;
-      color: $white-color;
-      background-color: $transparent;
-      border: 1px solid $transparent;
-      border-bottom: 1px solid #a6a6a6;
-      outline: none;
-      transition: all 0.3s ease;
-      &::placeholder {
-        font-size: 15px;
-        line-height: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    padding: 42px 34px 29px;
+    margin-left: 15%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+    // backdrop-filter: blur(5px);
+    border-radius: 10px;
+    &__line-start {
+      display: inline-block;
+      height: 4px;
+      width: 49px;
+      background-color: #E02C22;
+      border-radius: 10px;
+      margin-right: 19px;
+      margin-bottom: 3%;
+    }
+    &__line-end {
+      display: inline-block;
+      height: 4px;
+      width: 105px;
+      background-color: #E02C22;
+      border-radius: 10px;
+      margin-left: 29px;
+      margin-bottom: 3%;
+    }
+    &__input-wrapper {
+      margin-bottom: 40px;
+    }
+    &__thumb {
+      position: relative;
+      display: block;
+      color: black;
+      &:not(:last-child) {
+        margin-bottom: 10px;
       }
-
+    }
+    &-input {
+      width: 100%;
+      border: 1px solid #333333;
+      background-color: inherit;
+      border-radius: 10px;
+      padding: 15px 20px;
+      outline: none;
+      color: #333333;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      cursor: pointer;
+      &::placeholder {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #333333;
+      }
       &--error {
         border: 1px solid $red-color;
       }
+    }
+    &-checkbox-wrappers {
+      display: flex;
+      margin-bottom: 40px;
     }
 
     &-label {
       position: relative;
       display: flex;
       align-items: center;
-      margin-left: 10px;
       color: $white-color;
       font-size: $fs-15;
-      line-height: 24px;
+      line-height: 18px;
+      font-weight: 500;
+      cursor: pointer;
       & span {
         display: block;
       }
       &::before {
         display: inline-block;
-        width: 10px;
-        height: 10px;
-        margin-right: 0.5em;
+        min-width: 24px;
+        height: 24px;
+        margin-right: 10px;
         background-repeat: no-repeat;
         background-position: center;
-        border: 1px solid #adb5bd;
+        border: 1px solid #333333;
+        border-radius: 10px;
         content: '';
       }
     }
     &-checkbox {
       display: none;
       &:checked + .order__form-label::before {
-        background-color: $white-color;
-        background-image: url('../../public/assets/svg/check.svg');
+        // background-color: #E02C22;
+
+        background-image: url('../../public/assets/svg/order-checked.svg');
       }
     }
     &-btn {
-      width: 100%;
-      max-width: 245px;
-      height: 45px;
+      display: block;
+      padding: 12px 20px;
+      max-width: 145px;
+      border-radius: 10px;
+      margin: 0 auto;
+      height: 46px;
       color: $white-color;
-      font-weight: $fw-800;
-      font-size: $fs-12;
-      line-height: 24px;
-      text-transform: uppercase;
-      background-color: $red-color;
+      font-weight: $fw-700;
+      font-size: $fs-18;
+      line-height: 22px;
+      background-color: #E02C22;
       border: none;
       outline: none;
       cursor: pointer;
+      & a {
+        color: $white-color;
+        font-weight: $fw-700;
+        font-size: $fs-18;
+        line-height: 22px;
+        text-decoration: none;
+      }
     }
   }
-  &__img {
-    display: none;
-    background-image: url('../../public/assets/images/orderBg-tablet.png');
+  
+}
+
+@media screen and (max-width: 1200px) {
+  .car-page__breadcrumbs.order-sec {
+    margin-left: 9%;
+    padding-top: 20px;
+    margin-bottom: 40px;
+    
+  }
+  .order {
+    height: 100vh;
+    min-height: 550px;
+    // overflow: hidden;
+    // overflow-y: scroll;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .order {
-    height: unset;
-    min-height: unset;
-    &__back {
-      top: 90px;
-      left: 30px;
-    }
+    background-image: url('../../public/assets/images/order1900.png');
     &__wrapper {
-      padding: 200px 360px 150px 90px;
+      position: relative;
+      padding: 65px 15px 75px;
     }
-    &__img {
-      display: block;
-      min-height: 322px;
+    &__title-thanks {
+      font-family: 'Gilroy';
+      color: $white-color;
+      font-weight: $fw-700;
+      font-size: 42px;
+      line-height: 51px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+    &__text {
+        color: $white-color;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        margin-bottom: 40px;
+    }
+    &__back {
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      cursor: pointer;
     }
     &__title {
-      font-size: $fs-24;
-      text-align: left;
+      font-family: 'Gilroy';
+      color: $white-color;
+      font-weight: $fw-700;
+      font-size: 36px;
+      line-height: 46px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 28px;
     }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      width: 450px;
+      padding: 36px 34px 25px;
+      margin-left: 15%;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+      // backdrop-filter: blur(5px);
+      border-radius: 10px;
+      
+      &__input-wrapper {
+        margin-bottom: 30px;
+      }
+      &__thumb {
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+      &-input {
+        width: 100%;
+        border: 1px solid #333333;
+        background-color: inherit;
+        border-radius: 10px;
+        padding: 15px 20px;
+        outline: none;
+        color: #333333;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        cursor: pointer;
+        &::placeholder {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+          color: #BDBDBD;
+        }
+        &--error {
+          border: 1px solid $red-color;
+        }
+      }
+      &-checkbox-wrappers {
+        display: flex;
+        margin-bottom: 34px;
+      }
+  
+      &-label {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: $white-color;
+        font-size: $fs-15;
+        line-height: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        & span {
+          display: block;
+        }
+        &::before {
+          display: inline-block;
+          min-width: 24px;
+          height: 24px;
+          margin-right: 10px;
+          background-repeat: no-repeat;
+          background-position: center;
+          border: 1px solid #333333;
+          border-radius: 10px;
+          content: '';
+        }
+      }
+      &-checkbox {
+        display: none;
+        &:checked + .order__form-label::before {
+          // background-color: #E02C22;
+  
+          background-image: url('../../public/assets/svg/order-checked.svg');
+        }
+      }
+      &-btn {
+        display: block;
+        padding: 12px 20px;
+        max-width: 145px;
+        border-radius: 10px;
+        margin: 0 auto;
+        height: 46px;
+        color: $white-color;
+        font-weight: $fw-700;
+        font-size: $fs-18;
+        line-height: 22px;
+        background-color: #E02C22;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        & a {
+          color: $white-color;
+          font-weight: $fw-700;
+          font-size: $fs-18;
+          line-height: 22px;
+          text-decoration: none;
+        }
+      }
+    }
+    
   }
+  
 }
 
-@media screen and (min-width: 1200px) {
-  .order {
-    display: flex;
-    height: 100vh;
-    padding-top: 60px;
-    &__back {
-      top: 20px;
-      left: 20px;
+@media screen and (max-width: 768px) {
+  .car-page__breadcrumbs.order-sec {
+    margin-left: 0;
+    padding-top: 16px;
+    margin-bottom: 44px;
+    & a {
+      font-size: 12px;
+      line-height: 14px;
     }
+  
+  }
+  .order {
+    
+    &__title-thanks {
+      font-size: 36px;
+      line-height: 44px;
+      margin-bottom: 14px;
+      
+    }
+    &__text {
+      font-size: 16px;
+      line-height: 19px;
+      margin-bottom: 26px;
+    }
+    background-image: url('../../public/assets/images/order428.png');
     &__wrapper {
-      flex: 0 0 50%;
-      padding: 130px 170px 140px 160px;
+      padding: 50px 41px 75px;
     }
-
-    &__img {
-      flex: 0 0 50%;
-      background-image: url('../../public/assets/images/orderBg-dekstop.png');
-    }
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .order {
     &__title {
-      font-size: $fs-34;
+      font-size: 36px;
+      line-height: 44px;
+      margin-bottom: 17px;
     }
+    &__form {
+      width: 346px;
+      padding: 21px 30px 30px;
+      margin: 0 auto;
+      &__line-start {
+        height: 2px;
+        width: 30px;
+        border-radius: 10px;
+        margin-right: 7px;
+        margin-bottom: 4%;
+      }
+      &__line-end {
+        height: 2px;
+        width: 90px;
+        border-radius: 10px;
+        margin-left: 14px;
+        margin-bottom: 4%;
+      }
+      &__input-wrapper {
+        margin-bottom: 24px;
+      }
+      &__thumb {
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+      &-input {
+        font-size: 14px;
+        line-height: 16px;
+        cursor: pointer;
+        &::placeholder {
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+      &-checkbox-wrappers {
+        display: block;
+        margin-bottom: 30px;
+      }
+      &-checkbox-wrapper {
+        &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+      &-label {
+        font-size: $fs-14;
+        line-height: 16px;
+        cursor: pointer;
+        
+        &::before {
+          margin-right: 14px;
+        }
+      }
+      &-btn {
+        display: block;
+        padding: 10px 20px;
+        max-width: 120px;
+        margin: 0;
+        height: 100%;
+        font-size: $fs-14;
+        line-height: 17px;
+      }
+    }
+    
+  }
+}
+
+@media screen and (max-width: 427px) {
+  .car-page__breadcrumbs.order-sec {
+    margin-bottom: 24px;
+    & a {
+      font-size: 10px;
+      line-height: 12px;
+    }
+  
+  }
+  .order {
+    &__title-thanks {
+      font-size: 30px;
+      line-height: 36px;
+      margin-bottom: 6px;
+    }
+    &__text {
+      font-size: 12px;
+      line-height: 14px;
+      margin-bottom: 24px;
+    }
+    background-image: url('../../public/assets/images/order375.png');
     &__wrapper {
-      padding: 345px 305px 345px 215px;
+      padding: 50px 43px 75px;
+    }
+    &__title {
+      font-size: 30px;
+      line-height: 36px;
+      margin-bottom: 20px;
+    }
+    &__form {
+      width: 100%;
+      padding: 21px 30px 30px;
+      margin: 0 auto;
+      &__line-start {
+        width: 17px;
+        margin-right: 5px;
+      }
+      &__line-end {
+        width: 66px;
+        margin-left: 10px;
+      }
+      &__input-wrapper {
+        margin-bottom: 24px;
+      }
+      &__thumb {
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+      &-input {
+        font-size: 12px;
+        line-height: 14px;
+        &::placeholder {
+          font-size: 12px;
+          line-height: 14px;
+        }
+      }
+      &-checkbox-wrappers {
+        display: block;
+        margin-bottom: 24px;
+      }
+      &-checkbox-wrapper {
+        &:not(:last-child) {
+        margin-bottom: 14px;
+      }
+    }
+      &-label {
+        font-size: $fs-12;
+        line-height: 14px;
+        
+        &::before {
+          margin-right: 16px;
+        }
+      }
+      &-btn {
+        padding: 9px 14px;
+        width: 100%;
+        margin: 0;
+        font-size: $fs-12;
+        line-height: 14px;
+      }
+    }
+    
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .car-page__breadcrumbs.order-sec {
+    margin-left: 15%;
+    padding-top: 50px;
+    margin-bottom: 234px;
+    & a {
+      font-size: 16px;
+      line-height: 18px;
+      color: #E0E0E0;
+      
+    }
+  
+  }
+  .order {
+    overflow-y: scroll;
+    &__title-thanks {
+      font-size: 70px;
+      line-height: 85px;
+      margin-bottom: 20px;
+    }
+    &__text {
+        font-size: 26px;
+        line-height: 31px;
+        margin-bottom: 50px;
+    }
+    background-image: url('../../public/assets/images/order3842.png');
+    &__wrapper {
+      position: relative;
+      padding: 65px 15px 75px;
+    }
+    &__title {
+      font-size: 70px;
+      line-height: 84px;
+      margin-bottom: 33px;
+    }
+    &__form {
+      width: 762px;
+      padding: 42px 88px 50px;
+      margin-left: 20%;
+      &__line-start {
+        display: inline-block;
+        height: 8px;
+        width: 81px;
+        background-color: #E02C22;
+        border-radius: 10px;
+        margin-right: 19px;
+        margin-bottom: 3%;
+      }
+      &__line-end {
+        display: inline-block;
+        height: 8px;
+        width: 160px;
+        background-color: #E02C22;
+        border-radius: 10px;
+        margin-left: 29px;
+        margin-bottom: 3%;
+      }
+      &__input-wrapper {
+        margin-bottom: 50px;
+      }
+      &__thumb {
+        &:not(:last-child) {
+          margin-bottom: 14px;
+        }
+      }
+      &-input {
+        padding: 22px 30px;
+        font-size: 22px;
+        line-height: 25px;
+        cursor: pointer;
+        &::placeholder {
+          font-size: 22px;
+        line-height: 25px;
+        }
+      }
+      &-checkbox-wrappers {
+        display: flex;
+        margin-bottom: 50px;
+      }
+  
+      &-label {
+        font-size: $fs-22;
+        line-height: 25px;
+        & span {
+          display: block;
+        }
+        &::before {
+          min-width: 30px;
+          height: 30px;
+          margin-right: 26px;
+          content: '';
+        }
+      }
+    
+      &-btn {
+        padding: 18px 34px;
+        max-width: 100%;
+        margin: 0 auto;
+        height: 100%;
+        font-size: $fs-20;
+        line-height: 24px;
+      }
     }
   }
+}
+
+@media screen and (max-width: 374px) {
+  .car-page__breadcrumbs.order-sec {
+    margin-bottom: 34px;
+    }
+  .order {
+    
+    background-image: url('../../public/assets/images/order320.png');
+    &__wrapper {
+      padding: 50px 16px 75px;
+    }
+    &__title {
+      margin-bottom: 20px;
+    }
+    &__form {
+      padding: 27px 24px 24px;
+      &__line-start {
+        width: 15px;
+        margin-right: 4px;
+      }
+      &__line-end {
+        width: 66px;
+        margin-left: 10px;
+      }
+  }
+}
 }

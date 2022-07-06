@@ -17,6 +17,7 @@ export type FilterTableProps = {
   setPage: Dispatch<SetStateAction<number>>
   transport: string
   brandModels?: string[]
+  mobileActive?: boolean
 }
 
 export interface IFilter {

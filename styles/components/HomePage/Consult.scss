@@ -1,27 +1,35 @@
 .consult {
   position: relative;
-  margin-top: 70px;
+  padding: 96px 0;
   overflow: hidden;
+  background-color: $white-color;
   & a {
     text-decoration: none;
   }
   &__wrapper {
-    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__inner {
+    width: 505px;
+    margin-right: 77px;
   }
   &__title {
-    color: #1f181a;
-    font-weight: $fw-800;
-    font-size: $fs-23;
-    line-height: 150%;
-    & span {
-      color: #a1231b;
-    }
+    color: #000000;
+    font-weight: $fw-700;
+    font-size: $fs-32;
+    line-height: 40px;
+    font-weight: 700;
+    margin-bottom: 24px;
   }
   &__text {
     margin-top: 20px;
-    color: #1f181a;
-    font-size: $fs-17;
-    line-height: 150%;
+    color: #000000;
+    font-size: $fs-18;
+    line-height: 25px;
+    font-weight: 400;
+    margin-bottom: 40px;
   }
   &__click {
     display: flex;
@@ -42,15 +50,14 @@
     width: 100%;
     max-width: 215px;
     height: 45px;
-    margin-top: 20px;
     color: $white-color;
     font-weight: $fw-800;
     font-size: $fs-12;
     line-height: 24px;
     text-transform: uppercase;
-    background: linear-gradient(91.77deg, #df453c 0.88%, #c93830 99.34%);
+    background: #E02C22;
     border: none;
-    border-radius: 2px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
   }
@@ -58,24 +65,21 @@
 
 @media screen and(min-width:768px) {
   .consult {
-    margin: 90px 0;
     &__title {
       font-size: $fs-25;
     }
 
     &__wrapper {
       display: flex;
-      padding: 0 30px;
     }
     &__inner {
-      max-width: 350px;
+      // max-width: 350px;
     }
   }
 }
 
 @media screen and(min-width:1200px) {
   .consult {
-    margin: 90px 0;
     overflow: unset;
     &__title {
       font-size: $fs-27;
@@ -84,10 +88,9 @@
       font-size: $fs-18;
     }
     &__wrapper {
-      padding: 0 65px;
     }
     &__inner {
-      max-width: 470px;
+      // max-width: 470px;
     }
   }
 }
@@ -95,7 +98,74 @@
 @media screen and (min-width: 1800px) {
   .consult {
     &__inner {
-      max-width: 890px;
+      max-width: 505px;
     }
   }
+}
+
+
+@media screen and (max-width: 1200px)  {
+  .consult {
+    padding: 80px 32px;
+    &__wrapper {
+      display: block;
+    }
+    &__inner {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__title {
+      margin-bottom: 16px;
+    }
+    
+    &__click {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      &-text {
+        margin-right: 15px;
+        color: #1f181a;
+        font-weight: $fw-600;
+        font-size: $fs-22;
+        line-height: 150%;
+      }
+    }
+    &__btn {
+      margin-bottom: 64px;
+    }
+  }
+  
+  
+}
+
+@media screen and (max-width: 768px)  {
+  .consult {
+    padding: 64px 16px;
+    
+    &__inner {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__title {
+      margin-bottom: 16px;
+      font-size: 26px;
+      line-height: 32px;
+    }
+    
+    &__click {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      &-text {
+        margin-right: 15px;
+        color: #1f181a;
+        font-weight: $fw-600;
+        font-size: $fs-22;
+        line-height: 150%;
+      }
+    }
+    &__btn {
+      margin-bottom: 54px;
+    }
+  }  
 }
