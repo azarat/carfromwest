@@ -326,22 +326,22 @@ const carFeatures = [
   },
   {
     id: 66,
-    eng: 'Right side',
+    eng: 'Right Side',
     ua: 'Права сторона',
   },
   {
     id: 67,
-    eng: 'Right front',
+    eng: 'Right Front',
     ua: 'Права передня частина',
   },
   {
     id: 68,
-    eng: 'Right rear',
+    eng: 'Right Rear',
     ua: 'Права задня частина',
   },
   {
     id: 69,
-    eng: 'Storm damage',
+    eng: 'Storm Damage',
     ua: 'Пошкодження ураганом',
   },
   {
@@ -356,27 +356,27 @@ const carFeatures = [
   },
   {
     id: 72,
-    eng: 'burn-interior',
+    eng: 'Burn - Interior',
     ua: 'Пожежа - інтер’єр',
   },
   {
     id: 73,
-    eng: 'burn-exterior',
+    eng: 'Burn - Exterior',
     ua: 'Пожежа - екстер’єр',
   },
   {
     id: 74,
-    eng: 'burn-engine',
+    eng: 'Burn - Engine',
     ua: 'Пожежа - двигун',
   },
   {
     id: 75,
-    eng: 'burn - total',
+    eng: 'Burn - Total',
     ua: 'Пожежа - все авто',
   },
   {
     id: 76,
-    eng: 'burn',
+    eng: 'Burn',
     ua: 'Пожежа',
   },
   {
@@ -396,7 +396,7 @@ const carFeatures = [
   },
   {
     id: 80,
-    eng: 'Minor Dent/scratches',
+    eng: 'Minor Dent%2Fscratches',
     ua: 'Невеликі подряпини і вм’ятини',
   },
   {
@@ -406,13 +406,13 @@ const carFeatures = [
   },
   {
     id: 82,
-    eng: 'Left side',
+    eng: 'Left Side',
     ua: 'Ліва сторона',
   },
   { 
     id: 83,
-    eng: 'Історія пошкоджень', 
-    ua: 'damage history' 
+    eng: 'Damage History', 
+    ua: 'Історія пошкоджень' 
   }, 
   
 ]

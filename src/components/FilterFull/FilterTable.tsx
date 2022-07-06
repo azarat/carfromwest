@@ -11,8 +11,9 @@ import SpeedSVG from '../../assets/svg/speed.svg'
 // import FilterSVG from '../../assets/svg/filter_1.svg'
 import CloseSVG from '../../assets/svg/times.svg'
 // Constants
-import { years, gas, transmissions, driveLineTypes, primaryDamage, condition } from '../../constants/filter'
+import { years, gas, transmissions, driveLineTypes, condition } from '../../constants/filter'
 import { acceptedBodyStyles } from '../../constants/bodyStyles'
+import carFeatures from '../../constants/carFeatures'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
@@ -47,6 +48,20 @@ const FilterTable: React.FC<FilterTableProps> = ({
   // console.log('isLoading', isLoading);
   // console.log(bodyStyles);
   
+  const filterPrimaryDamage = (carFeatures: any) => {
+    const filteredDamages = carFeatures.filter((v: any)=>{
+      return (v.id >= 58 && v.id <= 83)
+    })
+
+    const mappedDamages = filteredDamages.map((v: any)=>{
+      return {
+        label: v.ua,
+        value: v.eng
+      }
+    })
+
+    return mappedDamages
+  }
 
   const router = useRouter()
 
@@ -73,7 +88,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
       }
     })
 
-    console.log(mapedBodyStyles);
+    // console.log(mapedBodyStyles);
     
 
     return mapedBodyStyles
@@ -451,7 +466,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 <Field
                   name={'primaryDamage'}
                   component={SelectTransmission}
-                  options={primaryDamage}
+                  options={filterPrimaryDamage(carFeatures)}
                   placeholder="Оберіть пошкодження"
                   filter='primaryDamage'
                 />
