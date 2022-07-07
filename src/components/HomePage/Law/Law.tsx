@@ -8,7 +8,7 @@ const Law: React.FC = () => {
       <div className="law__text">
         <h2 className='law__title'>ТЕПЕР АВТО З США ЩЕ ВИГІДНІШЕ!</h2>
         <div className="law__description">
-        <p>В Україні діє закон про <span className='law__description-bold'>безкоштовне розмитнення гібридних авто та електромобілів.</span> І цей закон не планують відміняти! </p>
+        <p>В Україні діє закон про <span className='law__description-bold'>безкоштовне розмитнення електромобілів.</span> І цей закон не планують відміняти! </p>
           <p>
             Вигідне авто з США і ніяких проблем з пошуками палива!
           </p>

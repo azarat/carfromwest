@@ -1,8 +1,8 @@
 const CatalogGridEmpty = (): JSX.Element => {
   return (
     <>
-      <h2 className="catalog-grid__title">По результатам поиска ничего не найдено</h2>
-      <h2 className="catalog-grid__subtitle">Попробуйте ввести другие параметры для поиска</h2>
+      <h2 className="catalog-grid__title">ЗА РЕЗУЛЬТАТАМИ ПОШУКУ НІЧОГО НЕ ЗНАЙДЕНО</h2>
+      <h2 className="catalog-grid__subtitle">СПРОБУЙТЕ ВВЕСТИ ІНШІ ПАРАМЕНТРИ ДЛЯ ПОШУКУ</h2>
     </>
   )
 }
