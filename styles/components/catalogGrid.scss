@@ -63,13 +63,15 @@
     &-image {
       width: 100%;
       margin-bottom: 60px;
-      // height: 200px;
-      // border-radius: 10px;
-      // overflow: hidden;
       position: relative;
 
       @media (max-width: 1920px) {
         margin-bottom: 53px;
+      }
+
+      @media (max-width: 1024px) {
+        width: 100%;
+        padding-bottom: 60%;
       }
 
       & img {
