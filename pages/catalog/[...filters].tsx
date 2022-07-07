@@ -19,6 +19,9 @@ import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 import { USER_AGENT } from '../../src/constants/userAgent'
 
+import FilterSVG from '../../src/assets/svg/filter_1.svg'
+
+
 const FiltersPage: NextPage<Partial<ICatalog>> = ({
   currentPage,
   currentParams,
@@ -59,6 +62,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     initialModels.push(models)
   }
   const router = useRouter()
+  const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   // const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
@@ -103,150 +107,44 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     return router.push(`${router.asPath.slice(0, queryIndex)}?sortField=${sortField}&sortDirection=${sortDirection}`)
   }
 
+  const toggleFilter = () => {
+    setActiveMobFilter(!activeMobFilter)
+  }
+
   const vehicle = { items, total } as ICarsFetchTypes
   return (
     <div className="catalog__wrapper">
       <section className="catalog">
-        {/* <FilterFull
-          makes={brands}
-          filter={filter}
-          setFilter={setFilter}
-          open={openFilter}
-          setOpen={setOpenFilter}
-          loading={false}
-        /> */}
         <FilterTable
-          transport={transport as string}
-          filter={currentParams}
-          setFilter={setFilter}
-          loading={false}
-          setPage={setPage}
-          makes={brands}
-          brandModels={brandModels}
-        />
+            transport={transport as string}
+            filter={currentParams}
+            setFilter={setFilter}
+            loading={false}
+            setPage={setPage}
+            makes={brands}
+            brandModels={brandModels}
+            mobileActive={activeMobFilter}
+          />
         <div className="catalog__filters-wrapper">
-          <CatalogSearch loading={false} handleSearch={handleSearch} />
           <FilterField
             loading={false}
             // setOpen={setOpenFilter}
             filter={filter}
             setFilter={setFilter}
           />
-          <CatalogSort
-            handleSort={handleSort}
-            filter={filter}
-            loading={false}
-          />
-          {/*TODO: Implements filters*/}
-          {/* <div className="filter-field__grid">
-            <div className="filter-field__grid-list">
-              {Object.keys(currentParams)
-                .filter((key) => {
-                  if (
-                    [
-                      'sortField',
-                      'sortDirection',
-                      'auctions',
-                      'vehicleType',
-                      'bodyStyles',
-                      'countries',
-                      'page',
-                      'itemsPerPage',
-                      'includeFilters',
-                    ].includes(key)
-                  )
-                    return false
-                  if (Array.isArray(currentParams[key])) return currentParams[key].length > 0
-                  return !!currentParams[key]
-                })
-                .map((key) => {
-                 key)
-                  let title = currentParams[key]
-                  if (key === 'type')
-                    title = vehicleTypes.filter(
-                      (val) => val.value === filter[key]
-                    )[0].title
-                  if (key === 'fuelType')
-                    title =
-                      gas.find((val) => val.value === currentParams.fuelType)?.label ||
-                      ''
-                  if (
-                    key === 'engineCapacities' &&
-                    currentParams.engineCapacities?.length
-                  )
-                    title = `${currentParams.engineCapacities[0]} - ${currentParams.engineCapacities[
-                      currentParams.engineCapacities.length - 1
-                    ]
-                      }`
+          <CatalogSearch loading={false} handleSearch={handleSearch} />
+          <div className='catalog-sort-wrap'>
+            <button className='mobile-filter-btn' onClick={toggleFilter}>
+              <FilterSVG />
+              Фільтр
+            </button>
 
-                  if (key === 'transmissionTypes')
-                    title = transmissions.filter(
-                      (val) =>
-                        currentParams.transmissionTypes?.length &&
-                        val.value === currentParams.transmissionTypes[0]
-                    )[0]?.label
-                  if (/^year_min$/.test(key)) title = `c ${title}`
-                  else if (/_min$/.test(key) || key === 'Price')
-                    title = `от ${title}`
-                  if (/_max$/.test(key)) title = `до ${title}`
-                  if (/^Price/.test(key)) title = `${title}$`
-                  if (/^year/.test(key)) title = `${title}г.`
-                  if (/^engine/.test(key)) title = `${title}л.`
-
-                  return (
-                    <div key={title} className="filter-field__grid-item">
-                      <div className="filter-field__grid-item-text">
-                        {title}
-                      </div>
-                      <button
-                        disabled={false}
-                        className="filter-field__grid-item-delete"
-                        onClick={() => {
-                          setFilter(
-                            Object.keys(currentParams)
-                              .filter((k) => !!currentParams[k] && k !== key)
-                              .reduce(
-                                (obj, key) =>
-                                  Object.assign(obj, { [key]: currentParams[key] }),
-                                {}
-                              ) as IFilter
-                          )
-                        }}
-                      />
-                    </div>
-                  )
-                })}
-            </div>
-            {Object.keys(filter).filter((key) => {
-              if (
-                [
-                  'sortField',
-                  'sortDirection',
-                  'auctions',
-                  'vehicleType',
-                  'bodyStyles',
-                  'countries',
-                  'page',
-                  'itemsPerPage',
-                  'includeFilters',
-                ].includes(key)
-              )
-                return false
-              if (Array.isArray(filter[key])) return filter[key].length > 0
-              return !!filter[key]
-            }).length > 0 && (
-                <button
-                  className="filter-field__grid-item filter-field__grid-item--reset"
-                  onClick={() => {
-                    setFilter({})
-                    router.push({ query: {} })
-                    setPage(1)
-                  }}
-                >
-                  Сбросить фильтры
-                </button>
-              )}
-          </div> */}
+            <CatalogSort
+              handleSort={handleSort}
+              filter={filter}
+              loading={false}
+            />
+          </div>
         </div>
 
         <CatalogGrid loading={false} cars={vehicle}>
@@ -257,27 +155,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
-  // const apiFields = [
-  //   "auctions", 
-  //   "bodyStyles", 
-  //   "damageTypes", 
-  //   "engineCapacities", 
-  //   "engineCylinders", 
-  //   "fuelTypes", 
-  //   "drivelineTypes", 
-  //   "makes", 
-  //   "models", 
-  //   "trims", 
-  //   "saleDocumentsGroups", 1 2 3 4
-  //   "transmissionTypes", 
-  //   "vehicleTypes", 
-  //   "locations", 
-  //   "vehicleConditions", 
-  //   "features", 
-  //   "countries"
-  // ];
-  
+export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {  
   const transportParam = ((query?.filters || []) as string[]).find(f => f.includes('transport-is-'))
   const brandParam = ((query?.filters || []) as string[]).find(f => f.includes('brand-is-'))
   const currentParams = Object.keys(aviableParams).reduce(

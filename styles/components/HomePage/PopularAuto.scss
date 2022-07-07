@@ -20,7 +20,7 @@
     .swiper {
       &-container {
         width: 70%;
-        height: 350px;
+        // height: 350px;
         
         margin-right: auto;
         margin-left: auto;
@@ -29,34 +29,41 @@
           // height: 400px;
           overflow: visible;
           margin: 0px 0px 0px 16px;
-          padding: 27px 0px 40px;
-          height: 370px;
+          padding: 70px 0px 40px;
+          // height: 370px;
         }
       }
 
       &-slide {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
         display: flex;
-        -webkit-align-items: center;
         align-items: center;
-        -webkit-justify-content: center;
         justify-content: center;
         font-size: $fs-18;
         text-align: center;
         background: #fff;
         background-position: center;
         background-size: cover;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
+
         @media (max-width: 767px) {
           border-radius: 10px;
           padding: 16px;
           align-items: flex-end;
-          height: 307px
+          // height: 307px;
+          height: auto;
+
+          & > div {
+            height: 100%;
+
+            & > div {
+              height: 100%;
+              // display: flex;
+              // flex-direction: column;
+              // justify-content: space-between;
+
+              display: grid;
+              grid-template-rows: 60px auto;
+            }
+          }
         }
       }
 
@@ -68,8 +75,13 @@
         max-height: 130px;
         object-fit: contain;
         max-width: 100%;
-
-        @media (max-width: 500px) {
+        
+        @media (max-width: 767px) {
+          justify-self: center;
+          width: 100%;
+          align-self: flex-end;
+          max-width: none;
+          height: auto;
         }
       }
       &-button {
@@ -117,6 +129,7 @@
   & .slider-item {
     &__inner {
       cursor: pointer;
+      align-self: flex-end;
     }
     &__name {
       margin-bottom: 10px;
@@ -128,7 +141,7 @@
       cursor: pointer;
 
       @media (max-width: 767px) {
-        font-size: $fs-26;
+        font-size: $fs-25;
         line-height: 32px;
         margin-bottom: 16px;
       }
@@ -209,13 +222,13 @@
     &__desktop-slider-wrapper {
       display: block;
     }
-    &__title {
+    // &__title {
       // max-width: 205px;
       // margin: unset;
       // margin-left: 30px;
       // font-size: $fs-22;
       // text-align: left;
-    }
+    // }
     & .slider-item {
       &__name {
         margin: 10px 0;
@@ -230,6 +243,7 @@
         font-size: $fs-14;
         background-color: #E02C22;
         border-radius: 10px;
+        margin-top: 10px;
       }
     }
   }
@@ -237,15 +251,15 @@
 
 @media screen and (min-width: 1200px) {
   .popular {
-    &::before {
-      // width: 562px;
-    }
-    &__title {
-    }
+    // &::before {
+    //   // width: 562px;
+    // }
+    // &__title {
+    // }
     & .slider-item {
-      &__inner {
-        // padding-bottom: 5px;
-      }
+      // &__inner {
+      //   // padding-bottom: 5px;
+      // }
       &__name,
       &__price {
         font-size: $fs-24;
@@ -255,14 +269,14 @@
 }
 
 @media screen and (min-width: 1800px) {
-  .popular {
-    &::before {
-      // width: 600px;
-    }
-    &__title {
-      // max-width: 380px;
-      // margin-left: 150px;
-      // font-size: $fs-48;
-    }
-  }
+  // .popular {
+  //   // &::before {
+  //   //   // width: 600px;
+  //   // }
+  //   // &__title {
+  //   //   // max-width: 380px;
+  //   //   // margin-left: 150px;
+  //   //   // font-size: $fs-48;
+  //   // }
+  // }
 }

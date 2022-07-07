@@ -45,8 +45,14 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
-  // console.log('isLoading', isLoading);
-  // console.log(bodyStyles);
+
+  const mobileActiveBoolean = (!!mobileActive ? mobileActive : false)
+
+  const [activeMobFilter, setActiveMobFilter] = useState<boolean>(mobileActiveBoolean)
+
+  useEffect(()=>{
+    setActiveMobFilter(mobileActiveBoolean)
+  }, [mobileActive])  
   
   const filterPrimaryDamage = (carFeatures: any) => {
     const filteredDamages = carFeatures.filter((v: any)=>{
@@ -219,6 +225,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   const resetFilters = () => {
     router.push('/catalog')
+    setActiveMobFilter(false)
   }
 
   useEffect(() => {
@@ -260,7 +267,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
         onSubmit={handleSubmit}
         enableReinitialize={true}
       >
-        <Form className={(!!mobileActive && mobileActive == true) ? `active-mobile` : ``}>
+        <Form className={activeMobFilter ? `active-mobile` : ``}>
           <button
             onClick={resetFilters}
             disabled={loading}
