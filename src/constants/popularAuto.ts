@@ -15,7 +15,7 @@ export const popularAuto = [
     name: 'Chevrolet Volt',
     usaPrice: '19000',
     uaPrice: '23000',
-    img: '/assets/images/chevrolet_volt.png',
+    img: '/assets/images/chevrolet_volt_2.png',
     filterParams: {
       makes: 'Chevrolet',
       models: 'Volt',
@@ -59,7 +59,7 @@ export const popularAuto = [
     name: 'Toyota Prius Prime',
     usaPrice: '19000',
     uaPrice: '24000',
-    img: '/assets/images/Toyota_Prius_Prime.png',
+    img: '/assets/images/Toyota_Prius_Prime_2.png',
     filterParams: {
       makes: 'Toyota',
       models: 'Prius Prime',

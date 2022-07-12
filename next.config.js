@@ -10,6 +10,6 @@ module.exports = withReactSvg({
     botKey: '5472641997:AAE1HmY_aL5KSQFZQcR6n1z9f0DNtBQMpfY',
   },
   images: {
-    domains: ["cs.copart.com"],
+    domains: ["cs.copart.com", "cvis.iaai.com"],
   },
 })

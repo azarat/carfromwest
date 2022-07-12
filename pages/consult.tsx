@@ -42,11 +42,11 @@ const Check: NextPage = () => {
 
       const response = await fetch(endpoint, options)
 
-      const result = await response.json()
+      // const result = await response.json()
 
       // console.log(result);
 
-      if (result.status === 200) {
+      if (response.status === 200) {
         setName('')
         setPhone('')
         localStorage.removeItem('url')
