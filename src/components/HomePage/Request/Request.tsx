@@ -88,7 +88,7 @@ const Request: React.FC = () => {
           <Form className="request__info-form">
               <div className="request__info-form-field-wrapper">
               <label className="request__info-form-field"
-            ><span className="request__info-form-field__label">Ваше ім’я {isFormSend ? '1' : '2'}</span>
+            ><span className="request__info-form-field__label">Ваше ім’я</span>
             <span className="request__info-form-field__thumb">
               <Field className="request__info-form-field__input" type="text" name="name" required placeholder='Олександр' />
             </span>
