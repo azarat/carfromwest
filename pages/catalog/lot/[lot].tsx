@@ -124,11 +124,12 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
             </div>
               <div className="car-page__description">
                 <div className="car-page__description-label">Опис</div>
-                <p>Автомобіль має привабливий колір кузова Золото, який добре проглядається на трасі в будь-який час доби.</p>
-                <p>Зазначена ціна лота може варіюватися в залежності від кількості пропозицій покупців.</p>
-                <p>Попередня дата продажу автомобіля призначається продавцем. Визначити участь в аваріях і підтвердити справжній пробіг авто 155 358 км км можна за даними бази Карфакс , після введення VIN коду.</p>
-                <p>Кінцеву ціну лота кожен клієнт може розрахувати за допомогою онлайн-калькулятора на сайті компанії.</p>
-                <p>Щоб отримати детальну інформацію по лоту, його ціною і особливості автомобіля, надішліть запит через форму . Менеджер відповість на всі питання і допоможе оформити замовлення.</p>
+                <p>{`${car.lotInfo.year} ${car.lotInfo.make} ${car.lotInfo.model}`} - його можна замовити з США безпечно з компанією CARSFROMWEST!</p>
+                <p>Цікавить ціна? Наш менеджер зробить детальний прорахунок: ціна за лот, сума застави (10% від аукціонної ціни), аукціонний збір, сума доставки до порту Америки, до порту в Європі, доставка до України, митні збори, вартість послуг брокера та всі платежі з оформлення. Навіть комісію за платежі прораховують!
+                Залиште ваші контакти у формі &quot;ПОРАХУВАТИ ВАРТІСТЬ&quot;</p>
+                <p>З CARSFROMWEST ви точно не купите &quot;кота в мішку&quot;!</p>
+                <p>Ми надаємо все: CAR FAX, експертну оцінку менеджерів з досвідом роботи 5+ років.</p>
+                <p>Якщо хочете дізнатись більше подробиць про лот - натисніть &quot;ОТРИМАТИ КОНСУЛЬТАЦІЮ&quot;</p>
               </div>
 
             <div className="car-page__about">
@@ -216,7 +217,7 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><EngineVolumeSVG />Об'єм двигуна:</span>
+                    <span className="car-page__table-item-title"><EngineVolumeSVG />Об`єм двигуна:</span>
                     <span className="car-page__table-item-description">
                       {matchCarsFeatures(car.specifications.engine?.capacity) || car.specifications.engine?.capacity || 'Н/Д'}
                     </span>
