@@ -1,9 +1,9 @@
 # carsfromwest.com.ua
-#### Frontend Next JS with Typescript on DigitalOcean.
-#### Backend the same Next Js server api handler.
-#### CFW frontend sends request to own API to prepare data.    
-#### CFW API sends request to Express (Node.js framework) on the same DO droplet.
-#### Express is used as proxy to fetch data from api.carsfromwest.com
+ -  Frontend Next JS with Typescript on DigitalOcean.
+ -  Backend the same Next Js server api handler.
+ -  CFW frontend sends request to own API to prepare data.    
+ -  CFW API sends request to Express (Node.js framework) on the same DO droplet.
+ -  Express is used as proxy to fetch data from api.carsfromwest.com
 
 
 #### api.carsfromwest.com is NOT our project, cannot be modified and has no documnetation.
@@ -14,7 +14,7 @@
 
 
 #### CFW Express proxy in DO droplet path is /var/www/html/projects/proxy/
-##### To run as a background service "(node index.js &)"
+ - To run as a background service "(node index.js &)"
 
 
 #### Project uses Yarn packege manager. All dependencies are listed in package.json file.
