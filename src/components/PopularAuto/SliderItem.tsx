@@ -12,8 +12,6 @@ const SliderItem: React.FC<SliderItemProps> = ({
   const { push } = useRouter()
 
   const handleCatalog = (): void => {
-    if (typeof document !== 'undefined') {
-      document.body.scrollIntoView()
 
       let url = '';
       if (filterParams.makes) url += `/brand-is-${filterParams.makes}`
@@ -21,7 +19,6 @@ const SliderItem: React.FC<SliderItemProps> = ({
       if (filterParams.yearMin) url += `/yearStart-is-${filterParams.yearMin}`
 
       push('/catalog' + url)
-    }
   }
 
   return (
