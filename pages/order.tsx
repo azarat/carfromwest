@@ -56,6 +56,7 @@ const Order: NextPage = () => {
         setPhone('')
         // localStorage.removeItem('url')
         setIsFormSend(true)
+        router.push('order/#thankyou')
       }
     }
   }
