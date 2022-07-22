@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { Formik, Form, Field } from 'formik'
+import { useRouter } from 'next/router'
 
 // const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const Request: React.FC = () => {
   const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  const router = useRouter()
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     const {
@@ -36,6 +38,7 @@ const Request: React.FC = () => {
     // const result = await response.json()
 
     if (response.status === 200) {
+      router.push('/#thankyou')
       localStorage.removeItem('url')
       setIsFormSend(true)
     }
