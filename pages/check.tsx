@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import React, { MouseEventHandler, useState } from 'react'
 // import InputMask from 'react-input-mask'
 import Link from 'next/link'
+import router from 'next/router'
 
 // const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
@@ -52,6 +53,7 @@ const Check: NextPage = () => {
         setPhone('')
         localStorage.removeItem('url')
         setIsFormSend(true)
+        router.push('/check/#thankyou')
       }
     }
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -11,18 +11,20 @@ import 'swiper/components/thumbs/thumbs.min.css'
 import SwiperCore, { Navigation, Thumbs } from 'swiper/core'
 import SliderItem from './SliderItem'
 import { popularAuto } from '../../constants/popularAuto'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+// import { useRouter } from 'next/router'
+import Spinner from '../Spinner/Spinner'
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs])
 
 export const PopularSlider: React.FC = () => {
-  const { push } = useRouter()
+  // const { push } = useRouter()
   // const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null)
+  const [isLoading, setLoading] = useState(false)
 
   return (
     <>
+      <div className={`filter-spinner valigned${isLoading ? ' loading' : ''}`}><Spinner /></div>
       <Swiper
         spaceBetween={16}
         loop
@@ -36,14 +38,10 @@ export const PopularSlider: React.FC = () => {
       >
         {popularAuto.map(({ name, uaPrice, usaPrice, img, filterParams }) => {
           return (
-            <Link key={name} href={{}}>
-              <SwiperSlide className="auto-slide">
-                <div
-                  role="presentation"
-                  onClick={() => {
-                    push('/catalog', { query: filterParams })
-                  }}
-                >
+              <SwiperSlide className="auto-slide" key={name}>
+                <div onClick={()=>{
+                  setLoading(true)
+                  }}>
                   <SliderItem
                     name={name}
                     uaPrice={uaPrice}
@@ -53,7 +51,6 @@ export const PopularSlider: React.FC = () => {
                   />
                 </div>
               </SwiperSlide>
-            </Link>
           )
         })}
       </Swiper>

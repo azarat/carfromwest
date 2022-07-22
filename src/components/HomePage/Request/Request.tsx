@@ -6,7 +6,6 @@ import { Formik, Form, Field } from 'formik'
 
 const Request: React.FC = () => {
   const [isFormSend, setIsFormSend] = useState<boolean>(false)
-  // const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     const {

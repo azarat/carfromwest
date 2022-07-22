@@ -1,35 +1,70 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import Image from 'next/image'
-import { Formik } from 'formik'
 // import InputMask from 'react-input-mask'
-import { useRouter } from 'next/router'
+import { Formik, Form, Field } from 'formik'
+import Link from 'next/link'
 
-const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
+// const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const RequestBottom: React.FC = () => {
-  const router = useRouter()
+  const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  
+  const handleSubmit = async (values: any, { resetForm }: any) => {
+    const {
+      name,
+      phone,
+      wishes
+    } = values;
 
-  const sendRequest = async (values: any): Promise<void> => {
-    const res = await fetch(
-      'https://admin.webrains.studio/sendCFWLandingMessage',
-      {
-        method: 'POST',
+    const data = {
+      title: 'Форма: Підібрати краще авто',
+      name,
+      phone,
+      wishes
+    };
 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...values,
-          initialLink: sessionStorage
-            ? sessionStorage.getItem('initialLink')
-            : false,
-        }),
-      }
-    )
-    if (res) {
-      await router.push('/thanks')
+    const JSONdata = JSON.stringify(data)
+    const endpoint = '/api/tg_bot'
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSONdata
     }
+
+    const response = await fetch(endpoint, options)
+    // const result = await response.json()
+
+    if (response.status === 200) {
+      localStorage.removeItem('url')
+      setIsFormSend(true)
+    }
+
+    resetForm({})
   }
+  // const sendRequest = async (values: any): Promise<void> => {
+  //   const res = await fetch(
+  //     'https://admin.webrains.studio/sendCFWLandingMessage',
+  //     {
+  //       method: 'POST',
+
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         ...values,
+  //         initialLink: sessionStorage
+  //           ? sessionStorage.getItem('initialLink')
+  //           : false,
+  //       }),
+  //     }
+  //   )
+  //   if (res) {
+  //     await router.push('/thanks')
+  //   }
+  // }
 
   return (
     <section className="requestBottom">
@@ -40,98 +75,73 @@ const RequestBottom: React.FC = () => {
             Заповніть форму, аби ми зв`язались з Вами та підібрали автомобіль, який ми можемо привезти із США для вас з економією в 40%.
         </div>
         </div>
-        <Formik
-          initialValues={{ name: '', phone: '', wishes: '' }}
-          validate={(values) => {
-            const errors: any = {}
-            if (!values.name) {
-              errors.name = 'Обязательное поле'
-            }
-            if (!values.phone) {
-              errors.phone = 'Обязательное поле'
-            } else if (!numberRegEpx.test(values.phone)) {
-              errors.phone = 'Не правильно введен номер'
-            }
-            return errors
-          }}
-          onSubmit={(values, { resetForm }) => {
-            sendRequest(values)
-            resetForm({})
-          }}
-        >
-          {/* {({ values, touched, handleSubmit, handleChange, errors }) => (*/}
-          {({ handleSubmit }) => (
-            <form onSubmit={handleSubmit} className="requestBottom__info-form">
-              {/* <div className="request__info-form-input--wrapper">
-                <input
-                  name="name"
-                  id="request-name"
-                  type="text"
-                  className="request__info-form-input"
-                  value={values.name}
-                  onChange={handleChange}
-                />
-                {values.name.length === 0 && (
-                  <label htmlFor="request-name">Введите ваше имя</label>
-                )}
-                {errors.name && touched.name && (
-                  <p className="request__info-form-input-error">
-                    {errors.name}
-                  </p>
-                )}
-              </div>
-              <div className="request__info-form-input--wrapper">
-                <InputMask
-                  name="phone"
-                  value={values.phone}
-                  onChange={handleChange}
-                  className="request__info-form-input"
-                  mask="+380\(99) 999-99-99"
-                  alwaysShowMask
-                />
-                {errors.phone && touched.phone && (
-                  <p className="request__info-form-input-error">
-                    {errors.phone}
-                  </p>
-                )}
-              </div>
-              <div className="request__info-form-input--wrapper request__info-form-textarea--wrapper">
-                <textarea
-                  name="wishes"
-                  id="request-text"
-                  className="request__info-form-textarea"
-                  value={values.wishes}
-                  onChange={handleChange}
-                />
-                {values.wishes.length === 0 && (
-                  <label htmlFor="request-text">Введите ваши пожелания</label>
-                )}
-              </div> */}
+        {isFormSend ? <form className="order__form">
+            <h1 className="order__title-thanks">ДЯКУЄМО
+            ЗА ЗАЯВКУ<span className='order__form-title'>!</span></h1>
+            <p className='order__text'>Наш менеджер зв’яжеться з Вами в найближчий час</p>
+            <button className="order__form-btn" onClick={()=>setIsFormSend(false)}>
+            <Link href="/">
+                      <a>
+                        На головну 
+                      </a>
+                    </Link>
+              </button>
+          </form>
+            : 
+          <Formik
+            initialValues={{ name: '', phone: '', wishes: '' }}
+            validate={(values) => {
+              const errors: any = {}
+              if (!values.name) {
+                errors.name = 'Обязательное поле'
+              }
+              if (!values.phone) {
+                errors.phone = 'Обязательное поле'
+              } 
+              // else if (!numberRegEpx.test(values.phone)) {
+              //   errors.phone = 'Не правильно введен номер'
+              // }
 
+              return errors
+            }}
+            onSubmit={handleSubmit}
+          >
+          <Form className="requestBottom__info-form">
               <div className="requestBottom__info-form-field-wrapper">
               <label className="requestBottom__info-form-field"
             ><span className="requestBottom__info-form-field__label">Ваше ім’я</span>
             <span className="requestBottom__info-form-field__thumb">
-              <input className="requestBottom__info-form-field__input" type="text" name="username" required placeholder='Олександр' />
+              <Field className="requestBottom__info-form-field__input" type="text" name="name" required placeholder='Олександр' />
             </span>
           </label>
           <label className="requestBottom__info-form-field"
             ><span className="requestBottom__info-form-field__label">Номер телефону</span>
             <span className="requestBottom__info-form-field__thumb">
-              <input className="requestBottom__info-form-field__input" type="text" name="username" required placeholder='+380 (__) __ __ __'/>
+              <Field className="requestBottom__info-form-field__input" type="text" name="phone" required placeholder='+380 (__) __ __ __'/>
             </span>
           </label>
           <label className="requestBottom__info-form-field form-field--textarea"
             ><span className="requestBottom__info-form-field__label">Коментар:</span>
-            <textarea className="requestBottom__info-form-field__textarea" name="comment" placeholder="Введіть Ваші побажання"></textarea>
+            <Field name="wishes">
+              {({field}: any) => {
+                return (
+                  <textarea 
+                    value={field.value}
+                    onChange={field.onChange}
+                    name="wishes"
+                    className="requestBottom__info-form-field__textarea" 
+                    placeholder="Введіть Ваші побажання"></textarea>
+                );
+              }}
+            </Field>
           </label>
           </div>
               <button className="requestBottom__info-form-button" type="submit">
                 Підібрати краще авто
               </button>
-            </form>
-          )}
+          </Form>
         </Formik>
+        }
       </div>
       {/* <div className="request__image">
         <h4 className="request__image-title">CARSFROMWEST</h4>

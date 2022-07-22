@@ -108,6 +108,7 @@
         }
       }
       &-pagination {
+        z-index: -1;
         &-bullet {
           position: relative;
           margin: 0 8px !important;
