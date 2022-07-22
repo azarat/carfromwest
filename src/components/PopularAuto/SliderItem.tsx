@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import { SliderItemProps } from './Types'
+import Spinner from '../Spinner/Spinner'
 
 const SliderItem: React.FC<SliderItemProps> = ({
   name,
@@ -9,22 +10,25 @@ const SliderItem: React.FC<SliderItemProps> = ({
   img,
   filterParams,
 }) => {
+  
+  const [isLoading, setLoading] = useState(false)
   const { push } = useRouter()
 
   const handleCatalog = (): void => {
-
       let url = '';
       if (filterParams.makes) url += `/brand-is-${filterParams.makes}`
       if (filterParams.models) url += `/model-is-${filterParams.models}`
       if (filterParams.yearMin) url += `/yearStart-is-${filterParams.yearMin}`
-
+      setLoading(true)
       push('/catalog' + url)
   }
 
   return (
     <div role="presentation" className="slider-item" onClick={handleCatalog}>
+      <div className={`filter-spinner valigned${isLoading ? ' loading' : ''}`}><Spinner /></div>
       <img src={img} alt="car-full" className="slider-item__img" />
       <div className="slider-item__inner">
+      
         <p className="slider-item__name">{name}</p>
         <p className="slider-item__price">
            {usaPrice}$ з США з ремонтом
