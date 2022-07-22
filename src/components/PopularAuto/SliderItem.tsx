@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React from 'react'
 import { SliderItemProps } from './Types'
-import Spinner from '../Spinner/Spinner'
+// import Spinner from '../Spinner/Spinner'
 
 const SliderItem: React.FC<SliderItemProps> = ({
   name,
@@ -11,7 +11,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
   filterParams,
 }) => {
   
-  const [isLoading, setLoading] = useState(false)
+  // const [isLoading, setLoading] = useState(false)
   const { push } = useRouter()
 
   const handleCatalog = (): void => {
@@ -19,13 +19,12 @@ const SliderItem: React.FC<SliderItemProps> = ({
       if (filterParams.makes) url += `/brand-is-${filterParams.makes}`
       if (filterParams.models) url += `/model-is-${filterParams.models}`
       if (filterParams.yearMin) url += `/yearStart-is-${filterParams.yearMin}`
-      setLoading(true)
+      // setLoading(true)
       push('/catalog' + url)
   }
 
   return (
     <div role="presentation" className="slider-item" onClick={handleCatalog}>
-      <div className={`filter-spinner valigned${isLoading ? ' loading' : ''}`}><Spinner /></div>
       <img src={img} alt="car-full" className="slider-item__img" />
       <div className="slider-item__inner">
       
