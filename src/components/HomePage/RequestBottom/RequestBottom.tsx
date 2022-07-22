@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 // import Image from 'next/image'
 // import InputMask from 'react-input-mask'
-import { useRouter } from 'next/router'
 import { Formik, Form, Field } from 'formik'
 import Link from 'next/link'
 
-const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
+// const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const RequestBottom: React.FC = () => {
-  const router = useRouter()
   const [isFormSend, setIsFormSend] = useState<boolean>(false)
   
   const handleSubmit = async (values: any, { resetForm }: any) => {
