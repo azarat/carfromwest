@@ -12,7 +12,7 @@ const Check: NextPage = () => {
   const [name, setName] = useState<string>('')
   const [phone, setPhone] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
-  const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  const [isFormSend, setIsFormSend] = useState<boolean>(true)
   // const router = useRouter()
 
   const handleSend: MouseEventHandler = async (e) => {
@@ -53,7 +53,7 @@ const Check: NextPage = () => {
         setPhone('')
         localStorage.removeItem('url')
         setIsFormSend(true)
-        router.push('/check/#thankyou')
+        router.push('/thankyou')
       }
     }
   }
