@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import Link from 'next/link'
+import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import { useRouter } from 'next/router'
 
 // const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const Request: React.FC = () => {
-  const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  // const [isFormSend, setIsFormSend] = useState<boolean>(false)
   const router = useRouter()
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
@@ -40,7 +39,6 @@ const Request: React.FC = () => {
     if (response.status === 200) {
       router.push('/thankyou')
       localStorage.removeItem('url')
-      setIsFormSend(true)
     }
 
     resetForm({})
@@ -56,19 +54,6 @@ const Request: React.FC = () => {
         </div>
         </div>
 
-        {isFormSend ? <form className="order__form">
-            <h1 className="order__title-thanks">ДЯКУЄМО
-            ЗА ЗАЯВКУ<span className='order__form-title'>!</span></h1>
-            <p className='order__text'>Наш менеджер зв’яжеться з Вами в найближчий час</p>
-            <button className="order__form-btn" onClick={()=>setIsFormSend(false)}>
-            <Link href="/">
-                      <a>
-                        На головну 
-                      </a>
-                    </Link>
-              </button>
-          </form>
-            : 
           <Formik
             initialValues={{ name: '', phone: '', wishes: '' }}
             validate={(values) => {
@@ -122,7 +107,6 @@ const Request: React.FC = () => {
               </button>
           </Form>
         </Formik>
-        }
       </div>
     </section>
   )

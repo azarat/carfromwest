@@ -1,14 +1,9 @@
-import React, { useState } from 'react'
-// import Image from 'next/image'
-// import InputMask from 'react-input-mask'
+import React from 'react'
 import { Formik, Form, Field } from 'formik'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
 
 const RequestBottom: React.FC = () => {
-  const [isFormSend, setIsFormSend] = useState<boolean>(false)
   const router = useRouter()
   
   const handleSubmit = async (values: any, { resetForm }: any) => {
@@ -37,12 +32,10 @@ const RequestBottom: React.FC = () => {
     }
 
     const response = await fetch(endpoint, options)
-    // const result = await response.json()
 
     if (response.status === 200) {
       router.push('/thankyou')
       localStorage.removeItem('url')
-      setIsFormSend(true)
     }
 
     resetForm({})
@@ -78,19 +71,7 @@ const RequestBottom: React.FC = () => {
             Заповніть форму, аби ми зв`язались з Вами та підібрали автомобіль, який ми можемо привезти із США для вас з економією в 40%.
         </div>
         </div>
-        {isFormSend ? <form className="order__form">
-            <h1 className="order__title-thanks">ДЯКУЄМО
-            ЗА ЗАЯВКУ<span className='order__form-title'>!</span></h1>
-            <p className='order__text'>Наш менеджер зв’яжеться з Вами в найближчий час</p>
-            <button className="order__form-btn" onClick={()=>setIsFormSend(false)}>
-            <Link href="/">
-                      <a>
-                        На головну 
-                      </a>
-                    </Link>
-              </button>
-          </form>
-            : 
+       
           <Formik
             initialValues={{ name: '', phone: '', wishes: '' }}
             validate={(values) => {
@@ -144,7 +125,6 @@ const RequestBottom: React.FC = () => {
               </button>
           </Form>
         </Formik>
-        }
       </div>
       {/* <div className="request__image">
         <h4 className="request__image-title">CARSFROMWEST</h4>
