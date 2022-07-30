@@ -40,7 +40,7 @@ const RequestBottom: React.FC = () => {
     // const result = await response.json()
 
     if (response.status === 200) {
-      router.push('/#thankyou')
+      router.push('/thankyou')
       localStorage.removeItem('url')
       setIsFormSend(true)
     }

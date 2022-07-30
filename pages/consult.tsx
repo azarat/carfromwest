@@ -1,7 +1,6 @@
 import { NextPage } from 'next'
 import React, { MouseEventHandler, useState } from 'react'
 // import InputMask from 'react-input-mask'
-import Link from 'next/link'
 import router from 'next/router'
 
 // const numberRegEpx = /^\+380\(\d{2}\) \d{3}-\d{2}-\d{2}$/
@@ -12,7 +11,7 @@ const Check: NextPage = () => {
   const [name, setName] = useState<string>('')
   const [phone, setPhone] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
-  const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  // const [isFormSend, setIsFormSend] = useState<boolean>(false)
   // const router = useRouter()
 
   const handleSend: MouseEventHandler = async (e) => {
@@ -52,8 +51,8 @@ const Check: NextPage = () => {
         setName('')
         setPhone('')
         localStorage.removeItem('url')
-        setIsFormSend(true)
-        router.push('consult/#thankyou')
+        // setIsFormSend(true)
+        router.push('/thankyou')
       }
     }
   }
@@ -72,20 +71,6 @@ const Check: NextPage = () => {
       
       <div className="order__wrapper">
         
-        
-       {isFormSend ? <form className="order__form">
-        <h1 className="order__title-thanks">ДЯКУЄМО
-        ЗА ЗАЯВКУ<span className='order__form-title'>!</span></h1>
-        <p className='order__text'>Наш менеджер зв’яжеться з Вами в найближчий час</p>
-        <button className="order__form-btn" >
-        <Link href="/">
-                  <a>
-                    На головну 
-                  </a>
-                </Link>
-          </button>
-      </form>
-        : 
       <form className="order__form order__form" style={{marginTop: "5%"}}>
       <h1 className="order__title"><span className='order__form__line-start'></span>Отримати консультацію<span style={{width: "5%", marginLeft: "3px"}} className='order__form__line-end'></span></h1>
       <div className="order__form__input-wrapper">
@@ -153,8 +138,6 @@ const Check: NextPage = () => {
         Відправити
       </button>
     </form> 
-      } 
-      
       </div>
     </div>
   )

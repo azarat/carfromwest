@@ -12,7 +12,7 @@ const Order: NextPage = () => {
   const [phone, setPhone] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
   const [autoVin, setAutoVin] = useState<any>()
-  const [isFormSend, setIsFormSend] = useState<boolean>(false)
+  // const [isFormSend, setIsFormSend] = useState<boolean>(false)
   const router = useRouter()
   useEffect(() => {
     setAutoVin(localStorage.getItem("autoVin"))
@@ -55,8 +55,8 @@ const Order: NextPage = () => {
         setName('')
         setPhone('')
         // localStorage.removeItem('url')
-        setIsFormSend(true)
-        router.push('order/#thankyou')
+        // setIsFormSend(true)
+        router.push('/thankyou')
       }
     }
   }
@@ -106,19 +106,7 @@ const Order: NextPage = () => {
           </nav>
           </div>
         
-       {isFormSend ? <form className="order__form">
-        <h1 className="order__title-thanks">ДЯКУЄМО
-        ЗА ЗАЯВКУ<span className='order__form-title'>!</span></h1>
-        <p className='order__text'>Наш менеджер зв’яжеться з Вами в найближчий час</p>
-        <button className="order__form-btn" >
-        <Link href="/">
-                  <a>
-                    На головну 
-                  </a>
-                </Link>
-          </button>
-      </form>
-        : 
+      
       <form className="order__form">
       <h1 className="order__title"><span className='order__form__line-start'></span>ПОРАХУВАТИ ВАРТІСТЬ<span className='order__form__line-end'></span></h1>
       <div className="order__form__input-wrapper">
@@ -177,7 +165,6 @@ const Order: NextPage = () => {
         Відправити
       </button>
     </form> 
-      } 
       
       </div>
     </div>
