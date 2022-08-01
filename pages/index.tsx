@@ -15,6 +15,8 @@ import Law from '../src/components/HomePage/Law/Law'
 import AdvantagesAuto from '../src/components/HomePage/AdvantagesAuto/AdvantagesAuto'
 import RequestBottom from '../src/components/HomePage/RequestBottom/RequestBottom'
 
+
+
 const IndexPage: NextPage = () => {
   return (
     <>
