@@ -11,13 +11,22 @@ import SpeedSVG from '../../assets/svg/speed.svg'
 // import FilterSVG from '../../assets/svg/filter_1.svg'
 import CloseSVG from '../../assets/svg/times.svg'
 // Constants
-import { years, gas, transmissions, driveLineTypes, condition } from '../../constants/filter'
+import {
+  years,
+  gas,
+  transmissions,
+  driveLineTypes,
+  condition,
+} from '../../constants/filter'
 import { acceptedBodyStyles } from '../../constants/bodyStyles'
 import carFeatures from '../../constants/carFeatures'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
+import { useDispatch, useSelector } from 'react-redux'
 // import { vehicleTypes } from '../../constants/filter'
+
+import { updateOptionsTree } from '../../../store/actions/optionsTree'
 
 const FilterTable: React.FC<FilterTableProps> = ({
   loading,
@@ -25,10 +34,12 @@ const FilterTable: React.FC<FilterTableProps> = ({
   makes,
   transport,
   brandModels,
-  mobileActive
+  mobileActive,
 }): JSX.Element => {
   // const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   // const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
+
+  const optionsTree = useSelector((state: any) => state.optionsTree.optionsTree)
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [marks, setMarks] = useState()
@@ -46,23 +57,27 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
 
-  const mobileActiveBoolean = (!!mobileActive ? mobileActive : false)
+  const dispatchRedux = useDispatch()
 
-  const [activeMobFilter, setActiveMobFilter] = useState<boolean>(mobileActiveBoolean)
+  const mobileActiveBoolean = !!mobileActive ? mobileActive : false
 
-  useEffect(()=>{
+  const [activeMobFilter, setActiveMobFilter] =
+    useState<boolean>(mobileActiveBoolean)
+
+  useEffect(() => {
     setActiveMobFilter(mobileActiveBoolean)
-  }, [mobileActive])  
-  
+    console.log(optionsTree)
+  }, [mobileActive])
+
   const filterPrimaryDamage = (carFeatures: any) => {
-    const filteredDamages = carFeatures.filter((v: any)=>{
-      return (v.id >= 58 && v.id <= 83)
+    const filteredDamages = carFeatures.filter((v: any) => {
+      return v.id >= 58 && v.id <= 83
     })
 
-    const mappedDamages = filteredDamages.map((v: any)=>{
+    const mappedDamages = filteredDamages.map((v: any) => {
       return {
         label: v.ua,
-        value: v.eng
+        value: v.eng,
       }
     })
 
@@ -80,22 +95,21 @@ const FilterTable: React.FC<FilterTableProps> = ({
   // }
 
   const filterBodyStyles = (bodyStyles: string[]) => {
-    const filteredBodyStyles = bodyStyles.filter((bv: string)=>{
-      const acceptedBodyStylesEn = acceptedBodyStyles.map((av: any)=>av.en)
+    const filteredBodyStyles = bodyStyles.filter((bv: string) => {
+      const acceptedBodyStylesEn = acceptedBodyStyles.map((av: any) => av.en)
       return acceptedBodyStylesEn.includes(bv)
     })
 
-    const mapedBodyStyles = filteredBodyStyles.map((fv: string)=>{
+    const mapedBodyStyles = filteredBodyStyles.map((fv: string) => {
       const label = acceptedBodyStyles.filter((av: any) => av.en == fv)[0].ua
 
       return {
         value: fv,
-        label: label
+        label: label,
       }
     })
 
     // console.log(mapedBodyStyles);
-    
 
     return mapedBodyStyles
   }
@@ -106,7 +120,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [filter])
 
   useEffect(() => {
-    
     setLoading(true)
     const url = `/api/filter?filters=makes,bodyStyles`
     fetch(url)
@@ -117,13 +130,13 @@ const FilterTable: React.FC<FilterTableProps> = ({
             label: val,
             value: val,
           })) || []
-        )        
+        )
+
         setBodyStyles(filterBodyStyles(json?.bodyStyles.sort()))
       })
       .catch(() => setMarks(undefined))
       .finally(() => setLoading(false))
-    }, [])
-
+  }, [])
 
   useEffect(() => {
     if (currentMark && !currentModel) {
@@ -134,12 +147,16 @@ const FilterTable: React.FC<FilterTableProps> = ({
       fetch(url)
         .then((res) => res.json())
         .then((json) => {
+          const parsedModels = json?.models.sort()
           setModels(
             json?.models.sort().map((val: string) => ({
               label: val,
               value: val,
             })) || []
           )
+          console.log(parsedModels)
+
+          // dispatchRedux(updateOptionsTree({ ...optionsTree, parsedModels }))
           setBodyStyles(filterBodyStyles(json?.bodyStyles.sort()))
         })
         .catch(() => setModels(undefined))
@@ -159,7 +176,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               label: val,
               value: val,
             })) || []
-          )          
+          )
           setBodyStyles(filterBodyStyles(json?.bodyStyles.sort()))
         })
         .catch(() => {
@@ -192,35 +209,41 @@ const FilterTable: React.FC<FilterTableProps> = ({
           'countries',
           'primaryDamage',
           // 'secondaryDamage',
-          'condition'
+          'condition',
         ].includes(k) && values[k]
     )
 
-    let url = '';
+    let url = ''
     if (values.makes) url += `/brand-is-${values.makes}`
     if (values.models) url += `/model-is-${values.models}`
     if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
-    if (values.engineFrom && values.engineTo) url += `/volume-is-${values.engineFrom}to${values.engineTo}`
+    if (values.engineFrom && values.engineTo)
+      url += `/volume-is-${values.engineFrom}to${values.engineTo}`
     if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
     if (values.toYear) url += `/yearEnd-is-${values.toYear}`
     if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
     if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
     if (values.primaryDamage) url += `/damageTypes-is-${values.primaryDamage}`
     // if (values.secondaryDamage) url += `/secondaryDamage-is-${values.secondaryDamage}`
-    if (values.transmission) url += `/transmissionTypes-is-${values.transmission}`
-    if (values.saleDocumentsGroups) url += `/saleDocumentsGroups-is-${values.saleDocumentsGroups}`
+    if (values.transmission)
+      url += `/transmissionTypes-is-${values.transmission}`
+    if (values.saleDocumentsGroups)
+      url += `/saleDocumentsGroups-is-${values.saleDocumentsGroups}`
     if (values.sellerType) url += `/sellerType-is-${values.sellerType}`
     if (values.bodyStyle) url += `/bodyStyles-is-${values.bodyStyle}`
     if (values.condition) url += `/condition-is-${values.condition}`
-    if (values.driveLineTypes) url += `/driveLineTypes-is-${values.driveLineTypes}`
+    if (values.driveLineTypes)
+      url += `/driveLineTypes-is-${values.driveLineTypes}`
     // console.log(values);
-    
+
     router.push('/catalog' + url)
   }
 
   const toggleFilter = () => {
-    const mobileFilterBtn = window.document.getElementsByClassName('mobile-filter-btn')[0] as HTMLElement;
-    mobileFilterBtn.click();
+    const mobileFilterBtn = window.document.getElementsByClassName(
+      'mobile-filter-btn'
+    )[0] as HTMLElement
+    mobileFilterBtn.click()
   }
 
   const resetFilters = () => {
@@ -229,20 +252,22 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }
 
   useEffect(() => {
-    router.events.on('routeChangeStart', ()=>setLoading(true))
-    router.events.on('routeChangeComplete', ()=>setLoading(false))
-    router.events.on('routeChangeError',  ()=>setLoading(false))
+    router.events.on('routeChangeStart', () => setLoading(true))
+    router.events.on('routeChangeComplete', () => setLoading(false))
+    router.events.on('routeChangeError', () => setLoading(false))
 
     return () => {
-        router.events.off('routeChangeStart', ()=>setLoading(true))
-        router.events.off('routeChangeComplete',  ()=>setLoading(false))
-        router.events.off('routeChangeError',  ()=>setLoading(false))
+      router.events.off('routeChangeStart', () => setLoading(true))
+      router.events.off('routeChangeComplete', () => setLoading(false))
+      router.events.off('routeChangeError', () => setLoading(false))
     }
   })
-  
+
   return (
     <div className="filter-full--table">
-      <div className={`filter-spinner${isLoading ? ' loading' : ''}`}><Spinner /></div>
+      <div className={`filter-spinner${isLoading ? ' loading' : ''}`}>
+        <Spinner />
+      </div>
 
       <Formik
         initialValues={{
@@ -250,19 +275,29 @@ const FilterTable: React.FC<FilterTableProps> = ({
           fromYear: filter.yearMin ?? '',
           toYear: filter.yearMax ?? '',
           sellerType: filter.sellerType ?? '',
-          transmission: filter.transmissionTypes ? filter.transmissionTypes[0] : '',
+          transmission: filter.transmissionTypes
+            ? filter.transmissionTypes[0]
+            : '',
           engineFrom: filter.engineCapacities ? filter.engineCapacities[0] : '',
-          engineTo: filter.engineCapacities ? (parseFloat(filter.engineCapacities[filter.engineCapacities.length - 1]) + 0.1) : '',
+          engineTo: filter.engineCapacities
+            ? parseFloat(
+                filter.engineCapacities[filter.engineCapacities.length - 1]
+              ) + 0.1
+            : '',
           makes: currentMark,
           fuelTypes: filter.fuelTypes ? filter.fuelTypes[0] : '',
           models: currentModel,
           odometerMin: filter.odometerMin ?? '',
           odometerMax: filter.odometerMax ?? '',
-          vehicleConditions: filter.vehicleConditions ? filter.vehicleConditions[0] : '',
+          vehicleConditions: filter.vehicleConditions
+            ? filter.vehicleConditions[0]
+            : '',
           driveLineTypes: filter.driveLineTypes ? filter.driveLineTypes[0] : '',
           primaryDamage: filter.damageTypes ? filter.damageTypes[0] : '',
           // secondaryDamage: '',
-          condition: filter.vehicleConditions ? filter.vehicleConditions[0] : ''
+          condition: filter.vehicleConditions
+            ? filter.vehicleConditions[0]
+            : '',
         }}
         onSubmit={handleSubmit}
         enableReinitialize={true}
@@ -277,28 +312,30 @@ const FilterTable: React.FC<FilterTableProps> = ({
             Скинути фільтр
           </button>
 
-
-          <button type='button' className='mobile-filter-btn--close' onClick={toggleFilter}>
+          <button
+            type="button"
+            className="mobile-filter-btn--close"
+            onClick={toggleFilter}
+          >
             <CloseSVG />
           </button>
 
-          <div className='filter-full--table-wrap'>
+          <div className="filter-full--table-wrap">
             <Accordion title="Рік">
               <div className="filter-full__year">
                 <Field
                   name={'fromYear'}
                   component={SelectTransmission}
-                  filter='yearStart'
+                  filter="yearStart"
                   transport={transport}
                   options={firstYears}
                   placeholder="з"
                   setter={setFromYear}
-                  
                 />
                 <Field
                   name={'toYear'}
                   component={SelectTransmission}
-                  filter='yearEnd'
+                  filter="yearEnd"
                   transport={transport}
                   options={secondYears}
                   placeholder="по"
@@ -310,15 +347,19 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Марка" isOpenInner={true}>
               <div className="filter-full__transmission">
                 <Field
-                  name='makes'
+                  name="makes"
                   value={currentMark}
-                  filter='brand'
+                  filter="brand"
                   transport={transport}
                   component={SelectMake}
-                  options={makes?.length ? makes?.map((mark) => ({
-                    label: mark,
-                    value: mark,
-                  })) : marks}
+                  options={
+                    makes?.length
+                      ? makes?.map((mark) => ({
+                          label: mark,
+                          value: mark,
+                        }))
+                      : marks
+                  }
                   placeholder="Всі"
                   setter={setCurrentMark}
                 />
@@ -328,15 +369,19 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Модель" isOpenInner={true}>
               <div className="filter-full__transmission">
                 <Field
-                  name='models'
+                  name="models"
                   value={currentModel}
-                  filter='model'
+                  filter="model"
                   transport={transport}
                   component={SelectMake}
-                  options={brandModels?.length ? brandModels?.map((model) => ({
-                    label: model,
-                    value: model,
-                  })) : models}
+                  options={
+                    brandModels?.length
+                      ? brandModels?.map((model) => ({
+                          label: model,
+                          value: model,
+                        }))
+                      : models
+                  }
                   placeholder="Всі"
                   setter={setCurrentModel}
                 />
@@ -358,7 +403,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
               <div className="filter-full__gas">
                 <Field
                   name={'fuelTypes'}
-                  filter='fuel'
+                  filter="fuel"
                   component={SelectTransmission}
                   options={gas}
                   placeholder="Оберіть тип палива"
@@ -379,10 +424,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   <EngineSVG />
                 </div>
                 <div className="filter-full__engine-input">
-                  <Field 
-                    placeholder="До" 
-                    type="number" 
-                    name="engineTo" 
+                  <Field
+                    placeholder="До"
+                    type="number"
+                    name="engineTo"
                     step="any"
                     min="0"
                   />
@@ -444,7 +489,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   component={SelectTransmission}
                   options={driveLineTypes}
                   placeholder="Оберіть тип привода"
-                  filter='driveLineTypes'
+                  filter="driveLineTypes"
                 />
               </div>
             </Accordion>
@@ -452,18 +497,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Продавець">
               <div className="filter-full__year">
                 <label>
-                  <Field
-                    type="radio"
-                    name="sellerType"
-                    value="insurance"
-                    /> Страхова
+                  <Field type="radio" name="sellerType" value="insurance" />{' '}
+                  Страхова
                 </label>
                 <label>
-                  <Field
-                    type="radio"
-                    name="sellerType"
-                    value="other"
-                  /> Перекуп
+                  <Field type="radio" name="sellerType" value="other" /> Перекуп
                 </label>
               </div>
             </Accordion>
@@ -475,7 +513,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   component={SelectTransmission}
                   options={filterPrimaryDamage(carFeatures)}
                   placeholder="Оберіть пошкодження"
-                  filter='primaryDamage'
+                  filter="primaryDamage"
                 />
               </div>
             </Accordion>
@@ -491,8 +529,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion> */}
-
-           
           </div>
           <button
             disabled={loading}

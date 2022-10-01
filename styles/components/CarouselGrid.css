@@ -1,0 +1,101 @@
+.carousel-grid {
+  display: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .carousel-grid {
+    position: relative;
+    display: block;
+    -ms-grid-row: 2;
+    grid-row: 2;
+    width: 100%;
+  }
+  .carousel-grid__wrapper {
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel-grid__wrapper::after {
+    position: absolute;
+    top: calc(0% + 14px);
+    right: 0;
+    border-radius: 0px 10px 10px 0px;
+    width: 139px;
+    height: 105px;
+    background: -webkit-gradient(linear, right top, left top, from(#FFFFFF), to(rgba(255, 255, 255, 0)));
+    background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    content: '';
+  }
+}
+
+@media screen and (min-width: 1200px) and (min-width: 1900px) {
+  .carousel-grid__wrapper::after {
+    top: calc(0% + 16px);
+    width: 142px;
+    height: 109px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .carousel-grid__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    position: relative;
+    -webkit-transition: all ease 300ms;
+    transition: all ease 300ms;
+  }
+  .carousel-grid__btn {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 30px;
+    height: 30px;
+    top: 43%;
+    right: -15px;
+    outline: none;
+    border: none;
+    background: #0F2442;
+    -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .carousel-grid__btn svg path {
+    fill: white;
+  }
+  .carousel-grid__item {
+    width: 139px;
+    height: 105px;
+    margin-top: 14px;
+    margin-right: 14px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1200px) and (min-width: 1900px) {
+  .carousel-grid__item {
+    width: 142px;
+    height: 109px;
+    margin-top: 16px;
+    margin-right: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .carousel-grid__item-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+/*# sourceMappingURL=CarouselGrid.css.map */
