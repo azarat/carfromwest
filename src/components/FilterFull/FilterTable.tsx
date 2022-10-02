@@ -23,10 +23,10 @@ import carFeatures from '../../constants/carFeatures'
 // Types
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
-import { useDispatch, useSelector } from 'react-redux'
+import { /* useDispatch,  */ useSelector } from 'react-redux'
 // import { vehicleTypes } from '../../constants/filter'
 
-import { updateOptionsTree } from '../../../store/actions/optionsTree'
+// import { updateOptionsTree } from '../../../store/actions/optionsTree'
 
 const FilterTable: React.FC<FilterTableProps> = ({
   loading,
@@ -57,7 +57,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const [models, setModels] = useState()
   const [isLoading, setLoading] = useState(false)
 
-  const dispatchRedux = useDispatch()
+  // const dispatchRedux = useDispatch()
 
   const mobileActiveBoolean = !!mobileActive ? mobileActive : false
 
