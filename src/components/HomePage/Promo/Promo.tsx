@@ -5,6 +5,10 @@ import { Formik, Field, FieldProps, Form } from 'formik'
 import { useRouter } from 'next/router'
 import Spinner from '../../Spinner/Spinner'
 import { years } from '../../../constants/filter'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { updateOptionsTree } from '../../../../store/actions/optionsTree'
 
 type CustomSelectProps = {
   options: any
@@ -23,58 +27,147 @@ const Promo: React.FC = (): JSX.Element => {
   const [toYear, setToYear] = useState<number>(2021)
   const [isLoading, setLoading] = useState(false)
 
+  const optionsTree = useSelector(
+    (state: any) => state.optionsTree.optionsTree ?? []
+  )
+
+  const dispatchRedux = useDispatch()
+
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
-  useEffect(() => {
-    const url = `/api/filter?filters=makes`
+  const getMarks = async () => {
     setLoading(true)
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) =>
-        setMarks(
-          json?.makes.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          })) || []
-        )
+    const url = `/api/filter?filters=makes`
+
+    if (optionsTree.length > 0) {
+      setMarks(
+        optionsTree.map((val: any) => ({
+          label: val.title,
+          value: val.title,
+        }))
       )
-      .catch(() => setMarks([]))
-      .finally(() => setLoading(false))
+    } else {
+      try {
+        const response = await axios.get(url)
+        if (response.status == 200) {
+          setMarks(
+            response.data.makes.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            }))
+          )
+
+          const mappedOptionsTree = optionsTree.map((item: any) => item.title)
+
+          const filteredMarks = response.data.makes.filter((val: string) => {
+            return !mappedOptionsTree.includes(val)
+          })
+
+          dispatchRedux(
+            updateOptionsTree(
+              optionsTree.concat(
+                filteredMarks.map((val: any) => ({
+                  title: val,
+                  models: [],
+                }))
+              )
+            )
+          )
+        }
+      } catch (error) {
+        setMarks([])
+      }
+    }
+
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getMarks()
+    // const url = `/api/filter?filters=makes`
+    // setLoading(true)
+    // fetch(url)
+    //   .then((res) => res.json())
+    //   .then((json) =>
+    //     setMarks(
+    //       json?.makes.sort().map((val: string) => ({
+    //         label: val,
+    //         value: val,
+    //       })) || []
+    //     )
+    //   )
+    //   .catch(() => setMarks([]))
+    //   .finally(() => setLoading(false))
   }, [])
 
-  useEffect(() => {
+  const getModels = async () => {
     setLoading(true)
-
-    if (currentMark && !currentModel) {
-      const url = `/api/filter?filters=makes,models&makes=${currentMark}`
-      fetch(url)
-        .then((res) => res.json())
-        .then((json) => {
-            // console.log('sdfsd', json?.models);
-            
-            setModels(
-              json?.models.sort().map((val: string) => ({
-                label: val,
-                value: val,
-              })) || []
-            )
-          }
+    const url = `/api/filter?filters=makes,models&makes=${currentMark}`
+    try {
+      const response = await axios.get(url)
+      if (response.status == 200) {
+        setModels(
+          response.data.models.sort().map((val: string) => ({
+            label: val,
+            value: val,
+          }))
         )
-        .catch(() => setModels([]))
-        .finally(() => setLoading(false))
+
+        // const mappedOptionsTree = optionsTree.map((item: any) => item.title)
+
+        // const filteredModels = response.data.models.filter((val: string) => {
+        //   return !mappedOptionsTree.includes(val)
+        // })
+
+        // console.log(response.data.models)
+
+        // dispatchRedux(
+        //   updateOptionsTree(
+        //     optionsTree.concat(
+        //       response.data.models.map((val: any) => ({
+        //         title: val,
+        //         models: val,
+        //       }))
+        //     )
+        //   )
+        // )
+      }
+    } catch (error) {
+      setModels([])
+    }
+
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    if (currentMark && !currentModel) {
+      getModels()
+      // const url = `/api/filter?filters=makes,models&makes=${currentMark}`
+      // fetch(url)
+      //   .then((res) => res.json())
+      //   .then((json) => {
+      //     setModels(
+      //       json?.models.sort().map((val: string) => ({
+      //         label: val,
+      //         value: val,
+      //       })) || []
+      //     )
+      //   })
+      //   .catch(() => setModels([]))
+      //   .finally(() => setLoading(false))
     }
   }, [currentMark])
 
   const handleSubmit = (values: any) => {
     setLoading(true)
 
-    let url = '';
+    let url = ''
     if (values.makes) url += `/brand-is-${values.makes}`
     if (values.models) url += `/model-is-${values.models}`
     if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
     if (values.toYear) url += `/yearEnd-is-${values.toYear}`
-    router.push('/catalog' + url)    
+    router.push('/catalog' + url)
   }
 
   // if (typeof window !== 'undefined') {
@@ -82,7 +175,7 @@ const Promo: React.FC = (): JSX.Element => {
   //   console.log('initialLink', sessionStorage.getItem('initialLink'))
   // }
   // useEffect(()=>{
-    
+
   //   // setLoading(false)
   // }, [router.asPath])
 
@@ -92,24 +185,24 @@ const Promo: React.FC = (): JSX.Element => {
     form,
     placeholder,
     side,
-    setter
+    setter,
   }): JSX.Element => {
     return (
-      <Select 
+      <Select
         name={field.name}
-        options={options} 
+        options={options}
         placeholder={placeholder}
         onChange={(e) => {
-            if (!!setter) setter(e.value)
-            form.setFieldValue(field.name, e.value)
-          }
-        }
+          if (!!setter) setter(e.value)
+          form.setFieldValue(field.name, e.value)
+        }}
         value={
           options
             ? options.find((option: any) => option.value === field.value)
             : ''
-        }  
-        className={`promo__form-${side}__select`}/>  
+        }
+        className={`promo__form-${side}__select`}
+      />
     )
   }
 
@@ -117,72 +210,79 @@ const Promo: React.FC = (): JSX.Element => {
     <>
       <div className="promo">
         <div className="promo__wrapper">
-        <div className="promo__wrapper-left">
-          <h1 className="promo__title">
-            АВТО ІЗ США
-          </h1>
-          <p className="promo__description">
-            Бажаєте підібрати найкращий варіант та цікавитесь як заощадити при покупці авто з США?
-            Залиште номер телефону і ми розповімо усі подробиці!
-          </p>
-          <Formik
-            initialValues={{
-              makes: '',
-              models: '',
-              fromYear: '',
-              toYear: '',
-              fromPrice: '',
-              toPrice: ''
-            }}
-            onSubmit={handleSubmit}
-            enableReinitialize={true} >         
-            <Form className="promo__form" action="">
+          <div className="promo__wrapper-left">
+            <h1 className="promo__title">АВТО ІЗ США</h1>
+            <p className="promo__description">
+              Бажаєте підібрати найкращий варіант та цікавитесь як заощадити при
+              покупці авто з США? Залиште номер телефону і ми розповімо усі
+              подробиці!
+            </p>
+            <Formik
+              initialValues={{
+                makes: '',
+                models: '',
+                fromYear: '',
+                toYear: '',
+                fromPrice: '',
+                toPrice: '',
+              }}
+              onSubmit={handleSubmit}
+              enableReinitialize={true}
+            >
+              <Form className="promo__form" action="">
+                <div
+                  className={`filter-spinner valigned${
+                    isLoading ? ' loading' : ''
+                  }`}
+                >
+                  <Spinner />
+                </div>
 
-              <div className={`filter-spinner valigned${isLoading ? ' loading' : ''}`}><Spinner /></div>
-
-              <div className="promo__form__discount">Економія до 40%</div>
-              <div className="promo__form-left">
-                <Field
-                  name={'makes'}
-                  component={promoSelect}
-                  placeholder={'Марка'}
-                  options={marks}
-                  side={'left'}
-                  setter={setCurrentMark}
+                <div className="promo__form__discount">Економія до 40%</div>
+                <div className="promo__form-left">
+                  <Field
+                    name={'makes'}
+                    component={promoSelect}
+                    placeholder={'Марка'}
+                    options={marks}
+                    side={'left'}
+                    setter={setCurrentMark}
                   />
 
-                <Field
-                  name={'models'}
-                  component={promoSelect}
-                  placeholder={'Модель'}
-                  options={models}
-                  side={'left'}
-                  setter={setCurrentModel}
-                />
-              </div>
-              <div className="promo__form-right">
-                <div className="promo__form-right-info">
-                  <span className={`promo__form-right__select-year`}>Рік</span>
-
                   <Field
-                    name={'fromYear'}
+                    name={'models'}
                     component={promoSelect}
-                    placeholder={'Від'}
-                    options={firstYears}
-                    setter={setFromYear}
-                    side={'right'}
-                    />
-
-                  <Field
-                    name={'toYear'}
-                    component={promoSelect}
-                    placeholder={'До'}
-                    options={secondYears}
-                    setter={setToYear}
-                    side={'right'}
-                    />
+                    placeholder={'Модель'}
+                    options={models}
+                    side={'left'}
+                    setter={setCurrentModel}
+                  />
                 </div>
-                {/* <div className="promo__form-right-info">
+                <div className="promo__form-right">
+                  <div className="promo__form-right-info">
+                    <span className={`promo__form-right__select-year`}>
+                      Рік
+                    </span>
+
+                    <Field
+                      name={'fromYear'}
+                      component={promoSelect}
+                      placeholder={'Від'}
+                      options={firstYears}
+                      setter={setFromYear}
+                      side={'right'}
+                    />
+
+                    <Field
+                      name={'toYear'}
+                      component={promoSelect}
+                      placeholder={'До'}
+                      options={secondYears}
+                      setter={setToYear}
+                      side={'right'}
+                    />
+                  </div>
+                  {/* <div className="promo__form-right-info">
                   <span className={`promo__form-right__select-price`}>Ціна</span>
 
                   <Field
@@ -201,27 +301,32 @@ const Promo: React.FC = (): JSX.Element => {
                     side={'right'}
                     />
                 </div> */}
-              </div>
-              <button className="promo__form__btn" type='submit'>Пошук</button>
-            </Form>
-          </Formik>
+                </div>
+                <button className="promo__form__btn" type="submit">
+                  Пошук
+                </button>
+              </Form>
+            </Formik>
           </div>
           <div className="promo__wrapper-right">
-            <div className='promo__wrapper-right-blue'></div>
-            <div className='promo__wrapper-right-orange'></div>
-            <div className='promo__wrapper-right-red'></div>
+            <div className="promo__wrapper-right-blue"></div>
+            <div className="promo__wrapper-right-orange"></div>
+            <div className="promo__wrapper-right-red"></div>
             <div className="promo__image">
-            <Image className='promo__image-block'
-              objectFit="cover"
-              layout="fill"
-              src="/assets/images/hero.png"
-            />
-          </div>
-          <div className="promo__image-mob">
-              <img className='promo__image-mob-block' src="/assets/images/hero.png"
+              <Image
+                className="promo__image-block"
+                objectFit="cover"
+                layout="fill"
+                src="/assets/images/hero.png"
               />
+            </div>
+            <div className="promo__image-mob">
+              <img
+                className="promo__image-mob-block"
+                src="/assets/images/hero.png"
+              />
+            </div>
           </div>
-        </div>
           {/* <div
             role="presentation"
             className="promo__video"

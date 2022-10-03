@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^0.27.2",
     "formik": "^2.2.7",
     "husky": "^8.0.1",
     "memory-cache": "^0.2.0",
