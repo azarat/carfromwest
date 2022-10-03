@@ -19,7 +19,6 @@ import { USER_AGENT } from '../../src/constants/userAgent'
 
 import FilterSVG from '../../src/assets/svg/filter_1.svg'
 
-
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
   total,
@@ -62,18 +61,18 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
-        includeFilters: includeFilters,
-        makes: initialMakes,
-        vehicleType: type ? type : 'automobile',
-        models: initialModels,
-        yearMin: yearMin ? +yearMin : null,
-        yearMax: yearMax ? +yearMax : null,
-      }
+          includeFilters: includeFilters,
+          makes: initialMakes,
+          vehicleType: type ? type : 'automobile',
+          models: initialModels,
+          yearMin: yearMin ? +yearMin : null,
+          yearMax: yearMax ? +yearMax : null,
+        }
       : typeof localStorage !== 'undefined'
-        ? JSON.parse(
+      ? JSON.parse(
           localStorage.getItem('filter') ?? JSON.stringify({ ...defaultFilter })
         )
-        : { ...defaultFilter }
+      : { ...defaultFilter }
   )
 
   useEffect(() => {
@@ -83,7 +82,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
   useEffect(() => {
     if (typeof localStorage !== 'undefined')
       localStorage.setItem('filter', JSON.stringify(filter))
-
   }, [filter, page])
 
   const handleSearch = (searchTerm: string): void => {
@@ -92,12 +90,19 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
   const handleSort = ({ value }: { value: string }): Promise<boolean> => {
     const [sortField, sortDirection] = value.split('--')
-    const queryIndex = router.asPath.indexOf('?');
+    const queryIndex = router.asPath.indexOf('?')
     if (queryIndex === -1) {
-      return router.push(`${router.asPath}?sortField=${sortField}&sortDirection=${sortDirection}`)
+      return router.push(
+        `${router.asPath}?sortField=${sortField}&sortDirection=${sortDirection}`
+      )
     }
 
-    return router.push(`${router.asPath.slice(0, queryIndex)}?sortField=${sortField}&sortDirection=${sortDirection}`)
+    return router.push(
+      `${router.asPath.slice(
+        0,
+        queryIndex
+      )}?sortField=${sortField}&sortDirection=${sortDirection}`
+    )
   }
 
   const vehicle = { items, total } as ICarsFetchTypes
@@ -126,8 +131,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
             setFilter={setFilter}
           />
           <CatalogSearch loading={false} handleSearch={handleSearch} />
-          <div className='catalog-sort-wrap'>
-            <button className='mobile-filter-btn' onClick={toggleFilter}>
+          <div className="catalog-sort-wrap">
+            <button className="mobile-filter-btn" onClick={toggleFilter}>
               <FilterSVG />
               Фільтр
             </button>
@@ -141,7 +146,13 @@ const Index: NextPage<Partial<ICatalog>> = ({
         </div>
 
         <CatalogGrid loading={false} cars={vehicle}>
-          {items && !!items.length && <Pagination page={page ? +page : 1} cars={vehicle} setPage={setPage} />}
+          {items && !!items.length && (
+            <Pagination
+              page={page ? +page : 1}
+              cars={vehicle}
+              setPage={setPage}
+            />
+          )}
         </CatalogGrid>
       </section>
     </div>
@@ -149,7 +160,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const filtersUrl = 'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+  const filtersUrl =
+    'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
   const filterResponse = await fetch(filtersUrl, {
     headers: {
       'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
@@ -157,29 +169,28 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
     },
   })
-  const { makes } = await filterResponse.json();
+  const { makes } = await filterResponse.json()
 
-
-  const lotsBody = ctx.query.searchTerm ? {
-    "includeFilters": [
-      "vehicleTypes"
-    ],
-    makes: [],
-    vehicleType: "automobile",
-    models: [],
-    yearMin: 2010,
-    yearMax: null,
-    searchTerm: ctx.query.searchTerm,
-    page: 1,
-    itemsPerPage: 12
-  } : {
-    vehicleType: 'automobile',
-    page: +ctx.query.page! || 1,
-    itemsPerPage: 12,
-    yearMin: 2010,
-    sortField: ctx.query.sortField || 'added-date',
-    sortDirection: ctx.query.sortDirection || 'asc',
-  };
+  const lotsBody = ctx.query.searchTerm
+    ? {
+        includeFilters: ['vehicleTypes'],
+        makes: [],
+        vehicleType: 'automobile',
+        models: [],
+        yearMin: 2010,
+        yearMax: null,
+        searchTerm: ctx.query.searchTerm,
+        page: 1,
+        itemsPerPage: 12,
+      }
+    : {
+        vehicleType: 'automobile',
+        page: +ctx.query.page! || 1,
+        itemsPerPage: 12,
+        yearMin: 2010,
+        sortField: ctx.query.sortField || 'added-date',
+        sortDirection: ctx.query.sortDirection || 'asc',
+      }
 
   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
   const carsResponse = await fetch(carsUrl, {
@@ -193,7 +204,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     body: JSON.stringify(lotsBody),
   })
 
-  const { items, total } = await carsResponse.json();
+  const { items, total } = await carsResponse.json()
 
   return {
     props: {

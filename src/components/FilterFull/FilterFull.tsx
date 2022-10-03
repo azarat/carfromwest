@@ -52,6 +52,7 @@ const FilterFull: React.FC<FilterFullProps> = ({
     setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
   }, [filter])
 
+
   useEffect(() => {
     const url = `/api/filter?filters=makes`
     fetch(url)
@@ -108,7 +109,6 @@ const FilterFull: React.FC<FilterFullProps> = ({
     open
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'unset')
-      
   }, [open])
 
   const handleSubmit = (values: any) => {
@@ -190,8 +190,6 @@ const FilterFull: React.FC<FilterFullProps> = ({
         onSubmit={handleSubmit}
       >
         <Form>
-
-
           <div className="filter-full__transmission">
             <h3 className="filter-full__title">Марка</h3>
             <Field
@@ -267,22 +265,37 @@ const FilterFull: React.FC<FilterFullProps> = ({
           <div className="filter-full__engine">
             <h3 className="filter-full__title">Об’єм двигуна</h3>
             <div className="filter-full__engine-input">
-              <Field placeholder="Від" type="number" name="engineForm" min="0"/>
+              <Field
+                placeholder="Від"
+                type="number"
+                name="engineForm"
+                min="0"
+              />
               <EngineSVG />
             </div>
             <div className="filter-full__engine-input">
-              <Field placeholder="До" type="number" name="engineTo" min="0"/>
+              <Field placeholder="До" type="number" name="engineTo" min="0" />
               <EngineSVG />
             </div>
           </div>
           <div className="filter-full__engine">
             <h3 className="filter-full__title">Пробіг</h3>
             <div className="filter-full__engine-input">
-              <Field placeholder="Пр. 10000" type="number" name="odometerMin" min="0"/>
+              <Field
+                placeholder="Пр. 10000"
+                type="number"
+                name="odometerMin"
+                min="0"
+              />
               <SpeedSVG />
             </div>
             <div className="filter-full__engine-input">
-              <Field placeholder="Пр. 50000" type="number" name="odometerMax" min="0"/>
+              <Field
+                placeholder="Пр. 50000"
+                type="number"
+                name="odometerMax"
+                min="0"
+              />
               <SpeedSVG />
             </div>
           </div>

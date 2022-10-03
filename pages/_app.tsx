@@ -8,11 +8,17 @@ import Footer from '../src/components/Footer/Footer'
 import NextNprogress from 'nextjs-progressbar'
 import { useRouter } from 'next/router'
 
+import store from '../store/store'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
+
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const router = useRouter()
   const shouldShowFooter = router.pathname !== '/order'
 
-  
+  const persistor = persistStore(store)
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const initialLink = sessionStorage.getItem('initialLink')
@@ -32,36 +38,47 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         />
 
         {/*  Global site tag (gtag.js) - Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-215694992-1"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-215694992-1"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'UA-215694992-1');`
-        }}></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          gtag('config', 'UA-215694992-1');`,
+          }}
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MHFMKJC');`}}>
-        </script>
+})(window,document,'script','dataLayer','GTM-MHFMKJC');`,
+          }}
+        ></script>
         {/* HelpCrunch chat Code */}
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(w,d){
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d){
   w.HelpCrunch=function(){w.HelpCrunch.q.push(arguments)};w.HelpCrunch.q=[];
   function r(){var s=document.createElement('script');s.async=1;s.type='text/javascript';s.src='https://widget.helpcrunch.com/';(d.body||d.head).appendChild(s);}
   if(w.attachEvent){w.attachEvent('onload',r)}else{w.addEventListener('load',r,false)}
-})(window, document)`}}>
-        </script>
-        <script dangerouslySetInnerHTML={{
-          __html: `HelpCrunch('init', 'carsfromwest', {
+})(window, document)`,
+          }}
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `HelpCrunch('init', 'carsfromwest', {
     applicationId: 1,
     applicationSecret: 'KHddEJ19qmyTlPTtq9A5G3oT973HnUc80Bv3vBM6kMU4DZIoWxE5oiyXDdcoYNzNEDofv6KvUf92dYQL75dj4g=='
   })
 
-  HelpCrunch('showChatWidget');`}}>
-        </script>
+  HelpCrunch('showChatWidget');`,
+          }}
+        ></script>
         {/* Binotel Code */}
         <script
           type="text/javascript"
@@ -109,19 +126,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         src="https://www.facebook.com/tr?id=2763995213865176&ev=PageView&noscript=1"
         /></noscript> */}
       </Head>
-      <Header />
-      <main>
-        <Component {...pageProps} />
-      </main>
-      {shouldShowFooter && <Footer />} 
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Header />
+          <main>
+            <Component {...pageProps} />
+          </main>
+          {shouldShowFooter && <Footer />}
+        </PersistGate>
+      </Provider>
       <NextNprogress
         color="#e02c22"
         startPosition={0.3}
         stopDelayMs={200}
         height={3}
       />
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHFMKJC"
-        height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-MHFMKJC"
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        ></iframe>
+      </noscript>
     </>
   )
 }
