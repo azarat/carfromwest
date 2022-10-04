@@ -22,7 +22,7 @@ import FilterSVG from '../../src/assets/svg/filter_1.svg'
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
   total,
-  brands,
+  // brands,
   makes,
   type = '',
   yearMin,
@@ -120,7 +120,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
           setFilter={setFilter}
           loading={false}
           setPage={setPage}
-          makes={brands}
+          // makes={brands}
           mobileActive={activeMobFilter}
         />
         <div className="catalog__filters-wrapper">
@@ -169,7 +169,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
     },
   })
-  const { makes } = await filterResponse.json()
+
+  const { makes } = await filterResponse?.json()
 
   const lotsBody = ctx.query.searchTerm
     ? {
@@ -204,7 +205,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     body: JSON.stringify(lotsBody),
   })
 
-  const { items, total } = await carsResponse.json()
+  const { items, total } = await carsResponse?.json()
 
   return {
     props: {
