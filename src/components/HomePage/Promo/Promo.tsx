@@ -21,7 +21,7 @@ type CustomSelectProps = {
 const Promo: React.FC = (): JSX.Element => {
   const router = useRouter()
   const [marks, setMarks] = useState([])
-  const [models, setModels] = useState<any>([{ label: '', value: '' }])
+  const [models, setModels] = useState<any>([])
   const [currentMark, setCurrentMark] = useState('')
   const [currentModel, setCurrentModel] = useState('')
   const [fromYear, setFromYear] = useState<number>(0)
@@ -78,6 +78,7 @@ const Promo: React.FC = (): JSX.Element => {
                 filteredMarks.map((val: any) => ({
                   title: val,
                   models: [],
+                  bodyStyles: [],
                 }))
               )
             )
@@ -95,7 +96,7 @@ const Promo: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     setCurrentModel('')
-    setModels([{ label: '', value: '' }])
+    // setModels([{ label: '', value: '' }])
   }, [currentMark])
 
   useEffect(() => {
