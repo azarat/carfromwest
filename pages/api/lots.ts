@@ -15,6 +15,7 @@ const filter: NextApiHandler = async (req, res) => {
     const db = client.db("cfwdata")
     const dbLots = await db.collection('lots')
         .find({}).toArray()
+    console.log(dbLots);
     
     // return res.status(200).send(dbLots);
 
