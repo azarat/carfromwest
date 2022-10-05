@@ -28,21 +28,23 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { updateOptionsTree } from '../../../store/actions/optionsTree'
 import axios from 'axios'
+import { updateDate } from '../../../store/actions/updateDate'
 
 const FilterTable: React.FC<FilterTableProps> = ({
   loading,
   filter,
-  makes,
   transport,
-  brandModels,
   mobileActive,
 }): JSX.Element => {
   // const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   // const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
 
+  const dispatchRedux = useDispatch()
   const optionsTree = useSelector(
     (state: any) => state.optionsTree.optionsTree ?? []
   )
+  const updatedDate = useSelector((state: any) => state.updatedDate.updatedDate)
+  const timeToUpdate = 86400000 /* one day */
 
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
@@ -58,10 +60,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
     filter.models?.length ? filter.models[0] : ''
   )
 
-  const [models, setModels] = useState()
+  const [models, setModels] = useState<any>([{ label: '', value: '' }])
   const [isLoading, setLoading] = useState(false)
-
-  const dispatchRedux = useDispatch()
 
   const mobileActiveBoolean = !!mobileActive ? mobileActive : false
 
@@ -112,8 +112,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
       }
     })
 
-    // console.log(mapedBodyStyles);
-
     return mapedBodyStyles
   }
 
@@ -126,6 +124,9 @@ const FilterTable: React.FC<FilterTableProps> = ({
     setLoading(true)
     const url = `/api/filter?filters=makes,bodyStyles`
 
+    if (Date.now() - updatedDate > timeToUpdate) {
+      dispatchRedux(updateOptionsTree([]))
+    }
     if (optionsTree.length > 0) {
       setMarks(
         optionsTree.map((val: any) => ({
@@ -144,7 +145,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
             }))
           )
           setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
-
           const mappedOptionsTree = optionsTree.map((item: any) => item.title)
 
           const filteredMarks = response.data.makes.filter((val: string) => {
@@ -157,10 +157,13 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 filteredMarks.map((val: any) => ({
                   title: val,
                   models: [],
+                  bodyStyles: [],
                 }))
               )
             )
           )
+
+          dispatchRedux(updateDate(Date.now()))
         }
       } catch (error) {
         setMarks(undefined)
@@ -170,47 +173,48 @@ const FilterTable: React.FC<FilterTableProps> = ({
     setLoading(false)
   }
 
-  useEffect(() => {
-    getMarks()
-  }, [])
-
   const getModels = async () => {
     setLoading(true)
-    setBodyStyles([])
-    setBodyStyle('')
+    setCurrentModel('')
+
+    const currentMarkIndex = optionsTree.findIndex(
+      (item: any) => item.title == currentMark
+    )
+
     const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
-    try {
-      const response = await axios.get(url)
-      if (response.status == 200) {
-        setModels(
-          response.data.models.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          }))
-        )
-        setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
 
-        // const mappedOptionsTree = optionsTree.map((item: any) => item.title)
+    if (optionsTree[currentMarkIndex]?.models.length > 0) {
+      setModels(
+        optionsTree[currentMarkIndex].models.map((val: any) => ({
+          label: val.title,
+          value: val.title,
+        }))
+      )
+      setBodyStyles(filterBodyStyles(optionsTree[currentMarkIndex].bodyStyles))
+    } else {
+      try {
+        const response = await axios.get(url)
+        if (response.status == 200) {
+          setModels(
+            response.data.models.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            }))
+          )
+          setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
+          optionsTree[currentMarkIndex].models = response.data.models.map(
+            (val: any) => ({
+              title: val,
+              bodyStyles: [],
+            })
+          )
+          optionsTree[currentMarkIndex].bodyStyles = response.data.bodyStyles
 
-        // const filteredModels = response.data.models.filter((val: string) => {
-        //   return !mappedOptionsTree.includes(val)
-        // })
-
-        // console.log(response.data.models)
-
-        // dispatchRedux(
-        //   updateOptionsTree(
-        //     optionsTree.concat(
-        //       response.data.models.map((val: any) => ({
-        //         title: val,
-        //         models: val,
-        //       }))
-        //     )
-        //   )
-        // )
+          dispatchRedux(updateOptionsTree(optionsTree))
+        }
+      } catch (error) {
+        setModels(undefined)
       }
-    } catch (error) {
-      setModels(undefined)
     }
 
     setLoading(false)
@@ -220,53 +224,64 @@ const FilterTable: React.FC<FilterTableProps> = ({
     setLoading(true)
     setBodyStyles([])
     setBodyStyle('')
+
+    const currentMarkIndex = optionsTree.findIndex(
+      (item: any) => item.title == currentMark
+    )
+    const currentModelIndex = optionsTree[currentMarkIndex]?.models.findIndex(
+      (item: any) => item.title == currentModel
+    )
+
     const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}&models=${currentModel}`
-    try {
-      const response = await axios.get(url)
-      if (response.status == 200) {
-        setModels(
-          response.data.models.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          })) || []
+    if (
+      optionsTree[currentMarkIndex]?.models[currentModelIndex]?.bodyStyles
+        .length > 0
+    ) {
+      setBodyStyles(
+        filterBodyStyles(
+          optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles
         )
-        setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
+      )
+    } else {
+      try {
+        const response = await axios.get(url)
+        if (response.status == 200) {
+          setModels(
+            response.data.models.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            })) || []
+          )
+          setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
 
-        // const mappedOptionsTree = optionsTree.map((item: any) => item.title)
+          optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles =
+            response.data.bodyStyles
 
-        // const filteredModels = response.data.models.filter((val: string) => {
-        //   return !mappedOptionsTree.includes(val)
-        // })
-
-        console.log(response.data.models)
-
-        // dispatchRedux(
-        //   updateOptionsTree(
-        //     optionsTree.concat(
-        //       response.data.models.map((val: any) => ({
-        //         title: val,
-        //         models: val,
-        //       }))
-        //     )
-        //   )
-        // )
+          dispatchRedux(updateOptionsTree(optionsTree))
+        }
+      } catch (error) {
+        setBodyStyles([])
+        setBodyStyle('')
       }
-    } catch (error) {
-      setBodyStyles([])
-      setBodyStyle('')
     }
-
     setLoading(false)
   }
 
   useEffect(() => {
-    if (currentMark && !currentModel) {
+    getMarks()
+  }, [])
+
+  useEffect(() => {
+    if (currentMark) {
       getModels()
     }
+  }, [currentMark])
+
+  useEffect(() => {
     if (currentModel) {
       getBodystyles()
     }
-  }, [currentMark, currentModel])
+  }, [currentModel])
 
   const handleSubmit = (values: any) => {
     Object.keys(values).filter(
@@ -315,7 +330,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (values.condition) url += `/condition-is-${values.condition}`
     if (values.driveLineTypes)
       url += `/driveLineTypes-is-${values.driveLineTypes}`
-    // console.log(values);
 
     router.push('/catalog' + url)
   }
@@ -424,7 +438,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             <Accordion title="Марка" isOpenInner={true}>
               <div className="filter-full__transmission">
                 <Field
@@ -433,20 +446,12 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   filter="brand"
                   transport={transport}
                   component={SelectMake}
-                  options={
-                    makes?.length
-                      ? makes?.map((mark) => ({
-                          label: mark,
-                          value: mark,
-                        }))
-                      : marks
-                  }
+                  options={marks}
                   placeholder="Всі"
                   setter={setCurrentMark}
                 />
               </div>
             </Accordion>
-
             <Accordion title="Модель" isOpenInner={true}>
               <div className="filter-full__transmission">
                 <Field
@@ -455,20 +460,12 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   filter="model"
                   transport={transport}
                   component={SelectMake}
-                  options={
-                    brandModels?.length
-                      ? brandModels?.map((model) => ({
-                          label: model,
-                          value: model,
-                        }))
-                      : models
-                  }
+                  options={models}
                   placeholder="Всі"
                   setter={setCurrentModel}
                 />
               </div>
             </Accordion>
-
             <Accordion title="Коробка передач">
               <div className="filter-full__transmission">
                 <Field
@@ -479,7 +476,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             <Accordion title="Тип палива">
               <div className="filter-full__gas">
                 <Field
@@ -491,7 +487,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             <Accordion title="Об’єм двигуна">
               <div className="filter-full__engine">
                 <div className="filter-full__engine-input">
@@ -516,7 +511,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 </div>
               </div>
             </Accordion>
-
             <Accordion title="Пробіг">
               <div className="filter-full__engine">
                 <div className="filter-full__engine-input">
@@ -539,7 +533,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 </div>
               </div>
             </Accordion>
-
             <Accordion title="Стан">
               <div className="filter-full__transmission">
                 <Field
@@ -550,7 +543,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             <Accordion title="Тип кузова">
               <div className="filter-full__transmission">
                 <Field
@@ -562,7 +554,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             <Accordion title="Тип привода">
               <div className="filter-full__transmission">
                 <Field
@@ -574,7 +565,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             <Accordion title="Продавець">
               <div className="filter-full__year">
                 <label>
@@ -586,7 +576,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 </label>
               </div>
             </Accordion>
-
             <Accordion title="Пошкодження">
               <div className="filter-full__transmission">
                 <Field
@@ -598,7 +587,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion>
-
             {/* <Accordion title="Другорядне пошкодження">
               <div className="filter-full__transmission">
                 <Field

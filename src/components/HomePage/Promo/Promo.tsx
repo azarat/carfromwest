@@ -7,6 +7,7 @@ import Spinner from '../../Spinner/Spinner'
 import { years } from '../../../constants/filter'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
+import { updateDate } from '../../../../store/actions/updateDate'
 
 import { updateOptionsTree } from '../../../../store/actions/optionsTree'
 
@@ -20,7 +21,7 @@ type CustomSelectProps = {
 const Promo: React.FC = (): JSX.Element => {
   const router = useRouter()
   const [marks, setMarks] = useState([])
-  const [models, setModels] = useState([])
+  const [models, setModels] = useState<any>([])
   const [currentMark, setCurrentMark] = useState('')
   const [currentModel, setCurrentModel] = useState('')
   const [fromYear, setFromYear] = useState<number>(0)
@@ -30,7 +31,8 @@ const Promo: React.FC = (): JSX.Element => {
   const optionsTree = useSelector(
     (state: any) => state.optionsTree.optionsTree ?? []
   )
-
+  const updatedDate = useSelector((state: any) => state.updatedDate.updatedDate)
+  const timeToUpdate = 86400000 /* one day */
   const dispatchRedux = useDispatch()
 
   const firstYears = years.filter((year) => year.value < toYear)
@@ -40,6 +42,9 @@ const Promo: React.FC = (): JSX.Element => {
     setLoading(true)
     const url = `/api/filter?filters=makes`
 
+    if (Date.now() - updatedDate > timeToUpdate) {
+      dispatchRedux(updateOptionsTree([]))
+    }
     if (optionsTree.length > 0) {
       setMarks(
         optionsTree.map((val: any) => ({
@@ -57,7 +62,6 @@ const Promo: React.FC = (): JSX.Element => {
               value: val,
             }))
           )
-
           const mappedOptionsTree = optionsTree.map((item: any) => item.title)
 
           const filteredMarks = response.data.makes.filter((val: string) => {
@@ -70,10 +74,13 @@ const Promo: React.FC = (): JSX.Element => {
                 filteredMarks.map((val: any) => ({
                   title: val,
                   models: [],
+                  bodyStyles: [],
                 }))
               )
             )
           )
+
+          dispatchRedux(updateDate(Date.now()))
         }
       } catch (error) {
         setMarks([])
@@ -83,79 +90,58 @@ const Promo: React.FC = (): JSX.Element => {
     setLoading(false)
   }
 
-  useEffect(() => {
-    getMarks()
-    // const url = `/api/filter?filters=makes`
-    // setLoading(true)
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((json) =>
-    //     setMarks(
-    //       json?.makes.sort().map((val: string) => ({
-    //         label: val,
-    //         value: val,
-    //       })) || []
-    //     )
-    //   )
-    //   .catch(() => setMarks([]))
-    //   .finally(() => setLoading(false))
-  }, [])
-
   const getModels = async () => {
     setLoading(true)
-    const url = `/api/filter?filters=makes,models&makes=${currentMark}`
-    try {
-      const response = await axios.get(url)
-      if (response.status == 200) {
-        setModels(
-          response.data.models.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          }))
-        )
 
-        // const mappedOptionsTree = optionsTree.map((item: any) => item.title)
+    const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
+    // const url = `/api/filter?filters=makes,models&makes=${currentMark}`
+    const currentMarkIndex = optionsTree.findIndex(
+      (item: any) => item.title == currentMark
+    )
+    if (optionsTree[currentMarkIndex]?.models.length > 0) {
+      setModels(
+        optionsTree[currentMarkIndex].models.map((val: any) => ({
+          label: val.title,
+          value: val.title,
+        }))
+      )
+    } else {
+      try {
+        const response = await axios.get(url)
+        if (response.status == 200) {
+          setModels(
+            response.data.models.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            }))
+          )
 
-        // const filteredModels = response.data.models.filter((val: string) => {
-        //   return !mappedOptionsTree.includes(val)
-        // })
+          optionsTree[currentMarkIndex].models = response.data.models.map(
+            (val: any) => ({
+              title: val,
+              bodyStyles: [],
+            })
+          )
+          optionsTree[currentMarkIndex].bodyStyles = response.data.bodyStyles
 
-        // console.log(response.data.models)
-
-        // dispatchRedux(
-        //   updateOptionsTree(
-        //     optionsTree.concat(
-        //       response.data.models.map((val: any) => ({
-        //         title: val,
-        //         models: val,
-        //       }))
-        //     )
-        //   )
-        // )
+          dispatchRedux(updateOptionsTree(optionsTree))
+        }
+      } catch (error) {
+        setModels([])
       }
-    } catch (error) {
-      setModels([])
     }
-
     setLoading(false)
   }
 
   useEffect(() => {
-    if (currentMark && !currentModel) {
+    getMarks()
+  }, [])
+
+  useEffect(() => {
+    if (currentMark) {
+      console.log(currentModel)
+
       getModels()
-      // const url = `/api/filter?filters=makes,models&makes=${currentMark}`
-      // fetch(url)
-      //   .then((res) => res.json())
-      //   .then((json) => {
-      //     setModels(
-      //       json?.models.sort().map((val: string) => ({
-      //         label: val,
-      //         value: val,
-      //       })) || []
-      //     )
-      //   })
-      //   .catch(() => setModels([]))
-      //   .finally(() => setLoading(false))
     }
   }, [currentMark])
 
