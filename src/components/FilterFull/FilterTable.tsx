@@ -145,8 +145,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
             }))
           )
           setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
-          // setCurrentModel('')
-          // setModels([{ label: '', value: '' }])
           const mappedOptionsTree = optionsTree.map((item: any) => item.title)
 
           const filteredMarks = response.data.makes.filter((val: string) => {
@@ -175,17 +173,9 @@ const FilterTable: React.FC<FilterTableProps> = ({
     setLoading(false)
   }
 
-  useEffect(() => {
-    getMarks()
-  }, [])
-
   const getModels = async () => {
     setLoading(true)
-    // setBodyStyles([])
-    // setBodyStyle('')
-
-    // setCurrentModel('')
-    // setModels([{ label: '', value: '' }])
+    setCurrentModel('')
 
     const currentMarkIndex = optionsTree.findIndex(
       (item: any) => item.title == currentMark
@@ -278,18 +268,20 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }
 
   useEffect(() => {
-    setCurrentModel('')
-    setModels([{ label: '', value: '' }])
+    getMarks()
+  }, [])
+
+  useEffect(() => {
+    if (currentMark) {
+      getModels()
+    }
   }, [currentMark])
 
   useEffect(() => {
-    if (currentMark && !currentModel) {
-      getModels()
-    }
     if (currentModel) {
       getBodystyles()
     }
-  }, [currentMark, currentModel])
+  }, [currentModel])
 
   const handleSubmit = (values: any) => {
     Object.keys(values).filter(

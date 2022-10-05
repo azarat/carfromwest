@@ -52,8 +52,6 @@ const Promo: React.FC = (): JSX.Element => {
           value: val.title,
         }))
       )
-      // setCurrentModel('')
-      // setModels([{ label: '', value: '' }])
     } else {
       try {
         const response = await axios.get(url)
@@ -64,8 +62,6 @@ const Promo: React.FC = (): JSX.Element => {
               value: val,
             }))
           )
-          // setCurrentModel('')
-          // setModels([{ label: '', value: '' }])
           const mappedOptionsTree = optionsTree.map((item: any) => item.title)
 
           const filteredMarks = response.data.makes.filter((val: string) => {
@@ -93,15 +89,6 @@ const Promo: React.FC = (): JSX.Element => {
 
     setLoading(false)
   }
-
-  useEffect(() => {
-    setCurrentModel('')
-    // setModels([{ label: '', value: '' }])
-  }, [currentMark])
-
-  useEffect(() => {
-    getMarks()
-  }, [])
 
   const getModels = async () => {
     setLoading(true)
@@ -147,14 +134,19 @@ const Promo: React.FC = (): JSX.Element => {
   }
 
   useEffect(() => {
-    // setCurrentModel('')
-    if (currentMark && !currentModel) {
+    getMarks()
+  }, [])
+
+  useEffect(() => {
+    if (currentMark) {
+      console.log(currentModel)
+
       getModels()
     }
   }, [currentMark])
 
   const handleSubmit = (values: any) => {
-    // setLoading(true)
+    setLoading(true)
 
     let url = ''
     if (values.makes) url += `/brand-is-${values.makes}`
