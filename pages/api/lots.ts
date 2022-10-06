@@ -1,5 +1,6 @@
 import { NextApiHandler } from 'next'
 import { USER_AGENT } from '../../src/constants/userAgent'
+import clientPromise from '../../mongodb/mongodb'
 
 const filter: NextApiHandler = async (req, res) => {
   try {
@@ -9,6 +10,14 @@ const filter: NextApiHandler = async (req, res) => {
     ) {
       return res.status(200).send({ items: [] })
     }
+
+    const client = await clientPromise
+    const db = client.db("cfwdata")
+    const dbLots = await db.collection('lots')
+        .find({}).toArray()
+    console.log(dbLots);
+    
+    // return res.status(200).send(dbLots);
 
     const url = `http://46.101.185.57:8080/search/v1/lots`
     const response = await fetch(url, {

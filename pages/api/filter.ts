@@ -1,5 +1,6 @@
 import { NextApiHandler } from 'next'
 import { USER_AGENT } from '../../src/constants/userAgent'
+import clientPromise from '../../mongodb/mongodb'
 
 const filter: NextApiHandler = async (req, res) => {
   try {
@@ -7,8 +8,18 @@ const filter: NextApiHandler = async (req, res) => {
       .map((key) => `${key}=${req.query[key]}`)
       .sort()
       .join('&')
+    
+    const client = await clientPromise
+    const db = client.db("cfwdata")
+    const dbFilteredData = await db.collection('filters')
+      .find({ title: 'test'}).toArray()
+    console.log(dbFilteredData);
+    
+    
+    // return res.status(200).send(dbFilteredData);
 
     const url = `http://46.101.185.57:8080/search/v1/filters?${queryParams}&auctions=iaai,copart`
+
     const response = await fetch(url, {
       headers: {
         'user-agent': req.headers['user-agent'] || USER_AGENT,
