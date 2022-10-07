@@ -40,7 +40,7 @@ const Promo: React.FC = (): JSX.Element => {
 
   const getMarks = async () => {
     setLoading(true)
-    const url = `/api/filter?filters=makes`
+    const url = `/api/filter`
 
     if (Date.now() - updatedDate > timeToUpdate) {
       dispatchRedux(updateOptionsTree([]))
@@ -56,15 +56,16 @@ const Promo: React.FC = (): JSX.Element => {
       try {
         const response = await axios.get(url)
         if (response.status == 200) {
+          const parsedMarks = response.data.map((i: any) => i.title)
           setMarks(
-            response.data.makes.sort().map((val: string) => ({
+            parsedMarks.sort().map((val: string) => ({
               label: val,
               value: val,
             }))
           )
           const mappedOptionsTree = optionsTree.map((item: any) => item.title)
 
-          const filteredMarks = response.data.makes.filter((val: string) => {
+          const filteredMarks = parsedMarks.filter((val: string) => {
             return !mappedOptionsTree.includes(val)
           })
 
@@ -93,8 +94,8 @@ const Promo: React.FC = (): JSX.Element => {
   const getModels = async () => {
     setLoading(true)
 
-    const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
-    // const url = `/api/filter?filters=makes,models&makes=${currentMark}`
+    // const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
+    const url = `/api/filter?title=${currentMark}`
     const currentMarkIndex = optionsTree.findIndex(
       (item: any) => item.title == currentMark
     )
@@ -108,21 +109,23 @@ const Promo: React.FC = (): JSX.Element => {
     } else {
       try {
         const response = await axios.get(url)
+
         if (response.status == 200) {
+          const parsedData = response.data[0]
           setModels(
-            response.data.models.sort().map((val: string) => ({
-              label: val,
-              value: val,
+            parsedData.models.sort().map((val: any) => ({
+              label: val.title,
+              value: val.title,
             }))
           )
 
-          optionsTree[currentMarkIndex].models = response.data.models.map(
+          optionsTree[currentMarkIndex].models = parsedData.models.map(
             (val: any) => ({
-              title: val,
-              bodyStyles: [],
+              title: val.title,
+              bodyStyles: val.bodyStyles,
             })
           )
-          optionsTree[currentMarkIndex].bodyStyles = response.data.bodyStyles
+          optionsTree[currentMarkIndex].bodyStyles = parsedData.bodyStyles
 
           dispatchRedux(updateOptionsTree(optionsTree))
         }
