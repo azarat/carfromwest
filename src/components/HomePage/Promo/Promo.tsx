@@ -56,31 +56,21 @@ const Promo: React.FC = (): JSX.Element => {
       try {
         const response = await axios.get(url)
         if (response.status == 200) {
-          const parsedMarks = response.data.map((i: any) => i.title)
+          const filteredData = response.data.filter(
+            (item: any) => item.models.length > 0
+          )
+          const parsedMarks = filteredData.map((i: any) => i.title)
+
           setMarks(
             parsedMarks.sort().map((val: string) => ({
               label: val,
               value: val,
             }))
           )
-          const mappedOptionsTree = optionsTree.map((item: any) => item.title)
 
-          const filteredMarks = parsedMarks.filter((val: string) => {
-            return !mappedOptionsTree.includes(val)
-          })
+          console.log(filteredData)
 
-          dispatchRedux(
-            updateOptionsTree(
-              optionsTree.concat(
-                filteredMarks.map((val: any) => ({
-                  title: val,
-                  models: [],
-                  bodyStyles: [],
-                }))
-              )
-            )
-          )
-
+          dispatchRedux(updateOptionsTree([...filteredData]))
           dispatchRedux(updateDate(Date.now()))
         }
       } catch (error) {
@@ -93,46 +83,15 @@ const Promo: React.FC = (): JSX.Element => {
 
   const getModels = async () => {
     setLoading(true)
-
-    // const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
-    const url = `/api/filter?title=${currentMark}`
     const currentMarkIndex = optionsTree.findIndex(
       (item: any) => item.title == currentMark
     )
-    if (optionsTree[currentMarkIndex]?.models.length > 0) {
-      setModels(
-        optionsTree[currentMarkIndex].models.map((val: any) => ({
-          label: val.title,
-          value: val.title,
-        }))
-      )
-    } else {
-      try {
-        const response = await axios.get(url)
-
-        if (response.status == 200) {
-          const parsedData = response.data[0]
-          setModels(
-            parsedData.models.sort().map((val: any) => ({
-              label: val.title,
-              value: val.title,
-            }))
-          )
-
-          optionsTree[currentMarkIndex].models = parsedData.models.map(
-            (val: any) => ({
-              title: val.title,
-              bodyStyles: val.bodyStyles,
-            })
-          )
-          optionsTree[currentMarkIndex].bodyStyles = parsedData.bodyStyles
-
-          dispatchRedux(updateOptionsTree(optionsTree))
-        }
-      } catch (error) {
-        setModels([])
-      }
-    }
+    setModels(
+      optionsTree[currentMarkIndex].models.map((val: any) => ({
+        label: val.title,
+        value: val.title,
+      }))
+    )
     setLoading(false)
   }
 
@@ -142,9 +101,8 @@ const Promo: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (currentMark) {
-      console.log(currentModel)
-
       getModels()
+      console.log(currentModel)
     }
   }, [currentMark])
 
