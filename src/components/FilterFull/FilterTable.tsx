@@ -122,7 +122,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   const getMarks = async () => {
     setLoading(true)
-    // const url = `/api/filter?filters=makes,bodyStyles`
     const url = `/api/filter`
 
     if (Date.now() - updatedDate > timeToUpdate) {
@@ -139,8 +138,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
       try {
         const response = await axios.get(url)
         if (response.status == 200) {
-          const parsedMarks = response.data.map((i: any) => i.title)
-          const parsedBodystyles = response.data.map((i: any) => i.bodyStyles)
+          const filteredData = response.data.filter(
+            (item: any) => item.models.length > 0
+          )
+          const parsedMarks = filteredData.map((i: any) => i.title)
+          const parsedBodystyles = filteredData.map((i: any) => i.bodyStyles)
 
           setMarks(
             parsedMarks.sort().map((val: string) => ({
@@ -150,24 +152,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
           )
           setBodyStyles(filterBodyStyles(parsedBodystyles[0].sort()))
 
-          const mappedOptionsTree = optionsTree.map((item: any) => item.title)
-
-          const filteredMarks = parsedMarks.filter((val: string) => {
-            return !mappedOptionsTree.includes(val)
-          })
-
-          dispatchRedux(
-            updateOptionsTree(
-              optionsTree.concat(
-                filteredMarks.map((val: any) => ({
-                  title: val,
-                  models: [],
-                  bodyStyles: [],
-                }))
-              )
-            )
-          )
-
+          dispatchRedux(updateOptionsTree([...filteredData]))
           dispatchRedux(updateDate(Date.now()))
         }
       } catch (error) {
@@ -185,55 +170,20 @@ const FilterTable: React.FC<FilterTableProps> = ({
     const currentMarkIndex = optionsTree.findIndex(
       (item: any) => item.title == currentMark
     )
+    setModels(
+      optionsTree[currentMarkIndex].models.map((val: any) => ({
+        label: val.title,
+        value: val.title,
+      }))
+    )
 
-    // const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}`
-    const url = `/api/filter?title=${currentMark}`
-
-    if (optionsTree[currentMarkIndex]?.models.length > 0) {
-      setModels(
-        optionsTree[currentMarkIndex].models.map((val: any) => ({
-          label: val.title,
-          value: val.title,
-        }))
-      )
-
-      setBodyStyles(filterBodyStyles(optionsTree[currentMarkIndex].bodyStyles))
-    } else {
-      try {
-        const response = await axios.get(url)
-        if (response.status == 200) {
-          const parsedData = response.data[0]
-
-          setModels(
-            parsedData.models.sort().map((val: any) => ({
-              label: val.title,
-              value: val.title,
-            }))
-          )
-          setBodyStyles(filterBodyStyles(parsedData.bodyStyles.sort()))
-          optionsTree[currentMarkIndex].models = parsedData.models.map(
-            (val: any) => ({
-              title: val.title,
-              bodyStyles: val.bodyStyles,
-            })
-          )
-          optionsTree[currentMarkIndex].bodyStyles = parsedData.bodyStyles
-
-          dispatchRedux(updateOptionsTree(optionsTree))
-        }
-      } catch (error) {
-        setModels(undefined)
-      }
-    }
+    setBodyStyles(filterBodyStyles(optionsTree[currentMarkIndex].bodyStyles))
 
     setLoading(false)
   }
 
   const getBodystyles = async () => {
     setLoading(true)
-    setBodyStyles([])
-    setBodyStyle('')
-
     const currentMarkIndex = optionsTree.findIndex(
       (item: any) => item.title == currentMark
     )
@@ -241,40 +191,20 @@ const FilterTable: React.FC<FilterTableProps> = ({
       (item: any) => item.title == currentModel
     )
 
-    const url = `/api/filter?filters=makes,models,bodyStyles&makes=${currentMark}&models=${currentModel}`
-    // const url = `/api/filter?title=${currentMark}&models=${currentModel}`
-
     if (
-      optionsTree[currentMarkIndex]?.models[currentModelIndex]?.bodyStyles
+      optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles
         .length > 0
     ) {
+      setBodyStyles([])
+      setBodyStyle('')
+
       setBodyStyles(
         filterBodyStyles(
           optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles
         )
       )
-    } else {
-      try {
-        const response = await axios.get(url)
-        if (response.status == 200) {
-          setModels(
-            response.data.models.sort().map((val: string) => ({
-              label: val,
-              value: val,
-            })) || []
-          )
-          setBodyStyles(filterBodyStyles(response.data.bodyStyles.sort()))
-
-          optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles =
-            response.data.bodyStyles
-
-          dispatchRedux(updateOptionsTree(optionsTree))
-        }
-      } catch (error) {
-        setBodyStyles([])
-        setBodyStyle('')
-      }
     }
+
     setLoading(false)
   }
 
