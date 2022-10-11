@@ -12,7 +12,7 @@ import FilterField from '../../src/components/FilterField/FilterField'
 // import FilterFull from '../../src/components/FilterFull/FilterFull'
 import FilterTable from '../../src/components/FilterFull/FilterTable'
 // Types
-import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
+// import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 import { IFilter } from '../../src/components/FilterFull/Types'
 import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
@@ -116,7 +116,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
     setActiveMobFilter(!activeMobFilter)
   }
 
-  const vehicle = { items, total } as ICarsFetchTypes
+  const vehicle = { items, total } as any /*  as ICarsFetchTypes */
 
   return (
     <div className="catalog__wrapper">

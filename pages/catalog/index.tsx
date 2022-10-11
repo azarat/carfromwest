@@ -1,4 +1,4 @@
-import { NextPage, GetServerSideProps } from 'next'
+import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -10,19 +10,19 @@ import FilterField from '../../src/components/FilterField/FilterField'
 // import FilterFull from '../../src/components/FilterFull/FilterFull'
 import FilterTable from '../../src/components/FilterFull/FilterTable'
 // Types
-import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
+// import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 import { IFilter } from '../../src/components/FilterFull/Types'
 import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 // import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
-import { USER_AGENT } from '../../src/constants/userAgent'
+// import { USER_AGENT } from '../../src/constants/userAgent'
 
 import FilterSVG from '../../src/assets/svg/filter_1.svg'
 
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
-  total,
+  // total,
   // brands,
   makes,
   type = '',
