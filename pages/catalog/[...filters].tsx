@@ -118,7 +118,6 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
 
   const vehicle = { items, total } as ICarsFetchTypes
 
-
   return (
     <div className="catalog__wrapper">
       <section className="catalog">

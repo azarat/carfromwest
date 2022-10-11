@@ -1,6 +1,6 @@
 import { ILot } from '../../Types/Types'
 export type CatalogGridProps = {
-  cars: ICarsFetchTypes | undefined
+  cars: any[] /* ICarsFetchTypes */
   loading: boolean
 }
 
