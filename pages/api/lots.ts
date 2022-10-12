@@ -1,11 +1,34 @@
 import { NextApiHandler } from 'next'
-// import { USER_AGENT } from '../../src/constants/userAgent'
 import clientPromise from '../../mongodb/mongodb'
 
 const filter: NextApiHandler = async (req, res) => {
 
   const nPerPage = 12;
   const pageNumber = +req.query.page;
+
+  const queryParamsSet = <any> [{
+            $lte: [
+              { $dateFromString: { dateString: '$auctionDate' } },
+              new Date()
+            ]
+          }] 
+  
+    // queryParamsSet.push()
+
+
+ const queryParams: any = {$expr: {
+        $and: queryParamsSet
+  },
+  }
+  
+  if ('make' in req.query) {
+    queryParams['lotInfo.make'] = req.query.make
+  }
+
+  console.log(req.query);
+  console.log(queryParams);
+  
+  
 
   try {
     if (
@@ -17,19 +40,9 @@ const filter: NextApiHandler = async (req, res) => {
 
     const client = await clientPromise
     const db = client.db("cfwdata")
-    const dbLots = await db.collection('lots')
-      .find({}).skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 ).limit(nPerPage).toArray()
+    const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).toArray()
     
-    // const dbLots = await db.collection('lots').aggregate([
-    //     { $limit: 2 }
-    //                 //  { $match: { lotNumber: "34645408" } },
-    //                 //  { $group: { _id: "$cust_id", total: { $sum: "$amount" } } },
-    //                 //  { $sort: { total: -1 } }
-    //                ])
-    // console.log(dbLots);
-
     const dbLotsCount = await db.collection('lots').count()
-    console.log(dbLotsCount);
     
     
     // return res.status(200).send(dbLots);

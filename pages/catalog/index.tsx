@@ -78,6 +78,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
       : { ...defaultFilter }
   )
 
+  console.log(router.query.make)
+
   useEffect(() => {
     setFilter((prev) => ({ ...prev, searchTerm: router.query.searchTerm }))
   }, [router.query.searchTerm])
@@ -116,7 +118,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }, [router.query])
 
   const getLots = async () => {
-    const url = `/api/lots?page=${router.query.page}`
+    const url = `/api/lots?page=${router.query.page}&make=${router.query.make}`
 
     try {
       const response = await axios.get(url)
@@ -131,7 +133,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
   useEffect(() => {
     getLots()
-  }, [router.query.page])
+  }, [router.query])
 
   const toggleFilter = () => {
     setActiveMobFilter(!activeMobFilter)
