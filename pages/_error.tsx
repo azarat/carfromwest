@@ -7,9 +7,9 @@ const Error500: React.FC = (): JSX.Element => {
   return (
     <div className="error-page">
       <h1 className="error-page-title">
-        Упс, что-то пошло не так
+        Упс, щось пішло не так
         <br />
-        Мы уже работаем над этим
+        Ми вже працюємо над цим
       </h1>
     </div>
   )
