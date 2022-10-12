@@ -12,7 +12,7 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
   cars,
   loading,
 }): JSX.Element => {
-  if (!loading && !cars) {
+  if (!loading && !cars?.dbLots) {
     return (
       <div className="catalog-grid">
         <CatalogGridEmpty />
@@ -26,9 +26,9 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
       <div className="catalog-grid__container">
         {!loading &&
           cars &&
-          cars.map(
+          cars?.dbLots.map(
             ({
-              _id,
+              // _id,
               auction,
               lotNumber,
               lotInfo: { vin, make, model, year },
@@ -49,7 +49,10 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
               auctionDate,
             }) => (
               // <Link key={vin} href={`/catalog/lot/${auction}-${lotNumber}`}>
-              <div className="catalog-grid__container-link" key={_id}>
+              <div
+                className="catalog-grid__container-link"
+                key={vin + lotNumber}
+              >
                 <CatalogItem
                   fuelType={gas.find((f) => f.value === fuelType)?.label || ''}
                   hightBid={+currentBid.value}

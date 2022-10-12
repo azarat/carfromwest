@@ -3,6 +3,10 @@ import { NextApiHandler } from 'next'
 import clientPromise from '../../mongodb/mongodb'
 
 const filter: NextApiHandler = async (req, res) => {
+
+  const nPerPage = 12;
+  const pageNumber = +req.query.page;
+
   try {
     if (
       req.query.searchTerm &&
@@ -14,8 +18,19 @@ const filter: NextApiHandler = async (req, res) => {
     const client = await clientPromise
     const db = client.db("cfwdata")
     const dbLots = await db.collection('lots')
-        .find({}).limit(12).toArray()
-    console.log(dbLots);
+      .find({}).skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 ).limit(nPerPage).toArray()
+    
+    // const dbLots = await db.collection('lots').aggregate([
+    //     { $limit: 2 }
+    //                 //  { $match: { lotNumber: "34645408" } },
+    //                 //  { $group: { _id: "$cust_id", total: { $sum: "$amount" } } },
+    //                 //  { $sort: { total: -1 } }
+    //                ])
+    // console.log(dbLots);
+
+    const dbLotsCount = await db.collection('lots').count()
+    console.log(dbLotsCount);
+    
     
     // return res.status(200).send(dbLots);
 
@@ -32,7 +47,7 @@ const filter: NextApiHandler = async (req, res) => {
     // })
 
     // const data = await response.text()
-    return res.status(200).send(dbLots)
+    return res.status(200).send({dbLots, dbLotsCount})
   } catch (e) {
     return res.status(500).send({ message: 'Server Error' })
   }

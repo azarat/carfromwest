@@ -1,6 +1,6 @@
 import { ILot } from '../../Types/Types'
 export type CatalogGridProps = {
-  cars: any[] /* ICarsFetchTypes */
+  cars:  ICarsFetchTypes | undefined
   loading: boolean
 }
 
@@ -72,8 +72,8 @@ export interface ICar {
 }
 
 export interface ICarsFetchTypes {
-  items: ILot[]
-  total: number
+  dbLots: ILot[]
+  dbLotsCount: number
 }
 
 export type CatalogItemProps = {
