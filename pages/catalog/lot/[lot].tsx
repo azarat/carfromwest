@@ -23,15 +23,12 @@ import StateSVG from '../../../src/assets/svg/state.svg'
 import ColorSVG from '../../../src/assets/svg/color.svg'
 import ClockSVG from '../../../src/assets/svg/clock.svg'
 
-
-
 // Types
 import { CarPageProps } from '../../../src/Types/Types'
 import Countdown from '../../../src/components/Countdown/Countdown'
 import carFeatures from '../../../src/constants/carFeatures'
 // import { dateToText } from '../../../src/helpers/dateToText'
 // import Consultation from '../../../src/components/Consultation/Consultation'
-
 
 const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   const router = useRouter()
@@ -45,32 +42,37 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
   )
   // console.log(car);
   // console.log(carFeatures);
-  
-  
+
   function matchCarsFeatures(parameter: any) {
-    if(parameter) {
+    if (parameter) {
       parameter = parameter.toLowerCase()
     }
-    const match: any = carFeatures.filter(item => item.eng.toLowerCase() === parameter)
-    
-    if(match.length > 0) {
+    const match: any = carFeatures.filter(
+      (item) => item.eng.toLowerCase() === parameter
+    )
+
+    if (match.length > 0) {
       return match[0].ua
     }
     return
   }
 
-    let localeDate
-    let localeTime
-    let auctionDateEnd = new Date(carResponse.auctionDate)
-  if(carResponse?.auctionDate) {
+  let localeDate
+  let localeTime
+  let auctionDateEnd = new Date(carResponse.auctionDate)
+  if (carResponse?.auctionDate) {
     auctionDateEnd = new Date(carResponse.auctionDate)
 
-    const optionsTime: any = {  hour: "numeric", minute: "numeric" };
-    const optionsDate: any = {  year: 'numeric', month: 'numeric', day: 'numeric' };
-    
-    localeDate = auctionDateEnd.toLocaleString("ua", optionsDate);
-    localeTime = auctionDateEnd.toLocaleString("ua", optionsTime);
-}
+    const optionsTime: any = { hour: 'numeric', minute: 'numeric' }
+    const optionsDate: any = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }
+
+    localeDate = auctionDateEnd.toLocaleString('ua', optionsDate)
+    localeTime = auctionDateEnd.toLocaleString('ua', optionsTime)
+  }
   useEffect(() => {
     setCar(carResponse)
   }, [carResponse])
@@ -122,15 +124,30 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                 </div>
               </div>
             </div>
-              <div className="car-page__description">
-                <div className="car-page__description-label">Опис</div>
-                <p>{`${car.lotInfo.year} ${car.lotInfo.make} ${car.lotInfo.model}`} - його можна замовити з США безпечно з компанією CARSFROMWEST!</p>
-                <p>Цікавить ціна? Наш менеджер зробить детальний прорахунок: ціна за лот, сума застави (10% від аукціонної ціни), аукціонний збір, сума доставки до порту Америки, до порту в Європі, доставка до України, митні збори, вартість послуг брокера та всі платежі з оформлення. Навіть комісію за платежі прораховують!
-                Залиште ваші контакти у формі &quot;ПОРАХУВАТИ ВАРТІСТЬ&quot;</p>
-                <p>З CARSFROMWEST ви точно не купите &quot;кота в мішку&quot;!</p>
-                <p>Ми надаємо все: CAR FAX, експертну оцінку менеджерів з досвідом роботи 5+ років.</p>
-                <p>Якщо хочете дізнатись більше подробиць про лот - натисніть &quot;ОТРИМАТИ КОНСУЛЬТАЦІЮ&quot;</p>
-              </div>
+            <div className="car-page__description">
+              <div className="car-page__description-label">Опис</div>
+              <p>
+                {`${car.lotInfo.year} ${car.lotInfo.make} ${car.lotInfo.model}`}{' '}
+                - його можна замовити з США безпечно з компанією CARSFROMWEST!
+              </p>
+              <p>
+                Цікавить ціна? Наш менеджер зробить детальний прорахунок: ціна
+                за лот, сума застави (10% від аукціонної ціни), аукціонний збір,
+                сума доставки до порту Америки, до порту в Європі, доставка до
+                України, митні збори, вартість послуг брокера та всі платежі з
+                оформлення. Навіть комісію за платежі прораховують! Залиште ваші
+                контакти у формі &quot;ПОРАХУВАТИ ВАРТІСТЬ&quot;
+              </p>
+              <p>З CARSFROMWEST ви точно не купите &quot;кота в мішку&quot;!</p>
+              <p>
+                Ми надаємо все: CAR FAX, експертну оцінку менеджерів з досвідом
+                роботи 5+ років.
+              </p>
+              <p>
+                Якщо хочете дізнатись більше подробиць про лот - натисніть
+                &quot;ОТРИМАТИ КОНСУЛЬТАЦІЮ&quot;
+              </p>
+            </div>
 
             <div className="car-page__about">
               <div className="car-page__price-wrapper">
@@ -148,21 +165,33 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                 </div> */}
                 {car.auctionDate && (
                   <>
-                  <div className="car-page__timer-wrapper">
-                    <div className="car-page__timer-left">
-                    {car.auction === 'copart' ? <img loading="lazy" src="/assets/images/copart.png" alt="" /> : <img loading="lazy" src="/assets/images/iaai.png" alt="" />} 
-                    </div>
-                    <div className="car-page__timer-right">
-                      <div className="car-page__time">
-                        ДО СТАРТУ ТОРГІВ ЗАЛИШИЛОСЬ
+                    <div className="car-page__timer-wrapper">
+                      <div className="car-page__timer-left">
+                        {car.auction === 'copart' ? (
+                          <img
+                            loading="lazy"
+                            src="/assets/images/copart.png"
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            loading="lazy"
+                            src="/assets/images/iaai.png"
+                            alt=""
+                          />
+                        )}
                       </div>
-                      <div className="car-page__timer">
-                        <Countdown date={auctionDateEnd.toISOString()} />
+                      <div className="car-page__timer-right">
+                        <div className="car-page__time">
+                          ДО СТАРТУ ТОРГІВ ЗАЛИШИЛОСЬ
+                        </div>
+                        <div className="car-page__timer">
+                          <Countdown date={auctionDateEnd.toISOString()} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
 
                 <div className="car-page__btn">
                   <button
@@ -183,103 +212,180 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
                 <div className="car-page__info-crash">
                   <CrashTypeSVG />
                   <div className="car-page__info-crash-primary">
-                    <div className="car-page__info-crash-label">Основне пошкодження</div>
-                    <div className="car-page__info-crash-value">{matchCarsFeatures(car.conditionInfo?.primaryDamage) || car.conditionInfo?.primaryDamage || 'Відсутнє'} </div>
+                    <div className="car-page__info-crash-label">
+                      Основне пошкодження
+                    </div>
+                    <div className="car-page__info-crash-value">
+                      {matchCarsFeatures(car.conditionInfo?.primaryDamage) ||
+                        car.conditionInfo?.primaryDamage ||
+                        'Відсутнє'}{' '}
+                    </div>
                   </div>
                   <div className="car-page__info-crash-secondary">
-                    <div className="car-page__info-crash-label">Другорядне пошкодження</div>
-                    <div className="car-page__info-crash-value">{matchCarsFeatures(car.conditionInfo?.secondaryDamage) || car.conditionInfo?.secondaryDamage || 'Відсутнє'}</div>
+                    <div className="car-page__info-crash-label">
+                      Другорядне пошкодження
+                    </div>
+                    <div className="car-page__info-crash-value">
+                      {matchCarsFeatures(car.conditionInfo?.secondaryDamage) ||
+                        car.conditionInfo?.secondaryDamage ||
+                        'Відсутнє'}
+                    </div>
                   </div>
                 </div>
                 <div className="car-page__table car-page__info-table">
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><DocumentTypeSVG />Тип документа:</span>
+                    <span className="car-page__table-item-title">
+                      <DocumentTypeSVG />
+                      Тип документа:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.saleInfo.saleDocument?.type) || car.saleInfo.saleDocument?.type || 'Н/Д'}
+                      {matchCarsFeatures(car.saleInfo.saleDocument?.type) ||
+                        car.saleInfo.saleDocument?.type ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><MileageSVG />Пробіг:</span>
+                    <span className="car-page__table-item-title">
+                      <MileageSVG />
+                      Пробіг:
+                    </span>
                     <span className="car-page__table-item-description">
                       {car.conditionInfo.odometer?.value || 0} миль
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><FuelTypeSVG />Топливо:</span>
+                    <span className="car-page__table-item-title">
+                      <FuelTypeSVG />
+                      Топливо:
+                    </span>
                     <span className="car-page__table-item-description">
-                       {matchCarsFeatures(car.specifications.fuelType) || car.specifications.fuelType || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.fuelType) ||
+                        car.specifications.fuelType ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><TransmissionSVG />Трансмісія:</span>
+                    <span className="car-page__table-item-title">
+                      <TransmissionSVG />
+                      Трансмісія:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.specifications.transmissionType) || car.specifications.transmissionType || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.transmissionType) ||
+                        car.specifications.transmissionType ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><EngineVolumeSVG />Об`єм двигуна:</span>
+                    <span className="car-page__table-item-title">
+                      <EngineVolumeSVG />
+                      Об`єм двигуна:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.specifications.engine?.capacity) || car.specifications.engine?.capacity || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.engine?.capacity) ||
+                        car.specifications.engine?.capacity ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><HeathSVG />Стан:</span>
+                    <span className="car-page__table-item-title">
+                      <HeathSVG />
+                      Стан:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.conditionInfo?.condition) || car.conditionInfo?.condition || 'Н/Д'}
+                      {matchCarsFeatures(car.conditionInfo?.condition) ||
+                        car.conditionInfo?.condition ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><CarBodySVG />Кузов:</span>
+                    <span className="car-page__table-item-title">
+                      <CarBodySVG />
+                      Кузов:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.specifications?.bodyStyle?.type) || car.specifications?.bodyStyle?.type || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications?.bodyStyle?.type) ||
+                        car.specifications?.bodyStyle?.type ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><DriveTypeSVG />Привод:</span>
+                    <span className="car-page__table-item-title">
+                      <DriveTypeSVG />
+                      Привод:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.specifications.drivelineType) || car.specifications.drivelineType || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications.drivelineType) ||
+                        car.specifications.drivelineType ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><KeysSVG />Наявність ключів:</span>
+                    <span className="car-page__table-item-title">
+                      <KeysSVG />
+                      Наявність ключів:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {car.conditionInfo.keys ? 'В наявності' : 'Немає в наявності'}
+                      {car.conditionInfo.keys
+                        ? 'В наявності'
+                        : 'Немає в наявності'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><StateSVG />Штат/тип сертификата:</span>
+                    <span className="car-page__table-item-title">
+                      <StateSVG />
+                      Штат/тип сертификата:
+                    </span>
                     <span className="car-page__table-item-description">
                       {certString !== '-' ? certString : 'N/A'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><StarSVG />Тип продавця</span>
+                    <span className="car-page__table-item-title">
+                      <StarSVG />
+                      Тип продавця
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.saleInfo?.seller?.group) || car.saleInfo?.seller?.group || 'Н/Д'}
+                      {matchCarsFeatures(car.saleInfo?.seller?.group) ||
+                        car.saleInfo?.seller?.group ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><CalendarSVG />Рік:</span>
+                    <span className="car-page__table-item-title">
+                      <CalendarSVG />
+                      Рік:
+                    </span>
                     <span className="car-page__table-item-description">
                       {car.lotInfo.year || 'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><SellerSVG />Продавець:</span>
+                    <span className="car-page__table-item-title">
+                      <SellerSVG />
+                      Продавець:
+                    </span>
                     <span className="car-page__table-item-description">
                       {car.saleInfo.seller?.displayName || 'Не вказаний'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><ColorSVG />Колір:</span>
+                    <span className="car-page__table-item-title">
+                      <ColorSVG />
+                      Колір:
+                    </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car.specifications?.color) || car.specifications?.color || 'Н/Д'}
+                      {matchCarsFeatures(car.specifications?.color) ||
+                        car.specifications?.color ||
+                        'Н/Д'}
                     </span>
                   </div>
                   <div className="car-page__table-item">
-                    <span className="car-page__table-item-title"><ClockSVG />Початок аукціону:</span>
+                    <span className="car-page__table-item-title">
+                      <ClockSVG />
+                      Початок аукціону:
+                    </span>
                     <span className="car-page__table-item-description">
-                     {localeTime || 'Н/Д'} {localeDate}
+                      {localeTime || 'Н/Д'} {localeDate}
                     </span>
                   </div>
                 </div>

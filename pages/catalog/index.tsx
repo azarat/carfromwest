@@ -19,9 +19,10 @@ import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 // import { USER_AGENT } from '../../src/constants/userAgent'
 
 import FilterSVG from '../../src/assets/svg/filter_1.svg'
+import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 
 const Index: NextPage<Partial<ICatalog>> = ({
-  items,
+  // items,
   // total,
   // brands,
   makes,
@@ -30,14 +31,14 @@ const Index: NextPage<Partial<ICatalog>> = ({
   yearMax,
   models,
   searchTerm,
-  page,
+  // page,
   transport,
 }): JSX.Element => {
   const defaultFilter = {
     auctions: ['copart', 'iaai'],
     vehicleType: 'automobile',
     countries: ['US'],
-    page: 1,
+    // page: 1,
     itemsPerPage: 12,
     sortField: 'added-date',
     sortDirection: 'asc',
@@ -58,8 +59,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const router = useRouter()
   const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   // const [openFilter, setOpenFilter] = useState<boolean>(false)
-  const [vehicle, setVehicle] = useState<any[]>([])
-  const [, setPage] = useState<number>(1)
+  const [vehicle, setVehicle] = useState<ICarsFetchTypes>()
+  const [page, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
       ? {
@@ -76,6 +77,8 @@ const Index: NextPage<Partial<ICatalog>> = ({
         )
       : { ...defaultFilter }
   )
+
+  console.log(router.query.make)
 
   useEffect(() => {
     setFilter((prev) => ({ ...prev, searchTerm: router.query.searchTerm }))
@@ -110,8 +113,12 @@ const Index: NextPage<Partial<ICatalog>> = ({
   // const vehicle = { items, total } as ICarsFetchTypes
   // let vehicle
 
+  useEffect(() => {
+    setPage(Number(router.query.page))
+  }, [router.query])
+
   const getLots = async () => {
-    const url = `/api/lots`
+    const url = `/api/lots?page=${router.query.page}&make=${router.query.make}`
 
     try {
       const response = await axios.get(url)
@@ -126,7 +133,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
 
   useEffect(() => {
     getLots()
-  }, [])
+  }, [router.query])
 
   const toggleFilter = () => {
     setActiveMobFilter(!activeMobFilter)
@@ -167,7 +174,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
         </div>
 
         <CatalogGrid loading={false} cars={vehicle}>
-          {items && !!items?.length && (
+          {vehicle && vehicle?.dbLots?.length > 0 && (
             <Pagination
               page={page ? +page : 1}
               cars={vehicle}

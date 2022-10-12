@@ -251,7 +251,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
     )
 
     let url = ''
-    if (values.makes) url += `/brand-is-${values.makes}`
+    if (values.makes) url += `?make=${values.makes}`
     if (values.models) url += `/model-is-${values.models}`
     if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
     if (values.engineFrom && values.engineTo)

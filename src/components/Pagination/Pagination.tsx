@@ -21,16 +21,19 @@ const Pagination: React.FC<PaginationProps> = ({
   page,
   cars,
 }): JSX.Element | null => {
-  const totalPages = (cars && Math.ceil(cars.total / 12)) || 0
+  const totalPages = (cars && Math.ceil(cars.dbLotsCount / 12)) || 0
   const router = useRouter()
-  const getUrl = useMemo(() => (page: number) => {
-    const queryIndex = router.asPath.indexOf('?');
-    if (queryIndex === -1) {
-      return router.asPath + `?page=${page}`
-    }
+  const getUrl = useMemo(
+    () => (page: number) => {
+      const queryIndex = router.asPath.indexOf('?')
+      if (queryIndex === -1) {
+        return router.asPath + `?page=${page}`
+      }
 
-    return router.asPath.slice(0, queryIndex) + `?page=${page}`
-  }, [router.asPath]);
+      return router.asPath.slice(0, queryIndex) + `?page=${page}`
+    },
+    [router.asPath]
+  )
 
   const pageNeighbours = 1
   const fetchPageNumbers = () => {
@@ -106,8 +109,9 @@ const Pagination: React.FC<PaginationProps> = ({
             return (
               <li
                 key={`${page}${index}`}
-                className={`pagination__item ${item === page ? 'pagination__item--active' : ''
-                  }`}
+                className={`pagination__item ${
+                  item === page ? 'pagination__item--active' : ''
+                }`}
               >
                 <Link href={getUrl(index + 1)}>
                   <a className="pagination__item-btn">{item}</a>
