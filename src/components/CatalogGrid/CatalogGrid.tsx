@@ -12,57 +12,66 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
   cars,
   loading,
 }): JSX.Element => {
-  if (!loading && !cars?.items.length) {
+  if (!loading && !cars) {
     return (
       <div className="catalog-grid">
         <CatalogGridEmpty />
       </div>
     )
   }
+
   return (
     <div className="catalog-grid">
       {loading && <Spinner />}
       <div className="catalog-grid__container">
         {!loading &&
           cars &&
-          cars.items.map(
+          cars.map(
             ({
+              _id,
               auction,
               lotNumber,
               lotInfo: { vin, make, model, year },
-              specifications: { fuelType, engine, transmissionType, drivelineType },
-              conditionInfo: { odometer, condition, primaryDamage, secondaryDamage },
+              specifications: {
+                fuelType,
+                engine,
+                transmissionType,
+                drivelineType,
+              },
+              conditionInfo: {
+                odometer,
+                condition,
+                primaryDamage,
+                secondaryDamage,
+              },
               saleInfo: { currentBid },
               images,
-              auctionDate
-              
+              auctionDate,
             }) => (
               // <Link key={vin} href={`/catalog/lot/${auction}-${lotNumber}`}>
-                <div className="catalog-grid__container-link">
-                  <CatalogItem
-                    fuelType={
-                      gas.find((f) => f.value === fuelType)?.label || ''
-                    }
-                    hightBid={+currentBid.value}
-                    imageUrl={
-                      images ? images[0].full : '/assets/images/no-image.jpg'
-                    }
-                    lotNumber={`${lotNumber}`}
-                    make={make}
-                    modelGroup={model}
-                    odometer={odometer?.value || 0}
-                    vin={vin}
-                    year={year}
-                    auctionDate={auctionDate}
-                    engine={engine?.capacity}
-                    transmissionType={transmissionType}
-                    drivelineType={drivelineType}
-                    condition={condition}
-                    primaryDamage={primaryDamage}
-                    secondaryDamage={secondaryDamage}
-                    auction={auction}
-                  />
-                </div>
+              <div className="catalog-grid__container-link" key={_id}>
+                <CatalogItem
+                  fuelType={gas.find((f) => f.value === fuelType)?.label || ''}
+                  hightBid={+currentBid.value}
+                  imageUrl={
+                    images ? images[0].full : '/assets/images/no-image.jpg'
+                  }
+                  lotNumber={`${lotNumber}`}
+                  make={make}
+                  modelGroup={model}
+                  odometer={odometer?.value || 0}
+                  vin={vin}
+                  year={year}
+                  auctionDate={auctionDate}
+                  engine={engine?.capacity}
+                  transmissionType={transmissionType}
+                  drivelineType={drivelineType}
+                  condition={condition}
+                  primaryDamage={primaryDamage}
+                  secondaryDamage={secondaryDamage}
+                  auction={auction}
+                />
+              </div>
               // </Li nk>
             )
           )}

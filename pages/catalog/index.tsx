@@ -1,6 +1,7 @@
-import { NextPage, GetServerSideProps } from 'next'
+import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 // Components
 import CatalogGrid from '../../src/components/CatalogGrid/CatalogGrid'
@@ -9,19 +10,19 @@ import FilterField from '../../src/components/FilterField/FilterField'
 // import FilterFull from '../../src/components/FilterFull/FilterFull'
 import FilterTable from '../../src/components/FilterFull/FilterTable'
 // Types
-import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
+// import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 import { IFilter } from '../../src/components/FilterFull/Types'
 import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 // import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
-import { USER_AGENT } from '../../src/constants/userAgent'
+// import { USER_AGENT } from '../../src/constants/userAgent'
 
 import FilterSVG from '../../src/assets/svg/filter_1.svg'
 
 const Index: NextPage<Partial<ICatalog>> = ({
   items,
-  total,
+  // total,
   // brands,
   makes,
   type = '',
@@ -57,6 +58,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
   const router = useRouter()
   const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
   // const [openFilter, setOpenFilter] = useState<boolean>(false)
+  const [vehicle, setVehicle] = useState<any[]>([])
   const [, setPage] = useState<number>(1)
   const [filter, setFilter] = useState<Partial<IFilter>>(
     makes || type || yearMin || yearMax || models || searchTerm
@@ -105,7 +107,26 @@ const Index: NextPage<Partial<ICatalog>> = ({
     )
   }
 
-  const vehicle = { items, total } as ICarsFetchTypes
+  // const vehicle = { items, total } as ICarsFetchTypes
+  // let vehicle
+
+  const getLots = async () => {
+    const url = `/api/lots`
+
+    try {
+      const response = await axios.get(url)
+      if (response.status == 200) {
+        setVehicle(response.data)
+        console.log(vehicle)
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
+  useEffect(() => {
+    getLots()
+  }, [])
 
   const toggleFilter = () => {
     setActiveMobFilter(!activeMobFilter)
@@ -146,7 +167,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
         </div>
 
         <CatalogGrid loading={false} cars={vehicle}>
-          {items && !!items.length && (
+          {items && !!items?.length && (
             <Pagination
               page={page ? +page : 1}
               cars={vehicle}
@@ -159,63 +180,63 @@ const Index: NextPage<Partial<ICatalog>> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const filtersUrl =
-    'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
-  const filterResponse = await fetch(filtersUrl, {
-    headers: {
-      'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
-      Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-      'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
-    },
-  })
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const filtersUrl =
+//     'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
+//   const filterResponse = await fetch(filtersUrl, {
+//     headers: {
+//       'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
+//       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
+//       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
+//     },
+//   })
 
-  const { makes } = await filterResponse?.json()
+//   const { makes } = await filterResponse?.json()
 
-  const lotsBody = ctx.query.searchTerm
-    ? {
-        includeFilters: ['vehicleTypes'],
-        makes: [],
-        vehicleType: 'automobile',
-        models: [],
-        yearMin: 2010,
-        yearMax: null,
-        searchTerm: ctx.query.searchTerm,
-        page: 1,
-        itemsPerPage: 12,
-      }
-    : {
-        vehicleType: 'automobile',
-        page: +ctx.query.page! || 1,
-        itemsPerPage: 12,
-        yearMin: 2010,
-        sortField: ctx.query.sortField || 'added-date',
-        sortDirection: ctx.query.sortDirection || 'asc',
-      }
+//   const lotsBody = ctx.query.searchTerm
+//     ? {
+//         includeFilters: ['vehicleTypes'],
+//         makes: [],
+//         vehicleType: 'automobile',
+//         models: [],
+//         yearMin: 2010,
+//         yearMax: null,
+//         searchTerm: ctx.query.searchTerm,
+//         page: 1,
+//         itemsPerPage: 12,
+//       }
+//     : {
+//         vehicleType: 'automobile',
+//         page: +ctx.query.page! || 1,
+//         itemsPerPage: 12,
+//         yearMin: 2010,
+//         sortField: ctx.query.sortField || 'added-date',
+//         sortDirection: ctx.query.sortDirection || 'asc',
+//       }
 
-  const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
-  const carsResponse = await fetch(carsUrl, {
-    method: 'POST',
-    headers: {
-      'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
-      Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-      'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(lotsBody),
-  })
+//   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
+//   const carsResponse = await fetch(carsUrl, {
+//     method: 'POST',
+//     headers: {
+//       'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
+//       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
+//       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(lotsBody),
+//   })
 
-  const { items, total } = await carsResponse?.json()
+//   const { items, total } = await carsResponse?.json()
 
-  return {
-    props: {
-      items,
-      total,
-      brands: makes,
-      transport: 'automobile',
-      ...ctx.query,
-    },
-  }
-}
+//   return {
+//     props: {
+//       items,
+//       total,
+//       brands: makes,
+//       transport: 'automobile',
+//       ...ctx.query,
+//     },
+//   }
+// }
 
 export default Index
