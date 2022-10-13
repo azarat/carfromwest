@@ -153,15 +153,17 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
           </div>
         </div>
 
-        <CatalogGrid loading={false} cars={vehicle}>
-          {items && !!items.length && (
-            <Pagination
-              page={currentPage as number}
-              cars={vehicle}
-              setPage={setPage}
-            />
-          )}
-        </CatalogGrid>
+        {
+          <CatalogGrid loading={false} cars={vehicle}>
+            {items && !!items.length && (
+              <Pagination
+                page={currentPage as number}
+                cars={vehicle}
+                setPage={setPage}
+              />
+            )}
+          </CatalogGrid>
+        }
       </section>
     </div>
   )

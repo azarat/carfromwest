@@ -5,6 +5,7 @@ const filter: NextApiHandler = async (req, res) => {
 
   const nPerPage = 12;
   const pageNumber = +req.query.page;
+  
   const client = await clientPromise
   const db = client.db("cfwdata")
  
@@ -20,11 +21,7 @@ const filter: NextApiHandler = async (req, res) => {
         $and: queryParamsSet,
     },
   }
-  
     
-  
-    
-  
   if ('make' in req.query && req.query.make !== 'undefined') {
     queryParams['lotInfo.make'] = req.query.make 
   }
@@ -80,9 +77,8 @@ const filter: NextApiHandler = async (req, res) => {
     queryParams['specifications.engine.capacity'] = {$gte: req.query.engineFrom, $lte: req.query.engineTo }
   }
   
-  
-
   console.log(queryParams);
+  
   
 
   try {
@@ -96,7 +92,6 @@ const filter: NextApiHandler = async (req, res) => {
   const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).toArray()
   const dbLotsCount = await db.collection('lots').countDocuments(queryParams);
     
-  console.log(dbLotsCount);
 
   return res.status(200).send({dbLots, dbLotsCount})
   } catch (e) {

@@ -12,6 +12,8 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
   cars,
   loading,
 }): JSX.Element => {
+  console.log(cars?.dbLots)
+
   if (!loading && !cars?.dbLots.length) {
     return (
       <div className="catalog-grid">
@@ -28,7 +30,6 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
           cars &&
           cars?.dbLots.map(
             ({
-              // _id,
               auction,
               lotNumber,
               lotInfo: { vin, make, model, year },

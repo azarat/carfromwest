@@ -23,16 +23,20 @@ const Pagination: React.FC<PaginationProps> = ({
 }): JSX.Element | null => {
   const totalPages = (cars && Math.ceil(cars.dbLotsCount / 12)) || 0
   const router = useRouter()
+
   const getUrl = useMemo(
     () => (page: number) => {
-      const queryIndex = router.asPath.indexOf('?')
-      if (queryIndex === -1) {
-        console.log(router.asPath)
+      const queryIndex = router.asPath.indexOf('page')
+      console.log(queryIndex)
 
-        return router.asPath + `?page=${page}`
+      if (queryIndex === -1) {
+        return (
+          router.asPath +
+          `${router.asPath == '/catalog' ? '?' : '&'}page=${page}`
+        )
       }
 
-      return router.asPath.slice(0, queryIndex) + `?page=${page}`
+      return router.asPath.slice(0, queryIndex) + `page=${page}`
     },
     [router.asPath]
   )
