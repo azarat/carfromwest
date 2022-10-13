@@ -8,6 +8,7 @@ const filter: NextApiHandler = async (req, res) => {
   
   const client = await clientPromise
   const db = client.db("cfwdata")
+  const sortValue = <any> {};
  
 
   const queryParamsSet = <any> [{
@@ -80,11 +81,42 @@ const filter: NextApiHandler = async (req, res) => {
     if (req.query.searchTerm.length == 8 && !isNaN(+req.query.searchTerm) ) { queryParams['lotNumber'] = req.query.searchTerm }
     if (req.query.searchTerm.length == 17) { queryParams['lotInfo.vin'] = req.query.searchTerm }
     if( isNaN(+req.query.searchTerm) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 ) { queryParams['lotInfo.make'] = req.query.searchTerm
- }
+    }
   }
   
-  
-  console.log(queryParams);
+  if ('sortField' in req.query) {
+    if (req.query.sortField == 'auction-date--asc') {
+      sortValue['auctionDate'] = 1;
+    }
+    if (req.query.sortField == 'auction-date--desc') {
+      sortValue['auctionDate'] = -1;
+    }
+    if (req.query.sortField == 'added-date--asc') {
+      sortValue['lotNumber'] = 1;
+    }
+    if (req.query.sortField == 'added-date--desc') {
+      sortValue['lotNumber'] = -1;
+    }
+    if (req.query.sortField == 'current-bid--asc') {
+      sortValue['saleInfo.currentBid.value'] = 1;
+    }
+    if (req.query.sortField == 'current-bid--desc') {
+     sortValue['saleInfo.currentBid.value'] = -1;
+    }
+    if (req.query.sortField == 'year--asc') {
+      sortValue['lotInfo.year'] = 1;
+    }
+    if (req.query.sortField == 'year--desc') {
+      sortValue['lotInfo.year'] = -1;
+    }
+    if (req.query.sortField == 'odometer--asc') {
+      sortValue['conditionInfo.odometer.value'] = 1;
+    }
+    if (req.query.sortField == 'odometer--desc') {
+     sortValue['conditionInfo.odometer.value'] = -1;
+    }
+  }
+
   
   try {
     if (
@@ -94,7 +126,7 @@ const filter: NextApiHandler = async (req, res) => {
       return res.status(200).send({ items: [] })
     }
 
-  const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).toArray()
+  const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
   const dbLotsCount = await db.collection('lots').countDocuments(queryParams);
     
 

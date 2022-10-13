@@ -92,19 +92,18 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }
 
   const handleSort = ({ value }: { value: string }): Promise<boolean> => {
-    const [sortField, sortDirection] = value.split('--')
-    const queryIndex = router.asPath.indexOf('?')
+    // const [sortField, sortDirection] = value.split('--')
+    const queryIndex = router.asPath.indexOf('sortField')
     if (queryIndex === -1) {
       return router.push(
-        `${router.asPath}?sortField=${sortField}&sortDirection=${sortDirection}`
+        `${router.asPath}${
+          router.asPath == '/catalog' ? '?' : '&'
+        }sortField=${value}`
       )
     }
 
     return router.push(
-      `${router.asPath.slice(
-        0,
-        queryIndex
-      )}?sortField=${sortField}&sortDirection=${sortDirection}`
+      `${router.asPath.slice(0, queryIndex)}sortField=${value}`
     )
   }
 
@@ -125,7 +124,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
         .join(`&`)
     }
     createURL()
-    console.log(url)
 
     try {
       const response = await axios.get(url)

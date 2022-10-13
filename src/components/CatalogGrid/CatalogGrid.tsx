@@ -12,8 +12,6 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
   cars,
   loading,
 }): JSX.Element => {
-  console.log(cars?.dbLots)
-
   if (!loading && !cars?.dbLots.length) {
     return (
       <div className="catalog-grid">
