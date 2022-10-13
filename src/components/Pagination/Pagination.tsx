@@ -27,7 +27,6 @@ const Pagination: React.FC<PaginationProps> = ({
   const getUrl = useMemo(
     () => (page: number) => {
       const queryIndex = router.asPath.indexOf('page')
-      console.log(queryIndex)
 
       if (queryIndex === -1) {
         return (

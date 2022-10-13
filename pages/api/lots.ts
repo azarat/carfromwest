@@ -76,6 +76,13 @@ const filter: NextApiHandler = async (req, res) => {
   if ('engineTo' in req.query && 'engineFrom' in req.query) {
     queryParams['specifications.engine.capacity'] = {$gte: req.query.engineFrom, $lte: req.query.engineTo }
   }
+  if ('searchTerm' in req.query) {    
+    if (req.query.searchTerm.length == 8 && !isNaN(+req.query.searchTerm) ) { queryParams['lotNumber'] = req.query.searchTerm }
+    if (req.query.searchTerm.length == 17) { queryParams['lotInfo.vin'] = req.query.searchTerm }
+    if( isNaN(+req.query.searchTerm) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 ) { queryParams['lotInfo.make'] = req.query.searchTerm
+ }
+  }
+  
   
   console.log(queryParams);
   
