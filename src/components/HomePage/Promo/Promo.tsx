@@ -68,8 +68,6 @@ const Promo: React.FC = (): JSX.Element => {
             }))
           )
 
-          console.log(filteredData)
-
           dispatchRedux(updateOptionsTree([...filteredData]))
           dispatchRedux(updateDate(Date.now()))
         }

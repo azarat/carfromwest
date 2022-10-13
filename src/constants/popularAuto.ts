@@ -5,9 +5,9 @@ export const popularAuto = [
     uaPrice: '15000',
     img: '/assets/images/mazda_6.png',
     filterParams: {
-      makes: 'Mazda',
-      models: '6',
-      yearMin: 2015,
+      make: 'Mazda',
+      model: '6',
+      yearStart: 2015,
     },
   },
 
@@ -17,9 +17,9 @@ export const popularAuto = [
     uaPrice: '23000',
     img: '/assets/images/chevrolet_volt_2.png',
     filterParams: {
-      makes: 'Chevrolet',
-      models: 'Volt',
-      yearMin: 2018,
+      make: 'Chevrolet',
+      model: 'Volt',
+      yearStart: 2018,
     },
   },
   {
@@ -28,9 +28,9 @@ export const popularAuto = [
     uaPrice: '21000',
     img: '/assets/images/kia-niro.png',
     filterParams: {
-      makes: 'Kia',
-      models: 'Niro',
-      yearMin: 2017,
+      make: 'Kia',
+      model: 'Niro',
+      yearStart: 2017,
     },
   },
   {
@@ -39,9 +39,9 @@ export const popularAuto = [
     uaPrice: '19000',
     img: '/assets/images/ford_fusion.png',
     filterParams: {
-      makes: 'Ford',
-      models: 'Fusion',
-      yearMin: 2017,
+      make: 'Ford',
+      model: 'Fusion',
+      yearStart: 2017,
     },
   },
   {
@@ -50,9 +50,9 @@ export const popularAuto = [
     uaPrice: '35000',
     img: '/assets/images/tesla_3.png',
     filterParams: {
-      makes: 'Tesla',
-      models: 'Model 3',
-      yearMin: 2019,
+      make: 'Tesla',
+      model: 'Model 3',
+      yearStart: 2019,
     },
   },
   {
@@ -61,9 +61,9 @@ export const popularAuto = [
     uaPrice: '24000',
     img: '/assets/images/Toyota_Prius_Prime_2.png',
     filterParams: {
-      makes: 'Toyota',
-      models: 'Prius Prime',
-      yearMin: 2018,
+      make: 'Toyota',
+      model: 'Prius Prime',
+      yearStart: 2018,
     },
   },
   {
@@ -72,9 +72,9 @@ export const popularAuto = [
     uaPrice: '18000',
     img: '/assets/images/tiguan.png',
     filterParams: {
-      makes: 'Volkswagen',
-      models: 'Tiguan',
-      yearMin: 2015,
+      make: 'Volkswagen',
+      model: 'Tiguan',
+      yearStart: 2015,
     },
   },
   {
@@ -83,9 +83,9 @@ export const popularAuto = [
     uaPrice: '15000',
     img: '/assets/images/chevrolet_malibu.png',
     filterParams: {
-      makes: 'Chevrolet',
-      models: 'Malibu',
-      yearMin: 2017,
+      make: 'Chevrolet',
+      model: 'Malibu',
+      yearStart: 2017,
     },
   },
 ]
