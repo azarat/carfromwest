@@ -22,11 +22,11 @@ const filter: NextApiHandler = async (req, res) => {
     },
   }
     
-  if ('makes' in req.query) {
-    queryParams['lotInfo.make'] = req.query.makes
+  if ('make' in req.query) {
+    queryParams['lotInfo.make'] = req.query.make
   }
-  if ('models' in req.query) {
-     queryParams['lotInfo.model'] = req.query.models
+  if ('model' in req.query) {
+     queryParams['lotInfo.model'] = req.query.model
   }  
   if ('fuelType' in req.query) {
      queryParams['specifications.fuelType'] = req.query.fuelType
