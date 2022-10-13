@@ -27,6 +27,8 @@ const Pagination: React.FC<PaginationProps> = ({
     () => (page: number) => {
       const queryIndex = router.asPath.indexOf('?')
       if (queryIndex === -1) {
+        console.log(router.asPath)
+
         return router.asPath + `?page=${page}`
       }
 

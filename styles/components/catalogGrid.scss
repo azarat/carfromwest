@@ -5,7 +5,8 @@
     margin-top: 0px;
   }
   &__title {
-    margin: 0;
+    margin-top: 20%;
+    // margin: 0;
     font-weight: $fw-700;
     font-size: $fs-24;
     text-align: center;
@@ -81,14 +82,14 @@
 
         position: relative;
         z-index: 2;
-      // @media (max-width: 1920px) {
+        // @media (max-width: 1920px) {
         // }
       }
     }
 
     &-details-btn {
-      background: #F2F2F2;
-      color: #0F2442;
+      background: #f2f2f2;
+      color: #0f2442;
       font-size: $fs-20;
       line-height: $fs-24;
       font-weight: $fw-700;
@@ -96,7 +97,7 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      
+
       @media (max-width: 1920px) {
         font-size: $fs-14;
         line-height: $fs-17;
@@ -107,7 +108,7 @@
     &-calculate-btn {
       padding: 18px 34px;
       color: #ffffff;
-      background: #E02C22;
+      background: #e02c22;
       border-radius: 10px;
       font-size: $fs-20;
       line-height: $fs-24;
@@ -115,7 +116,7 @@
       border: none;
       margin-right: 30px;
       cursor: pointer;
-      
+
       @media (max-width: 1920px) {
         font-size: $fs-14;
         line-height: $fs-17;
@@ -125,7 +126,7 @@
     }
 
     &-auction-date {
-      background: #0F2442;
+      background: #0f2442;
       text-align: center;
       color: #ffffff;
       border-radius: 10px;
@@ -254,10 +255,10 @@
 
       svg {
         margin-right: 20px;
-        
+
         @media (max-width: 1920px) {
           margin-right: 8px;
-          transform: scale(.8);
+          transform: scale(0.8);
         }
       }
 
@@ -310,18 +311,18 @@
 
         @media (max-width: 1920px) {
           font-size: $fs-12;
-          line-height: $fs-14;  
+          line-height: $fs-14;
         }
       }
       &-value {
         font-size: $fs-22;
         line-height: $fs-27;
         font-weight: $fw-700;
-        color: #0F2442;
+        color: #0f2442;
 
         @media (max-width: 1920px) {
           font-size: $fs-14;
-          line-height: $fs-17;  
+          line-height: $fs-17;
         }
       }
     }
@@ -331,7 +332,7 @@
 @media screen and (min-width: 768px) {
   .catalog-grid {
     // &__container {
-      // grid-template-columns: repeat(auto-fit, minmax(auto, 226px));
+    // grid-template-columns: repeat(auto-fit, minmax(auto, 226px));
     // }
     &__item {
       &-price {

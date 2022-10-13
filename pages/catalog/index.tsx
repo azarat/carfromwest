@@ -78,8 +78,6 @@ const Index: NextPage<Partial<ICatalog>> = ({
       : { ...defaultFilter }
   )
 
-  console.log(router.query.make)
-
   useEffect(() => {
     setFilter((prev) => ({ ...prev, searchTerm: router.query.searchTerm }))
   }, [router.query.searchTerm])
@@ -118,13 +116,12 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }, [router.query])
 
   const getLots = async () => {
-    const url = `/api/lots?page=${router.query.page}&make=${router.query.make}`
+    const url = `/api/lots?page=${router.query.page}&make=${router.query.make}&model=${router.query.model}&fuel=${router.query.fuel}&transmissionTypes=${router.query.transmissionTypes}&bodyStyles=${router.query.bodyStyles}&condition=${router.query.condition}&driveLineTypes=${router.query.driveLineTypes}&sellerType=${router.query.sellerType}&damageTypes=${router.query.damageTypes}&yearStart=${router.query.yearStart}&yearEnd=${router.query.yearEnd}&mileageStart=${router.query.mileageStart}&mileageEnd=${router.query.mileageEnd}&engineFrom=${router.query.engineFrom}&engineTo=${router.query.engineTo}`
 
     try {
       const response = await axios.get(url)
       if (response.status == 200) {
         setVehicle(response.data)
-        console.log(vehicle)
       }
     } catch (error) {
       console.log('error', error)

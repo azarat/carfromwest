@@ -216,6 +216,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (currentMark) {
       getModels()
     }
+    console.log(bodyStyles)
   }, [currentMark])
 
   useEffect(() => {
@@ -252,25 +253,41 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
     let url = ''
     if (values.makes) url += `?make=${values.makes}`
-    if (values.models) url += `/model-is-${values.models}`
-    if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
-    if (values.engineFrom && values.engineTo)
-      url += `/volume-is-${values.engineFrom}to${values.engineTo}`
-    if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
-    if (values.toYear) url += `/yearEnd-is-${values.toYear}`
-    if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
-    if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
-    if (values.primaryDamage) url += `/damageTypes-is-${values.primaryDamage}`
+    if (values.models) url += `&model=${values.models}`
+    if (values.fuelTypes)
+      url += `${url.length == 0 ? '?' : '&'}fuel=${values.fuelTypes}`
+    // if (values.engineFrom && values.engineTo)
+    //   url += `/volume-is-${values.engineFrom}to${values.engineTo}`
+    if (values.engineFrom)
+      url += `${url.length == 0 ? '?' : '&'}engineFrom=${values.engineFrom}`
+    if (values.engineTo)
+      url += `${url.length == 0 ? '?' : '&'}engineTo=${values.engineTo}`
+    if (values.fromYear)
+      url += `${url.length == 0 ? '?' : '&'}yearStart=${values.fromYear}`
+    if (values.toYear)
+      url += `${url.length == 0 ? '?' : '&'}yearEnd=${values.toYear}`
+    if (values.odometerMin)
+      url += `${url.length == 0 ? '?' : '&'}mileageStart=${values.odometerMin}`
+    if (values.odometerMax)
+      url += `${url.length == 0 ? '?' : '&'}mileageEnd=${values.odometerMax}`
+    if (values.primaryDamage)
+      url += `${url.length == 0 ? '?' : '&'}damageTypes=${values.primaryDamage}`
     // if (values.secondaryDamage) url += `/secondaryDamage-is-${values.secondaryDamage}`
     if (values.transmission)
-      url += `/transmissionTypes-is-${values.transmission}`
+      url += `${url.length == 0 ? '?' : '&'}transmissionTypes=${
+        values.transmission
+      }`
     if (values.saleDocumentsGroups)
       url += `/saleDocumentsGroups-is-${values.saleDocumentsGroups}`
-    if (values.sellerType) url += `/sellerType-is-${values.sellerType}`
-    if (values.bodyStyle) url += `/bodyStyles-is-${values.bodyStyle}`
-    if (values.condition) url += `/condition-is-${values.condition}`
+    if (values.sellerType)
+      url += `${url.length == 0 ? '?' : '&'}sellerType=${values.sellerType}`
+    if (values.bodyStyle) url += `&bodyStyles=${values.bodyStyle}`
+    if (values.condition)
+      url += `${url.length == 0 ? '?' : '&'}condition=${values.condition}`
     if (values.driveLineTypes)
-      url += `/driveLineTypes-is-${values.driveLineTypes}`
+      url += `${url.length == 0 ? '?' : '&'}driveLineTypes=${
+        values.driveLineTypes
+      }`
 
     router.push('/catalog' + url)
   }
