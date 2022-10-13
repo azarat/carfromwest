@@ -22,65 +22,63 @@ const filter: NextApiHandler = async (req, res) => {
     },
   }
     
-  if ('make' in req.query && req.query.make !== 'undefined') {
-    queryParams['lotInfo.make'] = req.query.make 
+  if ('makes' in req.query) {
+    queryParams['lotInfo.make'] = req.query.makes
   }
-  if ('model' in req.query && req.query.model !== 'undefined') {
-     queryParams['lotInfo.model'] = req.query.model
+  if ('models' in req.query) {
+     queryParams['lotInfo.model'] = req.query.models
   }  
-  if ('fuel' in req.query && req.query.fuel !== 'undefined') {
-     queryParams['specifications.fuelType'] = req.query.fuel
+  if ('fuelType' in req.query) {
+     queryParams['specifications.fuelType'] = req.query.fuelType
   }
-  if ('transmissionTypes' in req.query && req.query.transmissionTypes !== 'undefined') {
-     queryParams['specifications.transmissionType'] = req.query.transmissionTypes
+  if ('transmissionType' in req.query) {
+     queryParams['specifications.transmissionType'] = req.query.transmissionType
   }
-  if ('bodyStyles' in req.query && req.query.bodyStyles !== 'undefined') {
-     queryParams['specifications.bodyStyle.name'] = req.query.bodyStyles
+  if ('bodyStyle' in req.query) {
+     queryParams['specifications.bodyStyle.name'] = req.query.bodyStyle
   }
-  if ('condition' in req.query && req.query.condition !== 'undefined') {
+  if ('condition' in req.query) {
      queryParams['conditionInfo.condition'] = req.query.condition
   }
-  if ('driveLineTypes' in req.query && req.query.driveLineTypes !== 'undefined') {
-     queryParams['specifications.drivelineType'] = req.query.driveLineTypes
+  if ('driveLineType' in req.query) {
+     queryParams['specifications.drivelineType'] = req.query.driveLineType
   }
-  if ('sellerType' in req.query && req.query.sellerType !== 'undefined' && req.query.sellerType !== 'other') {
+  if ('sellerType' in req.query && req.query.sellerType !== 'other') {
     queryParams['saleInfo.seller.group'] = req.query.sellerType
   }
-  if ('damageTypes' in req.query && req.query.damageTypes !== 'undefined') {
-    queryParams['conditionInfo.primaryDamage'] = req.query.damageTypes
+  if ('primaryDamage' in req.query) {
+    queryParams['conditionInfo.primaryDamage'] = req.query.primaryDamage
   }  
-  if ('yearStart' in req.query && req.query.yearStart !== 'undefined') {
+  if ('yearStart' in req.query) {
     queryParams['lotInfo.year'] = { $gte: +req.query.yearStart }
   }
-  if ('yearEnd' in req.query && req.query.yearEnd !== 'undefined') {
+  if ('yearEnd' in req.query) {
     queryParams['lotInfo.year'] = { $lte: +req.query.yearEnd }
   }
-  if ('yearEnd' in req.query && 'yearStart' in req.query &&req.query.yearEnd !== 'undefined'  && req.query.yearStart !== 'undefined') {
+  if ('yearEnd' in req.query && 'yearStart' in req.query) {
     queryParams['lotInfo.year'] = {$gte: +req.query.yearStart, $lte: +req.query.yearEnd }
   }
-  if ('mileageStart' in req.query && req.query.mileageStart !== 'undefined') {
-    queryParams['conditionInfo.odometer.value'] = {$gte: +req.query.mileageStart }
+  if ('odometerMin' in req.query) {
+    queryParams['conditionInfo.odometer.value'] = {$gte: +req.query.odometerMin }
   }
-   if ('mileageEnd' in req.query && req.query.mileageEnd !== 'undefined') {
-    queryParams['conditionInfo.odometer.value'] = { $lte: +req.query.mileageEnd }
+   if ('odometerMax' in req.query) {
+    queryParams['conditionInfo.odometer.value'] = { $lte: +req.query.odometerMax }
   }
-  if ('mileageEnd' in req.query && 'mileageStart' in req.query && req.query.mileageEnd !== 'undefined'  && req.query.mileageStart !== 'undefined') {
-    queryParams['conditionInfo.odometer.value'] = {$gte: +req.query.mileageStart, $lte: +req.query.mileageEnd }
+  if ('odometerMax' in req.query && 'odometerMin' in req.query) {
+    queryParams['conditionInfo.odometer.value'] = {$gte: +req.query.odometerMin, $lte: +req.query.odometerMax }
   }
-  if ('engineFrom' in req.query && req.query.engineFrom !== 'undefined') {
+  if ('engineFrom' in req.query) {
     queryParams['specifications.engine.capacity'] = {$gte: req.query.engineFrom }
   }
-   if ('engineTo' in req.query && req.query.engineTo !== 'undefined') {
+   if ('engineTo' in req.query) {
     queryParams['specifications.engine.capacity'] = { $lte: req.query.engineTo }
   }
-  if ('engineTo' in req.query && 'engineFrom' in req.query && req.query.engineTo !== 'undefined'  && req.query.engineFrom !== 'undefined') {
+  if ('engineTo' in req.query && 'engineFrom' in req.query) {
     queryParams['specifications.engine.capacity'] = {$gte: req.query.engineFrom, $lte: req.query.engineTo }
   }
   
   console.log(queryParams);
   
-  
-
   try {
     if (
       req.query.searchTerm &&
