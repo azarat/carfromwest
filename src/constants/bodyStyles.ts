@@ -23,5 +23,9 @@ export const acceptedBodyStyles = [
         en: 'SUV',
         ua: 'Позашляховик'
     },
+    {
+        en: 'Sedan',
+        ua: 'Седан'
+    },
 ]
   

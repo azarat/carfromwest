@@ -216,6 +216,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (currentMark) {
       getModels()
     }
+    console.log(bodyStyles)
   }, [currentMark])
 
   useEffect(() => {
@@ -250,29 +251,30 @@ const FilterTable: React.FC<FilterTableProps> = ({
         ].includes(k) && values[k]
     )
 
-    let url = ''
-    if (values.makes) url += `?make=${values.makes}`
-    if (values.models) url += `/model-is-${values.models}`
-    if (values.fuelTypes) url += `/fuel-is-${values.fuelTypes}`
-    if (values.engineFrom && values.engineTo)
-      url += `/volume-is-${values.engineFrom}to${values.engineTo}`
-    if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
-    if (values.toYear) url += `/yearEnd-is-${values.toYear}`
-    if (values.odometerMin) url += `/mileageStart-is-${values.odometerMin}`
-    if (values.odometerMax) url += `/mileageEnd-is-${values.odometerMax}`
-    if (values.primaryDamage) url += `/damageTypes-is-${values.primaryDamage}`
-    // if (values.secondaryDamage) url += `/secondaryDamage-is-${values.secondaryDamage}`
-    if (values.transmission)
-      url += `/transmissionTypes-is-${values.transmission}`
-    if (values.saleDocumentsGroups)
-      url += `/saleDocumentsGroups-is-${values.saleDocumentsGroups}`
-    if (values.sellerType) url += `/sellerType-is-${values.sellerType}`
-    if (values.bodyStyle) url += `/bodyStyles-is-${values.bodyStyle}`
-    if (values.condition) url += `/condition-is-${values.condition}`
-    if (values.driveLineTypes)
-      url += `/driveLineTypes-is-${values.driveLineTypes}`
+    const url: any = []
 
-    router.push('/catalog' + url)
+    if (values.makes) url.push(`make=${values.makes}`)
+    if (values.models) url.push(`model=${values.models}`)
+    if (values.fuelTypes) url.push(`fuel=${values.fuelTypes}`)
+    if (values.engineFrom) url.push(`engineFrom=${values.engineFrom}`)
+    if (values.engineTo) url.push(`engineTo=${values.engineTo}`)
+    if (values.fromYear) url.push(`yearStart=${values.fromYear}`)
+    if (values.toYear) url.push(`yearEnd=${values.toYear}`)
+    if (values.odometerMin) url.push(`mileageStart=${values.odometerMin}`)
+    if (values.odometerMax) url.push(`mileageEnd=${values.odometerMax}`)
+    if (values.primaryDamage) url.push(`damageTypes=${values.primaryDamage}`)
+    if (values.transmission)
+      url.push(`transmissionTypes=${values.transmission}`)
+    if (values.saleDocumentsGroups)
+      url.push(`saleDocumentsGroups-is-${values.saleDocumentsGroups}`)
+    if (values.sellerType) url.push(`sellerType=${values.sellerType}`)
+    if (values.bodyStyle) url.push(`bodyStyles=${values.bodyStyle}`)
+    if (values.condition) url.push(`condition=${values.condition}`)
+    if (values.driveLineTypes)
+      url.push(`driveLineTypes=${values.driveLineTypes}`)
+    if (url.length > 0) {
+      router.push('/catalog?' + url.join('&'))
+    }
   }
 
   const toggleFilter = () => {

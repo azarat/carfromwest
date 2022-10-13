@@ -17,7 +17,7 @@ const Spinner = (): JSX.Element => {
           <div className="loader-circle-2"></div>
         </div>
         <div className="needle"></div>
-        <div className="loading">Загрузка</div>
+        <div className="loading">Завантаження</div>
       </div>
     </div>
   )
