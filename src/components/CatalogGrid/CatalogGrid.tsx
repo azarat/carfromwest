@@ -16,8 +16,8 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
   const [isLoading, setLoading] = useState<boolean>(loading)
 
   useEffect(() => {
-    setLoading(false)
-  }, [])
+    cars == undefined ? setLoading(true) : setLoading(false)
+  }, [cars])
 
   if (!isLoading && cars && !cars?.dbLots?.length) {
     return (
