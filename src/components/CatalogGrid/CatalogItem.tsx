@@ -30,34 +30,40 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
   primaryDamage,
   secondaryDamage,
   auction,
-  vin
+  vin,
 }): JSX.Element => {
   const router = useRouter()
 
   function matchCarsFeatures(parameter: any) {
-    if(parameter) {
+    if (parameter) {
       parameter = parameter.toLowerCase()
     }
-    const match: any = carFeatures.filter(item => item.eng.toLowerCase() === parameter)
-    
-    if(match.length > 0) {
+    const match: any = carFeatures.filter(
+      (item) => item.eng.toLowerCase() === parameter
+    )
+
+    if (match.length > 0) {
       return match[0].ua
     }
     return
   }
   // console.log(condition);
-  
+
   let localeDate
   let localeTime
   let auctionDateEnd
-  if(auctionDate) {
+  if (auctionDate) {
     auctionDateEnd = new Date(auctionDate)
 
-    const optionsTime: any = {  hour: "numeric", minute: "numeric" };
-    const optionsDate: any = {  year: 'numeric', month: 'numeric', day: 'numeric' };
-    
-    localeDate = auctionDateEnd.toLocaleString("ua", optionsDate);
-    localeTime = auctionDateEnd.toLocaleString("ua", optionsTime);
+    const optionsTime: any = { hour: 'numeric', minute: 'numeric' }
+    const optionsDate: any = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }
+
+    localeDate = auctionDateEnd.toLocaleString('ua', optionsDate)
+    localeTime = auctionDateEnd.toLocaleString('ua', optionsTime)
   }
 
   const handleCost = () => {
@@ -86,7 +92,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
                 Початок аукціону
               </div>
               <div className="catalog-grid__item-auction-date-value">
-              {localeTime || 'Н/Д'} {localeDate}
+                {localeTime || 'Н/Д'} {localeDate}
               </div>
             </div>
           </a>
@@ -97,7 +103,11 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
           <a>
             <div className="catalog-grid__item-header">
               <div className="catalog-grid__item-header-logo">
-              {auction === 'copart' ? <img loading="lazy" src="/assets/images/copart.png" alt="" /> : <img loading="lazy" src="/assets/images/iaai.png" alt="" />} 
+                {auction === 'copart' ? (
+                  <img loading="lazy" src="/assets/images/copart.png" alt="" />
+                ) : (
+                  <img loading="lazy" src="/assets/images/iaai.png" alt="" />
+                )}
               </div>
               <div className="catalog-grid__item-header-title">
                 <h6 className="catalog-grid__item-lot">#{lotNumber}</h6>
@@ -127,7 +137,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
           </div>
           <div className="catalog-grid__item-drivetype">
             <DriveTypeSVG />
-            {matchCarsFeatures(drivelineType) || drivelineType || "Н/Д"}
+            {matchCarsFeatures(drivelineType) || drivelineType || 'Н/Д'}
           </div>
           <div className="catalog-grid__item-health">
             <HeathSVG />
@@ -141,16 +151,31 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
         <div className="catalog-grid__item-descr nowrap">
           <CrashTypeSVG />
           <div className="catalog-grid__item-crash-type">
-            <div className="catalog-grid__item-crash-type-label">Основне пошкодження</div>
-            <div className="catalog-grid__item-crash-type-value">{matchCarsFeatures(primaryDamage) || primaryDamage || 'Відсутнє'}</div>
+            <div className="catalog-grid__item-crash-type-label">
+              Основне пошкодження
+            </div>
+            <div className="catalog-grid__item-crash-type-value">
+              {matchCarsFeatures(primaryDamage) || primaryDamage || 'Відсутнє'}
+            </div>
           </div>
           <div className="catalog-grid__item-crash-type">
-            <div className="catalog-grid__item-crash-type-label">Другорядне пошкодження</div>
-            <div className="catalog-grid__item-crash-type-value">{matchCarsFeatures(secondaryDamage) || secondaryDamage || 'Відсутнє'}</div>
+            <div className="catalog-grid__item-crash-type-label">
+              Другорядне пошкодження
+            </div>
+            <div className="catalog-grid__item-crash-type-value">
+              {matchCarsFeatures(secondaryDamage) ||
+                secondaryDamage ||
+                'Відсутнє'}
+            </div>
           </div>
         </div>
         <div className="catalog-grid__item-descr pb-0">
-          <button className="catalog-grid__item-calculate-btn" onClick={handleCost}>Порахувати вартість</button>
+          <button
+            className="catalog-grid__item-calculate-btn"
+            onClick={handleCost}
+          >
+            Порахувати вартість
+          </button>
           <Link key={vin} href={`/catalog/lot/${auction}-${lotNumber}`}>
             <a className="catalog-grid__item-details-btn">Детальніше</a>
           </Link>

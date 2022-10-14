@@ -40,8 +40,6 @@ const CarPage: NextPage<CarPageProps> = ({ carResponse }): JSX.Element => {
         : ['/assets/images/no-image.jpg'],
     [car]
   )
-  // console.log(car);
-  // console.log(carFeatures);
 
   function matchCarsFeatures(parameter: any) {
     if (parameter) {
