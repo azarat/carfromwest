@@ -118,7 +118,7 @@ const Pagination: React.FC<PaginationProps> = ({
                   item === page ? 'pagination__item--active' : ''
                 }`}
               >
-                <Link href={getUrl(index + 1)}>
+                <Link href={getUrl(item)}>
                   <a className="pagination__item-btn">{item}</a>
                 </Link>
               </li>
