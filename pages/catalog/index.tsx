@@ -92,19 +92,18 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }
 
   const handleSort = ({ value }: { value: string }): Promise<boolean> => {
-    const [sortField, sortDirection] = value.split('--')
-    const queryIndex = router.asPath.indexOf('?')
+    // const [sortField, sortDirection] = value.split('--')
+    const queryIndex = router.asPath.indexOf('sortField')
     if (queryIndex === -1) {
       return router.push(
-        `${router.asPath}?sortField=${sortField}&sortDirection=${sortDirection}`
+        `${router.asPath}${
+          router.asPath == '/catalog' ? '?' : '&'
+        }sortField=${value}`
       )
     }
 
     return router.push(
-      `${router.asPath.slice(
-        0,
-        queryIndex
-      )}?sortField=${sortField}&sortDirection=${sortDirection}`
+      `${router.asPath.slice(0, queryIndex)}sortField=${value}`
     )
   }
 
@@ -116,7 +115,15 @@ const Index: NextPage<Partial<ICatalog>> = ({
   }, [router.query])
 
   const getLots = async () => {
-    const url = `/api/lots?page=${router.query.page}&make=${router.query.make}&model=${router.query.model}&fuel=${router.query.fuel}&transmissionTypes=${router.query.transmissionTypes}&bodyStyles=${router.query.bodyStyles}&condition=${router.query.condition}&driveLineTypes=${router.query.driveLineTypes}&sellerType=${router.query.sellerType}&damageTypes=${router.query.damageTypes}&yearStart=${router.query.yearStart}&yearEnd=${router.query.yearEnd}&mileageStart=${router.query.mileageStart}&mileageEnd=${router.query.mileageEnd}&engineFrom=${router.query.engineFrom}&engineTo=${router.query.engineTo}`
+    let url = `/api/lots?`
+
+    const createURL = (): void => {
+      url += Object.entries(router.query)
+        .filter((i) => i[1])
+        .map((i) => i.join('='))
+        .join(`&`)
+    }
+    createURL()
 
     try {
       const response = await axios.get(url)
@@ -170,7 +177,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
           </div>
         </div>
 
-        <CatalogGrid loading={false} cars={vehicle}>
+        <CatalogGrid loading={true} cars={vehicle}>
           {vehicle && vehicle?.dbLots?.length > 0 && (
             <Pagination
               page={page ? +page : 1}

@@ -68,8 +68,6 @@ const Promo: React.FC = (): JSX.Element => {
             }))
           )
 
-          console.log(filteredData)
-
           dispatchRedux(updateOptionsTree([...filteredData]))
           dispatchRedux(updateDate(Date.now()))
         }
@@ -109,12 +107,12 @@ const Promo: React.FC = (): JSX.Element => {
   const handleSubmit = (values: any) => {
     setLoading(true)
 
-    let url = ''
-    if (values.makes) url += `/brand-is-${values.makes}`
-    if (values.models) url += `/model-is-${values.models}`
-    if (values.fromYear) url += `/yearStart-is-${values.fromYear}`
-    if (values.toYear) url += `/yearEnd-is-${values.toYear}`
-    router.push('/catalog' + url)
+    const url = Object.entries(values)
+      .filter((i) => i[1])
+      .map((i) => i.join('='))
+      .join(`&`)
+
+    router.push('/catalog?' + url)
   }
 
   // if (typeof window !== 'undefined') {
@@ -166,10 +164,10 @@ const Promo: React.FC = (): JSX.Element => {
             </p>
             <Formik
               initialValues={{
-                makes: '',
-                models: '',
-                fromYear: '',
-                toYear: '',
+                make: '',
+                model: '',
+                yearStart: '',
+                yearEnd: '',
                 fromPrice: '',
                 toPrice: '',
               }}
@@ -188,7 +186,7 @@ const Promo: React.FC = (): JSX.Element => {
                 <div className="promo__form__discount">Економія до 40%</div>
                 <div className="promo__form-left">
                   <Field
-                    name={'makes'}
+                    name={'make'}
                     component={promoSelect}
                     placeholder={'Марка'}
                     options={marks}
@@ -197,7 +195,7 @@ const Promo: React.FC = (): JSX.Element => {
                   />
 
                   <Field
-                    name={'models'}
+                    name={'model'}
                     component={promoSelect}
                     placeholder={'Модель'}
                     options={models}
@@ -212,7 +210,7 @@ const Promo: React.FC = (): JSX.Element => {
                     </span>
 
                     <Field
-                      name={'fromYear'}
+                      name={'yearStart'}
                       component={promoSelect}
                       placeholder={'Від'}
                       options={firstYears}
@@ -221,7 +219,7 @@ const Promo: React.FC = (): JSX.Element => {
                     />
 
                     <Field
-                      name={'toYear'}
+                      name={'yearEnd'}
                       component={promoSelect}
                       placeholder={'До'}
                       options={secondYears}

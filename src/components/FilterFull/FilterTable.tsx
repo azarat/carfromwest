@@ -226,55 +226,12 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [currentModel])
 
   const handleSubmit = (values: any) => {
-    Object.keys(values).filter(
-      (k) =>
-        [
-          'auctions',
-          'bodyStyles',
-          'damageTypes',
-          'engineCapacities',
-          'engineCylinders',
-          'fuelTypes',
-          'drivelineTypes',
-          'makes',
-          'models',
-          'trims',
-          'saleDocumentsGroups',
-          'transmissionTypes',
-          'locations',
-          'vehicleConditions',
-          'features',
-          'countries',
-          'primaryDamage',
-          // 'secondaryDamage',
-          'condition',
-        ].includes(k) && values[k]
-    )
+    const url = Object.entries(values)
+      .filter((i) => i[1])
+      .map((i) => i.join('='))
+      .join(`&`)
 
-    const url: any = []
-
-    if (values.makes) url.push(`make=${values.makes}`)
-    if (values.models) url.push(`model=${values.models}`)
-    if (values.fuelTypes) url.push(`fuel=${values.fuelTypes}`)
-    if (values.engineFrom) url.push(`engineFrom=${values.engineFrom}`)
-    if (values.engineTo) url.push(`engineTo=${values.engineTo}`)
-    if (values.fromYear) url.push(`yearStart=${values.fromYear}`)
-    if (values.toYear) url.push(`yearEnd=${values.toYear}`)
-    if (values.odometerMin) url.push(`mileageStart=${values.odometerMin}`)
-    if (values.odometerMax) url.push(`mileageEnd=${values.odometerMax}`)
-    if (values.primaryDamage) url.push(`damageTypes=${values.primaryDamage}`)
-    if (values.transmission)
-      url.push(`transmissionTypes=${values.transmission}`)
-    if (values.saleDocumentsGroups)
-      url.push(`saleDocumentsGroups-is-${values.saleDocumentsGroups}`)
-    if (values.sellerType) url.push(`sellerType=${values.sellerType}`)
-    if (values.bodyStyle) url.push(`bodyStyles=${values.bodyStyle}`)
-    if (values.condition) url.push(`condition=${values.condition}`)
-    if (values.driveLineTypes)
-      url.push(`driveLineTypes=${values.driveLineTypes}`)
-    if (url.length > 0) {
-      router.push('/catalog?' + url.join('&'))
-    }
+    router.push('/catalog?' + url)
   }
 
   const toggleFilter = () => {
@@ -309,11 +266,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
       <Formik
         initialValues={{
-          bodyStyles: bodyStyle ?? '',
-          fromYear: filter.yearMin ?? '',
-          toYear: filter.yearMax ?? '',
+          bodyStyle: bodyStyle ?? '',
+          yearStart: filter.yearMin ?? '',
+          yearEnd: filter.yearMax ?? '',
           sellerType: filter.sellerType ?? '',
-          transmission: filter.transmissionTypes
+          transmissionType: filter.transmissionTypes
             ? filter.transmissionTypes[0]
             : '',
           engineFrom: filter.engineCapacities ? filter.engineCapacities[0] : '',
@@ -322,15 +279,15 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 filter.engineCapacities[filter.engineCapacities.length - 1]
               ) + 0.1
             : '',
-          makes: currentMark,
+          make: currentMark,
           fuelTypes: filter.fuelTypes ? filter.fuelTypes[0] : '',
-          models: currentModel,
+          model: currentModel,
           odometerMin: filter.odometerMin ?? '',
           odometerMax: filter.odometerMax ?? '',
           vehicleConditions: filter.vehicleConditions
             ? filter.vehicleConditions[0]
             : '',
-          driveLineTypes: filter.driveLineTypes ? filter.driveLineTypes[0] : '',
+          driveLineType: filter.driveLineTypes ? filter.driveLineTypes[0] : '',
           primaryDamage: filter.damageTypes ? filter.damageTypes[0] : '',
           // secondaryDamage: '',
           condition: filter.vehicleConditions
@@ -362,7 +319,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Рік">
               <div className="filter-full__year">
                 <Field
-                  name={'fromYear'}
+                  name={'yearStart'}
                   component={SelectTransmission}
                   filter="yearStart"
                   transport={transport}
@@ -384,7 +341,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Марка" isOpenInner={true}>
               <div className="filter-full__transmission">
                 <Field
-                  name="makes"
+                  name="make"
                   value={currentMark}
                   filter="brand"
                   transport={transport}
@@ -398,7 +355,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Модель" isOpenInner={true}>
               <div className="filter-full__transmission">
                 <Field
-                  name="models"
+                  name="model"
                   value={currentModel}
                   filter="model"
                   transport={transport}
@@ -412,7 +369,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Коробка передач">
               <div className="filter-full__transmission">
                 <Field
-                  name="transmission"
+                  name="transmissionType"
                   component={SelectTransmission}
                   options={transmissions}
                   placeholder="Оберіть вашу коробку"
@@ -422,7 +379,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Тип палива">
               <div className="filter-full__gas">
                 <Field
-                  name={'fuelTypes'}
+                  name={'fuelType'}
                   filter="fuel"
                   component={SelectTransmission}
                   options={gas}
@@ -500,7 +457,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Тип привода">
               <div className="filter-full__transmission">
                 <Field
-                  name={'driveLineTypes'}
+                  name={'driveLineType'}
                   component={SelectTransmission}
                   options={driveLineTypes}
                   placeholder="Оберіть тип привода"
@@ -511,7 +468,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
             <Accordion title="Продавець">
               <div className="filter-full__year">
                 <label>
-                  <Field type="radio" name="sellerType" value="insurance" />{' '}
+                  <Field type="radio" name="sellerType" value="insurance" />
+                  {''}
                   Страхова
                 </label>
                 <label>
