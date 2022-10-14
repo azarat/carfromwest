@@ -4,8 +4,8 @@ export type SliderItemProps = {
   usaPrice: string
   img: string
   filterParams: {
-    makes: string
-    models: string
-    yearMin: number
+    make: string
+    model: string
+    yearStart: number
   }
 }
