@@ -23,7 +23,7 @@ import FilterSVG from '../../src/assets/svg/filter_1.svg'
 
 const FiltersPage: NextPage<Partial<ICatalog>> = ({
   currentPage,
-  currentParams,
+  // currentParams,
   items,
   total,
   brands,
@@ -123,7 +123,7 @@ const FiltersPage: NextPage<Partial<ICatalog>> = ({
       <section className="catalog">
         <FilterTable
           transport={transport as string}
-          filter={currentParams}
+          // filter={currentParams}
           setFilter={setFilter}
           loading={false}
           setPage={setPage}
