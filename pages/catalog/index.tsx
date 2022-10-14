@@ -177,7 +177,7 @@ const Index: NextPage<Partial<ICatalog>> = ({
           </div>
         </div>
 
-        <CatalogGrid loading={false} cars={vehicle}>
+        <CatalogGrid loading={true} cars={vehicle}>
           {vehicle && vehicle?.dbLots?.length > 0 && (
             <Pagination
               page={page ? +page : 1}
