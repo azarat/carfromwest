@@ -148,11 +148,9 @@ const Index: NextPage<Partial<ICatalog>> = ({
       <section className="catalog">
         <FilterTable
           transport={transport as string}
-          filter={filter}
           setFilter={setFilter}
           loading={false}
           setPage={setPage}
-          // makes={brands}
           mobileActive={activeMobFilter}
         />
         <div className="catalog__filters-wrapper">

@@ -19,7 +19,7 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
     setLoading(false)
   }, [])
 
-  if (!isLoading && !cars?.dbLots.length) {
+  if (!isLoading && cars && !cars?.dbLots?.length) {
     return (
       <div className="catalog-grid">
         <CatalogGridEmpty />

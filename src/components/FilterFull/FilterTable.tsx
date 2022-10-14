@@ -24,7 +24,6 @@ import carFeatures from '../../constants/carFeatures'
 import { FilterTableProps } from './Types'
 import SelectMake from './SelectMake'
 import { useDispatch, useSelector } from 'react-redux'
-// import { vehicleTypes } from '../../constants/filter'
 
 import { updateOptionsTree } from '../../../store/actions/optionsTree'
 import axios from 'axios'
@@ -32,13 +31,10 @@ import { updateDate } from '../../../store/actions/updateDate'
 
 const FilterTable: React.FC<FilterTableProps> = ({
   loading,
-  filter,
   transport,
   mobileActive,
 }): JSX.Element => {
-  // const [activeMobFilter, setActiveMobFilter] = useState<boolean>(false)
-  // const [vehicle, setVehicle] = useState<string>(filter.vehicleType || '')
-
+  const router = useRouter()
   const dispatchRedux = useDispatch()
   const optionsTree = useSelector(
     (state: any) => state.optionsTree.optionsTree ?? []
@@ -47,22 +43,14 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const timeToUpdate = 86400000 /* one day */
 
   const [fromYear, setFromYear] = useState<number>(0)
-  const [toYear, setToYear] = useState<number>(2021)
+  const [toYear, setToYear] = useState<number>(2022)
   const [marks, setMarks] = useState()
   const [bodyStyles, setBodyStyles] = useState<any>([])
-  const [bodyStyle, setBodyStyle] = useState(
-    filter.bodyTypes?.length ? filter.marks[0] : ''
-  )
-  const [currentMark, setCurrentMark] = useState<string>(
-    filter.makes?.length ? filter.makes[0] : ''
-  )
-  const [currentModel, setCurrentModel] = useState<string>(
-    filter.models?.length ? filter.models[0] : ''
-  )
-
+  const [, setBodyStyle] = useState('')
+  const [currentMark, setCurrentMark] = useState<string>('')
+  const [currentModel, setCurrentModel] = useState<string>('')
   const [models, setModels] = useState<any>([{ label: '', value: '' }])
   const [isLoading, setLoading] = useState(false)
-
   const mobileActiveBoolean = !!mobileActive ? mobileActive : false
 
   const [activeMobFilter, setActiveMobFilter] =
@@ -87,15 +75,8 @@ const FilterTable: React.FC<FilterTableProps> = ({
     return mappedDamages
   }
 
-  const router = useRouter()
-
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
-
-  // const handleVehicle = (e: React.MouseEvent<HTMLInputElement>) => {
-  //   const target = e.target as HTMLInputElement
-  //   setVehicle(target.value)
-  // }
 
   const filterBodyStyles = (bodyStyles: string[]) => {
     const filteredBodyStyles = bodyStyles.filter((bv: string) => {
@@ -114,11 +95,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
     return mapedBodyStyles
   }
-
-  useEffect(() => {
-    setCurrentMark(() => (filter.makes?.length ? filter.makes[0] : ''))
-    setCurrentModel(() => (filter.models?.length ? filter.models[0] : ''))
-  }, [filter])
 
   const getMarks = async () => {
     setLoading(true)
@@ -171,13 +147,13 @@ const FilterTable: React.FC<FilterTableProps> = ({
       (item: any) => item.title == currentMark
     )
     setModels(
-      optionsTree[currentMarkIndex].models.map((val: any) => ({
+      optionsTree[currentMarkIndex]?.models.map((val: any) => ({
         label: val.title,
         value: val.title,
       }))
     )
 
-    setBodyStyles(filterBodyStyles(optionsTree[currentMarkIndex].bodyStyles))
+    setBodyStyles(filterBodyStyles(optionsTree[currentMarkIndex]?.bodyStyles))
 
     setLoading(false)
   }
@@ -192,7 +168,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
     )
 
     if (
-      optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles
+      optionsTree[currentMarkIndex]?.models[currentModelIndex].bodyStyles
         .length > 0
     ) {
       setBodyStyles([])
@@ -200,7 +176,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
       setBodyStyles(
         filterBodyStyles(
-          optionsTree[currentMarkIndex].models[currentModelIndex].bodyStyles
+          optionsTree[currentMarkIndex]?.models[currentModelIndex].bodyStyles
         )
       )
     }
@@ -216,7 +192,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
     if (currentMark) {
       getModels()
     }
-    console.log(bodyStyles)
   }, [currentMark])
 
   useEffect(() => {
@@ -266,33 +241,21 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
       <Formik
         initialValues={{
-          bodyStyle: bodyStyle ?? '',
-          yearStart: filter.yearMin ?? '',
-          yearEnd: filter.yearMax ?? '',
-          sellerType: filter.sellerType ?? '',
-          transmissionType: filter.transmissionTypes
-            ? filter.transmissionTypes[0]
-            : '',
-          engineFrom: filter.engineCapacities ? filter.engineCapacities[0] : '',
-          engineTo: filter.engineCapacities
-            ? parseFloat(
-                filter.engineCapacities[filter.engineCapacities.length - 1]
-              ) + 0.1
-            : '',
-          make: currentMark,
-          fuelTypes: filter.fuelTypes ? filter.fuelTypes[0] : '',
-          model: currentModel,
-          odometerMin: filter.odometerMin ?? '',
-          odometerMax: filter.odometerMax ?? '',
-          vehicleConditions: filter.vehicleConditions
-            ? filter.vehicleConditions[0]
-            : '',
-          driveLineType: filter.driveLineTypes ? filter.driveLineTypes[0] : '',
-          primaryDamage: filter.damageTypes ? filter.damageTypes[0] : '',
-          // secondaryDamage: '',
-          condition: filter.vehicleConditions
-            ? filter.vehicleConditions[0]
-            : '',
+          bodyStyle: router.query.bodyStyle ?? '',
+          yearStart: Number(router.query.yearStart) ?? '',
+          toYear: Number(router.query.toYear) ?? '',
+          sellerType: router.query.sellerType ?? '',
+          transmissionType: router.query.transmissionType ?? '',
+          engineFrom: router.query.engineFrom ?? '',
+          engineTo: router.query.engineTo ?? '',
+          make: router.query.make ?? '',
+          fuelType: router.query.fuelType ?? '',
+          model: router.query.model ?? '',
+          odometerMin: router.query.odometerMin ?? '',
+          odometerMax: router.query.odometerMax ?? '',
+          driveLineType: router.query.driveLineType ?? '',
+          primaryDamage: router.query.primaryDamage ?? '',
+          condition: router.query.condition ?? '',
         }}
         onSubmit={handleSubmit}
         enableReinitialize={true}
@@ -473,6 +436,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
                   Страхова
                 </label>
                 <label>
+                  {''}
                   <Field type="radio" name="sellerType" value="other" /> Перекуп
                 </label>
               </div>

@@ -12,7 +12,7 @@ export type FilterFullProps = {
 export type FilterTableProps = {
   makes?: string[]
   setFilter: Dispatch<SetStateAction<Partial<IFilter>>>
-  filter: Partial<IFilter>
+  // filter: Partial<IFilter>
   loading: boolean
   setPage: Dispatch<SetStateAction<number>>
   transport: string

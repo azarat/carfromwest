@@ -85,7 +85,7 @@ const Promo: React.FC = (): JSX.Element => {
       (item: any) => item.title == currentMark
     )
     setModels(
-      optionsTree[currentMarkIndex].models.map((val: any) => ({
+      optionsTree[currentMarkIndex]?.models.map((val: any) => ({
         label: val.title,
         value: val.title,
       }))
@@ -269,23 +269,10 @@ const Promo: React.FC = (): JSX.Element => {
               <img
                 className="promo__image-mob-block"
                 src="/assets/images/hero.png"
+                alt="image-mob"
               />
             </div>
           </div>
-          {/* <div
-            role="presentation"
-            className="promo__video"
-          >
-            <div className="promo__video-image">
-              <span className="promo__video-play-button" />
-            </div>
-            <div className="promo__video-link">
-              <ArrowLinkSVG />
-              <button onClick={handleFormOpen} className="promo__button">
-                Подобрать авто
-              </button>
-            </div>
-          </div> */}
         </div>
       </div>
     </>
