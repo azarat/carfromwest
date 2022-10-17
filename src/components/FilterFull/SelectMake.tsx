@@ -35,6 +35,8 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const handleChange = (e: any) => {
     form.setFieldValue(field.name, e.value)
+    console.log(form.setFieldValue)
+
     setter(e.value)
     if (onChange !== undefined) {
       onChange(e.value)
@@ -43,13 +45,13 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
 
   const selectStyles = {
     option: (provided: any) => ({
-      ...provided
+      ...provided,
     }),
     control: (provided: any) => ({
       ...provided,
       borderColor: '#E0E0E0',
       borderRadius: '10px',
-      minHeight: '60px'
+      minHeight: '60px',
     }),
     input: (provided: any) => ({
       ...provided,
@@ -57,17 +59,23 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
     placeholder: (provided: any) => ({
       ...provided,
       fontSize: '20px',
-      lineHeight: (typeof window !== "undefined" && window.innerWidth <= 1920) ? '16px' : '24px',
+      lineHeight:
+        typeof window !== 'undefined' && window.innerWidth <= 1920
+          ? '16px'
+          : '24px',
       fontWeight: '500',
-      color: '#333333'
+      color: '#333333',
     }),
     singleValue: (provided: any) => ({
       ...provided,
       fontSize: '20px',
-      lineHeight: (typeof window !== "undefined" && window.innerWidth <= 1920) ? '16px' : '24px',
+      lineHeight:
+        typeof window !== 'undefined' && window.innerWidth <= 1920
+          ? '16px'
+          : '24px',
       fontWeight: '500',
-      color: '#0F2442'
-    })
+      color: '#0F2442',
+    }),
   }
 
   const toggling = () => setIsOpen(!isOpen)
@@ -76,7 +84,6 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
     setIsOpen(false)
     handleChange(value)
   }
-
 
   if (model) {
     return (
@@ -96,38 +103,38 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
     )
   }
 
-  const mainClasses = "customDropDown__list-container" + (isOpen ? " customDropDown__list-open" : "")
+  const mainClasses =
+    'customDropDown__list-container' +
+    (isOpen ? ' customDropDown__list-open' : '')
 
   return (
     <div className="customDropDown">
-      <div
-        className="customDropDown__header"
-        onClick={toggling}
-      >
+      <div className="customDropDown__header" onClick={toggling}>
         {field.value || placeholder}
         <Arrow className="customDropDown__header-arrow" />
       </div>
       <div className={mainClasses}>
         <ul className="customDropDown__list">
-          {
-            options && options.length !== 0 ? options.map((item: TCustomSelectItem) => (
+          {options && options.length !== 0 ? (
+            options.map((item: TCustomSelectItem) => (
               <li
                 onClick={onOptionClicked(item)}
                 className="customDropDown__list-item"
                 key={item.label}
               >
-                {filter &&
-                  (<Link href={`/catalog/transport-is-${transport}/${filter}-is-${item.label}`}>
+                {filter && (
+                  <Link
+                    href={`/catalog/transport-is-${transport}/${filter}-is-${item.label}`}
+                  >
                     <a style={{ display: 'none' }}>{item.label}</a>
-                  </Link>)}
+                  </Link>
+                )}
                 {item.label}
               </li>
-            )) : (
-              <li className="customDropDown__list-item">
-                Немає елементів
-              </li>
-            )
-          }
+            ))
+          ) : (
+            <li className="customDropDown__list-item">Немає елементів</li>
+          )}
         </ul>
       </div>
     </div>

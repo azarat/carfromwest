@@ -260,199 +260,211 @@ const FilterTable: React.FC<FilterTableProps> = ({
         onSubmit={handleSubmit}
         enableReinitialize={true}
       >
-        <Form className={activeMobFilter ? `active-mobile` : ``}>
-          <button
-            onClick={resetFilters}
-            disabled={loading}
-            type="button"
-            className="filter-full__button reset-filters"
-          >
-            Скинути фільтр
-          </button>
+        {({ setFieldValue }) => {
+          return (
+            <Form className={activeMobFilter ? `active-mobile` : ``}>
+              <button
+                onClick={resetFilters}
+                disabled={loading}
+                type="button"
+                className="filter-full__button reset-filters"
+              >
+                Скинути фільтр
+              </button>
 
-          <button
-            type="button"
-            className="mobile-filter-btn--close"
-            onClick={toggleFilter}
-          >
-            <CloseSVG />
-          </button>
+              <button
+                type="button"
+                className="mobile-filter-btn--close"
+                onClick={toggleFilter}
+              >
+                <CloseSVG />
+              </button>
 
-          <div className="filter-full--table-wrap">
-            <Accordion title="Рік">
-              <div className="filter-full__year">
-                <Field
-                  name={'yearStart'}
-                  component={SelectTransmission}
-                  filter="yearStart"
-                  transport={transport}
-                  options={firstYears}
-                  placeholder="з"
-                  setter={setFromYear}
-                />
-                <Field
-                  name={'toYear'}
-                  component={SelectTransmission}
-                  filter="yearEnd"
-                  transport={transport}
-                  options={secondYears}
-                  placeholder="по"
-                  setter={setToYear}
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Марка" isOpenInner={true}>
-              <div className="filter-full__transmission">
-                <Field
-                  name="make"
-                  value={currentMark}
-                  filter="brand"
-                  transport={transport}
-                  component={SelectMake}
-                  options={marks}
-                  placeholder="Всі"
-                  setter={setCurrentMark}
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Модель" isOpenInner={true}>
-              <div className="filter-full__transmission">
-                <Field
-                  name="model"
-                  value={currentModel}
-                  filter="model"
-                  transport={transport}
-                  component={SelectMake}
-                  options={models}
-                  placeholder="Всі"
-                  setter={setCurrentModel}
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Коробка передач">
-              <div className="filter-full__transmission">
-                <Field
-                  name="transmissionType"
-                  component={SelectTransmission}
-                  options={transmissions}
-                  placeholder="Оберіть вашу коробку"
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Тип палива">
-              <div className="filter-full__gas">
-                <Field
-                  name={'fuelType'}
-                  filter="fuel"
-                  component={SelectTransmission}
-                  options={gas}
-                  placeholder="Оберіть тип палива"
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Об’єм двигуна">
-              <div className="filter-full__engine">
-                <div className="filter-full__engine-input">
-                  <Field
-                    placeholder="Від"
-                    type="number"
-                    name="engineFrom"
-                    step="any"
-                    min="0"
-                  />
-                  <EngineSVG />
-                </div>
-                <div className="filter-full__engine-input">
-                  <Field
-                    placeholder="До"
-                    type="number"
-                    name="engineTo"
-                    step="any"
-                    min="0"
-                  />
-                  <EngineSVG />
-                </div>
-              </div>
-            </Accordion>
-            <Accordion title="Пробіг">
-              <div className="filter-full__engine">
-                <div className="filter-full__engine-input">
-                  <Field
-                    placeholder="Від"
-                    type="number"
-                    name="odometerMin"
-                    min="0"
-                  />
-                  <SpeedSVG />
-                </div>
-                <div className="filter-full__engine-input">
-                  <Field
-                    placeholder="До"
-                    type="number"
-                    name="odometerMax"
-                    min="0"
-                  />
-                  <SpeedSVG />
-                </div>
-              </div>
-            </Accordion>
-            <Accordion title="Стан">
-              <div className="filter-full__transmission">
-                <Field
-                  name={'condition'}
-                  component={SelectTransmission}
-                  options={condition}
-                  placeholder="Оберіть стан"
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Тип кузова">
-              <div className="filter-full__transmission">
-                <Field
-                  name={'bodyStyle'}
-                  component={SelectTransmission}
-                  options={bodyStyles}
-                  placeholder="Всі"
-                  setter={setBodyStyle}
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Тип привода">
-              <div className="filter-full__transmission">
-                <Field
-                  name={'driveLineType'}
-                  component={SelectTransmission}
-                  options={driveLineTypes}
-                  placeholder="Оберіть тип привода"
-                  filter="driveLineTypes"
-                />
-              </div>
-            </Accordion>
-            <Accordion title="Продавець">
-              <div className="filter-full__year">
-                <label>
-                  <Field type="radio" name="sellerType" value="insurance" />
-                  {''}
-                  Страхова
-                </label>
-                <label>
-                  {''}
-                  <Field type="radio" name="sellerType" value="other" /> Перекуп
-                </label>
-              </div>
-            </Accordion>
-            <Accordion title="Пошкодження">
-              <div className="filter-full__transmission">
-                <Field
-                  name={'primaryDamage'}
-                  component={SelectTransmission}
-                  options={filterPrimaryDamage(carFeatures)}
-                  placeholder="Оберіть пошкодження"
-                  filter="primaryDamage"
-                />
-              </div>
-            </Accordion>
-            {/* <Accordion title="Другорядне пошкодження">
+              <div className="filter-full--table-wrap">
+                <Accordion title="Рік">
+                  <div className="filter-full__year">
+                    <Field
+                      name={'yearStart'}
+                      component={SelectTransmission}
+                      filter="yearStart"
+                      transport={transport}
+                      options={firstYears}
+                      placeholder="з"
+                      setter={setFromYear}
+                    />
+                    <Field
+                      name={'toYear'}
+                      component={SelectTransmission}
+                      filter="yearEnd"
+                      transport={transport}
+                      options={secondYears}
+                      placeholder="по"
+                      setter={setToYear}
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Марка" isOpenInner={true}>
+                  <div className="filter-full__transmission">
+                    <Field
+                      name="make"
+                      value={currentMark}
+                      filter="brand"
+                      onChange={() => {
+                        console.log(currentModel)
+                        setFieldValue('model', '')
+                        setCurrentModel('')
+                      }}
+                      transport={transport}
+                      component={SelectMake}
+                      options={marks}
+                      placeholder="Всі"
+                      setter={setCurrentMark}
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Модель" isOpenInner={true}>
+                  <div className="filter-full__transmission">
+                    <Field
+                      name="model"
+                      value={currentModel}
+                      filter="model"
+                      transport={transport}
+                      component={SelectMake}
+                      options={models}
+                      placeholder="Всі"
+                      setter={setCurrentModel}
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Коробка передач">
+                  <div className="filter-full__transmission">
+                    <Field
+                      name="transmissionType"
+                      component={SelectTransmission}
+                      options={transmissions}
+                      placeholder="Оберіть вашу коробку"
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Тип палива">
+                  <div className="filter-full__gas">
+                    <Field
+                      name={'fuelType'}
+                      filter="fuel"
+                      component={SelectTransmission}
+                      options={gas}
+                      placeholder="Оберіть тип палива"
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Об’єм двигуна">
+                  <div className="filter-full__engine">
+                    <div className="filter-full__engine-input">
+                      <Field
+                        placeholder="Від"
+                        type="number"
+                        name="engineFrom"
+                        step="any"
+                        min="0"
+                      />
+                      <EngineSVG />
+                    </div>
+                    <div className="filter-full__engine-input">
+                      <Field
+                        placeholder="До"
+                        type="number"
+                        name="engineTo"
+                        step="any"
+                        min="0"
+                      />
+                      <EngineSVG />
+                    </div>
+                  </div>
+                </Accordion>
+                <Accordion title="Пробіг">
+                  <div className="filter-full__engine">
+                    <div className="filter-full__engine-input">
+                      <Field
+                        placeholder="Від"
+                        type="number"
+                        name="odometerMin"
+                        min="0"
+                      />
+                      <SpeedSVG />
+                    </div>
+                    <div className="filter-full__engine-input">
+                      <Field
+                        placeholder="До"
+                        type="number"
+                        name="odometerMax"
+                        min="0"
+                      />
+                      <SpeedSVG />
+                    </div>
+                  </div>
+                </Accordion>
+                <Accordion title="Стан">
+                  <div className="filter-full__transmission">
+                    <Field
+                      name={'condition'}
+                      component={SelectTransmission}
+                      options={condition}
+                      placeholder="Оберіть стан"
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Тип кузова">
+                  <div className="filter-full__transmission">
+                    <Field
+                      name={'bodyStyle'}
+                      component={SelectTransmission}
+                      options={bodyStyles}
+                      placeholder="Всі"
+                      setter={setBodyStyle}
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Тип привода">
+                  <div className="filter-full__transmission">
+                    <Field
+                      name={'driveLineType'}
+                      component={SelectTransmission}
+                      options={driveLineTypes}
+                      placeholder="Оберіть тип привода"
+                      filter="driveLineTypes"
+                    />
+                  </div>
+                </Accordion>
+                <Accordion title="Продавець">
+                  <div className="filter-full__year">
+                    <label>
+                      <Field type="radio" name="sellerType" value="insurance" />
+                      {''}
+                      Страхова
+                    </label>
+                    <label>
+                      {''}
+                      <Field
+                        type="radio"
+                        name="sellerType"
+                        value="other"
+                      />{' '}
+                      Перекуп
+                    </label>
+                  </div>
+                </Accordion>
+                <Accordion title="Пошкодження">
+                  <div className="filter-full__transmission">
+                    <Field
+                      name={'primaryDamage'}
+                      component={SelectTransmission}
+                      options={filterPrimaryDamage(carFeatures)}
+                      placeholder="Оберіть пошкодження"
+                      filter="primaryDamage"
+                    />
+                  </div>
+                </Accordion>
+                {/* <Accordion title="Другорядне пошкодження">
               <div className="filter-full__transmission">
                 <Field
                   name={'secondaryDamage'}
@@ -463,15 +475,17 @@ const FilterTable: React.FC<FilterTableProps> = ({
                 />
               </div>
             </Accordion> */}
-          </div>
-          <button
-            disabled={loading}
-            type="submit"
-            className="filter-full__button"
-          >
-            Застосувати фільтр
-          </button>
-        </Form>
+              </div>
+              <button
+                disabled={loading}
+                type="submit"
+                className="filter-full__button"
+              >
+                Застосувати фільтр
+              </button>
+            </Form>
+          )
+        }}
       </Formik>
     </div>
   )

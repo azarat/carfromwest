@@ -23,7 +23,7 @@ const Promo: React.FC = (): JSX.Element => {
   const [marks, setMarks] = useState([])
   const [models, setModels] = useState<any>([])
   const [currentMark, setCurrentMark] = useState('')
-  const [currentModel, setCurrentModel] = useState('')
+  const [, setCurrentModel] = useState('')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2021)
   const [isLoading, setLoading] = useState(false)
@@ -100,7 +100,6 @@ const Promo: React.FC = (): JSX.Element => {
   useEffect(() => {
     if (currentMark) {
       getModels()
-      console.log(currentModel)
     }
   }, [currentMark])
 

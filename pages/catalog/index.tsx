@@ -16,22 +16,16 @@ import Pagination from '../../src/components/Pagination/Pagination'
 import { ICatalog } from '../../src/Types/Types'
 import CatalogSearch from '../../src/components/CatalogSearch/CatalogSearch'
 // import { gas, transmissions, vehicleTypes } from '../../src/constants/filter'
-// import { USER_AGENT } from '../../src/constants/userAgent'
-
 import FilterSVG from '../../src/assets/svg/filter_1.svg'
 import { ICarsFetchTypes } from '../../src/components/CatalogGrid/Types'
 
 const Index: NextPage<Partial<ICatalog>> = ({
-  // items,
-  // total,
-  // brands,
   makes,
   type = '',
   yearMin,
   yearMax,
   models,
   searchTerm,
-  // page,
   transport,
 }): JSX.Element => {
   const defaultFilter = {

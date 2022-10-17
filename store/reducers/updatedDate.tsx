@@ -1,7 +1,7 @@
 import * as DATE from '../types/updatedDate'
 
 const initialState = {
-  updatedDate: Date.now(),
+  updatedDate: 0,
 }
 
 const updatedDate = (state = initialState, action: any) => {

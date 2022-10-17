@@ -10,7 +10,7 @@ export const getCarPageProps = async (
       props: { message: 'error' },
     }
   }
-
+  
   const { lot = '' } = context.params
 
   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
