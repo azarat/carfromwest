@@ -1,5 +1,5 @@
 export type CarPageProps = {
-  carResponse: ILot
+  // carResponse: ILot
 }
 
 export interface ILot {

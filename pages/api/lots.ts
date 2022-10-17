@@ -22,7 +22,7 @@ const filter: NextApiHandler = async (req, res) => {
         $and: queryParamsSet,
     },
   }
-    
+
   if ('make' in req.query) {
     queryParams['lotInfo.make'] = req.query.make
   }
@@ -116,7 +116,7 @@ const filter: NextApiHandler = async (req, res) => {
      sortValue['conditionInfo.odometer.value'] = -1;
     }
   }
-  
+
   try {
     if (
       req.query.searchTerm &&
@@ -125,11 +125,11 @@ const filter: NextApiHandler = async (req, res) => {
       return res.status(200).send({ items: [] })
     }
 
-  const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
-  const dbLotsCount = await db.collection('lots').countDocuments(queryParams);
-    
+    const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
+    const dbLotsCountArr = await db.collection('lots').aggregate([{ $match: queryParams }, {$count: 'count'}]).toArray();
+    const dbLotsCount = dbLotsCountArr[0].count
 
-  return res.status(200).send({dbLots, dbLotsCount})
+    return res.status(200).send({dbLots, dbLotsCount})
   } catch (e) {
     return res.status(500).send({ message: 'Server Error' })
   }
