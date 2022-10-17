@@ -100,7 +100,6 @@ const Promo: React.FC = (): JSX.Element => {
   useEffect(() => {
     if (currentMark) {
       getModels()
-      console.log(currentModel)
     }
   }, [currentMark])
 
