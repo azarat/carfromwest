@@ -25,7 +25,7 @@ const Promo: React.FC = (): JSX.Element => {
   const [currentMark, setCurrentMark] = useState('')
   const [, setCurrentModel] = useState('')
   const [fromYear, setFromYear] = useState<number>(0)
-  const [toYear, setToYear] = useState<number>(2021)
+  const [toYear, setToYear] = useState<number>(2023)
   const [isLoading, setLoading] = useState(false)
 
   const optionsTree = useSelector(

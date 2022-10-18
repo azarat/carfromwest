@@ -6,7 +6,7 @@ import CoupeCarSVG from '../assets/svg/coupe.svg'
 import PickupCarSVG from '../assets/svg/pickup.svg'
 
 export const years: any[] = []
-for (let i = 2021; i >= 1960; i--) {
+for (let i = 2022; i >= 1960; i--) {
   years.push({ label: i, value: i })
 }
 

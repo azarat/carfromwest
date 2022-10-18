@@ -43,7 +43,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const timeToUpdate = 86400000 /* one day */
 
   const [fromYear, setFromYear] = useState<number>(0)
-  const [toYear, setToYear] = useState<number>(2022)
+  const [toYear, setToYear] = useState<number>(2023)
   const [marks, setMarks] = useState()
   const [bodyStyles, setBodyStyles] = useState<any>([])
   const [, setBodyStyle] = useState('')
