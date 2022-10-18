@@ -35,8 +35,6 @@ const SelectMake: React.FC<FieldProps & CustomSelectProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const handleChange = (e: any) => {
     form.setFieldValue(field.name, e.value)
-    console.log(form.setFieldValue)
-
     setter(e.value)
     if (onChange !== undefined) {
       onChange(e.value)
