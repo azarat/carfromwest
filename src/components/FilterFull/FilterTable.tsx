@@ -43,7 +43,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const timeToUpdate = 86400000 /* one day */
 
   const [fromYear, setFromYear] = useState<number>(0)
-  const [toYear, setToYear] = useState<number>(2022)
+  const [toYear, setToYear] = useState<number>(2023)
   const [marks, setMarks] = useState()
   const [bodyStyles, setBodyStyles] = useState<any>([])
   const [, setBodyStyle] = useState('')
@@ -79,13 +79,13 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const secondYears = years.filter((year) => year.value > fromYear)
 
   const filterBodyStyles = (bodyStyles: string[]) => {
-    const filteredBodyStyles = bodyStyles.filter((bv: string) => {
-      const acceptedBodyStylesEn = acceptedBodyStyles.map((av: any) => av.en)
+    const filteredBodyStyles = bodyStyles?.filter((bv: string) => {
+      const acceptedBodyStylesEn = acceptedBodyStyles?.map((av: any) => av.en)
       return acceptedBodyStylesEn.includes(bv)
     })
 
-    const mapedBodyStyles = filteredBodyStyles.map((fv: string) => {
-      const label = acceptedBodyStyles.filter((av: any) => av.en == fv)[0].ua
+    const mapedBodyStyles = filteredBodyStyles?.map((fv: string) => {
+      const label = acceptedBodyStyles?.filter((av: any) => av.en == fv)[0].ua
 
       return {
         value: fv,
@@ -99,6 +99,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const getMarks = async () => {
     setLoading(true)
     const url = `/api/filter`
+
+    if (router.query.make) {
+      setCurrentMark(router.query.make.toString())
+    }
 
     if (Date.now() - updatedDate > timeToUpdate) {
       dispatchRedux(updateOptionsTree([]))
@@ -186,7 +190,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
   useEffect(() => {
     getMarks()
-  }, [])
+  }, [router.query.make])
 
   useEffect(() => {
     if (currentMark) {
@@ -310,7 +314,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
                       value={currentMark}
                       filter="brand"
                       onChange={() => {
-                        console.log(currentModel)
                         setFieldValue('model', '')
                         setCurrentModel('')
                       }}
