@@ -125,7 +125,11 @@ const Index: NextPage<Partial<ICatalog>> = ({
         setVehicle(response.data)
       }
     } catch (error) {
-      console.log('error', error)
+      setVehicle({
+        dbLots: [],
+        dbLotsCount: 0,
+      })
+      // console.log('error', error)
     }
   }
 
@@ -182,64 +186,5 @@ const Index: NextPage<Partial<ICatalog>> = ({
     </div>
   )
 }
-
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const filtersUrl =
-//     'http://46.101.185.57:8080/search/v1/filters?filters=makes&vehicleType=automobile&auctions=iaai,copart'
-//   const filterResponse = await fetch(filtersUrl, {
-//     headers: {
-//       'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
-//       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-//       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
-//     },
-//   })
-
-//   const { makes } = await filterResponse?.json()
-
-//   const lotsBody = ctx.query.searchTerm
-//     ? {
-//         includeFilters: ['vehicleTypes'],
-//         makes: [],
-//         vehicleType: 'automobile',
-//         models: [],
-//         yearMin: 2010,
-//         yearMax: null,
-//         searchTerm: ctx.query.searchTerm,
-//         page: 1,
-//         itemsPerPage: 12,
-//       }
-//     : {
-//         vehicleType: 'automobile',
-//         page: +ctx.query.page! || 1,
-//         itemsPerPage: 12,
-//         yearMin: 2010,
-//         sortField: ctx.query.sortField || 'added-date',
-//         sortDirection: ctx.query.sortDirection || 'asc',
-//       }
-
-//   const carsUrl = `http://46.101.185.57:8080/search/v1/lots`
-//   const carsResponse = await fetch(carsUrl, {
-//     method: 'POST',
-//     headers: {
-//       'user-agent': ctx.req.headers['user-agent'] || USER_AGENT,
-//       Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-//       'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(lotsBody),
-//   })
-
-//   const { items, total } = await carsResponse?.json()
-
-//   return {
-//     props: {
-//       items,
-//       total,
-//       brands: makes,
-//       transport: 'automobile',
-//       ...ctx.query,
-//     },
-//   }
-// }
 
 export default Index
