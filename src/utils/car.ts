@@ -1,62 +1,63 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { USER_AGENT } from '../constants/userAgent'
-import { ILot } from '../Types/Types'
+// import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+// import { USER_AGENT } from '../constants/userAgent'
+// import { ILot } from '../Types/Types'
 
-export const getCarPageProps = async (
-  context: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<any>> => {
-  if (!context.params) {
-    return {
-      props: { message: 'error' },
-    }
-  }
+// export const getCarPageProps = async (
+//   context: GetServerSidePropsContext
+// ): Promise<GetServerSidePropsResult<any>> => {
+//   if (!context.params) {
+//     return {
+//       props: { message: 'error' },
+//     }
+//   }
   
-  const { lot = '' } = context.params
+//   const { lot = '' } = context.params
 
-  const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
+//   const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
 
-  const url = `http://46.101.185.57:8080/search/v1/lots/${auction}/${lotNumber}`
+//   const url = `http://46.101.185.57:8080/search/v1/lots/${auction}/${lotNumber}`
 
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'user-agent': context.req.headers['user-agent'] || USER_AGENT,
-        Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
-        'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
-      },
-    })
+//   try {
+//     const res = await fetch(url, {
+//       headers: {
+//         'user-agent': context.req.headers['user-agent'] || USER_AGENT,
+//         Authorization: 'Basic Y2Z3ODpQWmwwZWcsQjky',
+//         'X-AUTH-TOKEN': '1974a9f80cfe4c0c7ab8a6235918ef8eae58ff82',
+//       },
+//     })
 
-    const carResponse = (await res.json()) as ILot
+//     const carResponse = (await res.json()) as ILot
 
-    if (!res.ok) {
-      return {
-        redirect: {
-          destination: '/error',
-          permanent: false,
-        },
-      }
-    }
+//     if (!res.ok) {
+//       return {
+//         redirect: {
+//           destination: '/error',
+//           permanent: false,
+//         },
+//       }
+//     }
 
-    if (carResponse.saleInfo.sold)
-      return {
-        redirect: {
-          destination: '/order-form',
-          permanent: false,
-        },
-      }
+//     if (carResponse.saleInfo.sold)
+//       return {
+//         redirect: {
+//           destination: '/order-form',
+//           permanent: false,
+//         },
+//       }
 
-    return {
-      props: {
-        carResponse,
-      },
-    }
-  } catch (e) {
-    console.log(e)
-  }
-  return {
-    redirect: {
-      destination: '/error',
-      permanent: false,
-    },
-  }
-}
+//     return {
+//       props: {
+//         carResponse,
+//       },
+//     }
+//   } catch (e) {
+//     console.log(e)
+//   }
+//   return {
+//     redirect: {
+//       destination: '/error',
+//       permanent: false,
+//     },
+//   }
+// }
+export {}; 
