@@ -16,6 +16,7 @@
     background-color: $transparent;
     border: none;
     outline: none;
+    z-index: 999;
     &:focus {
       & + label {
         // top: -10px;
