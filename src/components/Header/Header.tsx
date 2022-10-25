@@ -36,10 +36,6 @@ const Header: React.FC = () => {
             }
           >
            {open ? <MenuBurgerCloseSVG width={17} height={14}/> : <MenuBurgerOpenSVG width={17} height={14}/>} 
-            
-            {/* <span className="header__menu-burger-stroke-top" />
-            <span className="header__menu-burger-stroke" />
-            <span className="header__menu-burger-stroke-bottom" /> */}
           </div>
         </div>
         <div className="header__logo">
