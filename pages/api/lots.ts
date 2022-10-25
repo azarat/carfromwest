@@ -79,8 +79,8 @@ const filter: NextApiHandler = async (req, res) => {
   }
   if ('searchTerm' in req.query) {    
     if (req.query.searchTerm.length == 8 && !isNaN(Number(req.query.searchTerm)) ) { queryParams['lotNumber'] = req.query.searchTerm }
-    if (req.query.searchTerm.length == 17) { queryParams['lotInfo.vin'] = req.query.searchTerm }
-    if( isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 ) { queryParams['lotInfo.make'] = req.query.searchTerm
+    if (req.query.searchTerm.length == 17) { queryParams['lotInfo.vin'] = new RegExp(req.query.searchTerm.toString(), 'i')  }
+    if( isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 )  { queryParams['lotInfo.make'] = new RegExp(req.query.searchTerm.toString(), 'i')
     }
   }
   
@@ -124,7 +124,7 @@ const filter: NextApiHandler = async (req, res) => {
     ) {
       return res.status(200).send({ items: [] })
     }
-
+    
     const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
     const dbLotsCountArr = await db.collection('lots').aggregate([{ $match: queryParams }, {$count: 'count'}]).toArray();
     const dbLotsCount = dbLotsCountArr[0].count
