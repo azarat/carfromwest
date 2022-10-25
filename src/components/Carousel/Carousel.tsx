@@ -108,7 +108,7 @@ const Carousel: React.FC<ICarousel> = ({
     return () => {
       touchcleanUp()
     }
-  }, [slide])
+  }, [slide, handleTouch])
 
   return (
     <div className="carousel">
