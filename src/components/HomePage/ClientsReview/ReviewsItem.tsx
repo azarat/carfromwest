@@ -16,17 +16,16 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
   return (
     <div className="reviews-item">
       <div className="reviews-item__wrapper">
-      <div className="reviews-item__photos">
+        <div className="reviews-item__photos">
           {images.slice(0, 4).map((el) => (
             <div key={el} className="reviews-item__photo-wrapper">
-              <Image src={el} layout="fill" />
+              <Image loading="eager" src={el} layout="fill" />
             </div>
           ))}
         </div>
         <div className="reviews-item__review">
-        
           <p className="reviews-item__name">{name}</p>
-          
+
           <div
             className="reviews-item__text"
             dangerouslySetInnerHTML={{ __html: text }}
@@ -53,8 +52,6 @@ const ReviewsItem: React.FC<ReviewsItemProps> = ({
             Смотреть больше отзывов
           </a> */}
         </div>
-
-        
       </div>
     </div>
   )

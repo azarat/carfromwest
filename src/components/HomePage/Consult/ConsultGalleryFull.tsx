@@ -27,7 +27,7 @@ const ConsultGalleryFull: React.FC<ConsultGalleryFullTypes> = ({
         >
           {consultGallery.map(({ id, url }) => (
             <div className="consult__full-img" key={id}>
-              <Image src={url} layout="fill" />
+              <Image src={url} layout="fill" loading="eager" />
             </div>
           ))}
         </Carousel>

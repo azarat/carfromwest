@@ -40,7 +40,12 @@ const ConsultGallery: React.FC = () => {
               key={id}
               onClick={() => handleSlide(i)}
             >
-              <Image src={url} layout="fill" objectFit="cover" />
+              <Image
+                loading="eager"
+                src={url}
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
           ))}
         </>

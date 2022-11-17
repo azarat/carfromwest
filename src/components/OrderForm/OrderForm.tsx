@@ -146,6 +146,7 @@ const OrderForm: React.FC = () => {
           src="/assets/images/Order-From-Auto.jpeg"
           layout="fill"
           objectFit="cover"
+          loading="eager"
         />
       </div>
     </div>
