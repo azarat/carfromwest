@@ -262,7 +262,7 @@ const Promo: React.FC = (): JSX.Element => {
                 objectFit="cover"
                 layout="fill"
                 loading="eager"
-                src="/assets/images/hero-min.jpg"
+                src="/assets/images/hero-new.jpg"
               />
             </div>
             <div className="promo__image-mob">
