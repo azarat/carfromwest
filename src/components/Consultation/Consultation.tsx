@@ -29,6 +29,7 @@ const Consultation: React.FC = () => {
               src="/assets/images/consultation.png"
               layout="fill"
               objectFit="contain"
+              loading="eager"
             />
           </div>
         </div>

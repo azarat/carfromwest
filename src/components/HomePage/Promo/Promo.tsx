@@ -261,13 +261,14 @@ const Promo: React.FC = (): JSX.Element => {
                 className="promo__image-block"
                 objectFit="cover"
                 layout="fill"
-                src="/assets/images/hero.png"
+                loading="eager"
+                src="/assets/images/hero-min.jpg"
               />
             </div>
             <div className="promo__image-mob">
               <img
                 className="promo__image-mob-block"
-                src="/assets/images/hero.png"
+                src="/assets/images/hero-min.jpg"
                 alt="image-mob"
               />
             </div>

@@ -5,11 +5,15 @@ const AboutUs: React.FC = () => {
   return (
     <section id="section-about" className="about-us">
       <div className="about-us__text">
-        <h2 className='about-us__title'>Про нашу компанію</h2>
+        <h2 className="about-us__title">Про нашу компанію</h2>
         <div className="about-us__description">
-          <p className='about-us__description-text'>Наша компанія вже 7 років є надійним дилером автомобілів з США.</p>
+          <p className="about-us__description-text">
+            Наша компанія вже 7 років є надійним дилером автомобілів з США.
+          </p>
           <p>
-          Ми організовуємо весь процес привезення автомобіля з США, від професійного вибору, до ремонту та постановки на облік! Знайдемо будь-який автомобіль на будь-який смак наших клієнтів!
+            Ми організовуємо весь процес привезення автомобіля з США, від
+            професійного вибору, до ремонту та постановки на облік! Знайдемо
+            будь-який автомобіль на будь-який смак наших клієнтів!
           </p>
         </div>
         <div className="about-us__stats">
@@ -23,38 +27,41 @@ const AboutUs: React.FC = () => {
           </div>
           <div className="about-us__stats-money">
             <div className="about-us__stats-number">2 країни</div>
-            <p className="about-us__stats-text">наші офіси в США та в Україні</p>
+            <p className="about-us__stats-text">
+              наші офіси в США та в Україні
+            </p>
           </div>
         </div>
       </div>
       <div className="about-us__image about-us__image-desc">
         <Image
           className="about-us__image-block"
-          src="/assets/images/team-m.jpg"
+          src="/assets/images/team-m-min.jpg"
           layout="fill"
           objectFit="cover"
+          loading="eager"
         />
       </div>
       <div className="about-us__image about-us__image-tab">
         <Image
           className="about-us__image-block"
-          src="/assets/images/team-m.jpg"
+          src="/assets/images/team-m-min.jpg"
           layout="fill"
           objectFit="cover"
+          loading="eager"
         />
       </div>
       <div className="about-us__image about-us__image-mob">
-          <Image
+        <Image
           className="about-us__image-block"
-          src="/assets/images/team-m.jpg"
+          src="/assets/images/team-m-min.jpg"
           layout="fill"
           objectFit="cover"
+          loading="eager"
         />
       </div>
     </section>
   )
 }
-
-        
 
 export default AboutUs
