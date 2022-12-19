@@ -414,7 +414,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Наявність ключів:
                     </span>
                     <span className="car-page__table-item-description">
-                      Немає в наявності
+                      В наявності
                       {/* {car?.conditionInfo?.keys
                         ? 'В наявності'
                         : 'Немає в наявності'} */}
