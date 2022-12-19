@@ -315,7 +315,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                   >
                     <span className="car-page__table-item-title">
                       <FuelTypeSVG />
-                      Топливо:
+                      Паливо:
                     </span>
                     <span className="car-page__table-item-description">
                       {matchCarsFeatures(car?.specifications?.fuelType) ||
@@ -414,9 +414,10 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Наявність ключів:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car?.conditionInfo?.keys
+                      Немає в наявності
+                      {/* {car?.conditionInfo?.keys
                         ? 'В наявності'
-                        : 'Немає в наявності'}
+                        : 'Немає в наявності'} */}
                     </span>
                   </div>
                   <div
