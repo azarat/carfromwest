@@ -119,7 +119,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
           }
         }
 
-        const updateLot = axios.post(url, {
+        axios.post(url, {
           lotNumber,
           auction,
           carDetailedObject
@@ -128,6 +128,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
             "Content-Type" : "application/json"
           }
         })
+        
 
         setCarDetailed(carDetailedObject)
       }
