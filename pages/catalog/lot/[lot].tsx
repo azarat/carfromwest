@@ -24,7 +24,7 @@ import ColorSVG from '../../../src/assets/svg/color.svg'
 import ClockSVG from '../../../src/assets/svg/clock.svg'
 
 // Types
-import { ILot } from '../../../src/Types/Types'
+import { ILot, ILotDetailed } from '../../../src/Types/Types'
 import { CarPageProps } from '../../../src/Types/Types'
 import Countdown from '../../../src/components/Countdown/Countdown'
 import carFeatures from '../../../src/constants/carFeatures'
@@ -36,6 +36,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
   const router = useRouter()
   const { lot } = router.query
   const [car, setCar] = useState<ILot>()
+  const [carDetailed, setCarDetailed] = useState<ILotDetailed>()
   const [isPreload, setIsPreload] = useState<boolean>(true)
   const images = useMemo(
     () =>
@@ -44,17 +45,6 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
         : ['/assets/images/no-image.jpg'],
     [car]
   )
-  console.log(lot)
-
-  // if (lot === undefined) {
-  //   return <></>
-  // }
-
-  // const [auction, lotNumber] = Array.isArray(lot)
-  //   ? lot
-  //   : lot === undefined
-  //   ? ['', '']
-  //   : lot.split('-')
 
   const getCar = async (auction: string, lotNumber: string) => {
     const url = `/api/lot?lotNumber=${lotNumber}&auction=${auction}`
@@ -70,12 +60,120 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
     }
   }
 
+  const fillCarDetails = () => {
+    if (!car) return
+
+    let carDetailedObject:ILotDetailed = {
+      saleInfo: {
+        saleDocument: {
+          group: car?.saleInfo.saleDocument.group,
+          state: car?.saleInfo.saleDocument.state,
+          type: car?.saleInfo.saleDocument.type
+        },
+        seller: {
+          group: car?.saleInfo.seller.group,
+          displayName: car?.saleInfo.seller.displayName
+        }        
+      },
+      conditionInfo: {
+        keys: car?.conditionInfo.keys
+      },
+      specifications: {
+        bodyStyle: {
+          name: car?.specifications.bodyStyle.name,
+          type: car?.specifications.bodyStyle.type
+        }
+      }
+    }
+
+    setCarDetailed(carDetailedObject)
+  }
+
+  const getCarDetails = async (auction: string, lotNumber: string) => {
+    const url = `/api/lotDetails?lotNumber=${lotNumber}&auction=${auction}`
+
+    try {
+      const response = await axios.get(url)
+
+      if (response.status == 200) {
+        let carDetailedObject:ILotDetailed = {
+          saleInfo: {
+            saleDocument: {
+              group: response.data.saleInfo.saleDocument?.group,
+              state: response.data.saleInfo.saleDocument?.state,
+              type: response.data.saleInfo.saleDocument?.type
+            },
+            seller: {
+              group: response.data.saleInfo.seller?.group,
+              displayName: response.data.saleInfo.seller?.displayName
+            }        
+          },
+          conditionInfo: {
+            keys: response.data.conditionInfo?.keys
+          },
+          specifications: {
+            bodyStyle: {
+              name: response.data.specifications.bodyStyle?.name,
+              type: response.data.specifications.bodyStyle?.type
+            }
+          }
+        }
+
+        const updateLot = axios.post(url, {
+          lotNumber,
+          auction,
+          carDetailedObject
+        }, {
+          headers: {
+            "Content-Type" : "application/json"
+          }
+        })
+
+        setCarDetailed(carDetailedObject)
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
   useEffect(() => {
     if (!lot) return
 
     const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
     getCar(auction, lotNumber)
   }, [lot])
+  
+  useEffect(() => {
+    console.log(car);
+    
+  }, [car])
+
+  useEffect(() => {
+    if (!car) return
+    if (!lot) return
+    if (carDetailed) return
+
+    if ("keys" in car.conditionInfo) {
+      fillCarDetails()
+    } else {
+      const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
+      getCarDetails(auction, lotNumber)
+    }
+  }, [car, lot, carDetailed])
+
+  useEffect(() => {
+    if (!carDetailed) return
+    if (!car) return
+
+    let carDetailedObject = car
+
+    if (carDetailed.conditionInfo?.keys)
+      carDetailedObject['conditionInfo']['keys'] = carDetailed.conditionInfo?.keys
+
+    setCar(carDetailedObject)
+    
+    console.log(carDetailed);
+  }, [carDetailed])
 
   function matchCarsFeatures(parameter: any) {
     if (parameter) {
@@ -108,9 +206,9 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
     localeTime = auctionDateEnd.toLocaleString('ua', optionsTime)
   }
 
-  const certString = car?.saleInfo
-    ? `${car?.saleInfo?.saleDocument?.state || ''}-${
-        car?.saleInfo?.saleDocument?.type || ''
+  const certString = carDetailed?.saleInfo
+    ? `${carDetailed?.saleInfo?.saleDocument?.state || ''}-${
+      carDetailed?.saleInfo?.saleDocument?.type || ''
       }`
     : ''
 
@@ -290,8 +388,8 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Тип документа:
                     </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car?.saleInfo?.saleDocument?.type) ||
-                        car?.saleInfo?.saleDocument?.type ||
+                      {matchCarsFeatures(carDetailed?.saleInfo?.saleDocument?.type) ||
+                        carDetailed?.saleInfo?.saleDocument?.type ||
                         'Н/Д'}
                     </span>
                   </div>
@@ -383,9 +481,9 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                     </span>
                     <span className="car-page__table-item-description">
                       {matchCarsFeatures(
-                        car?.specifications?.bodyStyle?.type
+                        carDetailed?.specifications?.bodyStyle?.type
                       ) ||
-                        car?.specifications?.bodyStyle?.type ||
+                        carDetailed?.specifications?.bodyStyle?.type ||
                         'Н/Д'}
                     </span>
                   </div>
@@ -414,10 +512,9 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Наявність ключів:
                     </span>
                     <span className="car-page__table-item-description">
-                      В наявності
-                      {/* {car?.conditionInfo?.keys
+                      {(carDetailed?.conditionInfo?.keys || car?.conditionInfo?.keys)
                         ? 'В наявності'
-                        : 'Немає в наявності'} */}
+                        : 'Немає в наявності'}
                     </span>
                   </div>
                   <div
@@ -443,8 +540,8 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Тип продавця
                     </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(car?.saleInfo?.seller?.group) ||
-                        car?.saleInfo?.seller?.group ||
+                      {matchCarsFeatures(carDetailed?.saleInfo?.seller?.group) ||
+                        carDetailed?.saleInfo?.seller?.group ||
                         'Н/Д'}
                     </span>
                   </div>
@@ -471,7 +568,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Продавець:
                     </span>
                     <span className="car-page__table-item-description">
-                      {car?.saleInfo?.seller?.displayName || 'Не вказаний'}
+                      {carDetailed?.saleInfo?.seller?.displayName || 'Не вказаний'}
                     </span>
                   </div>
                   <div

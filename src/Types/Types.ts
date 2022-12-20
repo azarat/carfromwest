@@ -2,6 +2,38 @@ export type CarPageProps = {
   // carResponse: ILot
 }
 
+export interface ILotDetailed {
+  conditionInfo?: {
+    condition?: string
+    odometer?: {
+      value?: number
+      unit?: string
+      status?: string
+    }
+    primaryDamage?: string
+    secondaryDamage?: string
+    lossType?: string
+    keys?: boolean
+  }
+  saleInfo: {
+    saleDocument: {
+      group: string
+      state: string
+      type: string
+    }
+    seller: {
+      group: string
+      displayName: string
+    }
+  }
+  specifications: {
+    bodyStyle: {
+      name: string
+      type: string
+    }
+  }
+}
+
 export interface ILot {
   auction: string
   lotNumber: string
@@ -38,7 +70,7 @@ export interface ILot {
     primaryDamage: string
     secondaryDamage: string
     lossType: string
-    keys: false
+    keys: boolean
   }
   saleInfo: {
     sold: false
