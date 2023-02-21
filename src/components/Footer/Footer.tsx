@@ -21,9 +21,7 @@ const Footer: React.FC = () => {
               <a href="tel:0443343869">(044) 334-38-69</a>
             </li>
             <li className="footer__contacts-item">
-              <a href="tel:0800215804">
-                0800 215 804<span>(безкоштовно по Україні)</span>
-              </a>
+              <a href="tel:0683288818">+380 68 328 8818</a>
             </li>
           </ul>
 
@@ -55,9 +53,7 @@ const Footer: React.FC = () => {
           <p className="footer__work-time-date">24/7/365</p>
         </div>
         <SocialLink />
-        
       </div>
-      
     </footer>
   )
 }
