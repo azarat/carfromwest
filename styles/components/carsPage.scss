@@ -466,6 +466,10 @@
       height: 33px;
     }
 
+    &-consult {
+      font-size: $fs-16;
+    }
+
     &-order {
       color: $white-color;
       background-color: $red-color;
@@ -584,10 +588,10 @@
           font-size: $fs-16;
           line-height: $fs-19;
         }
-        @media (max-width: 12800px) {
-          font-size: $fs-12;
-          line-height: $fs-15;
-        }
+        // @media (max-width: 12800px) {
+        //   font-size: $fs-12;
+        //   line-height: $fs-15;
+        // }
       }
     }
   }

@@ -63,27 +63,27 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
   const fillCarDetails = () => {
     if (!car) return
 
-    let carDetailedObject:ILotDetailed = {
+    let carDetailedObject: ILotDetailed = {
       saleInfo: {
         saleDocument: {
           group: car?.saleInfo.saleDocument.group,
           state: car?.saleInfo.saleDocument.state,
-          type: car?.saleInfo.saleDocument.type
+          type: car?.saleInfo.saleDocument.type,
         },
         seller: {
           group: car?.saleInfo.seller.group,
-          displayName: car?.saleInfo.seller.displayName
-        }        
+          displayName: car?.saleInfo.seller.displayName,
+        },
       },
       conditionInfo: {
-        keys: car?.conditionInfo.keys
+        keys: car?.conditionInfo.keys,
       },
       specifications: {
         bodyStyle: {
           name: car?.specifications.bodyStyle.name,
-          type: car?.specifications.bodyStyle.type
-        }
-      }
+          type: car?.specifications.bodyStyle.type,
+        },
+      },
     }
 
     setCarDetailed(carDetailedObject)
@@ -96,39 +96,42 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
       const response = await axios.get(url)
 
       if (response.status == 200) {
-        let carDetailedObject:ILotDetailed = {
+        let carDetailedObject: ILotDetailed = {
           saleInfo: {
             saleDocument: {
               group: response.data.saleInfo.saleDocument?.group,
               state: response.data.saleInfo.saleDocument?.state,
-              type: response.data.saleInfo.saleDocument?.type
+              type: response.data.saleInfo.saleDocument?.type,
             },
             seller: {
               group: response.data.saleInfo.seller?.group,
-              displayName: response.data.saleInfo.seller?.displayName
-            }        
+              displayName: response.data.saleInfo.seller?.displayName,
+            },
           },
           conditionInfo: {
-            keys: response.data.conditionInfo?.keys
+            keys: response.data.conditionInfo?.keys,
           },
           specifications: {
             bodyStyle: {
               name: response.data.specifications.bodyStyle?.name,
-              type: response.data.specifications.bodyStyle?.type
-            }
-          }
+              type: response.data.specifications.bodyStyle?.type,
+            },
+          },
         }
 
-        axios.post(url, {
-          lotNumber,
-          auction,
-          carDetailedObject
-        }, {
-          headers: {
-            "Content-Type" : "application/json"
+        axios.post(
+          url,
+          {
+            lotNumber,
+            auction,
+            carDetailedObject,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
           }
-        })
-        
+        )
 
         setCarDetailed(carDetailedObject)
       }
@@ -143,10 +146,9 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
     const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
     getCar(auction, lotNumber)
   }, [lot])
-  
+
   useEffect(() => {
-    console.log(car);
-    
+    console.log(car)
   }, [car])
 
   useEffect(() => {
@@ -154,7 +156,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
     if (!lot) return
     if (carDetailed) return
 
-    if ("keys" in car.conditionInfo) {
+    if ('keys' in car.conditionInfo) {
       fillCarDetails()
     } else {
       const [auction, lotNumber] = Array.isArray(lot) ? lot : lot.split('-')
@@ -169,11 +171,12 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
     let carDetailedObject = car
 
     if (carDetailed.conditionInfo?.keys)
-      carDetailedObject['conditionInfo']['keys'] = carDetailed.conditionInfo?.keys
+      carDetailedObject['conditionInfo']['keys'] =
+        carDetailed.conditionInfo?.keys
 
     setCar(carDetailedObject)
-    
-    console.log(carDetailed);
+
+    console.log(carDetailed)
   }, [carDetailed])
 
   function matchCarsFeatures(parameter: any) {
@@ -209,7 +212,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
 
   const certString = carDetailed?.saleInfo
     ? `${carDetailed?.saleInfo?.saleDocument?.state || ''}-${
-      carDetailed?.saleInfo?.saleDocument?.type || ''
+        carDetailed?.saleInfo?.saleDocument?.type || ''
       }`
     : ''
 
@@ -389,7 +392,9 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Тип документа:
                     </span>
                     <span className="car-page__table-item-description">
-                      {matchCarsFeatures(carDetailed?.saleInfo?.saleDocument?.type) ||
+                      {matchCarsFeatures(
+                        carDetailed?.saleInfo?.saleDocument?.type
+                      ) ||
                         carDetailed?.saleInfo?.saleDocument?.type ||
                         'Н/Д'}
                     </span>
@@ -513,7 +518,8 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Наявність ключів:
                     </span>
                     <span className="car-page__table-item-description">
-                      {(carDetailed?.conditionInfo?.keys || car?.conditionInfo?.keys)
+                      {carDetailed?.conditionInfo?.keys ||
+                      car?.conditionInfo?.keys
                         ? 'В наявності'
                         : 'Немає в наявності'}
                     </span>
@@ -531,7 +537,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       {certString !== '-' ? certString : 'N/A'}
                     </span>
                   </div>
-                  <div
+                  {/* <div
                     className={`car-page__table-item ${
                       isPreload ? 'preload' : ''
                     }`}
@@ -545,7 +551,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                         carDetailed?.saleInfo?.seller?.group ||
                         'Н/Д'}
                     </span>
-                  </div>
+                  </div> */}
                   <div
                     className={`car-page__table-item ${
                       isPreload ? 'preload' : ''
@@ -569,7 +575,8 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                       Продавець:
                     </span>
                     <span className="car-page__table-item-description">
-                      {carDetailed?.saleInfo?.seller?.displayName || 'Не вказаний'}
+                      {carDetailed?.saleInfo?.seller?.displayName ||
+                        'Не вказаний'}
                     </span>
                   </div>
                   <div
