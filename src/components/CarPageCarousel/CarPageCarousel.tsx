@@ -5,7 +5,7 @@ import ArrowLeftSVG from '../../assets/svg/arrow-left-car.svg'
 
 import FullSizeSVG from '../../assets/svg/full-size.svg'
 import PhotoSVG from '../../assets/svg/total-carus.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CarouselModal from '../CarouselModal/CarouselModal'
 import CarouselImage from './CarouselImage'
 import CarouselGrid from './CarouselGrid'
@@ -19,6 +19,10 @@ const CarPageCarousel: React.FC<CarPageCarouselProps> = ({
 }): JSX.Element => {
   const [openModal, setOpenModal] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+
+  useEffect(() => {
+    setCurrentSlide(currentSlide)
+  }, [currentSlide])
 
   return (
     <>
