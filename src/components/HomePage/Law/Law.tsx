@@ -38,7 +38,11 @@ const Law: React.FC = () => {
         /></div> */}
         </div>
         <div className="law__image-mob">
-          <img className="law__image-mob-block" src="/assets/images/lawM.png" />
+          <img
+            className="law__image-mob-block"
+            src="/assets/images/lawM-min.png"
+            alt="image"
+          />
         </div>
       </div>
     </section>
