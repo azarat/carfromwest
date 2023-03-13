@@ -16,12 +16,13 @@ import HeathSVG from '../../../src/assets/svg/heath.svg'
 import CarBodySVG from '../../../src/assets/svg/carbody.svg'
 import DriveTypeSVG from '../../../src/assets/svg/drive_type.svg'
 import SellerSVG from '../../../src/assets/svg/seller.svg'
-import StarSVG from '../../../src/assets/svg/star.svg'
+// import StarSVG from '../../../src/assets/svg/star.svg'
 import KeysSVG from '../../../src/assets/svg/keys.svg'
 import DocumentTypeSVG from '../../../src/assets/svg/document-type.svg'
 import StateSVG from '../../../src/assets/svg/state.svg'
 import ColorSVG from '../../../src/assets/svg/color.svg'
 import ClockSVG from '../../../src/assets/svg/clock.svg'
+import VinSVG from '../../../src/assets/svg/vin.svg'
 
 // Types
 import { ILot, ILotDetailed } from '../../../src/Types/Types'
@@ -382,6 +383,20 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
                   </div>
                 </div>
                 <div className="car-page__table car-page__info-table">
+                  <div
+                    className={`car-page__table-item ${
+                      isPreload ? 'preload' : ''
+                    }`}
+                  >
+                    <span className="car-page__table-item-title">
+                      <VinSVG />
+                      VIN:
+                    </span>
+                    <span className="car-page__table-item-description">
+                      {car?.lotInfo?.vin}
+                    </span>
+                  </div>
+
                   <div
                     className={`car-page__table-item ${
                       isPreload ? 'preload' : ''
