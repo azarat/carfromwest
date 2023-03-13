@@ -17,6 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 36px;
     &-square {
       display: flex;
     }
@@ -74,7 +75,7 @@
   .countdown {
     font-size: 30px;
     line-height: 36px;
-    
+
     &__box {
       &-left {
         font-size: 30px;
