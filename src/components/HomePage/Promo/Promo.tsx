@@ -34,7 +34,6 @@ const Promo: React.FC = (): JSX.Element => {
   const updatedDate = useSelector((state: any) => state.updatedDate.updatedDate)
   const timeToUpdate = 86400000 /* one day */
   const dispatchRedux = useDispatch()
-
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
@@ -42,86 +41,87 @@ const Promo: React.FC = (): JSX.Element => {
     setLoading(true)
     const url = `/api/filter/makes`
 
-    // if (Date.now() - updatedDate > timeToUpdate) {
-    //   dispatchRedux(updateOptionsTree([]))
-    // }
-    // if (optionsTree.length > 0) {
-    //   setMakes(
-    //     optionsTree.map((val: any) => ({
-    //       label: val.title,
-    //       value: val.title,
-    //     }))
-    //   )
-    // } else {
-    try {
-      const response = await axios.get(url)
-      if (response.status == 200) {
-        // const filteredData = response.data.filter(
-        //   (item: any) => item.models.length > 0
-        // )
-        // const parsedMakes = filteredData.map((i: any) => i.title)
-
-        setMakes(
-          response.data.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          }))
-        )
-
-        // dispatchRedux(updateOptionsTree([...response.data]))
-        // dispatchRedux(updateDate(Date.now()))
-      }
-    } catch (error) {
-      setMakes([])
+    if (Date.now() - updatedDate > timeToUpdate) {
+      dispatchRedux(updateOptionsTree([]))
     }
-    // }
+
+    if (optionsTree.length > 0) {
+      setMakes(
+        optionsTree.map(
+          (item: { make: ''; models: { names: []; bodystyles: [] } }) => ({
+            label: item.make,
+            value: item.make,
+          })
+        )
+      )
+    } else {
+      try {
+        const response = await axios.get(url)
+        if (response.status == 200) {
+          setMakes(
+            response.data.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            }))
+          )
+
+          const updatedMakes = response.data.map((item: string) => ({
+            make: item,
+            models: { names: [], bodystyles: [] },
+          }))
+
+          dispatchRedux(updateOptionsTree([...updatedMakes]))
+          dispatchRedux(updateDate(Date.now()))
+        }
+      } catch (error) {
+        setMakes([])
+      }
+    }
 
     setLoading(false)
   }
 
   const getModels = async () => {
     setLoading(true)
-    // const currentMakeIndex = optionsTree.findIndex(
-    //   (item: any) => item.title == currentMake
-    // )
-    // setModels(
-    //   optionsTree[currentMakeIndex]?.models.map((val: any) => ({
-    //     label: val.title,
-    //     value: val.title,
-    //   }))
-    // )
+    const currentMakeIndex = optionsTree.findIndex(
+      (item: { make: ''; models: { names: []; bodystyles: [] } }) =>
+        item.make == currentMake
+    )
 
     const url = `/api/filter/models`
 
-    // if (Date.now() - updatedDate > timeToUpdate) {
-    //   dispatchRedux(updateOptionsTree([]))
-    // }
-    // if (optionsTree.length > 0) {
-    //   setMakes(
-    //     optionsTree.map((val: any) => ({
-    //       label: val.title,
-    //       value: val.title,
-    //     }))
-    //   )
-    // } else {
-    try {
-      const response = await axios.post(url, { currentMake })
-      console.log(response)
-      if (response.status == 200) {
-        setModels(
-          response.data.sort().map((val: string) => ({
-            label: val,
-            value: val,
-          }))
-        )
-
-        // dispatchRedux(updateOptionsTree([...response.data]))
-        // dispatchRedux(updateDate(Date.now()))
-      }
-    } catch (error) {
-      setModels([])
+    if (Date.now() - updatedDate > timeToUpdate) {
+      dispatchRedux(updateOptionsTree([]))
     }
-
+    if (
+      optionsTree.length > 0 &&
+      optionsTree[currentMakeIndex]?.models.name.length > 0
+    ) {
+      setModels(
+        optionsTree[currentMakeIndex]?.models.name.map((val: [string]) => ({
+          label: val,
+          value: val,
+        }))
+      )
+    } else {
+      try {
+        const response = await axios.post(url, { currentMake })
+        // console.log(response)
+        if (response.status == 200) {
+          setModels(
+            response.data.sort().map((val: string) => ({
+              label: val,
+              value: val,
+            }))
+          )
+          const updatedOptionTree = optionsTree
+          updatedOptionTree[currentMakeIndex].models.name = response.data
+          dispatchRedux(updateOptionsTree([...updatedOptionTree]))
+        }
+      } catch (error) {
+        setModels([])
+      }
+    }
     setLoading(false)
   }
 

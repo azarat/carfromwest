@@ -16,12 +16,22 @@ export const transmissions: any[] = [
   { label: 'Автоматична', value: 'automatic' },
 ]
 
+// export const driveLineTypes: any[] = [
+//   { label: 'Всі', value: '' },
+//   { label: 'Передній привід', value: 'front' },
+//   { label: 'Задній привід', value: 'rear' },
+//   { label: '4x4', value: 'four' },
+//   { label: 'Повний привід', value: 'all' },
+// ]
+
+
 export const driveLineTypes: any[] = [
   { label: 'Всі', value: '' },
-  { label: 'Передній привід', value: 'front' },
-  { label: 'Задній привід', value: 'rear' },
-  { label: '4x4', value: 'four' },
-  { label: 'Повний привід', value: 'all' },
+  { label: '4x4 w/Front Whl Drv', value: '4x4 w/Front Whl Drv' },
+  { label: '4x4 w/Rear Wheel Drv', value: '4x4 w/Rear Wheel Drv' },
+  { label: 'All wheel drive', value: 'All wheel drive' },
+  { label: 'Front-wheel Drive', value: 'Front-wheel Drive' },
+  { label: 'Rear-wheel drive', value: 'Rear-wheel drive' },
 ]
 
 export const primaryDamage: any[] = [
@@ -46,11 +56,18 @@ export const primaryDamage: any[] = [
 //   { label: 'Ліва передня частина', value: 'Left Front' }, 
 // ]
 
+// export const condition: any[] = [
+//   { label: 'Всі', value: '' },
+//   { label: 'Їде', value: 'runs' },
+//   { label: 'Заводиться', value: 'starts' },
+//   { label: 'Не заводиться', value: 'wont-start' },
+// ]
+
 export const condition: any[] = [
   { label: 'Всі', value: '' },
-  { label: 'Їде', value: 'runs' },
-  { label: 'Заводиться', value: 'starts' },
-  { label: 'Не заводиться', value: 'wont-start' },
+  { label: 'Run and Drive', value: 'Run and Drive' },
+  { label: 'Enhanced Vehicles', value: 'Enhanced Vehicles' },
+  { label: 'Engine Start Program', value: 'Engine Start Program' },
 ]
 
 export const gas: { label: string; value: string }[] = [
