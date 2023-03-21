@@ -48,7 +48,7 @@ const filter: NextApiHandler = async (req, res) => {
     queryParams['saleInfo.seller.group'] = req.query.sellerType
   }
   if ('primaryDamage' in req.query) {
-    queryParams['conditionInfo.primaryDamage'] = req.query.primaryDamage
+    queryParams['conditionInfo.primaryDamage'] = new RegExp(req.query.primaryDamage.toString(), 'i') 
   }  
   if ('yearStart' in req.query) {
     queryParams['lotInfo.year'] = { $gte: Number(req.query.yearStart) }

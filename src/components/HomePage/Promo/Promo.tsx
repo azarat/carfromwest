@@ -20,9 +20,9 @@ type CustomSelectProps = {
 
 const Promo: React.FC = (): JSX.Element => {
   const router = useRouter()
-  const [marks, setMarks] = useState([])
+  const [makes, setMakes] = useState([])
   const [models, setModels] = useState<any>([])
-  const [currentMark, setCurrentMark] = useState('')
+  const [currentMake, setCurrentMake] = useState('')
   const [, setCurrentModel] = useState('')
   const [fromYear, setFromYear] = useState<number>(0)
   const [toYear, setToYear] = useState<number>(2023)
@@ -38,70 +38,102 @@ const Promo: React.FC = (): JSX.Element => {
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
-  const getMarks = async () => {
+  const getMakes = async () => {
     setLoading(true)
-    const url = `/api/filter`
+    const url = `/api/filter/makes`
 
-    if (Date.now() - updatedDate > timeToUpdate) {
-      dispatchRedux(updateOptionsTree([]))
-    }
-    if (optionsTree.length > 0) {
-      setMarks(
-        optionsTree.map((val: any) => ({
-          label: val.title,
-          value: val.title,
-        }))
-      )
-    } else {
-      try {
-        const response = await axios.get(url)
-        if (response.status == 200) {
-          const filteredData = response.data.filter(
-            (item: any) => item.models.length > 0
-          )
-          const parsedMarks = filteredData.map((i: any) => i.title)
+    // if (Date.now() - updatedDate > timeToUpdate) {
+    //   dispatchRedux(updateOptionsTree([]))
+    // }
+    // if (optionsTree.length > 0) {
+    //   setMakes(
+    //     optionsTree.map((val: any) => ({
+    //       label: val.title,
+    //       value: val.title,
+    //     }))
+    //   )
+    // } else {
+    try {
+      const response = await axios.get(url)
+      if (response.status == 200) {
+        // const filteredData = response.data.filter(
+        //   (item: any) => item.models.length > 0
+        // )
+        // const parsedMakes = filteredData.map((i: any) => i.title)
 
-          setMarks(
-            parsedMarks.sort().map((val: string) => ({
-              label: val,
-              value: val,
-            }))
-          )
+        setMakes(
+          response.data.sort().map((val: string) => ({
+            label: val,
+            value: val,
+          }))
+        )
 
-          dispatchRedux(updateOptionsTree([...filteredData]))
-          dispatchRedux(updateDate(Date.now()))
-        }
-      } catch (error) {
-        setMarks([])
+        // dispatchRedux(updateOptionsTree([...response.data]))
+        // dispatchRedux(updateDate(Date.now()))
       }
+    } catch (error) {
+      setMakes([])
     }
+    // }
 
     setLoading(false)
   }
 
   const getModels = async () => {
     setLoading(true)
-    const currentMarkIndex = optionsTree.findIndex(
-      (item: any) => item.title == currentMark
-    )
-    setModels(
-      optionsTree[currentMarkIndex]?.models.map((val: any) => ({
-        label: val.title,
-        value: val.title,
-      }))
-    )
+    // const currentMakeIndex = optionsTree.findIndex(
+    //   (item: any) => item.title == currentMake
+    // )
+    // setModels(
+    //   optionsTree[currentMakeIndex]?.models.map((val: any) => ({
+    //     label: val.title,
+    //     value: val.title,
+    //   }))
+    // )
+
+    const url = `/api/filter/models`
+
+    // if (Date.now() - updatedDate > timeToUpdate) {
+    //   dispatchRedux(updateOptionsTree([]))
+    // }
+    // if (optionsTree.length > 0) {
+    //   setMakes(
+    //     optionsTree.map((val: any) => ({
+    //       label: val.title,
+    //       value: val.title,
+    //     }))
+    //   )
+    // } else {
+    try {
+      const response = await axios.post(url, { currentMake })
+      console.log(response)
+      if (response.status == 200) {
+        setModels(
+          response.data.sort().map((val: string) => ({
+            label: val,
+            value: val,
+          }))
+        )
+
+        // dispatchRedux(updateOptionsTree([...response.data]))
+        // dispatchRedux(updateDate(Date.now()))
+      }
+    } catch (error) {
+      setModels([])
+    }
+
     setLoading(false)
   }
 
   useEffect(() => {
-    getMarks()
+    getMakes()
   }, [])
 
   useEffect(() => {
-    if (currentMark) {
+    if (currentMake) {
       getModels()
     }
-  }, [currentMark])
+  }, [currentMake])
 
   const handleSubmit = (values: any) => {
     setLoading(true)
@@ -188,9 +220,9 @@ const Promo: React.FC = (): JSX.Element => {
                     name={'make'}
                     component={promoSelect}
                     placeholder={'Марка'}
-                    options={marks}
+                    options={makes}
                     side={'left'}
-                    setter={setCurrentMark}
+                    setter={setCurrentMake}
                   />
 
                   <Field
