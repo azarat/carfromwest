@@ -33,7 +33,7 @@ const filter: NextApiHandler = async (req, res) => {
      queryParams['specifications.fuelType'] = req.query.fuelType
   }
   if ('transmissionType' in req.query) {
-     queryParams['specifications.transmissionType'] = req.query.transmissionType
+     queryParams['specifications.transmissionType'] = new RegExp(req.query.transmissionType.toString(), 'i')  
   }
   if ('bodyStyle' in req.query) {
      queryParams['specifications.bodyStyle.name'] = req.query.bodyStyle
@@ -48,16 +48,30 @@ const filter: NextApiHandler = async (req, res) => {
     queryParams['saleInfo.seller.group'] = req.query.sellerType
   }
   if ('primaryDamage' in req.query) {
-    queryParams['conditionInfo.primaryDamage'] = req.query.primaryDamage
+    queryParams['conditionInfo.primaryDamage'] = new RegExp(req.query.primaryDamage.toString(), 'i') 
   }  
   if ('yearStart' in req.query) {
-    queryParams['lotInfo.year'] = { $gte: Number(req.query.yearStart) }
+    queryParams['$expr'] = {
+          $gte: [
+            {
+              $toDouble: "$lotInfo.year",
+            },
+            parseInt(req.query.yearStart.toString())
+          ]
+    }
   }
-  if ('yearEnd' in req.query) {
-    queryParams['lotInfo.year'] = { $lte: Number(req.query.yearEnd) }
+  if ('toYear' in req.query) {
+     queryParams['$expr'] = {
+          $lte: [
+            {
+              $toDouble: "$lotInfo.year",
+            },
+            parseInt(req.query.toYear.toString())
+          ]
+    }
   }
-  if ('yearEnd' in req.query && 'yearStart' in req.query) {
-    queryParams['lotInfo.year'] = {$gte: Number(req.query.yearStart), $lte: Number(req.query.yearEnd) }
+  if ('toYear' in req.query && 'yearStart' in req.query) {
+    queryParams['lotInfo.year'] = {$gte: req.query.yearStart, $lte: req.query.toYear }
   }
   if ('odometerMin' in req.query) {
     queryParams['conditionInfo.odometer.value'] = {$gte: Number(req.query.odometerMin) }
@@ -84,6 +98,8 @@ const filter: NextApiHandler = async (req, res) => {
     if( isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 )  { queryParams['lotInfo.make'] = new RegExp(req.query.searchTerm.toString(), 'i')
     }
   }
+
+  console.log(queryParams)
   
   if ('sortField' in req.query) {
     if (req.query.sortField == 'auction-date--asc') {
