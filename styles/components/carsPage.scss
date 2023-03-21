@@ -651,7 +651,9 @@
         align-items: center;
         font-size: $fs-22;
         line-height: $fs-26;
-
+        & path {
+          fill: rgb(15, 36, 66);
+        }
         @media (max-width: 1800px) {
           grid-template-columns: 40px auto;
           font-size: $fs-16;
