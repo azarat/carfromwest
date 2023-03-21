@@ -95,10 +95,10 @@ const Promo: React.FC = (): JSX.Element => {
     }
     if (
       optionsTree.length > 0 &&
-      optionsTree[currentMakeIndex]?.models.name.length > 0
+      optionsTree[currentMakeIndex]?.models?.name?.length > 0
     ) {
       setModels(
-        optionsTree[currentMakeIndex]?.models.name.map((val: [string]) => ({
+        optionsTree[currentMakeIndex]?.models?.name?.map((val: [string]) => ({
           label: val,
           value: val,
         }))

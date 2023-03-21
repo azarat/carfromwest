@@ -154,10 +154,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
     }
     if (
       optionsTree.length > 0 &&
-      optionsTree[currentMakeIndex]?.models.name.length > 0
+      optionsTree[currentMakeIndex]?.models?.name?.length > 0
     ) {
       setModels(
-        optionsTree[currentMakeIndex]?.models.name.map((val: [string]) => ({
+        optionsTree[currentMakeIndex]?.models?.name?.map((val: [string]) => ({
           label: val,
           value: val,
         }))
@@ -197,10 +197,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
     }
     if (
       optionsTree.length > 0 &&
-      optionsTree[currentMakeIndex]?.models.bodystyles.length > 0
+      optionsTree[currentMakeIndex]?.models?.bodystyles?.length > 0
     ) {
       setBodyStyles(
-        optionsTree[currentMakeIndex]?.models.bodystyles.map((val: string) => ({
+        optionsTree[currentMakeIndex]?.models?.bodystyles?.map((val: string) => ({
           label: val,
           value: val,
         }))
