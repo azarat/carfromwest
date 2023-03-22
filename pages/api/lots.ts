@@ -10,7 +10,6 @@ const filter: NextApiHandler = async (req, res) => {
   const db = client.db("cfwdata")
   const sortValue = <any> {};
  
-
   const queryParamsSet = <any> [{
             $gte: [
               { $dateFromString: { dateString: '$auctionDate' } },
@@ -92,7 +91,6 @@ const filter: NextApiHandler = async (req, res) => {
     queryParams['specifications.engine.capacity'] = {$gte: req.query.engineFrom, $lte: req.query.engineTo }
   }
   if ('searchTerm' in req.query) {
-    console.log(req.query, 'req.query')
     if (req.query.searchTerm.length == 8 && !isNaN(Number(req.query.searchTerm))) {
        queryParams['$expr'] = {
         $eq: [
@@ -107,14 +105,12 @@ const filter: NextApiHandler = async (req, res) => {
     }
     if (req.query.searchTerm.length == 17) {
       const slicedVin = req.query.searchTerm.slice(0, 11) + '******'
-      console.log(slicedVin, 'slicedVin')
       queryParams['lotInfo.vin'] = slicedVin  /* new RegExp(req.query.searchTerm.toString(), 'i')  */
     }
     if( isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 )  { queryParams['lotInfo.make'] = new RegExp(req.query.searchTerm.toString(), 'i')
     }
   }
 
-  console.log(queryParams)
   
   if ('sortField' in req.query) {
     if (req.query.sortField == 'auction-date--asc') {
@@ -158,9 +154,9 @@ const filter: NextApiHandler = async (req, res) => {
     }
     
     const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
-    const dbLotsCountArr = await db.collection('lots').aggregate([{ $match: queryParams }, {$count: 'count'}]).toArray();
+    
+    const dbLotsCountArr = await db.collection('lots').aggregate([/* { $match: queryParams }, */ {$count: 'count'}]).toArray();
     const dbLotsCount = dbLotsCountArr[0].count
-
     return res.status(200).send({dbLots, dbLotsCount})
   } catch (e) {
     return res.status(500).send({ message: 'Server Error' })
