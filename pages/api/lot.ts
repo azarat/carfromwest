@@ -11,7 +11,7 @@ const lot: NextApiHandler = async (req, res) => {
   if ('lotNumber' in req.query && 'auction' in req.query) {
     {
       queryParams['$expr'] = {
-        $lte: [
+        $eq: [
           {
             $toDouble: "$lotNumber",
           },
