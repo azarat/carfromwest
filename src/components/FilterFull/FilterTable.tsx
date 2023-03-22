@@ -18,7 +18,7 @@ import {
   driveLineTypes,
   condition,
 } from '../../constants/filter'
-// import { acceptedBodyStyles } from '../../constants/bodyStyles'
+import { acceptedBodyStyles } from '../../constants/bodyStyles'
 import carFeatures from '../../constants/carFeatures'
 // Types
 import { FilterTableProps } from './Types'
@@ -78,23 +78,26 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const firstYears = years.filter((year) => year.value < toYear)
   const secondYears = years.filter((year) => year.value > fromYear)
 
-  // const filterBodyStyles = (bodyStyles: string[]) => {
-  //   const filteredBodyStyles = bodyStyles?.filter((bv: string) => {
-  //     const acceptedBodyStylesEn = acceptedBodyStyles?.map((av: any) => av.en)
-  //     return acceptedBodyStylesEn.includes(bv)
-  //   })
+  const filterBodyStyles = (bodyStyles: string[]) => {
+    const filteredBodyStyles = bodyStyles?.filter((bv: string) => {
+      const acceptedBodyStylesEn = acceptedBodyStyles?.map((av: any) => av.en)
+      console.log(acceptedBodyStylesEn, bv.toLowerCase())
+      return acceptedBodyStylesEn.includes(bv.toLowerCase())
+    })
+    console.log(filteredBodyStyles, 'filteredBodyStyles,filteredBodyStyles')
+    const mapedBodyStyles = filteredBodyStyles?.map((fv: string) => {
+      const label = acceptedBodyStyles?.filter(
+        (av: any) => av.en == fv.toLowerCase()
+      )[0].ua
 
-  //   const mapedBodyStyles = filteredBodyStyles?.map((fv: string) => {
-  //     const label = acceptedBodyStyles?.filter((av: any) => av.en == fv)[0].ua
+      return {
+        value: fv,
+        label: label,
+      }
+    })
 
-  //     return {
-  //       value: fv,
-  //       label: label,
-  //     }
-  //   })
-
-  //   return mapedBodyStyles
-  // }
+    return mapedBodyStyles
+  }
 
   const getMakes = async () => {
     setLoading(true)
@@ -139,7 +142,7 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
     setLoading(false)
   }
-
+  // console.log(optionsTree, 'optionsTree')
   const getModels = async () => {
     setLoading(true)
     const currentMakeIndex = optionsTree.findIndex(
@@ -199,27 +202,39 @@ const FilterTable: React.FC<FilterTableProps> = ({
       optionsTree.length > 0 &&
       optionsTree[currentMakeIndex]?.models?.bodystyles?.length > 0
     ) {
+      // setBodyStyles(
+      //   optionsTree[currentMakeIndex]?.models?.bodystyles?.map(
+      //     (val: string) => ({
+      //       label: val,
+      //       value: val,
+      //     })
+      //   )
+      // )
       setBodyStyles(
-        optionsTree[currentMakeIndex]?.models?.bodystyles?.map((val: string) => ({
-          label: val,
-          value: val,
-        }))
+        filterBodyStyles(optionsTree[currentMakeIndex]?.models?.bodystyles)
       )
     } else {
       try {
         const url = `/api/filter/bodystyles`
-
+        console.log('data')
         const response = await axios.post(url, { currentModel })
-
+        console.log(response)
         if (response.status == 200) {
+          const filteredBodystyles = response.data.filter(
+            (item: string) => item != 'NaN'
+          )
+          const data = filterBodyStyles(filteredBodystyles)
+          console.log(data)
           setBodyStyles(
-            response.data.sort().map((val: string) => ({
-              label: val,
-              value: val,
-            }))
+            filterBodyStyles(filteredBodystyles)
+            // filteredBodystyles.sort().map((val: string) => ({
+            //   label: val,
+            //   value: val,
+            // }))
           )
           const updatedOptionTree = optionsTree
-          updatedOptionTree[currentMakeIndex].models.bodystyles = response.data
+          updatedOptionTree[currentMakeIndex].models.bodystyles =
+            filteredBodystyles
           dispatchRedux(updateOptionsTree([...updatedOptionTree]))
         }
       } catch (error) {
@@ -241,10 +256,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
   }, [currentMake])
 
   useEffect(() => {
-    if (currentMake) {
+    if (currentModel) {
       getBodystyles()
     }
-  }, [currentMake])
+  }, [currentModel])
 
   const handleSubmit = (values: any) => {
     const url = Object.entries(values)

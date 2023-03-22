@@ -68,7 +68,7 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
                     }
                     hightBid={+currentBid.value}
                     imageUrl={
-                      images ? images[0].full : '/assets/images/no-image.jpg'
+                      images ? images[0]?.full : '/assets/images/no-image.jpg'
                     }
                     lotNumber={`${lotNumber}`}
                     make={make}

@@ -36,7 +36,7 @@ const filter: NextApiHandler = async (req, res) => {
      queryParams['specifications.transmissionType'] = new RegExp(req.query.transmissionType.toString(), 'i')  
   }
   if ('bodyStyle' in req.query) {
-     queryParams['specifications.bodyStyle.name'] = req.query.bodyStyle
+     queryParams['specifications.bodyStyle.type'] = req.query.bodyStyle
   }
   if ('condition' in req.query) {
      queryParams['conditionInfo.condition'] = req.query.condition
@@ -105,7 +105,11 @@ const filter: NextApiHandler = async (req, res) => {
       
       // queryParams['lotNumber'] = req.query.searchTerm
     }
-    if (req.query.searchTerm.length == 17) { queryParams['lotInfo.vin'] = req.query.searchTerm  /* new RegExp(req.query.searchTerm.toString(), 'i')  */ }
+    if (req.query.searchTerm.length == 17) {
+      const slicedVin = req.query.searchTerm.slice(0, 11) + '******'
+      console.log(slicedVin, 'slicedVin')
+      queryParams['lotInfo.vin'] = slicedVin  /* new RegExp(req.query.searchTerm.toString(), 'i')  */
+    }
     if( isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 )  { queryParams['lotInfo.make'] = new RegExp(req.query.searchTerm.toString(), 'i')
     }
   }
