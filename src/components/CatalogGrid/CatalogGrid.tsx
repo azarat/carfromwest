@@ -63,11 +63,12 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({
                 >
                   <CatalogItem
                     fuelType={
-                      gas.find((f) => f.value === fuelType)?.label || ''
+                      gas.find((f) => f.value === fuelType.toLowerCase())
+                        ?.label || ''
                     }
                     hightBid={+currentBid.value}
                     imageUrl={
-                      images ? images[0].full : '/assets/images/no-image.jpg'
+                      images ? images[0]?.full : '/assets/images/no-image.jpg'
                     }
                     lotNumber={`${lotNumber}`}
                     make={make}

@@ -1,30 +1,30 @@
 export const acceptedBodyStyles = [
     {
-        en: 'All terrain',
+        en: 'all terrain',
         ua: 'Всюдихiд'
     },
     {
-        en: 'Cargo van',
+        en: 'cargo van',
         ua: 'Вантажний фургон'
     },
     {
-        en: 'Convertible',
+        en: 'convertible',
         ua: 'Кабріолет'
     },
     {
-        en: 'Coupe',
+        en: 'coupe',
         ua: 'Купе'
     },
     {
-        en: 'Hatchback',
+        en: 'hatchbac',
         ua: 'Хетчбек'
     },
     {
-        en: 'SUV',
+        en: 'suv',
         ua: 'Позашляховик'
     },
     {
-        en: 'Sedan',
+        en: 'sedan',
         ua: 'Седан'
     },
 ]

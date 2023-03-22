@@ -9,12 +9,22 @@ const lot: NextApiHandler = async (req, res) => {
   const queryParams: any = {}
 
   if ('lotNumber' in req.query && 'auction' in req.query) {
-    { queryParams['lotNumber'] = req.query.lotNumber }
-    { queryParams['auction'] = req.query.auction }
-  } 
-
+    {
+      queryParams['$expr'] = {
+        $eq: [
+          {
+            $toDouble: "$lotNumber",
+          },
+          parseInt(req.query.lotNumber.toString())
+        ]
+      };
+      { queryParams['auction'] = req.query.auction }
+    }
+  }
+  
   try {
     const lot = await db.collection('lots').find(queryParams).toArray()
+    console.log(lot)
     return res.status(200).send(lot)
   } catch (e) {
     return res.status(500).send({ message: 'Server Error' })
