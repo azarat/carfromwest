@@ -53,6 +53,7 @@ const CarPage: NextPage<CarPageProps> = (): JSX.Element => {
     try {
       const response = await axios.get(url)
       if (response.status == 200) {
+        console.log(response.data)
         setCar(response.data[0])
         setIsPreload(false)
       }
