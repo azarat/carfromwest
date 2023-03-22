@@ -81,14 +81,10 @@ const FilterTable: React.FC<FilterTableProps> = ({
   const filterBodyStyles = (bodyStyles: string[]) => {
     const filteredBodyStyles = bodyStyles?.filter((bv: string) => {
       const acceptedBodyStylesEn = acceptedBodyStyles?.map((av: any) => av.en)
-      console.log(acceptedBodyStylesEn, bv.toLowerCase())
-      return acceptedBodyStylesEn.includes(bv.toLowerCase())
+      return acceptedBodyStylesEn.includes(bv)
     })
-    console.log(filteredBodyStyles, 'filteredBodyStyles,filteredBodyStyles')
     const mapedBodyStyles = filteredBodyStyles?.map((fv: string) => {
-      const label = acceptedBodyStyles?.filter(
-        (av: any) => av.en == fv.toLowerCase()
-      )[0].ua
+      const label = acceptedBodyStyles?.filter((av: any) => av.en == fv)[0].ua
 
       return {
         value: fv,
@@ -142,7 +138,6 @@ const FilterTable: React.FC<FilterTableProps> = ({
 
     setLoading(false)
   }
-  // console.log(optionsTree, 'optionsTree')
   const getModels = async () => {
     setLoading(true)
     const currentMakeIndex = optionsTree.findIndex(
@@ -216,15 +211,11 @@ const FilterTable: React.FC<FilterTableProps> = ({
     } else {
       try {
         const url = `/api/filter/bodystyles`
-        console.log('data')
         const response = await axios.post(url, { currentModel })
-        console.log(response)
         if (response.status == 200) {
           const filteredBodystyles = response.data.filter(
             (item: string) => item != 'NaN'
           )
-          const data = filterBodyStyles(filteredBodystyles)
-          console.log(data)
           setBodyStyles(
             filterBodyStyles(filteredBodystyles)
             // filteredBodystyles.sort().map((val: string) => ({

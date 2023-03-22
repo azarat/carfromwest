@@ -27,11 +27,11 @@ export const transmissions: any[] = [
 
 export const driveLineTypes: any[] = [
   { label: 'Всі', value: '' },
-  { label: '4x4 w/Front Whl Drv', value: '4x4 w/Front Whl Drv' },
-  { label: '4x4 w/Rear Wheel Drv', value: '4x4 w/Rear Wheel Drv' },
-  { label: 'All wheel drive', value: 'All wheel drive' },
-  { label: 'Front-wheel Drive', value: 'Front-wheel Drive' },
-  { label: 'Rear-wheel drive', value: 'Rear-wheel drive' },
+  { label: 'Передній/Повний', value: '4x4 w/Front Whl Drv' },
+  { label: 'Задній/Повний', value: '4x4 w/Rear Wheel Drv' },
+  { label: 'Повний', value: 'All wheel drive' },
+  { label: 'Передній привід', value: 'Front-wheel Drive' },
+  { label: 'Задній привід', value: 'Rear-wheel drive' },
 ]
 
 export const primaryDamage: any[] = [
@@ -65,9 +65,10 @@ export const primaryDamage: any[] = [
 
 export const condition: any[] = [
   { label: 'Всі', value: '' },
-  { label: 'Run and Drive', value: 'Run and Drive' },
-  { label: 'Enhanced Vehicles', value: 'Enhanced Vehicles' },
-  { label: 'Engine Start Program', value: 'Engine Start Program' },
+  { label: 'Їде', value: 'RUNS AND DRIVES' },
+  { label: 'Не заводиться', value: 'ENHANCED VEHICLES' },
+  { label: 'Заводиться', value: 'ENGINE START PROGRAM' },
+  { label: 'Н/Д', value: 'NaN' },
 ]
 
 export const gas: { label: string; value: string }[] = [
@@ -116,7 +117,7 @@ export const vehicleTypes = [
 ]
 
 export const bodyTypes = [
-  { title: 'Седан', value: 'SEDAN', icon: CarSVG },
+  { title: 'Седан', value: 'SEDAN 4D', icon: CarSVG },
   { title: 'Хетчбек', value: 'HATCHBAC', icon: HatchbackCarSVG },
   { title: 'Купе', value: 'COUPE', icon: CoupeCarSVG },
   { title: 'Пікап', value: 'PICKUP', icon: PickupCarSVG },
