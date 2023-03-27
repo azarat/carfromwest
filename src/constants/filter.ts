@@ -14,6 +14,7 @@ export const transmissions: any[] = [
   { label: 'Всі', value: '' },
   { label: 'Механічна', value: 'manual' },
   { label: 'Автоматична', value: 'automatic' },
+  { label: 'Роботизована', value: 'BOTH AUTOMATED MANUAL' },
 ]
 
 // export const driveLineTypes: any[] = [

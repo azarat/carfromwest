@@ -413,7 +413,27 @@ const carFeatures = [
     id: 83,
     eng: 'Damage History', 
     ua: 'Історія пошкоджень' 
+  },  { 
+    id: 84,
+    eng: 'NaN', 
+    ua: 'Н/Д' 
   }, 
+ 
+  { id: 86, ua: 'Передній/Повний', eng: '4x4 w/Front Whl Drv' },
+  { id: 87, ua: 'Задній/Повний', eng: '4x4 w/Rear Wheel Drv' },
+  { id: 88, ua: 'Повний', eng: 'All wheel drive' },
+  { id: 89, ua: 'Передній привід', eng: 'Front-wheel Drive' },
+  {  id: 90,ua: 'Задній привід', eng: 'Rear-wheel drive' },
+
+   { id: 91, ua: 'Їде', eng: 'RUNS AND DRIVES' },
+  {  id: 92,ua: 'Не заводиться', eng: 'ENHANCED VEHICLES' },
+  {  id:93,ua: 'Заводиться', eng: 'ENGINE START PROGRAM' },
+  
+     { id: 95, ua: 'Роботизована', eng: 'BOTH AUTOMATED MANUAL' },
+  {  id: 96,ua: 'Роботизована', eng: 'ECVT AUTOMATIC' },
+  {  id:97,ua: 'Не зазначено', eng: 'UNKNOWN/OTHER' },
+ 
+  
   
 ]
 
