@@ -105,9 +105,15 @@ const filter: NextApiHandler = async (req, res) => {
     }
     if (req.query.searchTerm.length == 17) {
       const slicedVin = req.query.searchTerm.slice(0, 11) + '******'
-      queryParams['lotInfo.vin'] = slicedVin  /* new RegExp(req.query.searchTerm.toString(), 'i')  */
+      queryParams['$expr'] = {
+        $eq: [
+           '$lotInfo.vin', slicedVin.toUpperCase()
+        ]
+      };
+      // queryParams['lotInfo.vin'] = slicedVin /* new RegExp(slicedVin, 'i')  */
     }
-    if( isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17 )  { queryParams['lotInfo.make'] = new RegExp(req.query.searchTerm.toString(), 'i')
+    if (isNaN(Number(req.query.searchTerm)) && req.query.searchTerm.length < 17 || req.query.searchTerm.length > 17) {
+      queryParams['lotInfo.make'] = new RegExp(req.query.searchTerm.toString(), 'i')
     }
   }
 
@@ -153,10 +159,11 @@ const filter: NextApiHandler = async (req, res) => {
       return res.status(200).send({ items: [] })
     }
     
+    console.log(queryParams, 'queryParams')
     const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
-    
     const dbLotsCountArr = await db.collection('lots').aggregate([/* { $match: queryParams }, */ {$count: 'count'}]).toArray();
     const dbLotsCount = dbLotsCountArr[0].count
+    // console.log(dbLots, 'dbLots')
     return res.status(200).send({dbLots, dbLotsCount})
   } catch (e) {
     return res.status(500).send({ message: 'Server Error' })
