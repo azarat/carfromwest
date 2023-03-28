@@ -15,13 +15,15 @@ const filter: NextApiHandler = async (req, res) => {
               { $dateFromString: { dateString: '$auctionDate' } },
               new Date()
     ]
-  }] 
+  }]
 
- const queryParams: any = {$expr: {
+const queryParams: any = {$expr: {
         $and: queryParamsSet,
     },
   }
 
+    queryParams['auctionDate'] = {$ne: '0000-00-00T00:00:00.000Z'}
+  
   if ('make' in req.query) {
     queryParams['lotInfo.make'] = req.query.make
   }
@@ -159,13 +161,11 @@ const filter: NextApiHandler = async (req, res) => {
       return res.status(200).send({ items: [] })
     }
     
-    console.log(queryParams, 'queryParams')
     const dbLots = await db.collection('lots').find(queryParams).skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0).limit(nPerPage).sort(sortValue).toArray()
-    const dbLotsCountArr = await db.collection('lots').aggregate([/* { $match: queryParams }, */ {$count: 'count'}]).toArray();
+    const dbLotsCountArr = await db.collection('lots').aggregate([{ $match: queryParams }, {$count: 'count'}]).toArray();
     const dbLotsCount = dbLotsCountArr[0].count
-    // console.log(dbLots, 'dbLots')
     return res.status(200).send({dbLots, dbLotsCount})
-  } catch (e) {
+  } catch (e: any) {
     return res.status(500).send({ message: 'Server Error' })
   }
 }

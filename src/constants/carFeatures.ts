@@ -396,7 +396,7 @@ const carFeatures = [
   },
   {
     id: 80,
-    eng: 'Minor Dent%2Fscratches',
+    eng: 'Minor Dent/scratches',
     ua: 'Невеликі подряпини і вм’ятини',
   },
   {
