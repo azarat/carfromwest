@@ -73,7 +73,10 @@ const Header: React.FC = () => {
           <div className="header__contact-item-icon">
                   <PhoneSVG />
                 </div>
-          <a href="tel:0683288818"><span className='header__contact-item-text'>068 328 88 18</span></a>
+          <div>
+            <a href="tel:0683288818"><span className='header__contact-item-text'>068 328 88 18</span></a>
+            <a href="tel:0443343869"><span className='header__contact-item-text'>044 334 38 69</span></a>
+          </div>
         </div>
           <Link href="/consult">
             <a>

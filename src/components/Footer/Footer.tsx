@@ -23,6 +23,9 @@ const Footer: React.FC = () => {
             <li className="footer__contacts-item">
               <a href="tel:0683288818">+380 68 328 8818</a>
             </li>
+            <li className="footer__contacts-item">
+              <a href="tel:0800215804">0800 215 804</a>
+            </li>
           </ul>
 
           <div className="footer__contacts-address">
@@ -36,7 +39,7 @@ const Footer: React.FC = () => {
               </a>
             </p>
           </div>
-          <div className="footer__contacts-address">
+          {/* <div className="footer__contacts-address">
             <p>
               <a
                 href="https://goo.gl/maps/2dmLtzjUyiyGTom26"
@@ -46,7 +49,7 @@ const Footer: React.FC = () => {
                 м. Харків, пл. Павлівська, 10
               </a>
             </p>
-          </div>
+          </div> */}
         </div>
         <div className="footer__work-time">
           <h4 className="footer__work-time-title">Графік роботи </h4>
